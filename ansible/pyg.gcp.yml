@@ -1,0 +1,11 @@
+---
+plugin: gcp_compute
+projects:
+  - paws-your-game-main
+keyed_groups:
+  - key: tags['items']
+    separator: ''
+filters: []
+auth_kind: serviceaccount
+service_account_file: /tmp/serviceaccount.json
+
