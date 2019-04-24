@@ -1,3 +1,9 @@
 terraform/.terraform
 terraform/terraform.tfstate.backup
+
 *.pyc
+
+.pants.d
+dist
+.pids
+.pants.workdir.file_lock
