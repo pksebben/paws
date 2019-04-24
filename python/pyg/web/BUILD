@@ -1,0 +1,31 @@
+python_binary(
+    name='app',
+    source='app.py',
+    dependencies=[
+        ':api',
+        ':container',
+        'third_party:flask',
+    ],
+)
+
+python_library(
+    name='api',
+    sources=[
+        'api.py',
+    ],
+    dependencies=[
+        'third_party:flask',
+    ],
+)
+
+python_library(
+    name='container',
+    sources=[
+        'container.py',
+    ],
+    dependencies=[
+        'third_party:oscar.flag',
+        'third_party:twisted',
+        'third_party:werkzeug',
+    ],
+)

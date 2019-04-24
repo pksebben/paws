@@ -7,3 +7,4 @@ terraform/terraform.tfstate.backup
 dist
 .pids
 .pants.workdir.file_lock
+.cache/
