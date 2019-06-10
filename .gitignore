@@ -1,6 +1,12 @@
 terraform/.terraform
 terraform/terraform.tfstate.backup
 
+.babelrc
+
+node_modules
+
+~$
+
 *.pyc
 
 .pants.d
