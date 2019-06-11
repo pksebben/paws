@@ -7,7 +7,7 @@ const TodoWebpackPlugin = require("todo-webpack-plugin");
 const htmlPlugin =  new HtmlWebPackPlugin({
     hash: true,
     filename: "index.html",  //target html
-    template: "./src/public/index.html" //source html
+    template: "./frontend/public/index.html" //source html
 });
 
 const etPlugin =  new ExtractTextPlugin({ filename: 'css/style.css' });
@@ -19,7 +19,7 @@ const todoWebpackPlugin = new TodoWebpackPlugin({
 
 module.exports = {
     devtool: 'eval-source-map',
-    entry: "./src/index.jsx",
+    entry: "./frontend/index.jsx",
     output: {
         path: path.join(__dirname, "/dist"),
         filename: "[name].bundle.js",

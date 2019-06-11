@@ -1,11 +1,7 @@
 ### TODOs
 | Filename | line # | TODO
 |:------|:------:|:------
-| src/app.jsx | 1 | Implement routing for gamerprofile and shelterprofile
-| src/app.jsx | 2 | Git this whole project and send to kirby
-| src/views/Home.jsx | 3 | 
-
-### KIRBYs
-| Filename | line # | KIRBY
-|:------|:------:|:------
-| src/app.jsx | 3 | Hi!
+| frontend/app.jsx | 1 | Implement routing for gamerprofile and shelterprofile
+| frontend/components/TestingData.js | 5 | Implement storage and deprecate this module.
+| frontend/components/news.jsx | 3 | rename 'news.jsx' to 'newsitem.jsx'
+| frontend/views/Home.jsx | 3 | 
