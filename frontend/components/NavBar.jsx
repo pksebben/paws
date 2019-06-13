@@ -4,7 +4,8 @@ Navbar.
 */
 
 import React, { Component } from "React";
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";\
+
 
 //Navbar provides the basic, shared navigation for the site.
 class Navbar extends React.Component {
