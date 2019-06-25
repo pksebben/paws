@@ -6,6 +6,12 @@ TODO:
 */
 
 import React, { Component } from "react";
+import NavBar from '../components/NavBar.jsx';
+
+//test module stuff
+import FhqwhgadsInput from '../components/testModuleInput.jsx';
+import TestModule from '../components/testModule.jsx';
+
 import Event from "../components/events.jsx";
 import OurStory from "../components/ourStory.jsx";
 import NewsItem from "../components/news.jsx";
@@ -15,14 +21,20 @@ import RecentShelters from "../components/recentShelters.jsx";
 import TopGamers from "../components/topGamers.jsx";
 import { eventdata, newsdata, analyticsdata, recentgamerdata, recentshelterdata, topgamersdata } from "../components/TestingData.js";
 
+
 //This is the homepage. Everything that goes in here should be modular and imported
 class Home extends React.Component {
     render() {
         return(
             <div>
+              <NavBar/>
               <h1>
                 THIS AM A HUMPAEG
               </h1>
+              <h3>Come on FhqwhgadsInput</h3>
+              <FhqwhgadsInput/>
+              <h3>Gert out Fhqwhgads</h3>
+              <TestModule/>
               <OurStory/>
               <div className="upcomingEvents">
                 <h1>EVENTS GO HERE</h1>

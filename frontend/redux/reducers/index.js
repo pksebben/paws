@@ -4,19 +4,27 @@
 //GOOGLE: redux pro move - RTFM - js concat() slice() ...spread
 //GOOGLE: redux pro move - redux combineReducers()
 
-import { ADD_ARTICLE } from "../constants/action-types";
+import { ADD_FHQWHGADS, SET_PAGE } from "../constants/action-types";
 
 const initialState = {
-    articles: []
+    fhqwhgads: [],
+    currentpage: "home",
 };
 
+//TODO: fix this switch case and test it
 function rootReducer(state = initialState, action) {
-    if (action.type === ADD_ARTICLE) {
+    switch (action.type) { 
+    case ADD_FHQWHGADS:
 	return Object.assign({}, state, {
-	    articles: state.articles.concat(action.payload)
+	    fhqwhgads: state.fhqwhgads.concat(action.payload)
 	});
+    case SET_PAGE:
+	return Object.assign({}, state, {
+	    currentpage: action.payload
+	})
+    default:
+	return state;
     }
-    return state;
 };
 
 export default rootReducer;

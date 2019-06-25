@@ -5,9 +5,7 @@ import App from './app.jsx';
 //redux imports
 import { Provider } from 'react-redux';
 import store from './redux/store/index';
-//TODO: delete this next import once the file is deleted. See todo from redux/index.js
-import index from './redux/index';
-
+import index from './redux';
 
 const rootEl = document.getElementById('app');
 
