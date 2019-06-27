@@ -2,22 +2,30 @@
 News Item.  This should have a single news item in it, card-style, and (maybe?) a link to a bigger article
 TODO: rename 'news.jsx' to 'newsitem.jsx'
 */
-//TODO: Add state management
+//TODO: set up backend and db for news items.
+//TODO: barring backend and db, create temp testing module to pass in data
 
 import React, { Component } from "react";
 import { connect } from 'react-redux';
+import { fetchNews } from '../redux/actions/newsActions';
 
 //NewsItem creates cards for a news feed
 class NewsItem extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            title: this.props.title,
-            
-        };
+    componentDidMount() {
+        this.props.dispatch(fetchNews());
     }
     
     render(){
+        const { err, loading, news } = this.props;
+
+        if(err) {
+            return <div>Error! {err.message}</div>;
+        }
+
+        if(loading) {
+            return <div>loading...</div>;
+        }
+        
         return(
             <div>
               <h1>{this.props.title}</h1>
@@ -29,4 +37,10 @@ class NewsItem extends React.Component {
     }
 }
 
-export default NewsItem;
+const mapStateToProps = state => ({
+    news: state.news.items,
+    loading: state.news.loading,
+    err: state.news.err
+});
+
+export default connect(mapStateToProps)(NewsItem);

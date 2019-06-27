@@ -1,5 +1,5 @@
 /*
-Navbar.
+Navbar.  Self-explanatory.
 */
 
 //IAN: I've put some redux testing stuff in this file.  It's where you'll see the way we connect components.
@@ -11,14 +11,12 @@ import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { setPage } from '../redux/actions';
 
-//Navbar provides the basic, shared navigation for the site.
 class Navbar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             currentpage: "./"
         };
-        
         this.handleNav = this.handleNav.bind(this);
     }
 
@@ -41,12 +39,10 @@ class Navbar extends React.Component {
     }
 }
 
-//TODO: finish connecting this component to the Redux store.
 const mapStateToProps = state => {
     const { currentpage } = state;
     console.log("state deconstructed.  currentpage is " + currentpage);
     return { currentpage: state.currentpage };
-
 };
 
 const mapDispatchToProps = {

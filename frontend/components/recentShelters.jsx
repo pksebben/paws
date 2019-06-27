@@ -1,11 +1,10 @@
 /*
-Recent shelter module
+Recent shelter module provides cards on recently joined shelters
 card-style?
 */
 
 import React, { Component } from "react";
 
-//RecentShelters provides cards on recently joined shelters
 class RecentShelters extends React.Component {
     render() {
         return(
