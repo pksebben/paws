@@ -4,7 +4,7 @@
 //GOOGLE: redux pro move - RTFM - js concat() slice() ...spread
 //GOOGLE: redux pro move - redux combineReducers()
 
-import { ADD_FHQWHGADS, SET_PAGE } from "../constants/action-types";
+import { ADD_FHQWHGADS, SET_PAGE, FOUND_BAD_WORD } from "../constants/action-types";
 
 const initialState = {
     fhqwhgads: [],
@@ -22,6 +22,9 @@ function rootReducer(state = initialState, action) {
 	return Object.assign({}, state, {
 	    currentpage: action.payload
 	})
+    case FOUND_BAD_WORD:
+	alert((Array(11).join("robin" - 2) + " batman!").toString());
+	return state;
     default:
 	return state;
     }

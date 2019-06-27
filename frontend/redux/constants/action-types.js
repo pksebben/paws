@@ -2,3 +2,4 @@
 
 export const ADD_FHQWHGADS = "ADD_FHQWHGADS";
 export const SET_PAGE = "SET_PAGE";
+export const FOUND_BAD_WORD = "FOUND_BAD_WORD";
