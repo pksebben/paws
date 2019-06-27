@@ -3,6 +3,8 @@ Navbar.
 */
 
 //IAN: I've put some redux testing stuff in this file.  It's where you'll see the way we connect components.
+//TODO: Fix this module such that it properly updates the store with currentpage
+//TODO: Disable presentation of link if user is currently on that link's page
 
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
