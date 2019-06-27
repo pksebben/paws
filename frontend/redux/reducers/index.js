@@ -4,27 +4,19 @@
 //GOOGLE: redux pro move - RTFM - js concat() slice() ...spread
 //GOOGLE: redux pro move - redux combineReducers()
 
-import { ADD_FHQWHGADS, SET_PAGE, FOUND_BAD_WORD } from "../constants/action-types";
+import { SET_PAGE } from "../constants/action-types";
 
 const initialState = {
-    fhqwhgads: [],
-    currentpage: "home",
+    currentpage: "home"
 };
 
 //TODO: fix this switch case and test it
 function rootReducer(state = initialState, action) {
     switch (action.type) { 
-    case ADD_FHQWHGADS:
-	return Object.assign({}, state, {
-	    fhqwhgads: state.fhqwhgads.concat(action.payload)
-	});
     case SET_PAGE:
 	return Object.assign({}, state, {
 	    currentpage: action.payload
 	})
-    case FOUND_BAD_WORD:
-	alert((Array(11).join("robin" - 2) + " batman!").toString());
-	return state;
     default:
 	return state;
     }

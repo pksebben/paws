@@ -17,17 +17,15 @@ import TopGamers from "../components/topGamers.jsx";
 import { eventdata, newsdata, analyticsdata, recentgamerdata, recentshelterdata, topgamersdata } from "../components/TestingData.js";
 
 
-//This is the homepage. Everything that goes in here should be modular and imported
+
 class Home extends React.Component {
     render() {
         return(
             <div>
               <NavBar/>
               <h1>
-                THIS AM A HUMPAEG
+                Homepage
               </h1>
-              <h3>Come on FhqwhgadsInput</h3>
-              <h3>Gert out Fhqwhgads</h3>
               <OurStory/>
               <div className="upcomingEvents">
                 <h1>EVENTS GO HERE</h1>

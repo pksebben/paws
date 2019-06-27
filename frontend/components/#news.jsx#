@@ -4,12 +4,19 @@ TODO: rename 'news.jsx' to 'newsitem.jsx'
 */
 //TODO: Add state management
 
-
 import React, { Component } from "react";
+import { connect } from 'react-redux';
 
 //NewsItem creates cards for a news feed
 class NewsItem extends React.Component {
-
+    constructor(props){
+        super(props);
+        this.state = {
+            title: this.props.title,
+            
+        };
+    }
+    
     render(){
         return(
             <div>

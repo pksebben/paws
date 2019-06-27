@@ -9,7 +9,6 @@ import index from './redux';
 
 const rootEl = document.getElementById('app');
 
-
 render(
     <Provider store={ store }>
       <App />
