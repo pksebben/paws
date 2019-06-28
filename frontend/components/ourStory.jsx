@@ -1,6 +1,8 @@
+//OurStory provides a simple, basic intro.  What we're about.
+//TODO: hook this module up to CMS
+
 import React, { Component } from "react";
 
-//OurStory provides a simple, basic intro.  What we're about.
 class OurStory extends React.Component{
     render() {
         return(

@@ -1,8 +1,9 @@
 /*
-AnaLytics
+Analytics
 This should be a standalone (NOT card-based) 
 Might connect to store later and make stateful. idk.
 */
+//TODO: Add state management
 
 
 import React, { Component } from "react";
