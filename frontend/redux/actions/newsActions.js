@@ -3,7 +3,7 @@ export function fetchNews() {
 	dispatch(fetchNewsBegin());
 	return fetch("/news")
 	    .then(res => res.json())
-	    .then(json {
+	    .then(json => {
 		dispatch(fetchNewsSuccess(json.news));
 		return json.news
 	    })
