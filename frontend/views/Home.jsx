@@ -15,6 +15,7 @@ import RecentGamers from "../components/recentGamers.jsx";
 import RecentShelters from "../components/recentShelters.jsx";
 import TopGamers from "../components/topGamers.jsx";
 import ErrorBoundary from "../components/ErrorBoundary.jsx";
+import CardBox from "../components/CardBox.jsx";
 import { eventdata, newsdata, analyticsdata, recentgamerdata, recentshelterdata, topgamersdata } from "../components/TestingData.js";
 
 
@@ -28,10 +29,9 @@ class Home extends React.Component {
                 Homepage
               </h1>
               <OurStory/>
-              <div className="upcomingEvents">
-                <h1>Professional Events</h1>
+              <CardBox boxtitle="Upcoming Events">
                 <Event title={eventdata.title} date={eventdata.date} eventImage={eventdata.eventImage} eventDesc={eventdata.eventDesc} shelterLink={eventdata.shelterLink} shelterName={eventdata.shelterName} />
-              </div>
+              </CardBox>
               <div className="topGamers">
                 <h1>Professional Top Gamers</h1>
                 <TopGamers name={topgamersdata.name} shelters={topgamersdata.shelters} raised={topgamersdata.raised} events={topgamersdata.events} achievements={topgamersdata.achievements}/>

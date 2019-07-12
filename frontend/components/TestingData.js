@@ -5,14 +5,23 @@ of storage.
 TODO:Implement storage and deprecate this module.
 */
 
-const eventdata = {
+const eventdata = [ {
     title: "Professional Event",
+    eventID: 1,
     eventImage: "Image will go here", //TODO: replace with actual image data
     eventDesc: "This is a professional event.  Professionals only.  There will be no shenanigans at this event.  Only professional professionals professing professional profession things. Professionals.",
     shelterLink: "https://photricity.com/flw/ajaxhttps://www.gettyimages.com/photos/professional?phrase=professional&sort=best",
     shelterName: "Professional dog shelter.  For professional dogs.",
-    date: "1/13/59"
-}
+    date: new Date('December 17, 1995 03:24:00')
+},{
+    title: "Professional Event",
+    eventID: 2,
+    eventImage: "Image will go here", //TODO: replace with actual image data
+    eventDesc: "This is a professional event.  Professionals only.  There will be no shenanigans at this event.  Only professional professionals professing professional profession things. Professionals.",
+    shelterLink: "https://photricity.com/flw/ajaxhttps://www.gettyimages.com/photos/professional?phrase=professional&sort=best",
+    shelterName: "Professional dog shelter.  For professional dogs.",
+    date: new Date('December 18, 1995 03:24:00')
+}]
 
 const newsdata = {
     title: "Today's professional news",

@@ -18,12 +18,18 @@ const todoWebpackPlugin = new TodoWebpackPlugin({
 });
 
 module.exports = {
+    context: path.resolve(__dirname,''),
     devtool: 'eval-source-map',
-    entry: "./frontend/index.jsx",
+    devServer: {
+	open: true,
+	// contentBase: './dist'
+    },
+    entry: ["./frontend/index.jsx"],
     output: {
-        path: path.join(__dirname, "/dist"),
+        path: path.resolve(__dirname, "./dist"),
         filename: "[name].bundle.js",
-	chunkFilename: "[name].bundle.js"
+	chunkFilename: "[name].bundle.js",
+	publicPath: "/"
     },
     module: {
         rules: [{

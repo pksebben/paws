@@ -1,8 +1,12 @@
+### IANs
+| Filename | line # | IAN
+|:------|:------:|:------
+| frontend/components/NavBar.jsx | 5 | I've put some redux testing stuff in this file.  It's where you'll see the way we connect components.
+
 ### TODOs
 | Filename | line # | TODO
 |:------|:------:|:------
-| frontend/app.jsx | 1 | Implement routing for gamerprofile and shelterprofile
-| frontend/components/NavBar.jsx | 6 | Fix this module such that it properly updates the store with currentpage
+| frontend/components/NavBar.jsx | 6 | Fix this module such that it properly updates the store with currentpage.  Perhaps that's best done in componentdidmount in the actual page itself.
 | frontend/components/NavBar.jsx | 7 | Disable presentation of link if user is currently on that link's page
 | frontend/components/TestingData.js | 5 | Implement storage and deprecate this module.
 | frontend/components/analytics.jsx | 6 | Add state management
@@ -15,11 +19,7 @@
 | frontend/redux/index.js | 2 | once redux is integrated properly, delete this file.
 | frontend/redux/reducers/index.js | 13 | fix this switch case and test it
 | frontend/views/Home.jsx | 3 | 
-
-### IANs
-| Filename | line # | IAN
-|:------|:------:|:------
-| frontend/components/NavBar.jsx | 5 | I've put some redux testing stuff in this file.  It's where you'll see the way we connect components.
+| frontend/views/ShelterProfile.jsx | 1 | fill out shelter profile
 
 ### GOOGLEs
 | Filename | line # | GOOGLE

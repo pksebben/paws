@@ -33,8 +33,8 @@
 			},
 			"scripts": {
 						"test": "echo \"Error: no test specified\" && exit 1",
-						"start": "node_modules/.bin/webpack-dev-server --mode development --open --hot",
-						"build": "node_modules/.bin/webpack --config webpack.prod.js --mode production"
+						"start": "node_modules/.bin/webpack-dev-server --mode development --open",
+						"build": "node_modules/.bin/webpack --config webpack.config.js --mode development"
 			},
 			"repository": {
 						"type": "git",
