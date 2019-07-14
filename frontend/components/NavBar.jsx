@@ -30,9 +30,9 @@ class Navbar extends React.Component {
     render(){
         return(
             <div className="Navbar">
-              <Link to="./">Home</Link>
-              <Link to="./gamerprofile/">Gamer Login</Link>
-              <Link to="./shelterprofile/">Shelter Login</Link>
+              <Link to="/">Home</Link>
+              <Link to="/gamerprofile/">Gamer Login</Link>
+              <Link to="/shelterprofile/">Shelter Login</Link>
               <h1>{this.props.currentpage}</h1>
             </div>  
         );
