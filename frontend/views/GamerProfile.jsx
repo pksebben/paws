@@ -14,6 +14,7 @@ class GamerProfile extends React.Component {
     render() {
         return(
             <div>
+              <NavBar/>
               <h1>THIS IS A PLACEHOLDER UNTIL KIRBSLICE SENDS THE ACTUAL HTML</h1>
             </div>
         );
