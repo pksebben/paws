@@ -1,13 +1,8 @@
-### IANs
-| Filename | line # | IAN
-|:------|:------:|:------
-| frontend/components/NavBar.jsx | 5 | I've put some redux testing stuff in this file.  It's where you'll see the way we connect components.
-
 ### TODOs
 | Filename | line # | TODO
 |:------|:------:|:------
-| frontend/components/NavBar.jsx | 6 | Fix this module such that it properly updates the store with currentpage.  Perhaps that's best done in componentdidmount in the actual page itself.
-| frontend/components/NavBar.jsx | 7 | Disable presentation of link if user is currently on that link's page
+| frontend/components/NavBar.jsx | 4 | Fix this module such that it properly updates the store with currentpage.  Perhaps that's best done in componentdidmount in the actual page itself.
+| frontend/components/NavBar.jsx | 5 | Disable presentation of link if user is currently on that link's page
 | frontend/components/TestingData.js | 5 | Implement storage and deprecate this module.
 | frontend/components/analytics.jsx | 6 | Add state management
 | frontend/components/events.jsx | 6 | Add state management

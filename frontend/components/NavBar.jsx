@@ -1,8 +1,6 @@
 /*
 Navbar.  Self-explanatory.
 */
-
-//IAN: I've put some redux testing stuff in this file.  It's where you'll see the way we connect components.
 //TODO: Fix this module such that it properly updates the store with currentpage.  Perhaps that's best done in componentdidmount in the actual page itself.
 //TODO: Disable presentation of link if user is currently on that link's page
 
