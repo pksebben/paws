@@ -5,7 +5,7 @@ We may want to consider what kind of events we'll be having
 */
 //TODO: Add state management
 
-import eventdata from "./TestingData";
+import eventdata from "./testingdata";
 import React, { Component } from "react";
 
 

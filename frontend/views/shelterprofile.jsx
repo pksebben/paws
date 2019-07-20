@@ -1,6 +1,6 @@
 //TODO: fill out shelter profile
 import React, {Component} from 'react';
-import NavBar from '../components/NavBar.jsx';
+import NavBar from '../components/navbar.jsx';
 
 const ShelterProfile = () => (
     <div>

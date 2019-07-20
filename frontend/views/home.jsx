@@ -6,17 +6,17 @@ TODO:
 */
 
 import React, { Component } from "react";
-import NavBar from '../components/NavBar.jsx';
+import NavBar from '../components/navbar.jsx';
 import Event from "../components/events.jsx";
-import OurStory from "../components/ourStory.jsx";
+import OurStory from "../components/ourstory.jsx";
 import NewsItem from "../components/news.jsx";
 import Analytics from "../components/analytics.jsx";
-import RecentGamers from "../components/recentGamers.jsx";
-import RecentShelters from "../components/recentShelters.jsx";
-import TopGamers from "../components/topGamers.jsx";
-import ErrorBoundary from "../components/ErrorBoundary.jsx";
-import CardBox from "../components/CardBox.jsx";
-import { eventdata, newsdata, analyticsdata, recentgamerdata, recentshelterdata, topgamersdata } from "../components/TestingData.js";
+import RecentGamers from "../components/recentgamers.jsx";
+import RecentShelters from "../components/recentshelters.jsx";
+import TopGamers from "../components/topgamers.jsx";
+import ErrorBoundary from "../components/errorboundary.jsx";
+import CardBox from "../components/cardbox.jsx";
+import { eventdata, newsdata, analyticsdata, recentgamerdata, recentshelterdata, topgamersdata } from "../components/testingdata.js";
 
 
 
