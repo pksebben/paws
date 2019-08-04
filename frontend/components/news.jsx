@@ -1,9 +1,8 @@
 /*
 News Item.  This should have a single news item in it, card-style, and (maybe?) a link to a bigger article
-TODO: rename 'news.jsx' to 'newsitem.jsx'
+BEN: make a design decision about whether to keep this module as-is or to contain more than one item in it (probably, make it simply *the* news module and put all functions in here)
 */
-//TODO: set up backend and db for news items.
-//TODO: barring backend and db, create temp testing module to pass in data
+
 
 import React, { Component } from "react";
 import { connect } from 'react-redux';

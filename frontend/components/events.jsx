@@ -3,7 +3,7 @@ Event module.
 This will be an encapsulated 'card' that holds data for a single event.
 We may want to consider what kind of events we'll be having
 */
-//TODO: Add state management
+//BEN: Add state management
 
 import eventdata from "./testingdata";
 import React, { Component } from "react";

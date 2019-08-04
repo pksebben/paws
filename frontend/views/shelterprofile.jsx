@@ -1,4 +1,4 @@
-//TODO: fill out shelter profile
+//TODO: fill out shelter profile according to Kirby's spec
 import React, {Component} from 'react';
 import NavBar from '../components/navbar.jsx';
 
