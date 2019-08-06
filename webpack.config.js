@@ -23,6 +23,7 @@ module.exports = {
     devServer: {
 	open: true,
 	// contentBase: './dist'
+	historyApiFallback: true
     },
     entry: ["./frontend/index.jsx"],
     output: {

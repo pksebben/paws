@@ -6,13 +6,20 @@ It is also the place where appwide TODOs, IANs, BENs, and KIRBYs should live.
 //BEN: ++PRIORITY++ Figure out webpack again so I can advise re: static files
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import React, { Component,Suspense,lazy } from 'react';
+import Home from './views/home.jsx';
+import GamerProfile from './views/gamerprofile.jsx';
+import ShelterProfile from './views/shelterprofile.jsx';
+import OurTail from './views/ourtail.jsx';
+import Leaderboard from './views/leaderboard.jsx';
+import News from './views/news.jsx';
 
-const Home = lazy(() => import(/*webpackChunkName: "Home"*/'./views/home.jsx'));
-const GamerProfile = lazy(() => import(/*webpackChunkName: "GamerProfile"*/ './views/gamerprofile.jsx'));
-const ShelterProfile = lazy(() => import(/*webpackChunkName: "ShelterProfile"*/'./views/shelterprofile.jsx'));
-const OurTail = lazy(() => import(/*webpackChunkName: "OurTail"*/ "./views/ourtail.jsx"));
-const Leaderboard = lazy(() => import(/*webpackChunkName: "Leaderboard"*/ "./views/leaderboard.jsx"));
-const News = lazy(() => import(/*webPackChunkName: "News"*/ "./views/news.jsx"));
+
+// const Home = lazy(() => import(/*webpackChunkName: "Home"*/'./views/home.jsx'));
+// const GamerProfile = lazy(() => import(/*webpackChunkName: "GamerProfile"*/ './views/gamerprofile.jsx'));
+// const ShelterProfile = lazy(() => import(/*webpackChunkName: "ShelterProfile"*/'./views/shelterprofile.jsx'));
+// const OurTail = lazy(() => import(/*webpackChunkName: "OurTail"*/ "./views/ourtail.jsx"));
+// const Leaderboard = lazy(() => import(/*webpackChunkName: "Leaderboard"*/ "./views/leaderboard.jsx"));
+// const News = lazy(() => import(/*webPackChunkName: "News"*/ "./views/news.jsx"));
 
 class App extends Component{
     render() {
@@ -21,11 +28,11 @@ class App extends Component{
               <Suspense fallback={<div>loading...</div>}>
                 <Switch>
                   <Route exact path='/' component={Home}/>
-                  <Route path='/gamerprofile/' component={GamerProfile}/>
-                  <Route path='/shelterprofile/' component={ShelterProfile}/>
-                  <Route path='/leaderboard/' component={Leaderboard}/>
-                  <Route path='/ourtail/' component={OurTail}/>
-                  <Route path='/news/' component={News}/>
+                  <Route path='/gamerprofile' component={GamerProfile}/>
+                  <Route path='/shelterprofile' component={ShelterProfile}/>
+                  <Route path='/leaderboard' component={Leaderboard}/>
+                  <Route path='/ourtail' component={OurTail}/>
+                  <Route path='/news' component={News}/>
                 </Switch>
               </Suspense>
             </Router>

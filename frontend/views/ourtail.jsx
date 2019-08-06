@@ -9,7 +9,9 @@ class OurTail extends React.Component {
             <div>
               <NavBar/>
               <h1>Our Tail</h1>
-              <img src="/path/to/doggo.jpg">image of sophie the doggo</img>
+              <ErrorBoundary>
+                <img src="/path/to/doggo.jpg">image of sophie the doggo</img>
+              </ErrorBoundary>
               <p>This is Sophie. She was my best friend and first rescue pet.
 
                 After a series of unfortunate events, I had to put Sophie to sleep due to a rare genetic disorder. My world became very dark. I became lost and shortly after attempted to take my own life.

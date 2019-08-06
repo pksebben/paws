@@ -15,29 +15,50 @@ class GamerProfile extends React.Component {
     
     render() {
         return(
-            <div>
-
-              <NavBar/>
-
-              <div id="notifications">CREATE NOTIFICATION MODULE AND PLACE HERE</div>
-
-              <div id="profilesummary">
-                <ErrorBoundary>
-                  <div id="avatar">
-                    <img src="/path/to/avatar.jpg"/>
-                    <h2>Gamer Name goes here</h2>
-                  </div>
-                </ErrorBoundary>
-                <div id="profile_infotable">
-                  <div id="moneyraised">
-                    <ErrorBoundary>
-                        <img src="/path/to/money.jpg"/>
-                    </ErrorBoundary>
-                    <h1>Raised: $money</h1>
-                  </div>
-                </div>
+            <div id="Gamer_Profile" className="content">
+              <div className="section gamer_profile-overview">
+                <div className="gamer_profile-overview-avatar_username">
+                  <img className="gamer_profile-overview-avatar avatar"/>
+                  <h1 className="gamer_profile-overview-username">Puggle Lover</h1>
               </div>
-              <h1>THIS IS WHERE THE GAMER PROFILE GOES</h1>
+              <ul className="gamer_profile-overview-stats gamer_profile-list">
+                <li className="gamer_profile-overview-stats-raised">
+                  <i className="icon icon-block stats-raised-icon">moneybag</i>
+                  <dl>
+                    <dt>Raised</dt>
+                    <dd>$3,405</dd>
+                  </dl>
+                </li>
+                <li className="gamer_profile-overview-stats-rank">
+                  <i className="icon icon-block">trophy</i>
+                  <dl>
+                    <dt>Rank</dt>
+                    <dd>420 / 5,300</dd>
+                  </dl>
+                </li>
+                <li className="gamer_profile-overview-stats-upcoming_fundraiser">
+                  <i className="icon icon-standard">calendar</i>
+                  <dl>
+                    <dt>Upcoming Fundraiser</dt>
+                    <dd>September 30, 2019</dd>
+                  </dl>
+                </li>
+                <li className="gamer_profile-overview-stats-location">
+                  <i className="icon icon-block">earth</i>
+                  <dl>
+                    <dt>Location</dt>
+                    <dd>NYC</dd>
+                  </dl>
+                </li>
+                <li className="gamer_profile-overview-stats-twitch_handle">
+                  <i className="icon"></i>
+                  <dl>
+                    <dt>Twitch Handle</dt>
+                    <dd>Superzombiebbq</dd>
+                  </dl>
+                </li>
+              </ul>
+            </div> 
             </div>
         );
     }
