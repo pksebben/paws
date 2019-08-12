@@ -43,22 +43,24 @@ module.exports = {
                 }
             }
         }, {
-            test: /\.css$/,
-            use: ExtractTextPlugin.extract(
-                {
-                    fallback: 'style-loader',
-                    use: ['css-loader']
-                }
-            )
-        },
-        {
+            test: /\.css$/i,
+	    use: ['style-loader', 'css-loader'],
+        }, {
             test: /\.(png|jpg|gif)$/,
             use: [
                 {
                     loader: 'file-loader'
                 }
             ]
-        }
+        }, {
+	    test: /\.(ttf|eot|woff|woff2|svg)$/,
+	    use: {
+		loader: "file-loader",
+		options: {
+		    name: "fonts/[name].[ext]",
+		},
+	    },
+	}
         ]
     },
 

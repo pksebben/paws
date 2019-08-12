@@ -1,0 +1,665 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+ul, ol {
+  list-style: none outside none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+i {
+  font-style: normal;
+}
+
+dd, dt, dl {
+  margin: 0;
+}
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+  background: none repeat scroll 0 0 transparent;
+  border: 0 none;
+  font-size: 100%;
+  margin: 0;
+  outline: 0 none;
+  padding: 0;
+  vertical-align: baseline;
+}
+
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+}
+
+/*------------------- 
+    LAYOUT
+------------------- */
+#Content {
+  overflow: hidden;
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+}
+
+.column-one,
+.column-two {
+  width: 50%;
+  position: relative;
+  height: 100%;
+  float: left;
+  overflow: hidden;
+}
+
+@font-face {
+  font-family: "ssSocial";
+  src: url("fonts/ss-social.eot?") format("eot"), url("fonts/ss-social.woff2") format("woff2"), url("fonts/ss-social.woff") format("woff"), url("fonts/ss-social.ttf") format("truetype"), url("fonts/ss-social.svg#ssSocial") format("svg");
+}
+@font-face {
+  font-family: "ssStandardLine";
+  src: url("fonts/ss-line.eot?") format("eot"), url("fonts/ss-line.woff2") format("woff2"), url("fonts/ss-line.woff") format("woff"), url("fonts/ss-line.ttf") format("truetype"), url("fonts/ss-line.svg#ssStandardLine") format("svg");
+}
+@font-face {
+  font-family: "ssStandard";
+  src: url("fonts/ss-standard.eot?") format("eot"), url("fonts/ss-standard.woff2") format("woff2"), url("fonts/ss-standard.woff") format("woff"), url("fonts/ss-standard.ttf") format("truetype"), url("fonts/ss-standard.svg#ssStandard") format("svg");
+}
+@font-face {
+  font-family: "ssBlock";
+  src: url("fonts/ss-block.eot?") format("eot"), /* url("fonts/ss-block.woff2") format("woff2"), */ url("fonts/ss-block.woff") format("woff"), url("fonts/ss-block.ttf") format("truetype"), url("fonts/ss-block.svg#ssBlock") format("svg");
+}
+@font-face {
+  font-family: "alphaHeadline";
+  src: url("fonts/alpha-headline-regular.eot?") format("eot"), url("fonts/alpha-headline-regular.woff2") format("woff2"), url("fonts/alpha-headline-regular.woff") format("woff"), url("fonts/alpha-headline-regular.ttf") format("truetype"), url("fonts/alpha-headline-regular.svg#alphaHeadline") format("svg");
+}
+@font-face {
+  font-family: "alphaHeadline";
+  font-weight: bold;
+  src: url("fonts/alpha-headline-bold.eot?") format("eot"), url("fonts/alpha-headline-bold.woff2") format("woff2"), url("fonts/alpha-headline-bold.woff") format("woff"), url("fonts/alpha-headline-bold.ttf") format("truetype"), url("fonts/alpha-headline-bold.svg#alphaHeadline") format("svg");
+}
+@font-face {
+  font-family: "sourceSansPro";
+  font-weight: light;
+  src: url("fonts/source-sans-pro-light.eot?") format("eot"), url("fonts/source-sans-pro-light.woff2") format("woff2"), url("fonts/source-sans-pro-light.woff") format("woff"), url("fonts/source-sans-pro-light.ttf") format("truetype"), url("fonts/source-sans-pro-light.svg#sourceSansPro") format("svg");
+}
+@font-face {
+  font-family: "sourceSansPro";
+  font-weight: regular;
+  src: url("fonts/source-sans-pro-regular.eot?") format("eot"), url("fonts/source-sans-pro-regular.woff2") format("woff2"), url("fonts/source-sans-pro-regular.woff") format("woff"), url("fonts/source-sans-pro-regular.ttf") format("truetype"), url("fonts/source-sans-pro-regular.svg#sourceSansPro") format("svg");
+}
+@font-face {
+  font-family: "junegull";
+  font-weight: regular;
+  src: url("fonts/Junegull-Regular.eot?") format("eot"), url("fonts/Junegull-Regular.woff2") format("woff2"), url("fonts/Junegull-Regular.woff") format("woff"), url("fonts/Junegull-Regular.ttf") format("truetype"), url("fonts/Junegull-Regular.svg#junegull") format("svg");
+}
+html {
+  font-size: 100%;
+}
+
+h1 {
+  font-family: alphaHeadline;
+  font-size: 36px;
+  text-transform: uppercase;
+  line-height: 50px;
+}
+
+p {
+  font-size: 18px;
+  line-height: 27px;
+  font-family: sourceSansPro;
+  font-style: regular;
+}
+
+a {
+  color: #1b002b;
+  transition: color .5s ease-in-out;
+}
+a:hover {
+  color: #5900ff;
+}
+
+.icon-standard {
+  font-family: ssStandard;
+}
+
+.icon-social {
+  font-family: ssSocial;
+}
+
+.icon-block {
+  font-family: ssBlock;
+}
+
+.nav-tabs .nav-item a {
+  padding: 0;
+  border: 0;
+}
+.nav-tabs .nav-item a:hover {
+  border: 0;
+}
+.nav-tabs .nav-item a.active {
+  border: none;
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  /* Styles */
+}
+/* Smartphones (landscape) ----------- */
+@media only screen and (min-width: 321px) {
+  /* Styles */
+}
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width: 320px) {
+  /* Styles */
+}
+@media only screen and (min-device-width: 767px) {
+  .slick-container slick div {
+    margin-bottom: 20px;
+  }
+  .slick-container img {
+    width: 100%;
+    height: auto;
+  }
+}
+/* iPads (portrait and landscape) ----------- */
+/* iPads (landscape) ----------- */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+  /* Styles */
+}
+/* iPads (portrait) ----------- */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+  /* Styles */
+}
+/**********
+iPad 3
+**********/
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {
+  /* Styles */
+}
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {
+  /* Styles */
+}
+/* Desktops and laptops ----------- */
+@media only screen and (min-width: 1224px) {
+  /* Styles */
+}
+/* Large screens ----------- */
+@media only screen and (min-width: 1824px) {
+  /* Styles */
+}
+/* iPhone 4 ----------- */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {
+  /* Styles */
+}
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {
+  /* Styles */
+}
+/* iPhone 5 ----------- */
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2) {
+  /* Styles */
+}
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2) {
+  /* Styles */
+}
+/* iPhone 6 ----------- */
+@media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2) {
+  /* Styles */
+}
+@media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2) {
+  /* Styles */
+}
+/* iPhone 6+ ----------- */
+@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2) {
+  /* Styles */
+}
+@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2) {
+  /* Styles */
+}
+/* Samsung Galaxy S3 ----------- */
+@media only screen and (min-device-width: 320px) and (max-device-height: 640px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2) {
+  /* Styles */
+}
+@media only screen and (min-device-width: 320px) and (max-device-height: 640px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2) {
+  /* Styles */
+}
+/* Samsung Galaxy S4 ----------- */
+@media only screen and (min-device-width: 320px) and (max-device-height: 640px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 3) {
+  /* Styles */
+}
+@media only screen and (min-device-width: 320px) and (max-device-height: 640px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 3) {
+  /* Styles */
+}
+/* Samsung Galaxy S5 ----------- */
+@media only screen and (min-device-width: 360px) and (max-device-height: 640px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 3) {
+  /* Styles */
+}
+@media only screen and (min-device-width: 360px) and (max-device-height: 640px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 3) {
+  /* Styles */
+}
+#Nav {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: stretch;
+  height: 80px;
+}
+#Nav h1 {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  color: #1b002b;
+  font-family: junegull;
+  font-size: 36px;
+  transition: all .75s;
+}
+#Nav h1:hover {
+  color: #5900ff;
+  cursor: pointer;
+}
+#Nav ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  flex-grow: 1;
+  align-items: stretch;
+}
+#Nav ul li {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#Nav ul li a {
+  font-family: alphaHeadline;
+  font-size: 18px;
+  text-transform: uppercase;
+  color: #1b002b;
+  transition: all .75s;
+}
+#Nav ul li i {
+  transition: all .75s;
+}
+#Nav ul li:hover {
+  cursor: pointer;
+}
+#Nav ul li:hover a, #Nav ul li:hover i {
+  color: #5900ff;
+}
+#Nav ul li.nav-search input[type=text] {
+  width: 0px;
+  transition: width 0.5s ease-in-out;
+  border: 0px;
+  font-family: alphaHeadline;
+}
+#Nav ul li.nav-signin {
+  background-color: #5900ff;
+  transition: all .75s;
+  padding: 0 15px;
+}
+#Nav ul li.nav-signin a {
+  color: #fff;
+}
+#Nav ul li.nav-signin:hover {
+  background-color: #4700cc;
+}
+#Nav ul li.nav-donate {
+  background-color: #00c214;
+  transition: all .75s;
+  padding: 0 15px;
+}
+#Nav ul li.nav-donate a {
+  color: #fff;
+}
+#Nav ul li.nav-donate:hover {
+  background-color: #009910;
+}
+
+.button {
+  font-family: alphaHeadline;
+  font-size: 28px;
+  padding: 5px 20px;
+}
+
+.button-green {
+  color: #00c214;
+  border: 2px solid #00c214;
+  transition: all .5s ease-in-out;
+}
+.button-green:hover {
+  background-color: #00c214;
+  color: #fff;
+}
+
+.section {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.section-vertical {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.goalProgress {
+  background: #e6fad4;
+  height: 60px;
+}
+
+.progressBar {
+  background: #00c214;
+  color: #fff;
+  display: block;
+  overflow: hidden;
+  padding: 5px;
+  height: 60px;
+}
+
+ul.gamer_profile-list li {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  padding: 25px 0;
+}
+ul.gamer_profile-list li .icon {
+  font-size: 30px;
+  text-align: center;
+  padding-right: 40px;
+}
+
+.gamer_profile-overview {
+  background-color: #1b002b;
+}
+
+.gamer_profile-overview-avatar_username,
+.gamer_profile-overview-stats {
+  flex-grow: 1;
+}
+
+.gamer_profile-overview-avatar_username {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-right: 40px;
+  max-width: 600px;
+}
+
+.gamer_profile-overview-avatar_username .avatar {
+  height: 200px;
+  width: 200px;
+  border: 3px solid #fff;
+  border-radius: 100px;
+  margin-bottom: 20px;
+}
+.gamer_profile-overview-avatar_username .gamer_profile-overview-username {
+  color: #fff;
+  text-align: center;
+}
+
+ul.gamer_profile-overview-stats {
+  max-width: 600px;
+}
+ul.gamer_profile-overview-stats li {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  padding: 25px 0;
+}
+ul.gamer_profile-overview-stats li .icon {
+  font-size: 30px;
+  text-align: center;
+  padding-right: 40px;
+}
+ul.gamer_profile-overview-stats li:not(:last-child) {
+  border-bottom: 1px solid #5900ff;
+}
+ul.gamer_profile-overview-stats .icon, ul.gamer_profile-overview-stats dd {
+  color: #fff;
+}
+ul.gamer_profile-overview-stats .icon {
+  padding-left: 20px;
+  margin-top: 10px;
+}
+ul.gamer_profile-overview-stats dl {
+  flex-grow: 3;
+}
+ul.gamer_profile-overview-stats dd, ul.gamer_profile-overview-stats dt {
+  text-transform: uppercase;
+}
+ul.gamer_profile-overview-stats dt {
+  font-family: sourceSansPro;
+  font-style: light;
+  color: #5900ff;
+  font-size: 12px;
+  letter-spacing: .1em;
+  padding-bottom: 5px;
+}
+ul.gamer_profile-overview-stats dd {
+  font-family: alphaHeadline;
+  font-size: 28px;
+  margin: 0;
+}
+ul.gamer_profile-overview-stats .gamer_profile-overview-stats-raised i, ul.gamer_profile-overview-stats .gamer_profile-overview-stats-raised dt, ul.gamer_profile-overview-stats .gamer_profile-overview-stats-raised dd {
+  color: #00c214;
+}
+
+.gamer_profile-why_i_paws {
+  background-color: #1b002b;
+}
+.gamer_profile-why_i_paws .why_i_paws {
+  padding: 40px;
+  border: 1px solid #5900ff;
+  width: 100%;
+  max-width: 1200px;
+}
+.gamer_profile-why_i_paws .why_i_paws header {
+  color: #5900ff;
+  text-align: center;
+  margin-bottom: 15px;
+}
+.gamer_profile-why_i_paws .why_i_paws p {
+  color: #fff;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.gamer_profile-fundraisers {
+  background-color: #00c9db;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+.gamer_profile-fundraisers ul.nav-tabs {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+.gamer_profile-fundraisers ul.nav-tabs li {
+  flex-grow: 1;
+  width: 50%;
+}
+.gamer_profile-fundraisers ul.nav-tabs li a {
+  font-family: alphaHeadline;
+  font-size: 28px;
+  color: #fff;
+  padding: 1rem 40px;
+  text-transform: uppercase;
+}
+.gamer_profile-fundraisers ul.nav-tabs li a.active {
+  color: #1b002b;
+}
+.gamer_profile-fundraisers .tab-content {
+  flex: 1;
+}
+.gamer_profile-fundraisers h3 {
+  font-family: alphaHeadline;
+  font-size: 36px;
+  text-transform: uppercase;
+  line-height: 50px;
+}
+.gamer_profile-fundraisers h3 span {
+  font-size: 22px;
+}
+.gamer_profile-fundraisers #Gamer_Profile-Fundraisers-Upcoming {
+  background-color: #fff;
+  padding: 40px;
+}
+.gamer_profile-fundraisers #Gamer_Profile-Fundraisers-Upcoming .gamer_profile-fundraisers-upcoming-list > li {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  padding: 25px 0;
+}
+.gamer_profile-fundraisers #Gamer_Profile-Fundraisers-Upcoming .gamer_profile-fundraisers-upcoming-list > li .icon {
+  font-size: 30px;
+  text-align: center;
+  padding-right: 40px;
+}
+.gamer_profile-fundraisers #Gamer_Profile-Fundraisers-Upcoming li.gamer_profile-fundraisers-upcoming-donations {
+  justify-content: space-between;
+}
+.gamer_profile-fundraisers #Gamer_Profile-Fundraisers-Upcoming li.gamer_profile-fundraisers-upcoming-donations .icon {
+  color: #00c214;
+}
+.gamer_profile-fundraisers #Gamer_Profile-Fundraisers-Upcoming li.gamer_profile-fundraisers-upcoming-donations .gamer_profile-fundraisers-upcoming-donations-progress_bar {
+  flex-grow: 1;
+  margin-right: 40px;
+}
+.gamer_profile-fundraisers #Gamer_Profile-Fundraisers-Upcoming li.gamer_profile-fundraisers-upcoming-donations .gamer_profile-fundraisers-upcoming-donations-progress_bar h3 {
+  color: #00c214;
+}
+.gamer_profile-fundraisers #Gamer_Profile-Fundraisers-Upcoming li.gamer_profile-fundraisers-upcoming-donations .gamer_profile-fundraisers-upcoming-donations-donate_btn {
+  align-self: flex-end;
+}
+.gamer_profile-fundraisers #Gamer_Profile-Fundraisers-Upcoming li.gamer_profile-fundraisers-upcoming-countdown h3 {
+  font-size: 22px;
+}
+.gamer_profile-fundraisers #Gamer_Profile-Fundraisers-Upcoming li.gamer_profile-fundraisers-upcoming-countdown h3 span {
+  font-family: alphaHeadline;
+  font-size: 36px;
+  text-transform: uppercase;
+  line-height: 50px;
+}
+.gamer_profile-fundraisers .gamer_profile-fundraisers-upcoming-share {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: none;
+  justify-content: center;
+  margin: 40px 0;
+}
+.gamer_profile-fundraisers .gamer_profile-fundraisers-upcoming-share li:not(:last-child) {
+  padding-right: 20px;
+}
+.gamer_profile-fundraisers .gamer_profile-fundraisers-upcoming-share .text {
+  font-family: sourceSansPro;
+  font-style: light;
+}
+
+/* Fundraisers Past */
+#Gamer_Profile-Fundraisers-Past .gamer_profile-fundraisers-past-item {
+  background-color: #fff;
+  padding: 40px;
+  margin-bottom: 20px;
+}
+#Gamer_Profile-Fundraisers-Past .gamer_profile-fundraisers-past-item > ul li {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  padding: 25px 0;
+}
+#Gamer_Profile-Fundraisers-Past .gamer_profile-fundraisers-past-item > ul li .icon {
+  font-size: 30px;
+  text-align: center;
+  padding-right: 40px;
+}
+#Gamer_Profile-Fundraisers-Past .gamer_profile-fundraisers-past-item .gamer_profile-fundraisers-past-donations-progress_bar {
+  flex-grow: 1;
+}
+#Gamer_Profile-Fundraisers-Past .gamer_profile-fundraisers-past-item .gamer_profile-fundraisers-past-donations .icon,
+#Gamer_Profile-Fundraisers-Past .gamer_profile-fundraisers-past-item .gamer_profile-fundraisers-past-donations h3 {
+  color: #00c214;
+}
+
+/* Donations */
+.gamer_profile-donations {
+  background-color: #e6fad4;
+}
+.gamer_profile-donations header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.gamer_profile-donations-header h1 {
+  color: #00c214;
+}
+
+.gamer_profile-donations-list {
+  flex-grow: 1;
+}
+
+.gamer_profile-donations-list-item {
+  background-color: #fff;
+  position: relative;
+  padding: 20px;
+}
+.gamer_profile-donations-list-item h3 {
+  font-family: sourceSansPro;
+  font-size: 32px;
+  text-transform: uppercase;
+}
+.gamer_profile-donations-list-item .gamer_profile-donations-list-item-amount {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: #00c214;
+  font-family: alphaHeadline;
+  font-size: 36px;
+  text-transform: uppercase;
+  line-height: 50px;
+}
+.gamer_profile-donations-list-item date {
+  font-family: sourceSansPro;
+  font-style: light;
+  font-size: 12px;
+}
+.gamer_profile-donations-list-item p {
+  font-family: sourceSansPro;
+  font-style: italic;
+  font-size: 12px;
+}
+
+/*# sourceMappingURL=styles.css.map */

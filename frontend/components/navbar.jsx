@@ -34,17 +34,27 @@ class Navbar extends React.Component {
     
     render(){
         return(
-            <div className="Navbar">
-              <Link to="/"> Home </Link>
-              <Link to="/ourtail/"> Our Tail </Link>
-              <Link to="/leaderboard/"> LEADERBOARD </Link>
-              <Link to="/news/"> NEWS </Link>
-              <ErrorBoundary>
-                <img src='/path/to/spyglass.img'>search thinger</img>
-              </ErrorBoundary>
-              <Link to='/signin/'> SIGN IN / UP </Link>
-              <Link to="/donate/"> DONATE </Link>
-            </div>  
+            <nav className="Navbar">
+              <h1 className="nav-logo">Paws Your Game</h1>
+              <ul>
+                <li><Link to="/"> Home </Link></li>
+                <li><Link to="/ourtail/"> Our Tail </Link></li>
+                <li><Link to="/leaderboard/"> LEADERBOARD </Link></li>
+                <li><Link to="/news/"> NEWS </Link></li>
+                <ErrorBoundary>
+                  <li className="nav-search">
+                    <form>
+                      <button>
+                        <i className="icon icon-standard">search</i>
+                      </button>
+                      <input type="text" name="search" placeholder="Search for players, shelters, or donors."/>
+                    </form>
+                  </li>
+                </ErrorBoundary>
+                <li><Link to='/signin/'> SIGN IN / UP </Link></li>
+                <li><Link to="/donate/"> DONATE </Link></li>
+              </ul>
+            </nav>  
         );
     }
 }

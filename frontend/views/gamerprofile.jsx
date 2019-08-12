@@ -15,50 +15,59 @@ class GamerProfile extends React.Component {
     
     render() {
         return(
-            <div id="Gamer_Profile" className="content">
-              <div className="section gamer_profile-overview">
-                <div className="gamer_profile-overview-avatar_username">
-                  <img className="gamer_profile-overview-avatar avatar"/>
-                  <h1 className="gamer_profile-overview-username">Puggle Lover</h1>
+            <div>
+              <NavBar/>
+              <div id="Gamer_Profile" className="content">
+                <div className="section gamer_profile-overview">
+                  <div className="gamer_profile-overview-avatar_username">
+                    <img className="gamer_profile-overview-avatar avatar"/>
+                    <h1 className="gamer_profile-overview-username">Puggle Lover</h1>
+                  </div>
+                  <ul className="gamer_profile-overview-stats gamer_profile-list">
+                    <li className="gamer_profile-overview-stats-raised">
+                      <i className="icon icon-block stats-raised-icon">moneybag</i>
+                      <dl>
+                        <dt>Raised</dt>
+                        <dd>$3,405</dd>
+                      </dl>
+                    </li>
+                    <li className="gamer_profile-overview-stats-rank">
+                      <i className="icon icon-block">trophy</i>
+                      <dl>
+                        <dt>Rank</dt>
+                        <dd>420 / 5,300</dd>
+                      </dl>
+                    </li>
+                    <li className="gamer_profile-overview-stats-upcoming_fundraiser">
+                      <i className="icon icon-standard">calendar</i>
+                      <dl>
+                        <dt>Upcoming Fundraiser</dt>
+                        <dd>September 30, 2019</dd>
+                      </dl>
+                    </li>
+                    <li className="gamer_profile-overview-stats-location">
+                      <i className="icon icon-block">earth</i>
+                      <dl>
+                        <dt>Location</dt>
+                        <dd>NYC</dd>
+                      </dl>
+                    </li>
+                    <li className="gamer_profile-overview-stats-twitch_handle">
+                      <i className="icon"></i>
+                      <dl>
+                        <dt>Twitch Handle</dt>
+                        <dd>Superzombiebbq</dd>
+                      </dl>
+                    </li>
+                  </ul>
+                </div>
+                <div className="section gamer_profile-why_i_paws">
+                  <div className="why_i_paws">
+                    <header><h1>Why I Paws</h1><i className="icon"></i></header>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                  </div>
+                </div>
               </div>
-              <ul className="gamer_profile-overview-stats gamer_profile-list">
-                <li className="gamer_profile-overview-stats-raised">
-                  <i className="icon icon-block stats-raised-icon">moneybag</i>
-                  <dl>
-                    <dt>Raised</dt>
-                    <dd>$3,405</dd>
-                  </dl>
-                </li>
-                <li className="gamer_profile-overview-stats-rank">
-                  <i className="icon icon-block">trophy</i>
-                  <dl>
-                    <dt>Rank</dt>
-                    <dd>420 / 5,300</dd>
-                  </dl>
-                </li>
-                <li className="gamer_profile-overview-stats-upcoming_fundraiser">
-                  <i className="icon icon-standard">calendar</i>
-                  <dl>
-                    <dt>Upcoming Fundraiser</dt>
-                    <dd>September 30, 2019</dd>
-                  </dl>
-                </li>
-                <li className="gamer_profile-overview-stats-location">
-                  <i className="icon icon-block">earth</i>
-                  <dl>
-                    <dt>Location</dt>
-                    <dd>NYC</dd>
-                  </dl>
-                </li>
-                <li className="gamer_profile-overview-stats-twitch_handle">
-                  <i className="icon"></i>
-                  <dl>
-                    <dt>Twitch Handle</dt>
-                    <dd>Superzombiebbq</dd>
-                  </dl>
-                </li>
-              </ul>
-            </div> 
             </div>
         );
     }

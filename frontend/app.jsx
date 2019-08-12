@@ -12,6 +12,7 @@ import ShelterProfile from './views/shelterprofile.jsx';
 import OurTail from './views/ourtail.jsx';
 import Leaderboard from './views/leaderboard.jsx';
 import News from './views/news.jsx';
+import './styles/styles.css';
 
 
 // const Home = lazy(() => import(/*webpackChunkName: "Home"*/'./views/home.jsx'));
