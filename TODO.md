@@ -2,7 +2,6 @@
 | Filename | line # | KIRBY
 |:------|:------:|:------
 | frontend/app.jsx | 5 | We should talk about how to do static files and such.  This is dependant on my revisiting that part of webpack
-| frontend/views/gamerprofile.jsx | 6 | So this is the first place that it's plainly obvious that I am not yet qualified to write HTML.  I have *no idea* how to deal with things like the summary (where it's all money raised, avatar, name, next event, etc.).  I know how to get it done with a fuckton of nested divs but that seems like a good way to raise your blood pressure and create a clusterfuck.  When we sit down tomorrow (or whenever we get to it) I wanna try and attack this problem with extreme prejudice.  Perhaps one way to do that is to have you write up a couple examples (as if we were just gonna have you do it) and see if I can work from there.  If this tack feels like too much of a pain in the ass, just LMK and we can approach this whatever way you desire.  I would like to take some of the HTMLing load off you if I can but if we decide that's the hard way I have no ego about the matter.  I suppose it also goes without saying that this module is incomplete
 | frontend/views/news.jsx | 5 | Are we going to create a whole new scheme for doing the news or just implement the news component in the news page and gussy it up so it looks more like a thing?  What are your thoughts on this?  -B
 
 ### BENs
@@ -29,6 +28,7 @@
 | frontend/redux/index.js | 2 | once redux is integrated properly, delete this file.
 | frontend/redux/reducers/index.js | 13 | fix this switch case and test it
 | frontend/views/gamerprofile.jsx | 4 | Craft out this page according to Kirby's spec
+| frontend/views/gamerprofile.jsx | 6 | Do we want to make the 'upcoming fundraiser' a link to that fundraiser?
 | frontend/views/home.jsx | 3 | Refactor this page into it's component modules
 | frontend/views/news.jsx | 4 | Fix up the news component and figure out a way to either use it here or create some other scheme for displaying news in this context.  Kirby should weigh in on this
 | frontend/views/shelterprofile.jsx | 1 | fill out shelter profile according to Kirby's spec

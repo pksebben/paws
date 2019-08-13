@@ -3,7 +3,7 @@ Gamer Profile.
 */
 //TODO: Craft out this page according to Kirby's spec
 //BEN: Gamer profile notifications have to be created.  Should they be in their own module for readability or live native in the gamer profile view?
-//KIRBY:So this is the first place that it's plainly obvious that I am not yet qualified to write HTML.  I have *no idea* how to deal with things like the summary (where it's all money raised, avatar, name, next event, etc.).  I know how to get it done with a fuckton of nested divs but that seems like a good way to raise your blood pressure and create a clusterfuck.  When we sit down tomorrow (or whenever we get to it) I wanna try and attack this problem with extreme prejudice.  Perhaps one way to do that is to have you write up a couple examples (as if we were just gonna have you do it) and see if I can work from there.  If this tack feels like too much of a pain in the ass, just LMK and we can approach this whatever way you desire.  I would like to take some of the HTMLing load off you if I can but if we decide that's the hard way I have no ego about the matter.  I suppose it also goes without saying that this module is incomplete
+//TODO: Do we want to make the 'upcoming fundraiser' a link to that fundraiser?
 import React, { Component } from "react";
 import NavBar from '../components/navbar.jsx';
 import ErrorBoundary from "../components/errorboundary.jsx";
@@ -20,6 +20,7 @@ class GamerProfile extends React.Component {
               <div id="Gamer_Profile" className="content">
                 <div className="section gamer_profile-overview">
                   <div className="gamer_profile-overview-avatar_username">
+                    {/* THESE NEED STATE */}
                     <img className="gamer_profile-overview-avatar avatar"/>
                     <h1 className="gamer_profile-overview-username">Puggle Lover</h1>
                   </div>
@@ -28,6 +29,7 @@ class GamerProfile extends React.Component {
                       <i className="icon icon-block stats-raised-icon">moneybag</i>
                       <dl>
                         <dt>Raised</dt>
+                        {/* NEEDS STATE */}
                         <dd>$3,405</dd>
                       </dl>
                     </li>
@@ -35,6 +37,7 @@ class GamerProfile extends React.Component {
                       <i className="icon icon-block">trophy</i>
                       <dl>
                         <dt>Rank</dt>
+                        {/* NEEDS STATE */}
                         <dd>420 / 5,300</dd>
                       </dl>
                     </li>
@@ -42,6 +45,7 @@ class GamerProfile extends React.Component {
                       <i className="icon icon-standard">calendar</i>
                       <dl>
                         <dt>Upcoming Fundraiser</dt>
+                        {/* NEEDS STATE */}
                         <dd>September 30, 2019</dd>
                       </dl>
                     </li>
@@ -49,6 +53,7 @@ class GamerProfile extends React.Component {
                       <i className="icon icon-block">earth</i>
                       <dl>
                         <dt>Location</dt>
+                        {/* NEEDS STATE */}
                         <dd>NYC</dd>
                       </dl>
                     </li>
@@ -56,6 +61,7 @@ class GamerProfile extends React.Component {
                       <i className="icon"></i>
                       <dl>
                         <dt>Twitch Handle</dt>
+                        {/* NEEDS STATE */}
                         <dd>Superzombiebbq</dd>
                       </dl>
                     </li>
