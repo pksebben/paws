@@ -31,3 +31,17 @@ python_requirement_library(
         python_requirement('Werkzeug==0.15.2'),
     ],
 )
+
+python_requirement_library(
+    name='flask-sqlalchemy',
+    requirements=[
+        python_requirement('Flask-SQLAlchemy'),
+    ],
+)
+
+python_requirement_library(
+    name='psycopg2',
+    requirements=[
+        python_requirement('psycopg2'),
+    ],
+)

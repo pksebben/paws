@@ -5,6 +5,8 @@ python_binary(
         ':api',
         ':container',
         'third_party:flask',
+	'third_party:flask-sqlalchemy',
+	'third_party:psycopg2',
     ],
 )
 
@@ -15,6 +17,8 @@ python_library(
     ],
     dependencies=[
         'third_party:flask',
+	'third_party:flask-sqlalchemy',
+	'third_party:psycopg2',
     ],
 )
 
