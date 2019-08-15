@@ -1,13 +1,6 @@
-### KIRBYs
-| Filename | line # | KIRBY
-|:------|:------:|:------
-| frontend/app.jsx | 5 | We should talk about how to do static files and such.  This is dependant on my revisiting that part of webpack
-| frontend/views/news.jsx | 5 | Are we going to create a whole new scheme for doing the news or just implement the news component in the news page and gussy it up so it looks more like a thing?  What are your thoughts on this?  -B
-
 ### BENs
 | Filename | line # | BEN
 |:------|:------:|:------
-| frontend/app.jsx | 6 | ++PRIORITY++ Figure out webpack again so I can advise re: static files
 | frontend/components/analytics.jsx | 6 | should we deprecate this module?
 | frontend/components/events.jsx | 6 | Add state management
 | frontend/components/navbar.jsx | 5 | get rid of all that extra code I put in here to work around the link hiding problem
@@ -26,11 +19,10 @@
 | frontend/components/testingdata.js | 5 | Implement storage and deprecate this module.
 | frontend/redux/actions/index.js | 2 | Refactor all redux to use ducks patterning
 | frontend/redux/index.js | 2 | once redux is integrated properly, delete this file.
-| frontend/redux/reducers/index.js | 13 | fix this switch case and test it
+| frontend/redux/reducers/index.js | 14 | fix this switch case and test it
 | frontend/views/gamerprofile.jsx | 4 | Craft out this page according to Kirby's spec
 | frontend/views/gamerprofile.jsx | 6 | Do we want to make the 'upcoming fundraiser' a link to that fundraiser?
 | frontend/views/home.jsx | 3 | Refactor this page into it's component modules
-| frontend/views/news.jsx | 4 | Fix up the news component and figure out a way to either use it here or create some other scheme for displaying news in this context.  Kirby should weigh in on this
 | frontend/views/shelterprofile.jsx | 1 | fill out shelter profile according to Kirby's spec
 
 ### IANs

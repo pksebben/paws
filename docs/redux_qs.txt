@@ -1,0 +1,6 @@
+To create an action (something that acts on the state)
+   -an action constant
+   -an action
+   -a reducer, which takes the state and an action
+   -something in the store to act on.
+

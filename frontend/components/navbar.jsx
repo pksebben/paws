@@ -9,7 +9,7 @@ Navbar.  Self-explanatory.
 //TODO: Strike the 'gamerprofile' and 'shelterprofile' lynx and have those implemented via the SIGN IN / UP button.
 //BEN: is there a way to implement modals without any CSS in order to test modals here?  Would it be easier just to have a little CSS in there?  Look it up.
 
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { setPage } from '../redux/actions';
@@ -34,7 +34,7 @@ class Navbar extends React.Component {
     
     render(){
         return(
-            <nav className="Navbar">
+            <nav id="Nav">
               <h1 className="nav-logo">Paws Your Game</h1>
               <ul>
                 <li><Link to="/"> Home </Link></li>
@@ -47,12 +47,12 @@ class Navbar extends React.Component {
                       <button>
                         <i className="icon icon-standard">search</i>
                       </button>
-                      <input type="text" name="search" placeholder="Search for players, shelters, or donors."/>
+                      <input type="text" name="search" placeholder={"Search for players, shelters, or donors."}/>
                     </form>
                   </li>
                 </ErrorBoundary>
-                <li><Link to='/signin/'> SIGN IN / UP </Link></li>
-                <li><Link to="/donate/"> DONATE </Link></li>
+                <li className="nav-signin"><Link to='/signin/'> SIGN IN / UP </Link></li>
+                <li className="nav-donate"><Link to="/donate/"> DONATE </Link></li>
               </ul>
             </nav>  
         );
