@@ -5,52 +5,26 @@
 
 import React from 'react'
 import NavBar from '../components/navbar.jsx'
-import Event from '../components/events.jsx'
 import OurStory from '../components/ourstory.jsx'
 import NewsItem from '../components/news.jsx'
-import Analytics from '../components/analytics.jsx'
 import RecentGamers from '../components/recentgamers.jsx'
 import RecentShelters from '../components/recentshelters.jsx'
 import TopGamers from '../components/topgamers.jsx'
 import ErrorBoundary from '../components/errorboundary.jsx'
-import CardBox from '../components/cardbox.jsx'
 import { eventdata, newsdata, analyticsdata, recentgamerdata, recentshelterdata, topgamersdata } from '../components/testingdata.js'
+import HomeHeroSection from '../components/homeHeroSection.jsx'
+import HomeIntroSection from '../components/homeIntroSection.jsx'
+import HomeLeaderboard from '../components/homeLeaderboard.jsx'
 
 class Home extends React.Component {
   render () {
     return (
       <div>
         <NavBar />
-
-        {/* the mission statement is just a simple splash at the top of the page to give an idea of what we do */}
-        <div id='mission_statement'>
-          <h1>PLAY GAMES FOR THOSE WITHOUT A VOICE</h1>
-          <p>Paws Your Game's mission is to help raise money and other resources for animal rescue organizations through video game marathons</p>
-        </div>
-
-        {/* calls to action are quick-draw buttons that immediately take you to relevant parts of the site */}
-        <div id='calls_to_action'>
-          <div id='donate_call'>
-            <ErrorBoundary>
-              <img src='donate_call_icon'>donate call img</img>
-            </ErrorBoundary>
-            <p>Want to help support Paws Your Game's mission in providing resources to no kill shelters?  Donate today to help support us in our mission to end kill shelters.</p>
-            <button>Donate Now</button>
-          </div>
-        </div>
-
-        {/* leaderboard is a breakdown of top earners */}
-        <div id='leaderboard'>
-          <h1>Leaderboard</h1>
-          <ul id='leaderboard_board'>
-            <li>gamer in place 1</li>
-            <li>gamer in place 2</li>
-            <li>gamer in place 3</li>
-            <li>gamer in place 4</li>
-            <li>gamer in place 5</li>
-          </ul>
-        </div>
-
+        <HomeHeroSection/>
+        <HomeIntroSection/>
+        <HomeLeaderboard/>
+       
         {/* news holds a series of news snippets.  Like an electronic presskit */}
         <div id='news'>
           <h1>PAWS IN THE NEWS</h1>

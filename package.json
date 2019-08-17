@@ -32,6 +32,8 @@
 						"file-loader": "^4.2.0",
 						"react-redux": "^7.1.0",
 						"redux": "^4.0.1",
+						"redux-logger": "^3.0.6",
+						"remote-redux-devtools": "^0.5.16",
 						"standard": "^13.1.0",
 						"style-loader": "^1.0.0",
 						"todo-webpack-plugin": "^1.9.9"

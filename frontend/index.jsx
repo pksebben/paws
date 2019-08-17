@@ -1,15 +1,23 @@
-import React from 'react'
-import { render } from 'react-dom'
-import App from './app.jsx'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './app.jsx';
 // redux imports
-import { Provider } from 'react-redux'
-import store from './redux/store/index'
-import index from './redux'
+import { Provider } from 'react-redux';
+import configureStore from './redux/configurestore';
 
-const rootEl = document.getElementById('app')
+let store = configureStore();
 
-render(
-  <Provider store={store}>
-    <App />
-  </Provider>
-  , rootEl)
+//make the store accessible in the console for debugging
+window.store = store;
+
+class Paws extends React.Component {
+    render(){
+        return(
+            <Provider store={store}>
+              <App />
+            </Provider>
+        );
+    }
+}
+
+ReactDOM.render(<Paws />, document.getElementById('app'));

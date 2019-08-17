@@ -4,6 +4,7 @@ This is where the basic routing for the app is done.  It's called by index.jsx i
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import React, { Suspense } from 'react'
+
 import Home from './views/home.jsx'
 import GamerProfile from './views/gamerprofile.jsx'
 import ShelterProfile from './views/shelterprofile.jsx'

@@ -11,27 +11,11 @@ Navbar.  Self-explanatory.
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { connect } from 'react-redux';
-import { setPage } from '../redux/actions';
 import ErrorBoundary from "../components/errorboundary.jsx";
 
 
 class Navbar extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            currentpage: "./"
-        };
-        this.handleNav = this.handleNav.bind(this);
-    }
 
-    handleNav = (event) => {
-        this.state.currentpage = event.target.to.pathname;
-        console.log(event.target);
-        this.props.setPage(this.state.currentpage );
-        console.log("nav handled");
-    }
-    
     render(){
         return(
             <nav id="Nav">
@@ -59,18 +43,4 @@ class Navbar extends React.Component {
     }
 }
 
-const mapStateToProps = state => {
-    const { currentpage } = state;
-    console.log("state deconstructed.  currentpage is " + currentpage);
-    return { currentpage: state.currentpage };
-};
-
-const mapDispatchToProps = {
-    setPage
-};
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Navbar);
-
+export default Navbar;
