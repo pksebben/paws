@@ -7,7 +7,7 @@
 import React from 'react';
 import NavBar from '../components/navbar.jsx';
 import ErrorBoundary from '../components/errorboundary.jsx';
-import GamerProfileOverview from '../containers/gpo_container.js';
+import GamerProfileOverview from '../components/gamerprofileoverview.jsx';
 import GamerProfileFundraisers from "../components/gamerprofilefundraisers.jsx";
 
 

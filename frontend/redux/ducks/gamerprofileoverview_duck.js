@@ -1,11 +1,11 @@
 //action constants
-const SOME_ACTION = 'SOME_ACTION'
+const TEST_ACTION = 'TEST_ACTION'
 
 //action creators
-export function someAction(somevalue) {
+export function testAction(value) {
     return {
-        type: SOME_ACTION,
-        someValue
+        type: TEST_ACTION,
+        value
     };
 }
 
@@ -17,31 +17,18 @@ const initialState = {
     rank: 1,
     upcoming_fundraiser: "IT'S THE TEN",//this is probs going to be determined from a list.  Where do?
     location: 'CRACK COMMANDMENTS',
-    twitch_handle: 'TimmyPowerGamer'
+    twitch_handle: 'TimmyPowerGamer',
+    test_value: 0
 };
 
-//reducer
+//reducers. This is where the logic goes.
 export default function gpo_reducer(state = initialState, action){
     switch (action.type){
+    case 'TEST_ACTION':
+        return Object.assign({}, state, {
+            test_value: action.value
+        })
     default:
         return state;
     }
 }
-
-
-/*
-the patterns herein were gleaned from here: https://github.com/goopscoop/ga-react-tutorial/
-
-this pattern requires the following in other files:
-
-in redux/configureStore.js ~~~~~~~~~~~~~~~~~~~~
-a configurestore that uses combinereducers to create the initial store, and may apply middleware
-
-in the components that use the store ~~~~~~~~~~~~~~~~~~~~
-mapStateToProps functions that give the component access to the store
-mapDispatchToProps functions that allow changes in the store to be made based on changes in the props of components.
-a connect function that replaces the default export
-
-note:  There is, in that tutorial, a container that extracts all the functions from the module and connects them to the state outside of the module.  IDK why we would do this, save for making things more readable when there is a huge singular module (which we are trying to avoid anyhow.)
-
-*/

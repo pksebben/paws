@@ -1,6 +1,7 @@
 import React from 'react';
 import ErrorBoundary from './errorboundary.jsx';
 import { connect } from 'react-redux';
+import { testAction } from '../redux/ducks/gamerprofileoverview_duck.js';
 
 function mapStateToProps(state) {
     return {
@@ -8,11 +9,27 @@ function mapStateToProps(state) {
     };
 }
 
+function mapDispatchToProps(dispatch) {
+    return {
+        testAction: (value) => dispatch(testAction(value))
+    };
+}
+
 class GamerProfileOverview extends React.Component{
+
+    testFunction = (event) => {
+        event.preventDefault();
+        this.props.testAction(event.target.value);
+    }
+    
     render() {
-        console.log(this.props);
+        console.log("THIS PROPS GPO");
+        console.log(this.props.gpo);
+        console.log("CHANGE TESTVALUE TO 5");
+
         return(
-            <div className='section gamer_profile-overview'>    
+            <div className='section gamer_profile-overview'>
+              <button value={10} onClick={this.testFunction}>TEST ME</button>
               <div className='gamer_profile-overview-avatar_username'>
                 <img className='gamer_profile-overview-avatar avatar' /> {/* stateful */}
                 <h1 className='gamer_profile-overview-username'>{this.props.gpo.name}</h1> {/* stateful */}
@@ -59,4 +76,4 @@ class GamerProfileOverview extends React.Component{
     }
 }
 
-export default connect(mapStateToProps)(GamerProfileOverview);
+export default connect(mapStateToProps, mapDispatchToProps)(GamerProfileOverview);
