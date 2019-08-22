@@ -2,11 +2,13 @@ import sys
 
 import flask
 from oscar import flag
-from flask_sqlalchemy import SQLAlchemy
+from .sqlwizardry import SQLAlchemy
+from sqlalchemy import create_engine
 
 import pyg.web
 from pyg.web import api
 from pyg.web import container
+from pyg.web import models
 
 FLAGS = flag.namespace(__name__)
 FLAGS.endpoint = flag.String("server endpoint", default=flag.REQUIRED)
@@ -17,42 +19,12 @@ app = flask.Flask(__name__)
 # Do we want to put the database URI in a config file?
 app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://coffee:wildseven@localhost:5432/coffee"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-db = SQLAlchemy(app)
 
+engine = create_engine("postgresql://coffee:wildseven@localhost:5432/coffee")
 
-class Person(db.Model):    
-    id = db.Column(db.Integer, primary_key=True)
-    children = db.relationship("Userauth", "Userprofile", "Orgmembership")
+session = SQLAlchemy(app,"postgresql://coffee:wildseven@localhost:5432/coffee")
 
-    
-class UserAuth(db.Model):
-    id = db.Column(db.Integer, db.ForeignKey("person.id"), primary_key=True)
-    name = db.Column(db.String(80), unique=True, nullable=False)
-    password = db.Column(db.String(80), unique=False, nullable=False)
-
-    
-class UserProfile(db.Model):
-    id = db.Column(db.Integer, db.ForeignKey("person.id"), primary_key=True)
-    about = db.Column(db.String(2500))
-    avatar = db.Column(db.String(80))
-    birthday = db.Column(db.String(12))
-    location = db.Column(db.String(20))
-    email = db.Column(db.String(30))
-
-
-class Org(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    children = db.relationship("Orgmembership")
-
-
-class OrgMembership(db.Model):
-    orgid = db.Column(db.Integer, db.ForeignKey("org.id"), primary_key=True)
-    personid = db.Column(db.Integer, db.ForeignKey("person.id"), primary_key=True)
-
-
-class Fundraiser(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-
+models.Base.metadata.create_all(engine)
 
 def create_app():
     # TODO: everything

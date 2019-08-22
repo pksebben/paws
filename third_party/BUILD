@@ -33,15 +33,22 @@ python_requirement_library(
 )
 
 python_requirement_library(
-    name='flask-sqlalchemy',
+    name='psycopg2',
     requirements=[
-        python_requirement('Flask-SQLAlchemy'),
+        python_requirement('psycopg2'),
     ],
 )
 
 python_requirement_library(
-    name='psycopg2',
+    name='sqlalchemy',
     requirements=[
-        python_requirement('psycopg2'),
+        python_requirement('sqlalchemy'),
+    ],
+)
+
+python_requirement_library(
+    name='marshmallow',
+    requirements=[
+        python_requirement('marshmallow'),
     ],
 )
