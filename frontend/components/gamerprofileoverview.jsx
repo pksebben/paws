@@ -3,17 +3,20 @@ import ErrorBoundary from './errorboundary.jsx';
 import { connect } from 'react-redux';
 import { testAction } from '../redux/ducks/gamerprofileoverview_duck.js';
 
+
 function mapStateToProps(state) {
     return {
         gpo: state.gpo
     };
 }
 
+
 function mapDispatchToProps(dispatch) {
     return {
         testAction: (value) => dispatch(testAction(value))
     };
 }
+
 
 class GamerProfileOverview extends React.Component{
 
@@ -23,9 +26,6 @@ class GamerProfileOverview extends React.Component{
     }
     
     render() {
-        console.log("THIS PROPS GPO");
-        console.log(this.props.gpo);
-        console.log("CHANGE TESTVALUE TO 5");
 
         return(
             <div className='section gamer_profile-overview'>
@@ -75,5 +75,6 @@ class GamerProfileOverview extends React.Component{
         );
     }
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(GamerProfileOverview);

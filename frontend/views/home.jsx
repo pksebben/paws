@@ -5,13 +5,7 @@
 
 import React from 'react'
 import NavBar from '../components/navbar.jsx'
-import OurStory from '../components/ourstory.jsx'
-import NewsItem from '../components/news.jsx'
-import RecentGamers from '../components/recentgamers.jsx'
-import RecentShelters from '../components/recentshelters.jsx'
-import TopGamers from '../components/topgamers.jsx'
 import ErrorBoundary from '../components/errorboundary.jsx'
-import { eventdata, newsdata, analyticsdata, recentgamerdata, recentshelterdata, topgamersdata } from '../components/testingdata.js'
 import HomeHeroSection from '../components/homeHeroSection.jsx'
 import HomeIntroSection from '../components/homeIntroSection.jsx'
 import HomeLeaderboard from '../components/homeLeaderboard.jsx'

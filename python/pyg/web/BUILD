@@ -17,7 +17,6 @@ python_library(
     ],
     dependencies=[
         'third_party:sqlalchemy',
-        # 'third_party:threading',
     ],
 )
 
@@ -32,14 +31,15 @@ python_library(
     ],
 )
 
-# python_library(
-#     name='model',
-#     sources=[
-#         'model.py'
-#     ],
-#     dependancies=[
-#         'third_party:marshmallow',
-#     ]
+python_library(
+     name='model',
+     sources=[
+         'model.py'
+     ],
+     dependancies=[
+         'third_party:marshmallow',
+     ],
+)  
 
 python_library(
     name='container',

@@ -2,6 +2,7 @@
 
 import React from 'react'
 
+
 class HomeLeaderboard extends React.Component{
     render(){
         return(
@@ -26,5 +27,6 @@ class HomeLeaderboard extends React.Component{
         )
     }
 }
+
 
 export default HomeLeaderboard
