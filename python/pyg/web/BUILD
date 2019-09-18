@@ -4,16 +4,16 @@ python_binary(
     dependencies=[
         ':api',
         ':container',
-        ':sqlwizardry',
+        ':plugin',
         'third_party:flask',
 	'third_party:psycopg2',
     ],
 )
 
 python_library(
-    name='sqlwizardry',
+    name='plugin',
     sources=[
-        'sqlwizardry.py',
+        'plugin.py',
     ],
     dependencies=[
         'third_party:sqlalchemy',
@@ -28,6 +28,7 @@ python_library(
     dependencies=[
         'third_party:flask',
 	'third_party:psycopg2',
+        'third_party:marshmallow'
     ],
 )
 

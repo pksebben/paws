@@ -9,7 +9,7 @@ class CreateProfile extends React.Component {
     return (
       <div>
         <NavBar />
-        {/*  are we going to do a modal here?  How much of this can be done in CSS? */}
+        
       </div>
     )
   }
