@@ -4,6 +4,7 @@
 // TODO: Craft out this page according to Kirby's spec
 // BEN: Gamer profile notifications have to be created.  Should they be in their own module for readability or live native in the gamer profile view?
 // TODO: Do we want to make the 'upcoming fundraiser' a link to that fundraiser?
+ 
 import React from 'react';
 import NavBar from '../components/navbar.jsx';
 import ErrorBoundary from '../components/errorboundary.jsx';

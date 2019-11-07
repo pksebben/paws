@@ -1,14 +1,17 @@
 import flask
+import sys
 import werkzeug.exceptions
 from flask import request
-
-from pyg.web import db
-from pyg.web import plugin
-from pyg.web import models
 
 from marshmallow import Schema, fields, post_load, ValidationError
 
 import datetime as dt
+
+import pyg.web
+from pyg.web import plugin
+from pyg.web import models
+from pyg.web import db
+
 
 bp = flask.Blueprint('api', __name__, url_prefix='/api/v1')
 
@@ -26,12 +29,20 @@ def test():
     db.web.session.commit()
     return "commited!"
 
+@bp.route('/testpost', methods=['POST'])
+def test_post():
+    print('shits on fire yo', file=sys.stderr)
+    return(request.json['email'])
 
+# TODO: make this take JSON instead of Form.
 @bp.route('/user', methods=['POST'])
 def new_user():
     """add a new user. Called from the new user page.
     Should check if the email field exists, then create a new user tied to a UserAuth
     """
+
+    print('printing json...')
+    print(request.json)
 
     
     class NewUserAuthSchema(Schema):
@@ -54,7 +65,7 @@ def new_user():
 
         
     #call list of emails in db
-    q = db.web.session.query(models.UserAuth).filter_by(email=request.form['email'])
+    q = db.web.session.query(models.UserAuth).filter_by(email=request.json['email'])
     q = list(q)
     #check if email in db.emails
     if q:
@@ -62,9 +73,11 @@ def new_user():
         return "We found a user with that email already."
     
     else:
-        
+
+        print('attempting to enter user.')
         schema = NewUserAuthSchema()
-        loadeduserdata = schema.load(request.form)
+        # this next thing is busted.  Marshmallow wants a string json?  I dunno.  Cate is messaging so I'm outie, bro.
+        loadeduserdata = schema.loads(request.json)
         newuser = models.Person(created = dt.datetime.now())
         newuser.auth = loadeduserdata
         db.web.session.add(newuser)

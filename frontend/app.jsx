@@ -2,16 +2,17 @@
 This is where the basic routing for the app is done.  It's called by index.jsx in the same directory.
 */
 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import React, { Suspense } from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React, { Suspense } from 'react';
 
-import Home from './views/home.jsx'
-import GamerProfile from './views/gamerprofile.jsx'
-import ShelterProfile from './views/shelterprofile.jsx'
-import OurTail from './views/ourtail.jsx'
-import Leaderboard from './views/leaderboard.jsx'
-import News from './views/news.jsx'
-import './styles/styles.css'
+import Home from './views/home.jsx';
+import GamerProfile from './views/gamerprofile.jsx';
+import ShelterProfile from './views/shelterprofile.jsx';
+import OurTail from './views/ourtail.jsx';
+import Leaderboard from './views/leaderboard.jsx';
+import News from './views/news.jsx';
+import Signin from './views/signin.jsx';
+import './styles/styles.css';
 
 class App extends React.Component {
   render () {
@@ -25,11 +26,12 @@ class App extends React.Component {
             <Route path='/leaderboard' component={Leaderboard} />
             <Route path='/ourtail' component={OurTail} />
             <Route path='/news' component={News} />
+            <Route path='/signin' component={Signin}/>
           </Switch>
         </Suspense>
       </Router>
-    )
+    );
   }
 }
 
-export default App
+export default App;

@@ -5,6 +5,8 @@ python_binary(
         ':api',
         ':container',
         ':plugin',
+	':models',
+	':db',
         'third_party:flask',
 	'third_party:psycopg2',
     ],
@@ -33,13 +35,13 @@ python_library(
 )
 
 python_library(
-     name='model',
-     sources=[
-         'model.py'
-     ],
-     dependancies=[
-         'third_party:marshmallow',
-     ],
+    name='models',
+    sources=[
+        'models.py',
+    ],
+    dependencies=[
+        'third_party:sqlalchemy',
+    ],
 )  
 
 python_library(
@@ -51,5 +53,15 @@ python_library(
         'third_party:oscar.flag',
         'third_party:twisted',
         'third_party:werkzeug',
+    ],
+)
+
+python_library(
+    name='db',
+    sources=[
+	'db.py',
+    ],
+    dependencies=[
+        ':plugin',
     ],
 )
