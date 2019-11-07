@@ -2,6 +2,7 @@ import flask
 import sys
 import werkzeug.exceptions
 from flask import request
+from flask import render_template
 
 from marshmallow import Schema, fields, post_load, ValidationError
 
@@ -21,14 +22,11 @@ def index():
     """Return api description."""
     return "TODO:api"
 
+@bp.route('/home')
+def home():
+    return render_template('index.php')
 
-@bp.route('/test')
-def test():
-    bill = models.Person()
-    db.web.session.add(bill)
-    db.web.session.commit()
-    return "commited!"
-
+# Test route.  Delete me for production.
 @bp.route('/testpost', methods=['POST'])
 def test_post():
     print('shits on fire yo', file=sys.stderr)
@@ -74,7 +72,6 @@ def new_user():
     
     else:
 
-        print('attempting to enter user.')
         schema = NewUserAuthSchema()
         # this next thing is busted.  Marshmallow wants a string json?  I dunno.  Cate is messaging so I'm outie, bro.
         loadeduserdata = schema.loads(request.json)

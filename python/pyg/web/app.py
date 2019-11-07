@@ -12,6 +12,8 @@ from pyg.web import db
 from pyg.web import plugin
 
 from twisted.python import log
+from jinja2 import PackageLoader
+
 
 
 FLAGS = flag.namespace(__name__)
@@ -19,6 +21,8 @@ FLAGS.endpoint = flag.String("server endpoint", default=flag.REQUIRED)
 FLAGS.debug = flag.Bool("enable debug", default=False)
 
 app = flask.Flask(__name__)
+
+app.jinja_loader = PackageLoader('pyg.web','templates')
 
 def create_app():
     # TODO: everything

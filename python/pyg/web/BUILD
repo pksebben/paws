@@ -9,6 +9,7 @@ python_binary(
 	':db',
         'third_party:flask',
 	'third_party:psycopg2',
+	':templates',
     ],
 )
 
@@ -64,4 +65,9 @@ python_library(
     dependencies=[
         ':plugin',
     ],
+)
+
+resources(
+    name='templates',
+    sources=rglobs('templates/*')
 )
