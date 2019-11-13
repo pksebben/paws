@@ -10,6 +10,7 @@ python_binary(
         'third_party:flask',
 	'third_party:psycopg2',
 	':templates',
+	':static',
     ],
 )
 
@@ -70,4 +71,9 @@ python_library(
 resources(
     name='templates',
     sources=rglobs('templates/*')
+)
+
+resources(
+    name='static',
+    sources=rglobs('static/*')
 )

@@ -20,7 +20,7 @@ FLAGS = flag.namespace(__name__)
 FLAGS.endpoint = flag.String("server endpoint", default=flag.REQUIRED)
 FLAGS.debug = flag.Bool("enable debug", default=False)
 
-app = flask.Flask(__name__)
+app = flask.Flask(__name__, static_url_path='')
 
 app.jinja_loader = PackageLoader('pyg.web','templates')
 
