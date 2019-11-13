@@ -26,6 +26,13 @@ python_requirement_library(
 )
 
 python_requirement_library(
+    name='setuptools',
+    requirements=[
+        python_requirement('setuptools==39.1.0'),
+    ],
+)
+
+python_requirement_library(
     name='werkzeug',
     requirements=[
         python_requirement('Werkzeug==0.15.2'),

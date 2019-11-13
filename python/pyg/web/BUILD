@@ -9,6 +9,7 @@ python_binary(
 	':db',
         'third_party:flask',
 	'third_party:psycopg2',
+	'third_party:setuptools',
 	':templates',
 	':static',
     ],

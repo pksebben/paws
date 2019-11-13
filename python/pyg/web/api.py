@@ -24,7 +24,7 @@ def index():
 
 @bp.route('/home')
 def home():
-    return render_template('index.php')
+    return render_template('index.html')
 
 # Test route.  Delete me for production.
 @bp.route('/testpost', methods=['POST'])
