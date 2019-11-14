@@ -1,5 +1,5 @@
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, String, Integer, ForeignKey, Table
+from sqlalchemy import Column, String, Integer, ForeignKey, Table, Text
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy import create_engine
 
@@ -82,6 +82,13 @@ class Fundraiser(Base):
     
     id = Column(Integer, primary_key=True)
     donations = relationship("Donation")
+
+# Generic text dump for site content.  When ready, deprecate and replace with better scheme.    
+class Text(Base):
+    __tablename__ = "text"
+
+    id = Column(Integer, primary_key=True)
+    text = Column(Text(convert_unicode=True))
 
 #TODO: Factor out the engine connection string, present here and in db.py
 engine = create_engine("postgresql://coffee:wildseven@localhost:5432/coffee")
