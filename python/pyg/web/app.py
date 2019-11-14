@@ -43,15 +43,15 @@ def send_from_package(package, directory, filename, **options):
     fp = read_from_package(package, directory, filename)
     options.setdefault('conditional', True)
 
+    
+    mimetype = mimetypes.MimeTypes().guess_type(filename, strict=False)[0]
+
     try:
-        mimetype = mimetypes.MimeTypes().guess_type(filename, strict=False)[0]
-    except:
-        print("could not infer mime type. Setting to octet-stream", file="sys.stderr")
+        return flask.send_file(fp, mimetype=mimetype, **options)
+    except ValueError:
+        print("mimetype guessing failed. setting mime to octet")
         mimetype = "application/octet stream"
-        
- 
-    return flask.send_file(fp, mimetype=mimetype, **options)
- 
+        return flask.send_file(fp, mimetype=mimetype, **options)
  
 def read_from_package(package, directory, filename):
     resource_location = "/".join((directory, filename,))

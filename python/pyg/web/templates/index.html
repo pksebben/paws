@@ -13,17 +13,17 @@
       </div><!--end home-hero-->
       <div class="home-intro section">
         <div class="home-intro-donate_now">
-          <img src="static/img/icon-home-intro-donate_now.png"/>
+          <img src="{{ url_for('static', filename='img/icon-home-intro-donate_now.png')}}"/>
           <p>Want to help support Paws Your Game’s mission in providing resources to no kill shelters? Donate today to help support us in our mission to end kill shelters.</p>
           <button class="button" href="#">Donate Now</button>
         </div>
         <div class="home-intro-start_gaming">
-          <img src="static/img/icon-home-intro-start_gaming.png"/>
+          <img src="{{ url_for('static', filename='img/icon-home-intro-start_gaming.png')}}"/>
           <p>Love playing games? Love animals? Sign up to Paws Your Game and sponsor a local no kill shelter of your choice when we have our first marathon in 2019!</p>
           <button class="button" href="#">Start Gaming</button>
         </div>
         <div class="home-intro-join_us">
-          <img src="static/img/icon-home-intro-join_us.png"/>
+          <img src="{{ url_for('static', filename='img/icon-home-intro-join_us.png')}}"/>
           <p>Do you represent a no kill shelter? Interested in working or partnering with us? Sign up to learn more today on how you can help and support Paws Your Game.</p>
           <button class="button" href="#">Join us</button>
         </div>
@@ -36,7 +36,7 @@
             <a class="leaderboard-list-item-link" href="gamer_profile.php">
             </a>
             <span class="leaderboard-list-item-rank"><?php echo $i ?></span>
-            <img class="leaderboard-list-item-avatar" src="static/img/placeholder-user-avatar.png"/>
+            <img class="leaderboard-list-item-avatar" src="{{ url_for('static', filename='img/placeholder-user-avatar.png')}}"/>
             <span class="leaderboard-list-item-name">Firstname Lastname</span>
             <span class="leaderboard-list-item-change icon-block leaderboard-list-item-change-icon_down"></span>
 </span>

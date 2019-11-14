@@ -743,7 +743,7 @@ li.leaderboard-list-item:first-child .leaderboard-list-item-name {
   align-items: center;
   justify-content: center;
   height: 75vh;
-  background-image: url("../img/home-hero.jpg");
+  background-image: src("static/img/home-hero.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
