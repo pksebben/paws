@@ -26,6 +26,14 @@ def index():
 def home():
     return render_template('index.html')
 
+@bp.route('/gamerprofile')
+def gamerprofile():
+    return render_template('gamer_profile.html')
+
+@bp.route('/leaderboard')
+def leaderboard():
+    return render_template('leaderboard.html')
+
 # Test route.  Delete me for production.
 @bp.route('/testpost', methods=['POST'])
 def test_post():
