@@ -37,13 +37,12 @@ class PexFlask(flask.Flask):
  
         return send_from_package("pyg.web", directory,
                                  filename, cache_timeout=cache_timeout)
- 
- 
+
+
 def send_from_package(package, directory, filename, **options):
     fp = read_from_package(package, directory, filename)
     options.setdefault('conditional', True)
 
-    
     mimetype = mimetypes.MimeTypes().guess_type(filename, strict=False)[0]
 
     try:
@@ -52,7 +51,8 @@ def send_from_package(package, directory, filename, **options):
         print("mimetype guessing failed. setting mime to octet")
         mimetype = "application/octet stream"
         return flask.send_file(fp, mimetype=mimetype, **options)
- 
+
+
 def read_from_package(package, directory, filename):
     resource_location = "/".join((directory, filename,))
     if not pkg_resources.resource_exists(package, resource_location):
@@ -66,20 +66,17 @@ def read_from_package(package, directory, filename):
         print("filename is")
         print(filename)
         raise exceptions.NotFound()
- 
+
     return pkg_resources.resource_stream(package, resource_location)
 
 
 app = PexFlask(__name__ ,static_folder='static')
-
-print(app.static_folder)
 
 app.jinja_loader = PackageLoader('pyg.web','templates')
 
 print("stderr is working", file=sys.stderr)
 
 def create_app():
-    # TODO: everything
     app.register_blueprint(api.bp)
     db.init(app)
     return app
@@ -88,7 +85,7 @@ def create_app():
 def main():
     container.run(create_app(), FLAGS.endpoint, FLAGS.debug)
 
-    
+
 if __name__ == "__main__":
     observer = log.PythonLoggingObserver(loggerName='logname')
     observer.start()

@@ -7,15 +7,9 @@ from twisted.python import log
 from twisted.web import server
 from twisted.web import wsgi
 
-#  THIS IS A FIX FOR THE LOGGING PROBLEM THAT DID NOT WORK.  PERHAPS USEFUL. REVISIT.
-# from twisted.logger import Logger
 
-# log=Logger()
-# def handleData(data):
-#     log.debug("Got data: {data!r}.", data=data)
 
 logger = logging.getLogger(__name__)
-
 
 FLAGS = flag.namespace(__name__)
 FLAGS.threadpool_size = flag.Int('threadpool size', 20)

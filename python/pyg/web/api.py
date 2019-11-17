@@ -1,12 +1,11 @@
-import flask
+import datetime as dt
 import sys
+
 import werkzeug.exceptions
+import flask
 from flask import request
 from flask import render_template
-
 from marshmallow import Schema, fields, post_load, ValidationError
-
-import datetime as dt
 
 import pyg.web
 from pyg.web import plugin
@@ -14,32 +13,58 @@ from pyg.web import models
 from pyg.web import db
 
 
-bp = flask.Blueprint('api', __name__, url_prefix='/api/v1')
+bp = flask.Blueprint('api', __name__)
 
 
+
+# THIS IS A TEST SECTION AND SHOULD BE DELETED ALONG WITH THE FILES IT REFERENCES FOR PRODUCTION
+# ################################################################################################
+
+# This populates the db for testing purposes.  Use it as the first call in all routes until production 
+def populate():
+    tom = models.Person(created=dt.datetime.now())
+    tom.auth = models.UserAuth(name='tom boyee', password='pass',email='chaboyee@hotmail.ru')
+    tom.profile = models.UserProfile(about='My name is tom.', avatar='',birthday='every day',location='New Jersey')
+    db.web.session.add(tom)
+    db.web.session.commit()
+    print("Database populated")
+    # return "Populated the database"
+
+# ################################################################################################
+# END TEST SECTION
+
+
+
+# Homepage
 @bp.route('/')
-def index():
-    """Return api description."""
-    return "TODO:api"
-
-@bp.route('/home')
 def home():
-    return render_template('index.html')
+    return render_template('content_home.html')
 
-@bp.route('/gamerprofile')
-def gamerprofile():
-    return render_template('gamer_profile.html')
+# Gamer profile page. 
+@bp.route('/gamerprofile/<gamerid>')
+def gamerprofile(gamerid):
 
+    populate() # Testing function
+    
+    user = db.web.session.query(models.Person).filter_by(id=gamerid).one()
+    auth = user.auth
+    profile = user.profile
+    
+    return render_template('content_gamer_profile.html', auth=auth, profile=profile)
+
+# Leaderboard.  Might be turned into an imported module
 @bp.route('/leaderboard')
 def leaderboard():
-    return render_template('leaderboard.html')
+    return render_template('content_leaderboard.html')
 
-# Test route.  Delete me for production.
-@bp.route('/testpost', methods=['POST'])
-def test_post():
-    print('shits on fire yo', file=sys.stderr)
-    return(request.json['email'])
 
+
+
+
+####################################################################################################
+# The following sections may or may not be the direction we're going in.  Check back on them
+# once a login and signup page have been created.
+# =========================
 # TODO: make this take JSON instead of Form.
 @bp.route('/user', methods=['POST'])
 def new_user():
