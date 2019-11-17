@@ -1,0 +1,45 @@
+#!/bin/bash
+
+#NOTES
+# this script will only work for the user 'coffee' that has permissions on database 'coffee' and whose default db is 'coffee'  Checks will not work otherwise, and other abberrant behavior may result from other users attempting to run this script
+# additionally, the db.py in the app must point to the coffee database and utilise the db of the same name.  Password must also be configured correctly.
+# you must not be running another instance of app.pex or connected to the db in another terminal for this to work
+
+set -x
+
+# navigate to the project folder
+cd ~/Documents/code/Work/pyg
+
+# activate venv?
+source ./pyg-venv/bin/activate
+
+# does coffee db exist?
+echo "checking for database coffee"
+psql -c "\dt"
+
+# drop the db
+dropdb "coffee"
+
+# create the db
+createdb "coffee"
+
+# check that there is a blank db
+echo "checking db coffee. There should be no relations"
+psql -c "\dt"
+
+# give permissions on db
+psql -c "GRANT ALL ON DATABASE coffee TO coffee"
+
+psql -c "INSERT INTO person "
+
+# run the pants binary to create the .pex
+echo "running pants binary with target app"
+./pants binary python/pyg/web:app
+
+# run the .pex.  This should be done in a new process.
+echo "running app.pex with --endpoint tcp:8080"
+./dist/app.pex --endpoint="tcp:8080"  &&
+
+# check that db was populated
+echo "checking that population occurred correctly.  db should be full now."
+psql -c "\dt"
