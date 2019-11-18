@@ -74,6 +74,9 @@ app = PexFlask(__name__ ,static_folder='static')
 
 app.jinja_loader = PackageLoader('pyg.web','templates')
 
+# Necessary to set cookies.  Move to config later.
+app.secret_key = "2380b817f0f6dc67cebcc4068fc6b437"
+
 print("stderr is working", file=sys.stderr)
 
 def create_app():
