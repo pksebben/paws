@@ -5,6 +5,7 @@ import werkzeug.exceptions
 import flask
 from flask import request
 from flask import render_template
+from flask import session
 from marshmallow import Schema, fields, post_load, ValidationError
 
 import pyg.web
@@ -38,7 +39,8 @@ def populate():
 # Homepage
 @bp.route('/')
 def home():
-    return render_template('content_home.html')
+    session['user'] = 'bob'
+    return render_template('content_home.html', test=session['user'])
 
 # Gamer profile page. 
 @bp.route('/gamerprofile/<gamerid>')
