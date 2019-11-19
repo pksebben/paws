@@ -1,0 +1,42 @@
+###############################################################################################################
+                                                  SITE MAP
+###############################################################################################################
+This is meant to be a roadmap to get to a full site.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+PAGES
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Definitely Need
+-------------------------
+[ ] Homepage
+[ ] Login
+[ ] Gamer Profile
+
+Might Need
+-------------------------
+[ ] About
+[ ] Contact
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+DATA
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[ ] User Data
+     [ ] Person Table
+     [ ] User Auth Table
+     [ ] User Profile Table
+[ ] Org Data
+     [ ] Org Table
+     [ ]
+[ ] Fundraiser Data
+     [ ] Donations Table
+     [ ] Beneficiary Table
+     [ ] Fundraiser Table
+[ ] Generic Data
+     [ ] Text Table
+       - postgres has a [text] data type that I think is probably what we want to use.
+       - We talked about making sure everything is UTF-8
+       
+     
+     

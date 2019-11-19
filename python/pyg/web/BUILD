@@ -4,7 +4,24 @@ python_binary(
     dependencies=[
         ':api',
         ':container',
+        ':plugin',
+	':models',
+	':db',
         'third_party:flask',
+	'third_party:psycopg2',
+	'third_party:setuptools',
+	':templates',
+	':static',
+    ],
+)
+
+python_library(
+    name='plugin',
+    sources=[
+        'plugin.py',
+    ],
+    dependencies=[
+        'third_party:sqlalchemy',
     ],
 )
 
@@ -15,8 +32,20 @@ python_library(
     ],
     dependencies=[
         'third_party:flask',
+	'third_party:psycopg2',
+        'third_party:marshmallow'
     ],
 )
+
+python_library(
+    name='models',
+    sources=[
+        'models.py',
+    ],
+    dependencies=[
+        'third_party:sqlalchemy',
+    ],
+)  
 
 python_library(
     name='container',
@@ -28,4 +57,24 @@ python_library(
         'third_party:twisted',
         'third_party:werkzeug',
     ],
+)
+
+python_library(
+    name='db',
+    sources=[
+	'db.py',
+    ],
+    dependencies=[
+        ':plugin',
+    ],
+)
+
+resources(
+    name='templates',
+    sources=rglobs('templates/*')
+)
+
+resources(
+    name='static',
+    sources=rglobs('static/*')
 )

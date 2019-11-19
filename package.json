@@ -14,6 +14,7 @@
 						"babel-preset-react": "^6.24.1",
 						"extract-text-webpack-plugin": "^4.0.0-beta.0",
 						"html-webpack-plugin": "^3.2.0",
+						"node-sass": "^4.12.0",
 						"npm-check-updates": "^3.1.9",
 						"react": "^16.8.6",
 						"react-dom": "^16.8.6",
@@ -27,14 +28,20 @@
 						"@babel/core": "^7.4.4",
 						"@babel/plugin-proposal-class-properties": "^7.4.4",
 						"@babel/preset-env": "^7.4.4",
+						"css-loader": "^3.2.0",
+						"file-loader": "^4.2.0",
 						"react-redux": "^7.1.0",
 						"redux": "^4.0.1",
+						"redux-logger": "^3.0.6",
+						"remote-redux-devtools": "^0.5.16",
+						"standard": "^13.1.0",
+						"style-loader": "^1.0.0",
 						"todo-webpack-plugin": "^1.9.9"
 			},
 			"scripts": {
 						"test": "echo \"Error: no test specified\" && exit 1",
-						"start": "node_modules/.bin/webpack-dev-server --mode development --open --hot",
-						"build": "node_modules/.bin/webpack --config webpack.prod.js --mode production"
+						"start": "node_modules/.bin/webpack-dev-server --mode development --open",
+						"build": "node_modules/.bin/webpack --config webpack.config.js --mode development"
 			},
 			"repository": {
 						"type": "git",

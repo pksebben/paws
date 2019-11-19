@@ -26,8 +26,36 @@ python_requirement_library(
 )
 
 python_requirement_library(
+    name='setuptools',
+    requirements=[
+        python_requirement('setuptools==39.1.0'),
+    ],
+)
+
+python_requirement_library(
     name='werkzeug',
     requirements=[
         python_requirement('Werkzeug==0.15.2'),
+    ],
+)
+
+python_requirement_library(
+    name='psycopg2',
+    requirements=[
+        python_requirement('psycopg2'),
+    ],
+)
+
+python_requirement_library(
+    name='sqlalchemy',
+    requirements=[
+        python_requirement('sqlalchemy'),
+    ],
+)
+
+python_requirement_library(
+    name='marshmallow',
+    requirements=[
+        python_requirement('marshmallow'),
     ],
 )

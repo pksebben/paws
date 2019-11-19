@@ -1,8 +1,6 @@
 terraform/.terraform
 terraform/terraform.tfstate.backup
 
-.babelrc
-
 node_modules
 
 ~$
@@ -16,3 +14,5 @@ dist
 .pids
 .pants.workdir.file_lock
 .cache/
+
+.todo-breakdown

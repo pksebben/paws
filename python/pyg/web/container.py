@@ -7,8 +7,9 @@ from twisted.python import log
 from twisted.web import server
 from twisted.web import wsgi
 
-logger = logging.getLogger(__name__)
 
+
+logger = logging.getLogger(__name__)
 
 FLAGS = flag.namespace(__name__)
 FLAGS.threadpool_size = flag.Int('threadpool size', 20)
