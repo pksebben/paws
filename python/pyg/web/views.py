@@ -15,6 +15,7 @@ from pyg.web import models
 from pyg.web import db
 from pyg.web import testing
 from pyg.web import auth
+from pyg.web import api
 
 
 bp = flask.Blueprint('api', __name__)
@@ -45,13 +46,12 @@ def leaderboard():
     return render_template('content_leaderboard.html')
 
 
+# login page.  Might become a modal later.  Gotta figure out how to do modals.
 @bp.route('/login/<failtype>')
 @bp.route('/login')
 def login(failtype=None):
     testing.populate()
-    # TODO: respond to successful password by setting session variable and rerouting home
-    # TODO: respond to password failure by setting attempts bit in session and allowing to try again
-    # TODO: respond to email failure by responding with user not found try again
+
     if failtype == None:
         return render_template('login.html', failure_text="")
     elif failtype == "passworderr":
@@ -61,23 +61,19 @@ def login(failtype=None):
     else:
         return "unknown failure error code."
 
+
+# authorization module.  Does not render a template, but redirects to login or homepage based on failure or success
 @bp.route('/authorize', methods=['POST'])
 def authorize():
     """Login.  Should check if a user exists, and offer a number of things based on whether it does and whether the supplied password is correct etc."""
 
-
-    # REFACTORING HERE
     auth_code = auth.user(email = request.form['email'], password=request.form['password'])
 
     print("auth code: ", auth_code)
     
     if auth_code == "auth_success":
-
+        # IAN: I ended up setting the 'user logged in' in the auth module.  Let me know if there's a better pattern.
         return redirect('/')
-        # # TODO: replace this next block with something better, perhaps return the user id in the auth module
-        # userauth = db.web.session.query(models.UserAuth).filter_by(email=email)
-        # q = list(userauth)        
-        # session['userid'] = q[0].id
     elif auth_code == "auth_pass_err":
         return redirect('/login/passworderr')
     elif auth_code == "auth_email_err":
@@ -87,7 +83,28 @@ def authorize():
         print("Bad auth code. TODO: implement proper error handler")
         return redirect('/shitsonfireyo')
 
+
+# Error page.
 @bp.route('/shitsonfireyo/<errortype>')
 @bp.route('/shitsonfireyo')
 def errorpage(errortype=None):
     return render_template('errorpage.html', errortype=errortype)
+
+# Signup page
+@bp.route('/signup')
+def signup():
+    return render_template('signup.html')
+
+# New user module. Does not render a template.
+@bp.route('/newuser', methods=['POST'])
+def newuser():
+
+    result = api.sign_new_user(
+        email=request.form['email'],
+        password=request.form['password'],
+        name=request.form['name']
+    )
+    
+    print("ran new user script")
+    print(result)
+    return redirect('/signup')
