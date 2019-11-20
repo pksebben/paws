@@ -12,7 +12,7 @@ from jinja2 import PackageLoader
 from werkzeug import exceptions
 
 import pyg.web
-from pyg.web import api
+from pyg.web import views
 from pyg.web import container
 from pyg.web import models
 from pyg.web import db
@@ -81,7 +81,7 @@ app.secret_key = "2380b817f0f6dc67cebcc4068fc6b437"
 print("stderr is working", file=sys.stderr)
 
 def create_app():
-    app.register_blueprint(api.bp)
+    app.register_blueprint(views.bp)
     db.init(app)
     return app
 

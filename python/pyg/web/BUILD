@@ -2,7 +2,7 @@ python_binary(
     name='app',
     source='app.py',
     dependencies=[
-        ':api',
+        ':views',
         ':container',
         ':plugin',
 	':models',
@@ -51,9 +51,9 @@ python_library(
 )
 
 python_library(
-    name='api',
+    name='views',
     sources=[
-        'api.py',
+        'views.py',
     ],
     dependencies=[
         'third_party:flask',
