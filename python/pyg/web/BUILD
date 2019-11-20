@@ -7,11 +7,23 @@ python_binary(
         ':plugin',
 	':models',
 	':db',
+	':testing',
         'third_party:flask',
 	'third_party:psycopg2',
 	'third_party:setuptools',
 	':templates',
 	':static',
+    ],
+)
+
+python_library(
+    name='testing',
+    sources=[
+        'testing.py',
+    ],
+    dependencies=[
+        ':models',
+	':db',
     ],
 )
 
