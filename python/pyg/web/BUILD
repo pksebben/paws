@@ -8,11 +8,24 @@ python_binary(
 	':models',
 	':db',
 	':testing',
+	':auth',
         'third_party:flask',
 	'third_party:psycopg2',
 	'third_party:setuptools',
 	':templates',
 	':static',
+    ],
+)
+
+python_library(
+    name='auth',
+    sources=[
+        'auth.py',
+    ],
+    dependencies=[
+        ':db',
+	':models',
+	'third_party:marshmallow',
     ],
 )
 

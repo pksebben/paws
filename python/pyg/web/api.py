@@ -14,6 +14,7 @@ from pyg.web import plugin
 from pyg.web import models
 from pyg.web import db
 from pyg.web import testing
+from pyg.web import auth
 
 
 bp = flask.Blueprint('api', __name__)
@@ -64,40 +65,29 @@ def login(failtype=None):
 def authorize():
     """Login.  Should check if a user exists, and offer a number of things based on whether it does and whether the supplied password is correct etc."""
 
-    #get email and password from request
-    email = request.form['email']
-    password = request.form['password']
+
+    # REFACTORING HERE
+    auth_code = auth.user(email = request.form['email'], password=request.form['password'])
+
+    print("auth code: ", auth_code)
     
-    class AuthSchema(Schema):
-        email = fields.String()
-        password = fields.String()
+    if auth_code == "auth_success":
 
-    class PersonSchema(Schema):
-        id = fields.Integer()
-        auth = fields.Nested(AuthSchema, required=True, allow_none=False, many=False)
-
-    #get the id of the user being logged in
-    userauth = db.web.session.query(models.UserAuth).filter_by(email=email)
-
-    q = list(userauth)
-
-    print("###USERAUTH###")
-    print(userauth)
-    print("###LIST OF USERAUTH###")
-    print(q)
-
-    #did we find a user auth?
-    if q:
-        user = q[0].person
-        #do the login shuffle
-        #does the password match?
-        if q[0].password == password:
-            session['userid'] = q[0].id
-            return redirect('/')
-            #TODO: send the user id# so the client just knows who's using it.
-        else:
-            return redirect('/login/passworderr')
-    else:
+        return redirect('/')
+        # # TODO: replace this next block with something better, perhaps return the user id in the auth module
+        # userauth = db.web.session.query(models.UserAuth).filter_by(email=email)
+        # q = list(userauth)        
+        # session['userid'] = q[0].id
+    elif auth_code == "auth_pass_err":
+        return redirect('/login/passworderr')
+    elif auth_code == "auth_email_err":
         return redirect('/login/usererr')
+    else:
+        # TODO: implement proper handler for bad auth code
+        print("Bad auth code. TODO: implement proper error handler")
+        return redirect('/shitsonfireyo')
 
-
+@bp.route('/shitsonfireyo/<errortype>')
+@bp.route('/shitsonfireyo')
+def errorpage(errortype=None):
+    return render_template('errorpage.html', errortype=errortype)

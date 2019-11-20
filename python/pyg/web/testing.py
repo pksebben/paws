@@ -4,10 +4,8 @@ import pyg.web
 from pyg.web import models
 from pyg.web import db
 
-# THIS IS A TEST SECTION AND SHOULD BE DELETED ALONG WITH THE FILES IT REFERENCES FOR PRODUCTION
-# ################################################################################################
 
-# This populates the db for testing purposes.  Use it as the first call in all routes until production
+
 def create_new_person(person):
 
     print('creating new person')
@@ -32,7 +30,3 @@ def populate():
     tom = { 'name':'tom', 'password':'pass', 'email':'tom@gmail.com', 'about':'My name is tom.', 'avatar':'', 'birthday':'every day', 'location':'New Jersey'}
     create_new_person(tom)
     print("Database populated")
-    # return "Populated the database"
-
-# ################################################################################################
-# END TEST SECTION
