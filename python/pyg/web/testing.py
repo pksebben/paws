@@ -5,7 +5,7 @@ from pyg.web import models
 from pyg.web import db
 
 
-
+# create a new user.  Takes dict as input
 def create_new_person(person):
 
     print('creating new person')

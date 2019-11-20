@@ -2,6 +2,7 @@ python_binary(
     name='app',
     source='app.py',
     dependencies=[
+        ':api',
         ':views',
         ':container',
         ':plugin',
@@ -14,6 +15,17 @@ python_binary(
 	'third_party:setuptools',
 	':templates',
 	':static',
+    ],
+)
+
+python_library(
+    name='api',
+    sources=[
+        'api.py',
+    ],
+    dependencies=[
+        ':models',
+	':db',
     ],
 )
 
