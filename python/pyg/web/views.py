@@ -16,6 +16,7 @@ from pyg.web import db
 from pyg.web import testing
 from pyg.web import auth
 from pyg.web import api
+from pyg.web.exceptions import PasswordError, UserNotFoundError
 
 
 bp = flask.Blueprint('api', __name__)
@@ -66,23 +67,16 @@ def login(failtype=None):
 @bp.route('/authorize', methods=['POST'])
 def authorize():
     """Login.  Should check if a user exists, and offer a number of things based on whether it does and whether the supplied password is correct etc."""
-
-    auth_code = auth.user(email = request.form['email'], password=request.form['password'])
-
-    print("auth code: ", auth_code)
-    
-    if auth_code == "auth_success":
-        # IAN: I ended up setting the 'user logged in' in the auth module.  Let me know if there's a better pattern.
+    try:
+        auth.user(email = request.form['email'], password=request.form['password'])
         return redirect('/')
-    elif auth_code == "auth_pass_err":
+    except PasswordError as err:
+        print(err)
         return redirect('/login/passworderr')
-    elif auth_code == "auth_email_err":
+    except UserNotFoundError as err:
+        print(err)
         return redirect('/login/usererr')
-    else:
-        # TODO: implement proper handler for bad auth code
-        print("Bad auth code. TODO: implement proper error handler")
-        return redirect('/shitsonfireyo')
-
+            
 
 # Error page.
 @bp.route('/shitsonfireyo/<errortype>')

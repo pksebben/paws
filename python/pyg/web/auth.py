@@ -4,11 +4,11 @@ from flask import session
 import pyg.web
 from pyg.web import db
 from pyg.web import models
+from pyg.web.exceptions import PasswordError, UserNotFoundError
 
 
-
+# Log in a user.  If successful, sets a flask session variable
 def user(email, password):
-#get email and password from request
     
     class AuthSchema(Schema):
         email = fields.String()
@@ -35,9 +35,9 @@ def user(email, password):
         #does the password match?
         if q[0].password == password:
             session['userid'] = q[0].id
-            return "auth_success"
+            print("login successful")
             #TODO: send the user id# so the client just knows who's using it.
         else:
-            return "auth_pass_err"
+            raise PasswordError('user input incorrect password')
     else:
-        return "auth_email_err"
+        raise UserNotFoundError('email not found in database')

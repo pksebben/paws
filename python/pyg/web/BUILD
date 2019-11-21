@@ -2,6 +2,7 @@ python_binary(
     name='app',
     source='app.py',
     dependencies=[
+	':exceptions',
         ':api',
         ':views',
         ':container',
@@ -16,6 +17,14 @@ python_binary(
 	':templates',
 	':static',
     ],
+)
+
+python_library(
+    name='exceptions',
+    sources=[
+        'exceptions.py',
+    ],
+    dependencies=[],
 )
 
 python_library(
