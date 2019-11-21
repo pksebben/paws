@@ -1,3 +1,0 @@
-Implement Ian's version of flask-sqlqlchemy
-Implement marshmallow? (ask ian)
-Extract models into a new file
