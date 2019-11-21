@@ -19,7 +19,8 @@ from pyg.web import api
 from pyg.web.exceptions import PasswordError, UserNotFoundError
 
 
-bp = flask.Blueprint('api', __name__)
+
+bp = flask.Blueprint('views', __name__)
 
 # Homepage
 @bp.route('/')
@@ -63,21 +64,6 @@ def login(failtype=None):
         return "unknown failure error code."
 
 
-# authorization module.  Does not render a template, but redirects to login or homepage based on failure or success
-@bp.route('/authorize', methods=['POST'])
-def authorize():
-    """Login.  Should check if a user exists, and offer a number of things based on whether it does and whether the supplied password is correct etc."""
-    try:
-        auth.user(email = request.form['email'], password=request.form['password'])
-        return redirect('/')
-    except PasswordError as err:
-        print(err)
-        return redirect('/login/passworderr')
-    except UserNotFoundError as err:
-        print(err)
-        return redirect('/login/usererr')
-            
-
 # Error page.
 @bp.route('/shitsonfireyo/<errortype>')
 @bp.route('/shitsonfireyo')
@@ -88,6 +74,13 @@ def errorpage(errortype=None):
 @bp.route('/signup')
 def signup():
     return render_template('signup.html')
+
+
+"""The following modules do not render templates, and are more for accessing parts of the database and performing queries.  They may, however, perform redirects.
+
+We may want to consider putting these in their own blueprint, to differentiate."""
+
+
 
 # New user module. Does not render a template.
 @bp.route('/newuser', methods=['POST'])
@@ -102,3 +95,18 @@ def newuser():
     print("ran new user script")
     print(result)
     return redirect('/signup')
+
+# authorization module.  Does not render a template, but redirects to login or homepage based on failure or success
+@bp.route('/authorize', methods=['POST'])
+def authorize():
+    """Login.  Should check if a user exists, and offer a number of things based on whether it does and whether the supplied password is correct etc."""
+    try:
+        auth.user(email = request.form['email'], password=request.form['password'])
+        return redirect('/')
+    except PasswordError as err:
+        print(err)
+        return redirect('/login/passworderr')
+    except UserNotFoundError as err:
+        print(err)
+        return redirect('/login/usererr')
+            
