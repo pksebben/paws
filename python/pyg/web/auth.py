@@ -7,6 +7,9 @@ from pyg.web import models
 from pyg.web.exceptions import PasswordError, UserNotFoundError
 
 
+
+"""Auth.  This could, potentially, be merged with api.  I figured, however that it would likely grow quite a bit once Oauth is implemented."""
+
 # Log in a user.  If successful, sets a flask session variable
 def user(email, password):
     

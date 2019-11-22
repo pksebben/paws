@@ -9,6 +9,9 @@ from flask import session
 from flask import redirect
 from marshmallow import Schema, fields, post_load, ValidationError
 
+from psycopg2.errors import UniqueViolation
+from sqlalchemy.exc import IntegrityError
+
 import pyg.web
 from pyg.web import plugin
 from pyg.web import models
@@ -71,10 +74,18 @@ def errorpage(errortype=None):
     return render_template('errorpage.html', errortype=errortype)
 
 # Signup page
+@bp.route('/signup/<failtype>')
 @bp.route('/signup')
-def signup():
-    return render_template('signup.html')
+def signup(failtype=None):
+    if failtype == None:
+        return render_template('signup.html', failure_text="")
+    elif failtype == "userexists":
+        return render_template('signup.html', failure_text="We found a user with that email.")        
 
+# About page
+@bp.route('/about')
+def about():
+    return render_template('content_about.html')
 
 """The following modules do not render templates, and are more for accessing parts of the database and performing queries.  They may, however, perform redirects.
 
@@ -86,20 +97,21 @@ We may want to consider putting these in their own blueprint, to differentiate."
 @bp.route('/newuser', methods=['POST'])
 def newuser():
 
-    result = api.sign_new_user(
-        email=request.form['email'],
-        password=request.form['password'],
-        name=request.form['name']
-    )
+    try:
+        api.sign_new_user(
+            email=request.form['email'],
+            password=request.form['password'],
+            name=request.form['name']
+        )
+    except IntegrityError as err:
+        print(err)
+        return redirect('/signup/userexists')
     
-    print("ran new user script")
-    print(result)
     return redirect('/signup')
 
 # authorization module.  Does not render a template, but redirects to login or homepage based on failure or success
 @bp.route('/authorize', methods=['POST'])
 def authorize():
-    """Login.  Should check if a user exists, and offer a number of things based on whether it does and whether the supplied password is correct etc."""
     try:
         auth.user(email = request.form['email'], password=request.form['password'])
         return redirect('/')
