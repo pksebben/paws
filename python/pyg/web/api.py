@@ -6,14 +6,23 @@ from pyg.web import db
 
 def sign_new_user(email, password, name):
 
-    # check if the email is already present in the db
-    q = db.web.session.query(models.UserAuth).filter_by(email = email)
-    # if db.web.session.query(q.exists()).scalar():
-    #     return "crud_user_exists_err"
-    # else:
     newperson = models.Person(created=dt.datetime.now())
     newperson.auth = models.UserAuth(name=name, password=password, email=email)
     db.web.session.add(newperson)
     db.web.session.commit()
-    return "crud_user_create_success"
-        
+    print("user created")
+
+def update_user_profile(id, about, birthday, location):
+    """alright! we want to update each part of the user profile.  Perhaps the best way to do this is to grab all the data and put it in the forms, and then return all the forms."""
+    user = db.web.session.query(models.Person).get(id)
+    if not user.profile:
+        user.profile = models.UserProfile(about=about, birthday=birthday, location=location)
+        print('added user profile')
+    else:
+        user.profile.about = about
+        user.profile.birthday = birthday
+        user.profile.location = location
+        print('updated user profile')
+    # db.web.session.add(user.profile)
+    db.web.session.commit()
+    print("user updated")

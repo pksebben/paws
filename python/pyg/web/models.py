@@ -32,7 +32,7 @@ class Person(Base):
 class UserAuth(Base):
     __tablename__ = 'user_auth'
     
-    id = Column(Integer, ForeignKey("person.id"), primary_key=True)
+    id = Column(Integer, ForeignKey("person.id"), primary_key=True, onupdate="cascade")
     name = Column(String(80), unique=False, nullable=False)
     password = Column(String(80), unique=False, nullable=False)
     email = Column(String(80), unique=True, nullable=False)
@@ -42,7 +42,7 @@ class UserAuth(Base):
 class UserProfile(Base):
     __tablename__ = 'user_profile'
     
-    id = Column(Integer, ForeignKey("person.id"), primary_key=True)
+    id = Column(Integer, ForeignKey("person.id"), primary_key=True, onupdate="cascade")
     about = Column(String(2500))
     avatar = Column(String(80))
     birthday = Column(String(12))
