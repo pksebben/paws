@@ -13,7 +13,6 @@ def sign_new_user(email, password, name):
     print("user created")
 
 def update_user_profile(id, about, birthday, location):
-    """alright! we want to update each part of the user profile.  Perhaps the best way to do this is to grab all the data and put it in the forms, and then return all the forms."""
     user = db.web.session.query(models.Person).get(id)
     if not user.profile:
         user.profile = models.UserProfile(about=about, birthday=birthday, location=location)
@@ -23,6 +22,5 @@ def update_user_profile(id, about, birthday, location):
         user.profile.birthday = birthday
         user.profile.location = location
         print('updated user profile')
-    # db.web.session.add(user.profile)
     db.web.session.commit()
     print("user updated")
