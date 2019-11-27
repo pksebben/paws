@@ -91,6 +91,10 @@ def about():
 
 We may want to consider putting these in their own blueprint, to differentiate."""
 
+@bp.route('/shelterprofile')
+def shelterprofile():
+    return render_template('content_shelterprofile.html')
+
 
 
 # New user module. Does not render a template.
