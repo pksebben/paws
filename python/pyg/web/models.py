@@ -1,5 +1,5 @@
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, String, Integer, ForeignKey, Table, Text, Date
+from sqlalchemy import Column, String, Integer, ForeignKey, Table, Text, DateTime, Date
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy import create_engine
 
@@ -19,7 +19,7 @@ class Person(Base):
     __tablename__ = 'person'
     
     id = Column(Integer, primary_key=True)
-    created = Column(String, nullable=False)
+    created = Column(DateTime, nullable=False)
     auth = relationship("UserAuth", backref=backref("person", uselist=False), uselist=False)
     profile = relationship("UserProfile", backref=backref("person", uselist=False), uselist=False)
     orgs = relationship(
@@ -44,10 +44,11 @@ class UserProfile(Base):
     __tablename__ = 'user_profile'
     
     id = Column(Integer, ForeignKey("person.id"), primary_key=True, onupdate="cascade")
-    about = Column(String(2500))
+    about = Column(Text)
+    # TODO: implement some system by which custom pictures are uploaded and referred to by this next field
     avatar = Column(String(80))
-    birthday = Column(String(12))
-    location = Column(String(20))
+    birthday = Column(Date)
+    location = Column(String(40))
 
     
 # A list of primary keys for organizations
@@ -69,6 +70,7 @@ class OrgAuth(Base):
     id = Column(Integer, ForeignKey("org.id"), primary_key=True, onupdate="cascade")
     name = Column(String(80), unique=True, nullable= False)
     password= Column(String(40), unique=False, nullable=False)
+    created = Column(DateTime)
 
     
 # IAN: are we going to split up shelters / gaming orgs / etc?
@@ -93,7 +95,7 @@ class Donation(Base):
 
     id = Column(Integer, primary_key=True)
     donor_name = Column(String, nullable=False)
-    created = Column(String, nullable=False)
+    created = Column(DateTime, nullable=False)
     fundraiser_id = Column(Integer, ForeignKey("fundraiser.id"))
     fundraiser = relationship("Fundraiser", back_populates="donations")
     beneficiary_id = Column(Integer, ForeignKey("beneficiary.id"))

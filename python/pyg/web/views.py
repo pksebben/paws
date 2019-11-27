@@ -29,8 +29,17 @@ bp = flask.Blueprint('views', __name__)
 @bp.route('/')
 def home():
     # TODO: Implement 'user logged in' data
-    testid = ''
-    return render_template('content_home.html', test=testid)
+    if 'userid' in session:
+        print("user id is")
+        print(session['userid'])
+        userid = session['userid']
+        user=db.web.session.query(models.Person).get(userid)
+        username = user.auth.name
+        return render_template('content_home.html', username=username)
+    else:
+        # this is supposed to be a special value that causes pages to behave as they should
+        # when no one is logged in.
+        return render_template('content_home.html', username=None)
 
 
 # Gamer profile page. 
@@ -39,7 +48,7 @@ def gamerprofile(gamerid):
 
     testing.populate() # Testing function
 
-    user = db.web.session.query(models.Person).filter_by(id=gamerid).one()
+    user = db.web.session.query(models.Person).get(gamerid)
     auth = user.auth
     profile = user.profile
     
@@ -112,7 +121,7 @@ def newuser():
         print(err)
         return redirect('/signup/userexists')
     
-    return redirect('/signup')
+    return redirect('/')
 
 # authorization module.  Does not render a template, but redirects to login or homepage based on failure or success
 @bp.route('/authorize', methods=['POST'])

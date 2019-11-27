@@ -5,7 +5,6 @@ from pyg.web import models
 from pyg.web import db
 
 
-
 def sign_new_user(email, password, name):
 
     newperson = models.Person(created=dt.datetime.now())

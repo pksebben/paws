@@ -35,6 +35,6 @@ def create_new_person(person):
 
 def populate():
     print("calling populate")
-    tom = { 'name':'tom', 'password':'pass', 'email':'tom@gmail.com', 'about':'My name is tom.', 'avatar':'', 'birthday':'every day', 'location':'New Jersey'}
+    tom = { 'name':'tom', 'password':'pass', 'email':'tom@gmail.com', 'about':'My name is tom.', 'avatar':'', 'birthday':dt.datetime.now(), 'location':'New Jersey'}
     create_new_person(tom)
     print("Database populated")
