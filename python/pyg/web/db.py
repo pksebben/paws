@@ -1,5 +1,7 @@
 from pyg.web import plugin
 
+
+
 web = None
 
 def init(app):

@@ -28,6 +28,7 @@ bp = flask.Blueprint('views', __name__)
 # Homepage
 @bp.route('/')
 def home():
+    # TODO: Implement 'user logged in' data
     testid = ''
     return render_template('content_home.html', test=testid)
 
@@ -37,7 +38,7 @@ def home():
 def gamerprofile(gamerid):
 
     testing.populate() # Testing function
-    
+
     user = db.web.session.query(models.Person).filter_by(id=gamerid).one()
     auth = user.auth
     profile = user.profile

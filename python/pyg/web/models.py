@@ -7,6 +7,7 @@ from sqlalchemy import create_engine
 
 Base = declarative_base()
 
+# If this is a data structure we need, is there a better way to represent it?
 org_membership_table = Table('org_membership', Base.metadata,
                              Column('user_id', Integer, ForeignKey('person.id')),
                              Column('org_id', Integer, ForeignKey('org.id'))
@@ -58,6 +59,7 @@ class Org(Base):
     date_joined = Column(Date)
     auth = relationship("OrgAuth", backref=backref("org", uselist=False), uselist=False)
     profile = relationship("OrgProfile", backref=backref("org", uselist=False), uselist=False)
+
     
 # IAN: Re: orgs and authentication.  See below.
 # Org authentication.  We may want to structure this such that a particular user has edit privileges, instead of authenticating directly.  
@@ -68,6 +70,7 @@ class OrgAuth(Base):
     name = Column(String(80), unique=True, nullable= False)
     password= Column(String(40), unique=False, nullable=False)
 
+    
 # IAN: are we going to split up shelters / gaming orgs / etc?
 # Profile information for orgs.
 class OrgProfile(Base):
