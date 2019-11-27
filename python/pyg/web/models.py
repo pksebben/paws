@@ -1,5 +1,5 @@
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, String, Integer, ForeignKey, Table, Text
+from sqlalchemy import Column, String, Integer, ForeignKey, Table, Text, Date
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy import create_engine
 
@@ -54,6 +54,34 @@ class Org(Base):
     __tablename__ = 'org'
     
     id = Column(Integer, primary_key=True)
+    # IAN: do we want these to be Date or DateTime?
+    date_joined = Column(Date)
+    auth = relationship("OrgAuth", backref=backref("org", uselist=False), uselist=False)
+    profile = relationship("OrgProfile", backref=backref("org", uselist=False), uselist=False)
+    
+# IAN: Re: orgs and authentication.  See below.
+# Org authentication.  We may want to structure this such that a particular user has edit privileges, instead of authenticating directly.  
+class OrgAuth(Base):
+    __tablename__='org_auth'
+
+    id = Column(Integer, ForeignKey("org.id"), primary_key=True, onupdate="cascade")
+    name = Column(String(80), unique=True, nullable= False)
+    password= Column(String(40), unique=False, nullable=False)
+
+# IAN: are we going to split up shelters / gaming orgs / etc?
+# Profile information for orgs.
+class OrgProfile(Base):
+    __tablename__='org_profile'
+
+    id = Column(Integer, ForeignKey("org.id"), primary_key=True, onupdate="cascade")
+    missionstatement = Column(Text, nullable=True)
+    location = Column(String(50), nullable=True, unique=False)
+    # maybe these should live in their own table?
+    website = Column(Text, nullable=True)
+    facebook_link = Column(Text, nullable=True)
+    twitter_link = Column(Text, nullable=True)
+    twitch_link = Column(Text, nullable=True)
+    instagram_link = Column(Text, nullable=True)
 
     
 # Donations.  id / timestamp / fkeys / name for donating party
