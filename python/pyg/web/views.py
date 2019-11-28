@@ -1,5 +1,4 @@
 import datetime as dt
-import sys
 
 import werkzeug.exceptions
 import flask
@@ -7,17 +6,15 @@ from flask import request
 from flask import render_template
 from flask import session
 from flask import redirect
-from marshmallow import Schema, fields, post_load, ValidationError
 
 from psycopg2.errors import UniqueViolation
 from sqlalchemy.exc import IntegrityError
 
 import pyg.web
-from pyg.web import plugin
+from pyg.web import auth
 from pyg.web import models
 from pyg.web import db
 from pyg.web import testing
-from pyg.web import auth
 from pyg.web import api
 from pyg.web.exceptions import PasswordError, UserNotFoundError
 
@@ -51,9 +48,19 @@ def gamerprofile(gamerid):
     user = db.web.session.query(models.Person).get(gamerid)
     auth = user.auth
     profile = user.profile
-    
+
+    # is passing auth as a parameter a security liability?
     return render_template('content_gamer_profile.html', auth=auth, profile=profile)
 
+
+@bp.route('/editprofile')
+def editprofile():
+
+    user = db.web.session.query(models.Person).get(session['userid'])
+    auth = user.auth
+    profile = user.profile
+
+    return render_template('edit_gamerprofile.html', auth=auth, profile=profile)
 
 # Leaderboard.  Might be turned into an imported module
 @bp.route('/leaderboard')
@@ -97,13 +104,23 @@ def signup(failtype=None):
 def about():
     return render_template('content_about.html')
 
+# Shelter profile page
+@bp.route('/shelterprofile')
+def shelterprofile():
+    return render_template('content_shelterprofile.html')
+
+
 """The following modules do not render templates, and are more for accessing parts of the database and performing queries.  They may, however, perform redirects.
 
 We may want to consider putting these in their own blueprint, to differentiate."""
 
-@bp.route('/shelterprofile')
-def shelterprofile():
-    return render_template('content_shelterprofile.html')
+# Testing purposes. 
+@bp.route('/logout')
+def logout():
+    print('logging out')
+    session.pop('userid', None)
+    return redirect('/')
+
 
 
 

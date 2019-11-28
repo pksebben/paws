@@ -1,6 +1,5 @@
 import sys
 import os
-import io
 import mimetypes
 import pkg_resources
 
@@ -14,9 +13,7 @@ from werkzeug import exceptions
 import pyg.web
 from pyg.web import views
 from pyg.web import container
-from pyg.web import models
 from pyg.web import db
-from pyg.web import plugin
 
 
 

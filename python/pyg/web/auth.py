@@ -1,6 +1,10 @@
 from marshmallow import Schema, fields, post_load, ValidationError
 from flask import session
 
+# from psycopg2.errors import 
+from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm.exc import NoResultFound
+
 import pyg.web
 from pyg.web import db
 from pyg.web import models
@@ -21,26 +25,19 @@ def user(email, password):
         id = fields.Integer()
         auth = fields.Nested(AuthSchema, required=True, allow_none=False, many=False)
 
-    #get the id of the user being logged in
-    userauth = db.web.session.query(models.UserAuth).filter_by(email=email)
 
-    q = list(userauth)
 
-    print("###USERAUTH###")
-    print(userauth)
-    print("###LIST OF USERAUTH###")
-    print(q)
+    try:
+        userauth = db.web.session.query(models.UserAuth).filter_by(email=email).one()
+        assert userauth.password == password
+        session['userid'] = userauth.id
+    except AssertionError:
+        print("password mismatch")
+        raise PasswordError
+    except IntegrityError as err:
+        raise err.orig
+    except NoResultFound as err:
+        print("No user found to authorize")
+        raise UserNotFoundError
+        
 
-    #did we find a user auth?
-    if q:
-        user = q[0].person
-        #do the login shuffle
-        #does the password match?
-        if q[0].password == password:
-            session['userid'] = q[0].id
-            print("login successful")
-            #TODO: send the user id# so the client just knows who's using it.
-        else:
-            raise PasswordError('user input incorrect password')
-    else:
-        raise UserNotFoundError('email not found in database')
