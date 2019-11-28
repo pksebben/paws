@@ -41,10 +41,13 @@ def home():
 
 # Gamer profile page. 
 @bp.route('/gamerprofile/<gamerid>')
-def gamerprofile(gamerid):
+@bp.route('/gamerprofile')
+def gamerprofile(gamerid=None):
 
     testing.populate() # Testing function
 
+    if not gamerid:
+        gamerid = session['userid']
     user = db.web.session.query(models.Person).get(gamerid)
     auth = user.auth
     profile = user.profile
@@ -122,7 +125,15 @@ def logout():
     return redirect('/')
 
 
-
+@bp.route('/submit-user-edit', methods=["POST"])
+def submit_user_edit():
+    print(request.form)
+    user = db.web.session.query(models.Person).get(session['userid'])
+    user.auth.name = request.form['username']
+    user.profile.location = request.form['location']
+    user.profile.about = request.form['about']
+    return redirect('/gamerprofile')
+    
 
 # New user module. Does not render a template.
 @bp.route('/newuser', methods=['POST'])
