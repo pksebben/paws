@@ -9,6 +9,7 @@ from sqlalchemy import create_engine
 from twisted.python import log
 from jinja2 import PackageLoader
 from werkzeug import exceptions
+from flask-login import LoginManager
 
 import pyg.web
 from pyg.web import views
@@ -77,9 +78,23 @@ app.secret_key = "2380b817f0f6dc67cebcc4068fc6b437"
 
 print("stderr is working", file=sys.stderr)
 
+login_manager = LoginManager()
+
+class LoginUser(UserMixin):
+
+    def __init__(self, id):
+        self.id = id
+        self.name = "user" + str(id)
+        self.password = self.name + "_secret"
+
+@login_manager.user_loader
+def load_user(userid):
+    return LoginUser(userid)
+
 def create_app():
     app.register_blueprint(views.bp)
     db.init(app)
+    login_manager.init_app(app)
     return app
 
 

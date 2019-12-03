@@ -72,9 +72,18 @@ def leaderboard():
 
 
 # login page.  Might become a modal later.  Gotta figure out how to do modals.
+@bp.route('/login', methods=['POST'])
 @bp.route('/login/<failtype>')
 @bp.route('/login')
 def login(failtype=None):
+    # WIP - implement flask-login here
+    # if request.method == 'POST':
+    #     try:
+    #         auth.user(email = request.form['email'], password=request.form['password'])
+    #         return redirect('/')
+    #     except PasswordError as err:
+    #         return render_template('')
+    
     testing.populate()
 
     if failtype == None:
@@ -86,6 +95,21 @@ def login(failtype=None):
     else:
         return "unknown failure error code."
 
+# authorization module.  Does not render a template, but redirects to login or homepage based on failure or success
+@bp.route('/authorize', methods=['POST'])
+def authorize():
+    try:
+        auth.user(email = request.form['email'], password=request.form['password'])
+        return redirect('/')
+    except PasswordError as err:
+        print(err)
+        return redirect('/login/passworderr')
+    except UserNotFoundError as err:
+        print(err)
+        return redirect('/login/usererr')
+            
+
+    
 
 # Error page.
 @bp.route('/shitsonfireyo/<errortype>')
@@ -151,16 +175,3 @@ def newuser():
     
     return redirect('/')
 
-# authorization module.  Does not render a template, but redirects to login or homepage based on failure or success
-@bp.route('/authorize', methods=['POST'])
-def authorize():
-    try:
-        auth.user(email = request.form['email'], password=request.form['password'])
-        return redirect('/')
-    except PasswordError as err:
-        print(err)
-        return redirect('/login/passworderr')
-    except UserNotFoundError as err:
-        print(err)
-        return redirect('/login/usererr')
-            

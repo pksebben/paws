@@ -14,6 +14,7 @@ python_binary(
         'third_party:flask',
 	'third_party:psycopg2',
 	'third_party:setuptools',
+	'third_party:flask-login',
 	':templates',
 	':static',
     ],

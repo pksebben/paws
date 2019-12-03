@@ -16,6 +16,16 @@ python_requirement_library(
     ],
 )
 
+
+python_requirement_library(
+    name='flask-login',
+    requirements=[
+        python_requirement('flask-login'),
+    ],
+    dependencies=[
+    ],
+)
+
 python_requirement_library(
     name='twisted',
     requirements=[
