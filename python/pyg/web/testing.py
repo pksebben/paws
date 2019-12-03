@@ -7,14 +7,15 @@ from psycopg2.errors import UniqueViolation
 import pyg.web
 from pyg.web import models
 from pyg.web import db
-from pyg.web import api
+from pyg.web import views
 
 
+# TODO: this should be implementing the same user creation in views.
 # create a new user.  Takes dict as input
 def create_new_person(person):
     
     try:
-        api.sign_new_user(name=person['name'], email=person['email'], password=person['password'])
+        views.sign_new_user(name=person['name'], email=person['email'], password=person['password'])
         pass
     except IntegrityError as err:
         print(err.orig)
@@ -26,7 +27,7 @@ def create_new_person(person):
         user = db.web.session.query(models.UserAuth).filter_by(email=person['email']).one().person
         print("to user")
         print(user)
-        api.update_user_profile(id=user.id,
+        views.update_user_profile(id=user.id,
                                 about=person['about'],
                                 birthday=person['birthday'],
                                 location=person['location'])

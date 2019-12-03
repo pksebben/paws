@@ -15,9 +15,33 @@ from pyg.web import auth
 from pyg.web import models
 from pyg.web import db
 from pyg.web import testing
-from pyg.web import api
-from pyg.web.exceptions import PasswordError, UserNotFoundError
 
+
+def sign_new_user(email, password, name):
+
+    newperson = models.Person(created=dt.datetime.now())
+    newperson.auth = models.UserAuth(name=name, password=password, email=email)
+    db.web.session.add(newperson)
+    db.web.session.commit()
+    # change to structlog
+    # print("user created")
+    
+
+def update_user_profile(id, about, birthday, location):
+    user = db.web.session.query(models.Person).get(id)
+    if not user.profile:
+        user.profile = models.UserProfile(about=about, birthday=birthday, location=location)
+        # change to structlog
+        # print('added user profile')
+    else:
+        user.profile.about = about
+        user.profile.birthday = birthday
+        user.profile.location = location
+        # change to structlog
+        # print('updated user profile')
+    db.web.session.commit()
+    # change to structlog
+    # print("user updated")
 
 
 bp = flask.Blueprint('views', __name__)
@@ -27,8 +51,6 @@ bp = flask.Blueprint('views', __name__)
 def home():
     # TODO: Implement 'user logged in' data
     if 'userid' in session:
-        print("user id is")
-        print(session['userid'])
         userid = session['userid']
         user=db.web.session.query(models.Person).get(userid)
         username = user.auth.name
@@ -65,12 +87,17 @@ def editprofile():
 
     return render_template('edit_gamerprofile.html', auth=auth, profile=profile)
 
-# Leaderboard.  Might be turned into an imported module
-@bp.route('/leaderboard')
-def leaderboard():
-    return render_template('content_leaderboard.html')
 
+def authorize():
+    try:
+        auth.user(email = request.form['email'], password=request.form['password'])
+        return redirect('/')
+    except auth.AuthError as err:
+        # change to structlog
+        print(err)
+        return render_template('login.html', )
 
+    
 # login page.  Might become a modal later.  Gotta figure out how to do modals.
 @bp.route('/login', methods=['POST'])
 @bp.route('/login/<failtype>')
@@ -83,6 +110,8 @@ def login(failtype=None):
     #         return redirect('/')
     #     except PasswordError as err:
     #         return render_template('')
+    if request.method == 'POST':
+        authorize()
     
     testing.populate()
 
@@ -95,18 +124,8 @@ def login(failtype=None):
     else:
         return "unknown failure error code."
 
-# authorization module.  Does not render a template, but redirects to login or homepage based on failure or success
-@bp.route('/authorize', methods=['POST'])
-def authorize():
-    try:
-        auth.user(email = request.form['email'], password=request.form['password'])
-        return redirect('/')
-    except PasswordError as err:
-        print(err)
-        return redirect('/login/passworderr')
-    except UserNotFoundError as err:
-        print(err)
-        return redirect('/login/usererr')
+
+
             
 
     
@@ -144,18 +163,22 @@ We may want to consider putting these in their own blueprint, to differentiate."
 # Testing purposes. 
 @bp.route('/logout')
 def logout():
+    # change to structlog
     print('logging out')
     session.pop('userid', None)
     return redirect('/')
 
 
+ # TODO: sanity check this module
 @bp.route('/submit-user-edit', methods=["POST"])
 def submit_user_edit():
+    # change to structlog
     print(request.form)
     user = db.web.session.query(models.Person).get(session['userid'])
     user.auth.name = request.form['username']
     user.profile.location = request.form['location']
     user.profile.about = request.form['about']
+    db.web.session.commit()    
     return redirect('/gamerprofile')
     
 
@@ -164,14 +187,21 @@ def submit_user_edit():
 def newuser():
 
     try:
-        api.sign_new_user(
+        sign_new_user(
             email=request.form['email'],
             password=request.form['password'],
             name=request.form['name']
         )
     except IntegrityError as err:
+        # change to structlog
         print(err)
         return redirect('/signup/userexists')
     
     return redirect('/')
 
+
+
+# Leaderboard.  Might be turned into an imported module
+@bp.route('/leaderboard')
+def leaderboard():
+    return render_template('content_leaderboard.html')

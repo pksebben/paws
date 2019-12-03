@@ -9,7 +9,7 @@ from sqlalchemy import create_engine
 from twisted.python import log
 from jinja2 import PackageLoader
 from werkzeug import exceptions
-from flask-login import LoginManager
+from flask_login import LoginManager
 
 import pyg.web
 from pyg.web import views
@@ -46,7 +46,7 @@ def send_from_package(package, directory, filename, **options):
     try:
         return flask.send_file(fp, mimetype=mimetype, **options)
     except ValueError:
-        print("mimetype guessing failed. setting mime to octet")
+        print("still having mimetype problems. See app.py")
         mimetype = "application/octet stream"
         return flask.send_file(fp, mimetype=mimetype, **options)
 
@@ -54,15 +54,7 @@ def send_from_package(package, directory, filename, **options):
 def read_from_package(package, directory, filename):
     resource_location = "/".join((directory, filename,))
     if not pkg_resources.resource_exists(package, resource_location):
-        print("resource does not exist")
-        print("resource location is")
-        print(resource_location)
-        print("package is")
-        print(package)
-        print("directory is ")
-        print(directory)
-        print("filename is")
-        print(filename)
+        print("could not find package {}".format(package))
         raise exceptions.NotFound()
 
     return pkg_resources.resource_stream(package, resource_location)
@@ -75,17 +67,15 @@ app.jinja_loader = PackageLoader('pyg.web','templates')
 # Necessary to set cookies.  Move to config later.
 app.secret_key = "2380b817f0f6dc67cebcc4068fc6b437"
 
-
-print("stderr is working", file=sys.stderr)
-
 login_manager = LoginManager()
 
-class LoginUser(UserMixin):
+# incomplete
+# class LoginUser(UserMixin):
 
-    def __init__(self, id):
-        self.id = id
-        self.name = "user" + str(id)
-        self.password = self.name + "_secret"
+#     def __init__(self, id):
+#         self.id = id
+#         self.name = "user" + str(id)
+#         self.password = self.name + "_secret"
 
 @login_manager.user_loader
 def load_user(userid):
