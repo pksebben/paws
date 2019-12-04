@@ -100,7 +100,6 @@ def authorize():
     
 # login page.  Might become a modal later.  Gotta figure out how to do modals.
 @bp.route('/login', methods=['POST'])
-@bp.route('/login/<failtype>')
 @bp.route('/login')
 def login(failtype=None):
     # WIP - implement flask-login here
@@ -111,22 +110,14 @@ def login(failtype=None):
     #     except PasswordError as err:
     #         return render_template('')
     if request.method == 'POST':
-        authorize()
-    
-    testing.populate()
-
-    if failtype == None:
-        return render_template('login.html', failure_text="")
-    elif failtype == "passworderr":
-        return render_template('login.html', failure_text="Incorrect password. Please try again ")
-    elif failtype == "usererr":
-        return render_template('login.html', failure_text="We couldn't find that email.")
+        try:
+            auth.user(email = request.form['email'], password = request.form['password'])
+            return redirect('/')
+        except AuthError:
+            # TODO: should implement some flask flashing here.  Revisit.
+            return render_template('login.html', failure_text="invalid credentials. Please try again.")
     else:
-        return "unknown failure error code."
-
-
-
-            
+        return render_template('login.html', failure_text="")
 
     
 
