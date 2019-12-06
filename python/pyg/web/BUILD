@@ -74,9 +74,7 @@ python_library(
 
 python_library(
     name='views',
-    sources=[
-        'views.py',
-    ],
+    sources=globs('views/*.py'),
     dependencies=[
         'third_party:flask',
 	'third_party:psycopg2',
