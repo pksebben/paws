@@ -17,7 +17,7 @@ from pyg.web import db
 
 
 FLAGS = flag.namespace(__name__)
-FLAGS.endpoint = flag.String("server endpoint", default=flag.REQUIRED)
+FLAGS.endpoint = flag.String("server endpoint", default="tcp:8080")
 FLAGS.debug = flag.Bool("enable debug", default=False)
 
 
