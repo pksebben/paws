@@ -4,6 +4,15 @@
 	<title>Paws Your Game</title>
 	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     </head>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
     <body>
 	<nav id="Nav">
 	    <h1 class="nav-logo"><a href="/">Paws Your Game</a></h1>

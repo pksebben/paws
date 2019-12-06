@@ -6,6 +6,7 @@ from flask import request
 from flask import render_template
 from flask import session
 from flask import redirect
+from flask import flash
 
 from psycopg2.errors import UniqueViolation
 from sqlalchemy.exc import IntegrityError
@@ -99,27 +100,24 @@ def authorize():
 
     
 # login page.  Might become a modal later.  Gotta figure out how to do modals.
-@bp.route('/login', methods=['POST'])
-@bp.route('/login')
-def login(failtype=None):
-    # WIP - implement flask-login here
-    # if request.method == 'POST':
-    #     try:
-    #         auth.user(email = request.form['email'], password=request.form['password'])
-    #         return redirect('/')
-    #     except PasswordError as err:
-    #         return render_template('')
+@bp.route('/login', methods=['GET', 'POST'])
+def login():
+    error = None
     if request.method == 'POST':
         try:
             auth.user(email = request.form['email'], password = request.form['password'])
-            return redirect('/')
         except AuthError:
-            # TODO: should implement some flask flashing here.  Revisit.
-            return render_template('login.html', failure_text="invalid credentials. Please try again.")
+            flash("Invalid credentials.")
     else:
-        return render_template('login.html', failure_text="")
+        return render_template('login.html', failure_text=error)
 
     
+@bp.route('/logout')
+def logout():
+    # change to structlog
+    print('logging out')
+    session.pop('userid', None)
+    return redirect('/')
 
 # Error page.
 @bp.route('/shitsonfireyo/<errortype>')
@@ -150,14 +148,6 @@ def shelterprofile():
 """The following modules do not render templates, and are more for accessing parts of the database and performing queries.  They may, however, perform redirects.
 
 We may want to consider putting these in their own blueprint, to differentiate."""
-
-# Testing purposes. 
-@bp.route('/logout')
-def logout():
-    # change to structlog
-    print('logging out')
-    session.pop('userid', None)
-    return redirect('/')
 
 
  # TODO: sanity check this module

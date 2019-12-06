@@ -8,7 +8,6 @@ from twisted.web import server
 from twisted.web import wsgi
 
 
-
 logger = logging.getLogger(__name__)
 
 FLAGS = flag.namespace(__name__)
