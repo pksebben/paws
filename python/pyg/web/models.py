@@ -13,6 +13,10 @@ org_membership_table = Table('org_membership', Base.metadata,
                              Column('org_id', Integer, ForeignKey('org.id'))
                              )
 
+"""
+######################### Persons Data #########################
+"""
+
 
 # The base class for persons that relate person data to other tables
 class Person(Base):
@@ -51,6 +55,7 @@ class UserAuth(Base):
     name = Column(String(80), unique=False, nullable=False)
     password = Column(String(80), unique=False, nullable=False)
     email = Column(String(80), unique=True, nullable=False)
+    fuckyou = Column()
 
 
 # All the personal data for a person.  Things that will be on their profile
@@ -68,6 +73,11 @@ class UserProfile(Base):
     avatar = Column(String(80))
     birthday = Column(Date)
     location = Column(String(40))
+
+
+"""
+######################### TEAM DATA #########################
+"""
 
 
 # A list of primary keys for organizations
@@ -126,6 +136,10 @@ class OrgProfile(Base):
     twitch_link = Column(Text, nullable=True)
     instagram_link = Column(Text, nullable=True)
 
+"""
+######################### DONATION DATA #########################
+"""
+    
 
 # Donations.  id / timestamp / fkeys / name for donating party
 class Donation(Base):
@@ -158,6 +172,11 @@ class Fundraiser(Base):
     id = Column(Integer, primary_key=True)
     donations = relationship("Donation")
 
+"""
+######################### MISC DATA #########################
+-refactor into actual data for prod.
+"""
+    
 
 # Generic text dump for site content.  When ready, deprecate and replace
 # with better scheme.
