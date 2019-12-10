@@ -1,0 +1,154 @@
+* Sitemap
+These are the pages we are gonna need, with the relevant data nested.
+
+** TODO News Page [2/4]
+- [X] HTML structured out
+- [X] Data modeled
+  - [X] News Items [5/5]
+    - [X] Headline
+    - [X] Author
+    - [X] Datetime
+    - [X] Body
+    - [X] Slug
+- [ ] HTML wired to database
+- [ ] Code to generate written
+
+** TODO About
+- [X] HTML structured out
+
+** TODO Home Page [0/3]
+- [ ] Featured Gamer
+- [ ] Featured Campaign
+- [ ] Login-based automation
+  - [ ] Promote
+  - [ ] Ranking
+  - [ ] Current Campaign / Progress
+  - [ ] Edit Profile Widget
+
+** TODO Search Page [0/1]
+- [ ] Search For [0/3]
+  - [ ] Gamers [0/1]
+    - [ ] Search By [0/3]
+      - [ ] Name
+      - [ ] Region
+      - [ ] Browse (sort by) [0/3] 
+        - [ ] $ raised
+        - [ ] Name A-Z
+        - [ ] Date Joined
+  - [ ] Teams [0/1]
+    - [ ] Search By [0/3]
+      - [ ] Name
+      - [ ] Region
+      - [ ] Browse (sort by) [0/3] 
+        - [ ] $ raised
+        - [ ] Name A-Z
+        - [ ] Date Joined
+  - [ ] Shelters [0/1]
+    - [ ] Search By [0/3]
+      - [ ] Name
+      - [ ] Region
+      - [ ] Browse (sort by) [0/3] 
+        - [ ] $ raised
+        - [ ] Name A-Z
+        - [ ] Date Joined
+
+** TODO Team Profile Page [0/3]
+- [ ] Team stats
+- [ ] Roster
+- [ ] About
+
+** TODO Gamer Profile Page [0/3]
+- [ ] Gamer Stats
+- [ ] About
+- [ ] Donate
+
+** TODO Campaign Page [0/1]
+- [ ] 
+
+* Data
+
+** Player Data
+
+** Donations Data
+
+** Shelter Data
+
+** Team Data
+- [ ] Name
+- [ ] Roster
+- [ ] Date joined
+- [ ] about
+- [ ] 
+
+** Campaign Data
+
+*** goes in the campaign itself
+- [ ] Name
+- [ ] Date created
+- [ ] Target
+- [ ] End date
+- [ ] Owner
+  -- owner requires a little more thought.  
+     If a player makes a campaign, how does that work? 
+     If a team makes a campaign
+     Are there going to be Global campaigns?
+     Can shelters start a campaign?
+
+*** from other modules
+- [ ] $ raised (derived from donations)
+- [ ] contributors (derived from donations / users)
+- [ ] gamers (derived from ?)
+- [ ] Highest earner (derived from donations)
+
+* Actionable
+These things are not immediately actionable and require a little more study before implementation.
+
+** Page work
+these pages need a little love
+
+*** News
+ - [ ] Wire up the news item block to be generated based on code
+
+*** Search
+ - [ ] Do basically everything on the search page to populate it with data.
+
+*** Team Profile
+ - [ ] Wire in team profile
+
+*** Leaderboards
+ It occurs that the leaderboard is going to be a thing in more than one place and context.  
+ There may be leaderboards in the following places:
+ - [ ] Campaigns
+ - [ ] Teams
+ - [ ] Generalized (like, sitewide or on the homepage)
+ because of this, it may be handy to create leaderboards as a module that can morph to the use case.
+
+
+** Pruning Stuff
+These things might be useless
+
+*** content_editprofile.html
+
+*** registration.py
+
+** Questions
+these are either design decisions that should be made not unilaterally or things I need to ask Ian about to get a sense for how we are going to do them.
+
+*** design decisions
+- What should the news page look like?  What news are we trying to serve up?
+
+- What do we do about the database being either unpopulated or unavailable?  Are these such edge cases we need not worry about them?
+
+*** data modeling
+ - When looking at things like donations, how do we connect those to the other things? things like...
+   - Gamers.  Do we place a key on the donation?  Do we have a relational table that tracks this?
+   - Teams.  Do we pipe the donation relationship through the gamer?  What if a gamer is on more than one team?
+   - Shelters. This is fairly obvious, I think.  Donations are going to be tied to a specific shelter, right?
+
+ - Do we really want 'orgs' to be this generic thing for both shelters and teams?  It seems better to split em.
+
+ - Some donations won't be related to a fundraiser.  How do we manage that?
+
+ - Do all donations have a beneficiary?  How / Where do the donations go?
+
+ - 
