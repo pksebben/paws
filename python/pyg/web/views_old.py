@@ -26,24 +26,6 @@ def sign_new_user(email, password, name):
     db.web.session.commit()
     # change to structlog
     # print("user created")
-    
-
-def update_user_profile(id, about, birthday, location):
-    user = db.web.session.query(models.Person).get(id)
-    if not user.profile:
-        user.profile = models.UserProfile(about=about, birthday=birthday, location=location)
-        # change to structlog
-        # print('added user profile')
-    else:
-        user.profile.about = about
-        user.profile.birthday = birthday
-        user.profile.location = location
-        # change to structlog
-        # print('updated user profile')
-    db.web.session.commit()
-    # change to structlog
-    # print("user updated")
-
 
 bp = flask.Blueprint('views', __name__)
 

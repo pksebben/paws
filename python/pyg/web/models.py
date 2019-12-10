@@ -6,12 +6,6 @@ from sqlalchemy import create_engine
 
 Base = declarative_base()
 
-# If this is a data structure we need, is there a better way to represent it?
-org_membership_table = Table('org_membership', Base.metadata,
-                             Column(
-                                 'user_id', Integer, ForeignKey('person.id')),
-                             Column('org_id', Integer, ForeignKey('org.id'))
-                             )
 
 """
 ######################### Persons Data #########################
@@ -36,11 +30,7 @@ class Person(Base):
             "person",
             uselist=False),
         uselist=False)
-    orgs = relationship(
-        "Org",
-        secondary="org_membership",
-        backref="parents"
-    )
+
 
 
 # The auth data for persons
@@ -72,6 +62,7 @@ class UserProfile(Base):
     avatar = Column(String(80))
     birthday = Column(Date)
     location = Column(String(40))
+    twitch_handle = Column(String(40))
 
 
 """
