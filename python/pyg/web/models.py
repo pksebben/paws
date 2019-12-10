@@ -55,7 +55,6 @@ class UserAuth(Base):
     name = Column(String(80), unique=False, nullable=False)
     password = Column(String(80), unique=False, nullable=False)
     email = Column(String(80), unique=True, nullable=False)
-    fuckyou = Column()
 
 
 # All the personal data for a person.  Things that will be on their profile
@@ -80,51 +79,50 @@ class UserProfile(Base):
 """
 
 
-# A list of primary keys for organizations
-class Org(Base):
-    __tablename__ = 'org'
+# A list of primary keys for teamanizations
+class Team(Base):
+    __tablename__ = 'team'
 
     id = Column(Integer, primary_key=True)
     # IAN: do we want these to be Date or DateTime?
     date_joined = Column(Date)
     auth = relationship(
-        "OrgAuth",
+        "TeamAuth",
         backref=backref(
-            "org",
+            "team",
             uselist=False),
         uselist=False)
     profile = relationship(
-        "OrgProfile",
+        "TeamProfile",
         backref=backref(
-            "org",
+            "team",
             uselist=False),
         uselist=False)
 
 
-# IAN: Re: orgs and authentication.  See below.
-# Org authentication.  We may want to structure this such that a
+# IAN: Re: teams and authentication.  See below.
+# Team authentication.  We may want to structure this such that a
 # particular user has edit privileges, instead of authenticating directly.
-class OrgAuth(Base):
-    __tablename__ = 'org_auth'
+class TeamAuth(Base):
+    __tablename__ = 'team_auth'
 
     id = Column(
         Integer,
-        ForeignKey("org.id"),
+        ForeignKey("team.id"),
         primary_key=True,
         onupdate="cascade")
     name = Column(String(80), unique=True, nullable=False)
     password = Column(String(40), unique=False, nullable=False)
-    created = Column(DateTime)
 
 
-# IAN: are we going to split up shelters / gaming orgs / etc?
-# Profile information for orgs.
-class OrgProfile(Base):
-    __tablename__ = 'org_profile'
+# IAN: are we going to split up shelters / gaming teams / etc?
+# Profile information for teams.
+class TeamProfile(Base):
+    __tablename__ = 'team_profile'
 
     id = Column(
         Integer,
-        ForeignKey("org.id"),
+        ForeignKey("team.id"),
         primary_key=True,
         onupdate="cascade")
     missionstatement = Column(Text, nullable=True)
@@ -136,10 +134,11 @@ class OrgProfile(Base):
     twitch_link = Column(Text, nullable=True)
     instagram_link = Column(Text, nullable=True)
 
+
 """
 ######################### DONATION DATA #########################
 """
-    
+
 
 # Donations.  id / timestamp / fkeys / name for donating party
 class Donation(Base):
@@ -152,6 +151,7 @@ class Donation(Base):
     fundraiser = relationship("Fundraiser", back_populates="donations")
     beneficiary_id = Column(Integer, ForeignKey("beneficiary.id"))
     beneficiary = relationship("Beneficiary", back_populates="donations")
+    # user = relationship("")
     # the user field should be in here IOT track who gets credit for raising
     # the fundage.
 
@@ -172,11 +172,23 @@ class Fundraiser(Base):
     id = Column(Integer, primary_key=True)
     donations = relationship("Donation")
 
+
 """
 ######################### MISC DATA #########################
 -refactor into actual data for prod.
 """
-    
+
+
+class NewsArticle(Base):
+    __tablename__ = "newsarticle"
+
+    id = Column(Integer, primary_key=True)
+    headline = Column(Text(convert_unicode=True))
+    author = Column(Text(convert_unicode=True))
+    datetime = Column(DateTime, nullable=False)
+    body = Column(Text(convert_unicode=True))
+    slug = Column(Text(convert_unicode=True))
+
 
 # Generic text dump for site content.  When ready, deprecate and replace
 # with better scheme.

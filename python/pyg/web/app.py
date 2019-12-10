@@ -11,7 +11,7 @@ from werkzeug import exceptions
 from flask_login import LoginManager
 
 import pyg.web
-from pyg.web.views import login, registration, home, signup
+from pyg.web.views import login, home, signup, news, search, about, teamprofile
 from pyg.web import container
 from pyg.web import db
 
@@ -77,9 +77,12 @@ def load_user(userid):
 
 def init():
     app.register_blueprint(login.bp)
-    app.register_blueprint(registration.bp)
     app.register_blueprint(home.bp)
     app.register_blueprint(signup.bp)
+    app.register_blueprint(news.bp)
+    app.register_blueprint(about.bp)
+    app.register_blueprint(teamprofile.bp)
+    app.register_blueprint(search.bp)
     db.init(app)
     login_manager.init_app(app)
     return app
