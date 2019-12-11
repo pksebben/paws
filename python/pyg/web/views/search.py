@@ -36,10 +36,9 @@ def search():
             models.UserAuth).filter_by(
                 name=searchname).all()
         teams = db.web.session.query(
-            models.TeamAuth.filter_by(
-                name=searchname.all()
-            )
-        )
+            models.TeamAuth).filter_by(
+                name=searchname).all()
+            
         return flask.render_template(
             'content_search.html', players=players, teams=teams)
     else:

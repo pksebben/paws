@@ -5,6 +5,7 @@
 *** TODO Write function into test.app to use testing data
 *** TODO Write setup function for app.py
 *** TODO Write teardown function for app.py
+
 * Sitemap
 These are the pages we are gonna need, with the relevant data nested.
 
@@ -165,5 +166,3 @@ high-level stuff that fucks me up.
  -  
 
 *** code issues
- - So I wrote these tests for /search and they all check out but when I actually go to search nothing shows up.  I need you to take a look at those search functions and tell me where my head's fucked up.
-   - I dug into it a bit and what appears to be happening is that the POST method is not being used or it's (somehow) not triggering the if statement in the class.  I am confounded
