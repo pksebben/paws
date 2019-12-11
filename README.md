@@ -1,15 +1,15 @@
-#Paws Your Game
+# Paws Your Game
 
-##Users
+## Users
 Why are you even here?  *How* are you even here?  This is a closed repo.  Go on, get.  Vamoose.  There's nothing for you here.
 
-##Developers
+## Developers
 
-###Running a development server
+### Running a development server
 Before doing either of these, you gotta pull the repo.
 
 
-####Via Python (Recommended; more straightforward)
+#### Via Python (Recommended; more straightforward)
 This runs app.py through Python3
 
 1. [Install Python3](https://www.python.org/downloads/)
@@ -20,7 +20,7 @@ This runs app.py through Python3
 6. It will bitch about some stuff missing. `pip install` whatever it says is missing.
 7. `python3 app.py` again.  If it bitches, see #6, if not, the site should be live at [localhost:8080](localhost:8080)
 
-####Via Pantsbuild (fewer things to install, **way** more to mess with while developing)
+#### Via Pantsbuild (fewer things to install, **way** more to mess with while developing)
 This will generate an executable .pex file that can be run from anywhere without installing dependencies.
 Note: you will have to run  `./pants binary python/pyg/web:app` *every time* you make changes to the code, so this route is fairly slow.  Also; if you make a new file or use a new package, you'll have to add it to the BUILD file.  
 
