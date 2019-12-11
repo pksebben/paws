@@ -35,7 +35,6 @@ def userprofile(userid=1):
         # how are we going to handle bad values for userid?
         # we want to avoid rendering the page, for sure.
         # we want something logged
-        # 
         raise err
     if flask.request.method == 'POST':
         # update the user profile with form data

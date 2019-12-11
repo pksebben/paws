@@ -139,6 +139,7 @@ Are all donations tied to a beneficiary?
 
 """
 
+
 # Donations.  id / timestamp / fkeys / name for donating party
 class Donation(Base):
     __tablename__ = "donation"
@@ -153,7 +154,6 @@ class Donation(Base):
     beneficiary = relationship("Beneficiary", back_populates="donations")
     person_id = Column(Integer, ForeignKey("person.id"))
     person = relationship("Person", back_populates="donations")
-
 
 
 # #This seems like it might be better kept as a table of NGOs or something of that nature.

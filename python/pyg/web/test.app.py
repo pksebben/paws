@@ -75,7 +75,6 @@ class StartTest(unittest.TestCase):
 
     def tearDown(self):
         flask.template_rendered.disconnect(self._record_template, app.app)
-        
 
     def _record_template(self, sender, template, context, **extra):
         self.templates.append(template)

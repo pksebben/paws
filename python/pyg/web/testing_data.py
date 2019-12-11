@@ -3,7 +3,12 @@ import datetime as dt
 
 from pyg.web import models, db
 
-# People
+
+"""
+This has been factored into it's own module to allow testing of the site in test.app.py as well as by running the app.
+"""
+
+
 def makesomeboyees():
     try:
         tom = models.Person(
@@ -75,13 +80,13 @@ def makesomeboyees():
             twitch_link="twitch.com"
         )
         db.web.session.add(nurples)
-        
+
         # Donations
         playerslist = [bill, tom, bob]
         donationslist = [models.Donation() for i in range(50)]
         for i in donationslist:
             random.choice(playerslist).donations.append(i)
-            i.amount = random.randint(5,1500)
+            i.amount = random.randint(5, 1500)
             i.created = dt.datetime.now()
             i.donor_name = "mr moneybags"
             db.web.session.add(i)
