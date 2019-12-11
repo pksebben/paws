@@ -7,42 +7,45 @@ from sqlalchemy import create_engine
 Base = declarative_base()
 
 
-"""
-######################### Persons Data #########################
-"""
+member_to_team = Table("member_to_team", Base.metadata,
+                       Column('member_id', Integer, ForeignKey('member.id')),
+                       Column('team_id', Integer, ForeignKey('team.id')))
 
 
-# The base class for persons that relate person data to other tables
-class Person(Base):
-    __tablename__ = 'person'
+class Member(Base):
+    """Member is the central table which ties all member data together."""
+
+    __tablename__ = 'member'
 
     id = Column(Integer, primary_key=True)
     created = Column(DateTime, nullable=False)
     auth = relationship(
-        "UserAuth",
+        "Auth",
         backref=backref(
-            "person",
+            "member",
             uselist=False),
         uselist=False)
     profile = relationship(
-        "UserProfile",
+        "Profile",
         backref=backref(
-            "person",
+            "member",
             uselist=False),
         uselist=False)
     donations = relationship(
         "Donation",
-        back_populates="person"
+        back_populates="member"
     )
+    teams = relationship("Team", secondary=member_to_team)
 
 
-# The auth data for persons
-class UserAuth(Base):
-    __tablename__ = 'user_auth'
+class Auth(Base):
+    """UserAuth is for "native" or username/password auth into pyg."""
+
+    __tablename__ = 'auth'
 
     id = Column(
         Integer,
-        ForeignKey("person.id"),
+        ForeignKey("member.id"),
         primary_key=True,
         onupdate="cascade")
     name = Column(String(80), unique=False, nullable=False)
@@ -50,97 +53,38 @@ class UserAuth(Base):
     email = Column(String(80), unique=True, nullable=False)
 
 
-# All the personal data for a person.  Things that will be on their profile
-class UserProfile(Base):
-    __tablename__ = 'user_profile'
+class Profile(Base):
+    """Profile is member specifics."""
+
+    __tablename__ = 'profile'
 
     id = Column(
         Integer,
-        ForeignKey("person.id"),
+        ForeignKey("member.id"),
         primary_key=True,
         onupdate="cascade")
     about = Column(Text)
-    # TODO: implement some system by which custom pictures are uploaded and
-    # referred to by this next field
-    avatar = Column(String(80))
+    avatar_url = Column(String(80))
     birthday = Column(Date)
     location = Column(String(40))
     twitch_handle = Column(String(40))
 
 
-"""
-######################### TEAM DATA #########################
-"""
-
-
-# A list of primary keys for teamanizations
 class Team(Base):
     __tablename__ = 'team'
 
     id = Column(Integer, primary_key=True)
-    # IAN: do we want these to be Date or DateTime?
     date_joined = Column(Date)
-    auth = relationship(
-        "TeamAuth",
-        backref=backref(
-            "team",
-            uselist=False),
-        uselist=False)
-    profile = relationship(
-        "TeamProfile",
-        backref=backref(
-            "team",
-            uselist=False),
-        uselist=False)
-
-
-# IAN: Re: teams and authentication.  See below.
-# Team authentication.  We may want to structure this such that a
-# particular user has edit privileges, instead of authenticating directly.
-class TeamAuth(Base):
-    __tablename__ = 'team_auth'
-
-    id = Column(
-        Integer,
-        ForeignKey("team.id"),
-        primary_key=True,
-        onupdate="cascade")
-    name = Column(String(80), unique=True, nullable=False)
-    password = Column(String(40), unique=False, nullable=False)
-
-
-# IAN: are we going to split up shelters / gaming teams / etc?
-# Profile information for teams.
-class TeamProfile(Base):
-    __tablename__ = 'team_profile'
-
-    id = Column(
-        Integer,
-        ForeignKey("team.id"),
-        primary_key=True,
-        onupdate="cascade")
     missionstatement = Column(Text, nullable=True)
     location = Column(String(50), nullable=True, unique=False)
-    # maybe these should live in their own table?
     website = Column(Text, nullable=True)
-    facebook_link = Column(Text, nullable=True)
-    twitter_link = Column(Text, nullable=True)
-    twitch_link = Column(Text, nullable=True)
-    instagram_link = Column(Text, nullable=True)
+    facebook_url = Column(Text, nullable=True)
+    twitter_url = Column(Text, nullable=True)
+    twitch_url = Column(Text, nullable=True)
+    instagram_url = Column(Text, nullable=True)
+    members = relationship("Member", secondary=member_to_team)
 
 
-"""
-######################### DONATION DATA #########################
-
-There are a lot of things about donations that need to be figured out.
-For example, are all donations tied to a fundraiser?
-Are all donations tied to a player?
-Are all donations tied to a beneficiary?
-
-"""
-
-
-# Donations.  id / timestamp / fkeys / name for donating party
 class Donation(Base):
     __tablename__ = "donation"
 
@@ -152,8 +96,8 @@ class Donation(Base):
     fundraiser = relationship("Fundraiser", back_populates="donations")
     beneficiary_id = Column(Integer, ForeignKey("beneficiary.id"))
     beneficiary = relationship("Beneficiary", back_populates="donations")
-    person_id = Column(Integer, ForeignKey("person.id"))
-    person = relationship("Person", back_populates="donations")
+    member_id = Column(Integer, ForeignKey("member.id"))
+    member = relationship("Member", back_populates="donations")
 
 
 # #This seems like it might be better kept as a table of NGOs or something of that nature.
@@ -183,11 +127,11 @@ class NewsArticle(Base):
     __tablename__ = "newsarticle"
 
     id = Column(Integer, primary_key=True)
+    slug = Column(Text(convert_unicode=True), unique=True)
     headline = Column(Text(convert_unicode=True))
     author = Column(Text(convert_unicode=True))
     datetime = Column(DateTime, nullable=False)
     body = Column(Text(convert_unicode=True))
-    slug = Column(Text(convert_unicode=True))
 
 
 # Generic text dump for site content.  When ready, deprecate and replace

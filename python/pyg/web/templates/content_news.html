@@ -1,16 +1,22 @@
 {% extends "base_content.html" %}
 
 {% block content %}
-<div>
-  <h1>This is going to be a news page</h1>
-  <p>Perhaps it's better to just put a news area in the homepage?  Either way it can be built here and ported over.</p>
-  <!-- this next section should be programatically generated -->
+<div class="articles">
+  <h1>News</h1>
+  {% for article in articles %}
   <div class="newsItem">
     <h2 class="headline">{{ article.headline }}</h2>
     <p class="author">{{ article.author }}</p>
     <p>{{ article.date }}</p>
     <p>{{ article.body }}</p>
   </div>
-  <!-- end programatic section -->
+ {% endfor %}
+</div>
+<div class="toc">
+  <ul>
+    {% for item in toc %}
+    <li><a href="{{ url_for(".article", slug=item.slug) }}">{{ item.headline }}</a></li>
+    {% endfor %}
+  </ul>
 </div>
 {% endblock %}

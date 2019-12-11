@@ -79,7 +79,7 @@ def init():
     app.register_blueprint(login.bp)
     app.register_blueprint(home.bp)
     app.register_blueprint(signup.bp)
-    app.register_blueprint(news.bp)
+    app.register_blueprint(news.bp, url_prefix='/news')
     app.register_blueprint(about.bp)
     app.register_blueprint(teamprofile.bp)
     app.register_blueprint(search.bp)
