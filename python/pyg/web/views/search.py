@@ -1,6 +1,7 @@
 import flask
 import sys
 
+from sqlalchemy import func, desc
 
 from pyg.web import db, models
 
@@ -14,33 +15,20 @@ I'm guessing that there may be a better way to accomplish this.  Let me know you
 """
 
 
-class Player:
-    def __init__(self, auth, profile):
-        self.name = auth.name
-        self.email = auth.email
-        self.amountraised = 0
-        # get all donations and add to amountraised
-        donations = db.web.session.query(
-            models.Donation).filter_by(
-            person_id=auth.id).all()
-        for i in donations:
-            self.amountraised += i.amount
-        # How are we going to calculate rank?
-
-
 @bp.route('/search', methods=['GET', 'POST'])
 def search():
     if flask.request.method == 'POST':
+        donations = db.web.session.query(
+            models.Profile.handle,
+            func.sum(models.Donation.amount).label('total')
+        ).join(models.Member.profile
+               ).join(models.Donation
+                      ).group_by(
+            models.Profile.handle).order_by(desc('total')).all()
+        ranked = enumerate(donations, start=1)
         searchname = flask.request.form['name']
-        players = db.web.session.query(
-            models.UserAuth).filter_by(
-                name=searchname).all()
-        teams = db.web.session.query(
-            models.TeamAuth).filter_by(
-                name=searchname).all()
-            
         return flask.render_template(
-            'content_search.html', players=players, teams=teams)
+            'content_search.html', donations=ranked)
     else:
 
         return flask.render_template('content_search.html')

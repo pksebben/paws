@@ -1,3 +1,4 @@
+import logging
 import sys
 import os
 import mimetypes
@@ -96,6 +97,8 @@ def main():
 
 
 if __name__ == "__main__":
+    logging.basicConfig()
+    logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
     observer = log.PythonLoggingObserver(loggerName='logname')
     observer.start()
     flag.parse_commandline(sys.argv[1:])
