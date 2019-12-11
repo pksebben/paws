@@ -1,3 +1,10 @@
+* Immediate TODOs
+** TODO Implement testing data
+*** TODO Finish models.py to integrate donations
+*** TODO Populate the testing data file
+*** TODO Write function into test.app to use testing data
+*** TODO Write setup function for app.py
+*** TODO Write teardown function for app.py
 * Sitemap
 These are the pages we are gonna need, with the relevant data nested.
 
@@ -134,6 +141,10 @@ These things might be useless
 ** Questions
 these are either design decisions that should be made not unilaterally or things I need to ask Ian about to get a sense for how we are going to do them.
 
+*** Big, Important, Coding problems
+high-level stuff that fucks me up.
+ - I have no idea what the best practices are for error handling.  When do we make them disappear?  When do we log?  What do we do with particular database errors?  When we do handle them, where do we do it?  How do you keep this shit simple yet robust?  I confuse.
+
 *** design decisions
 - What should the news page look like?  What news are we trying to serve up?
 
@@ -151,4 +162,8 @@ these are either design decisions that should be made not unilaterally or things
 
  - Do all donations have a beneficiary?  How / Where do the donations go?
 
- - 
+ -  
+
+*** code issues
+ - So I wrote these tests for /search and they all check out but when I actually go to search nothing shows up.  I need you to take a look at those search functions and tell me where my head's fucked up.
+   - I dug into it a bit and what appears to be happening is that the POST method is not being used or it's (somehow) not triggering the if statement in the class.  I am confounded

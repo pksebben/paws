@@ -30,7 +30,10 @@ class Person(Base):
             "person",
             uselist=False),
         uselist=False)
-
+    donations = relationship(
+        "Donation",
+        back_populates="person"
+    )
 
 
 # The auth data for persons
@@ -128,23 +131,29 @@ class TeamProfile(Base):
 
 """
 ######################### DONATION DATA #########################
-"""
 
+There are a lot of things about donations that need to be figured out.
+For example, are all donations tied to a fundraiser?
+Are all donations tied to a player?
+Are all donations tied to a beneficiary?
+
+"""
 
 # Donations.  id / timestamp / fkeys / name for donating party
 class Donation(Base):
     __tablename__ = "donation"
 
     id = Column(Integer, primary_key=True)
+    amount = Column(Integer, nullable=False)
     donor_name = Column(String, nullable=False)
     created = Column(DateTime, nullable=False)
     fundraiser_id = Column(Integer, ForeignKey("fundraiser.id"))
     fundraiser = relationship("Fundraiser", back_populates="donations")
     beneficiary_id = Column(Integer, ForeignKey("beneficiary.id"))
     beneficiary = relationship("Beneficiary", back_populates="donations")
-    # user = relationship("")
-    # the user field should be in here IOT track who gets credit for raising
-    # the fundage.
+    person_id = Column(Integer, ForeignKey("person.id"))
+    person = relationship("Person", back_populates="donations")
+
 
 
 # #This seems like it might be better kept as a table of NGOs or something of that nature.

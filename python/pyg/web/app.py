@@ -13,7 +13,7 @@ from flask_login import LoginManager
 import pyg.web
 from pyg.web.views import login, home, signup, news, search, about, teamprofile, userprofile
 from pyg.web import container
-from pyg.web import db
+from pyg.web import db, testing_data
 
 
 FLAGS = flag.namespace(__name__)
@@ -86,6 +86,7 @@ def init():
     app.register_blueprint(userprofile.bp)
     db.init(app)
     login_manager.init_app(app)
+    testing_data.makesomeboyees
     return app
 
 

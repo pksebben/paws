@@ -48,6 +48,7 @@ class StartTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.tester = app.app.test_client()
+        signup.sign_new_user("othertom@gmail.com", "pass", "tom")
         signup.sign_new_user("tom@gmail.com", "pass", "tom")
         newstestcase = models.NewsArticle(
             headline="extry extry",
@@ -150,12 +151,19 @@ class StartTest(unittest.TestCase):
         res = db.web.session.query(models.UserAuth).filter_by(name="tom").all()
         self.assertEqual("tom", res[0].name)
 
-    def test_search_name(self):
+    def test_search_name_tom(self):
         # might be doing the post request wrong
         res = self.tester.post('/search', data=dict(
             name="tom"
         ))
         self.assertIn(b"tom", res.data)
+
+    def test_search_name_absent_beelzebub(self):
+        # might be doing the post request wrong
+        res = self.tester.post('/search', data=dict(
+            name="beelzebub"
+        ))
+        self.assertNotIn(b"beelzebub", res.data)
 
     # END SEARCH
 

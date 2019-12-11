@@ -46,7 +46,6 @@ def userprofile(userid=1):
             flask.request.form['location'],
             flask.request.form['twitch_handle']
         )
-        pass
     if flask.session.get('userid'):
         if flask.session['userid'] == userid:
             # show the profile with editable fields
