@@ -1,5 +1,14 @@
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, String, Integer, ForeignKey, Table, Text, DateTime, Date
+from sqlalchemy import (
+    Column,
+    String,
+    Integer,
+    ForeignKey,
+    Table,
+    Text,
+    DateTime,
+    Date,
+    Numeric)
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy import create_engine
 
@@ -63,6 +72,7 @@ class Profile(Base):
         ForeignKey("member.id"),
         primary_key=True,
         onupdate="cascade")
+    handle = Column(String(80), unique=True)
     about = Column(Text)
     avatar_url = Column(String(80))
     birthday = Column(Date)
@@ -89,38 +99,11 @@ class Donation(Base):
     __tablename__ = "donation"
 
     id = Column(Integer, primary_key=True)
-    amount = Column(Integer, nullable=False)
+    amount = Column(Numeric(asdecimal=False), nullable=False)
     donor_name = Column(String, nullable=False)
     created = Column(DateTime, nullable=False)
-    fundraiser_id = Column(Integer, ForeignKey("fundraiser.id"))
-    fundraiser = relationship("Fundraiser", back_populates="donations")
-    beneficiary_id = Column(Integer, ForeignKey("beneficiary.id"))
-    beneficiary = relationship("Beneficiary", back_populates="donations")
     member_id = Column(Integer, ForeignKey("member.id"))
     member = relationship("Member", back_populates="donations")
-
-
-# #This seems like it might be better kept as a table of NGOs or something of that nature.
-class Beneficiary(Base):
-    __tablename__ = "beneficiary"
-
-    id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False)
-    donations = relationship("Donation")
-
-
-# Primary keys for fundraisers
-class Fundraiser(Base):
-    __tablename__ = 'fundraiser'
-
-    id = Column(Integer, primary_key=True)
-    donations = relationship("Donation")
-
-
-"""
-######################### MISC DATA #########################
--refactor into actual data for prod.
-"""
 
 
 class NewsArticle(Base):

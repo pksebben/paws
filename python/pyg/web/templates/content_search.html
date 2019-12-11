@@ -13,34 +13,15 @@
     <label for="player_results">Players</label>
     <table id="player_results">
       <tr>
-	<th>Name</th>
 	<th>Rank</th>
-	<th>Amount raised</th>
-	<th>email</th>
-	<th>team</th>
-      </tr>
-      {% for i in players %}
-      <tr>
-	<td>{{ i.name }}</td>
-	<td>TODO: implement rank</td>
-	<td>TODO: implement amount raised</td>
-	<td>{{ i.email }}</td>
-	<td>TODO: implement team</td>
-      </tr>
-      {% endfor %}
-    </table>
-    <label for="team_results">Teams</label>
-    <table id="team_results">
-      <tr>
 	<th>Name</th>
-	<th>Amount Raised</th>
-	<th>Roster Size</th>
+	<th>Amount raised</th>
       </tr>
-      {% for i in teams %}
+      {% for i in donations %}
       <tr>
-	<td>{{ i.name }}</td>
-	<td>{{ i.amount_raised }}</td>
-	<td>{{ i.roster_size }}</td>
+	<td>{{ i.0 }}</td>
+	<td>{{ i.1.handle }}</td>
+	<td>{{ "$%.2f"|format(i.1.total|float) }}</td>
       </tr>
       {% endfor %}
     </table>

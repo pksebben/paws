@@ -1,4 +1,5 @@
 import datetime
+import random
 
 import sqlalchemy
 from sqlalchemy import orm
@@ -29,7 +30,6 @@ def init():
 
 
 def articles():
-
     article_1 = models.NewsArticle(
         headline=lorem(5),
         author=lorem(2),
@@ -49,6 +49,83 @@ def articles():
     session.commit()
 
 
+def people():
+    tom = models.Member(
+        created=datetime.datetime.now()
+    )
+    tom.auth = models.Auth(
+        name="tom",
+        password="pass",
+        email="tom@gmail.com"
+    )
+    tom.profile = models.Profile(
+        handle="tom_dawg",
+        about="my name is tom.  I am not good with about sections",
+        birthday=datetime.datetime.now(),
+        location="The town of hogsface, Land of foon"
+    )
+    othertom = models.Member(
+        created=datetime.datetime.now()
+    )
+    othertom.auth = models.Auth(
+        name="tom",
+        password="pass",
+        email="othertom@gmail.com"
+    )
+    othertom.profile = models.Profile(
+        handle="tom_2",
+        about="my name is other tom.  I am not good with about sections",
+        birthday=datetime.datetime.now(),
+        location="The town of hogsface, Land of foon"
+    )
+    bob = models.Member(
+        created=datetime.datetime.now()
+    )
+    bob.auth = models.Auth(
+        name="bob",
+        password="pass",
+        email="bob@gmail.com"
+    )
+    bob.profile = models.Profile(
+        handle="bob_the_builder",
+        about="my name is bob.  I am not good with about sections",
+        birthday=datetime.datetime.now(),
+        location="The town of pigsface, Land of foon"
+    )
+    bill = models.Member(
+        created=datetime.datetime.now()
+    )
+    bill.auth = models.Auth(
+        name="bill",
+        password="pass",
+        email="bill@gmail.com"
+    )
+    bill.profile = models.Profile(
+        handle="boogie_2988",
+        about="my name is bill.  I am not good with about sections",
+        birthday=datetime.datetime.now(),
+        location="The town of hogsface, Land of foon"
+    )
+    session.add(othertom)
+    session.add(bill)
+    session.add(tom)
+    session.add(bob)
+    session.commit()
+
+
+def donations():
+    members = session.query(models.Member).all()
+    for _ in range(90):
+        donation = models.Donation(member_id=random.choice(members).id,
+                                   donor_name="Scroog McDuck",
+                                   created=datetime.datetime.now(),
+                                   amount=random.uniform(5, 100.01))
+        session.add(donation)
+    session.commit()
+
+
 if __name__ == "__main__":
     init()
     articles()
+    people()
+    donations()
