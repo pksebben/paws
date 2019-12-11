@@ -117,10 +117,16 @@ class NewsArticle(Base):
     body = Column(Text(convert_unicode=True))
 
 
-# Generic text dump for site content.  When ready, deprecate and replace
-# with better scheme.
+class Route(Base):
+    __tablename__ = "route"
+    id = Column(String(80), primary_key=True)
+    texts = relationship("Text", back_populates="route")
+
+
 class Text(Base):
     __tablename__ = "text"
 
-    id = Column(Integer, primary_key=True)
+    route_id = Column(String(80), ForeignKey('route.id'), primary_key=True)
+    slug = Column(String(32), primary_key=True)
     text = Column(Text(convert_unicode=True))
+    route = relationship("Route", back_populates="texts")
