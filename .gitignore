@@ -16,3 +16,4 @@ dist
 .cache/
 
 .todo-breakdown
+foo.db
