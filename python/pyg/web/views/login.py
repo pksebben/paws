@@ -14,10 +14,7 @@ def login_user(email, password):
         assert user.password == password
         flask.session['userid'] = user.id
         return flask.redirect('/')
-    except AssertionError:
-        return flask.render_template(
-            "login.html", failure_text="bad credentials. please retry")
-    except NoResultFound:
+    except (AssertionError, NoResultFound):
         return flask.render_template(
             "login.html", failure_text="bad credentials. please retry")
 
