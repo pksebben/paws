@@ -1,25 +1,14 @@
-import logging
-import sys
 import os
 import mimetypes
 import pkg_resources
 
 import flask
-from oscar import flag
-from twisted.python import log
 from jinja2 import PackageLoader
 from werkzeug import exceptions
 from flask_login import LoginManager
 
 import pyg.web
 from pyg.web.views import login, home, signup, news, search, about, teamprofile, userprofile
-from pyg.web import container
-from pyg.web import db, testing_data
-
-
-FLAGS = flag.namespace(__name__)
-FLAGS.endpoint = flag.String("server endpoint", default="tcp:8080")
-FLAGS.debug = flag.Bool("enable debug", default=False)
 
 
 """this class and the following two functions enable loading static assets from the .pex"""
@@ -85,22 +74,14 @@ def init():
     app.register_blueprint(teamprofile.bp)
     app.register_blueprint(search.bp)
     app.register_blueprint(userprofile.bp)
-    db.init(app)
     login_manager.init_app(app)
-    testing_data.makesomeboyees
+
+    @app.context_processor
+    def dynamic_data():
+        texts = pyg.web.db.web.session.query(
+            pyg.web.models.Text).filter_by(
+                route_id=str(flask.request.url_rule))
+        text_dict = {x.slug: x.text for x in texts}
+        return {'text': text_dict}
+
     return app
-
-
-def main():
-    init()
-    container.run(app, FLAGS.endpoint, FLAGS.debug)
-
-
-if __name__ == "__main__":
-    logging.basicConfig()
-    logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
-    observer = log.PythonLoggingObserver(loggerName='logname')
-    observer.start()
-    flag.parse_commandline(sys.argv[1:])
-    flag.die_on_missing_required()
-    main()

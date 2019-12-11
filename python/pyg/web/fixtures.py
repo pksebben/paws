@@ -124,8 +124,20 @@ def donations():
     session.commit()
 
 
+def text():
+    home = models.Route(id="/")
+    session.add(home)
+    home_subtitle = models.Text(
+        route=home,
+        slug="subtitle",
+        text="Paws Your Game’s mission is to help raise money and other resources for animal rescue organizations through video game marathons.")
+    session.add(home)
+    session.commit()
+
+
 if __name__ == "__main__":
     init()
     articles()
     people()
     donations()
+    text()
