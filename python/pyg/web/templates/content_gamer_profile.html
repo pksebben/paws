@@ -1,11 +1,20 @@
 {% extends "base_content.html" %}
 
 {% block content %}
+{% if profile %}
 <div id="Gamer_Profile" class="content">
+    <h2>Welcome, {{ auth.name }}</h2>
+    <form id="submit" action="/profile/{{ auth.id }}">
+	<button>Submit changes</button>
+    </form>
     <div class="section gamer_profile-overview">
 	<div class="gamer_profile-overview-avatar_username">
             <img class="gamer_profile-overview-avatar avatar"/>
+	    {% if editmode == True %}
+	    <textarea rows="1" cols="25" name="name" form="submit">{{ auth.name }}</textarea>
+	    {% else %}
             <h1 class="gamer_profile-overview-username">{{ auth.name }}</h1>
+	    {% endif %}
 	</div>
 	<ul class="gamer_profile-overview-stats">
             <li class="gamer_profile-overview-stats-raised">
@@ -33,14 +42,23 @@
 		<i class="icon icon-block">earth</i>
 		<dl>
 		    <dt>Location</dt>
+		    {% if editmode == True %}
+		    <textarea rows="1" cols="25" name="location" form="submit">{{ profile.location }}</textarea>
+		    {% else %}
 		    <dd>{{ profile.location }}</dd>
+		    {% endif %}
+		    
 		</dl>
             </li>
             <li class="gamer_profile-overview-stats-twitch_handle">
 		<i class="icon"></i>
 		<dl>
 		    <dt>Twitch Handle</dt>
-		    <dd>GIMME DB</dd>
+		    {% if editmode == True %}
+		    <textarea rows="1" cols="25" name="twitch_handle" form="submit">{{ profile.twitch_handle }}</textarea>
+		    {% else %}
+		    <dd>{{ profile.twitch_handle }}</dd>
+		    {% endif %}
 		</dl>
             </li>
 	</ul>
@@ -49,7 +67,11 @@
     <div class="section gamer_profile-why_i_paws">
 	<div class="why_i_paws">
             <header><h1>Why I Paws</h1><i class="icon"></i></header>
-            <p>{{ profile.about }}</p>
+	    {% if editmode == True %}
+	    <textarea rows="5" cols="33" name="about" form="submit">{{ profile.about }}</textarea>
+	    {% else %}
+	    <p>{{ profile.about }}</p>
+	    {% endif %}
 	</div>
     </div>
 
@@ -159,4 +181,9 @@
 	</ul>
     </div>
 </div><!-- end gamer profile -->
+{% else %}
+<div>
+    <p>No profile found. Who were you looking for?</p>
+</div>
+{% endif %}
 {% endblock %}

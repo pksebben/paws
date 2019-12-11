@@ -2,7 +2,9 @@
 
 {% block content %}
 <div id="sessiontest">
-    <h1>{{ test }}</h1>
+  {% if username %}
+  <h1>welcome, {{ username }}!</h1>
+  {% endif %}
 </div>
 <div id="Home" class="content">
   <div class="home-hero section">
@@ -35,7 +37,7 @@
         <a class="leaderboard-list-item-link" href="gamer_profile.php">
         </a>
         <span class="leaderboard-list-item-rank"><?php echo $i ?></span>
-        <img class="leaderboard-list-item-avatar" src="{{ url_for('static', filename='img/placeholder-user-avatar.png')}}"/>
+        <img class="leaderboard-list-item-avatar" src="{{ url_for('static', filename='img/oscaravatar.jpg')}}"/>
         <span class="leaderboard-list-item-name">Firstname Lastname</span>
         <span class="leaderboard-list-item-change icon-block leaderboard-list-item-change-icon_down"></span>
 </span>

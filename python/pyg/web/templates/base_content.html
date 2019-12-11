@@ -4,13 +4,22 @@
 	<title>Paws Your Game</title>
 	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     </head>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
     <body>
 	<nav id="Nav">
-	    <h1 class="nav-logo"><a href="home">Paws Your Game</a></h1>
+	    <h1 class="nav-logo"><a href="/">Paws Your Game</a></h1>
 	    <ul>
-		<li><a href="our-tail.php">Our Tail</a></li>
-		<li><a href="leaderboard.php">Leaderboard</a></li>
-		<li><a href="news.php">News</a></li>
+		<li><a href="about">Our Tail</a></li>
+		<li><a href="leaderboard">Leaderboard</a></li>
+		<li><a href="news">News</a></li>
 		<li class="nav-search">
 		    <form>
 			<button>
@@ -19,7 +28,7 @@
 			<input type="text" name="search" placeholder="Search for Players / Shelters / Donors">
 		    </form>
 		</li>
-		<li class="nav-signin"><a href="sign-in.html">Sign In</a></li>
+		<li class="nav-signin"><a href="login">Sign In</a></li>
 		<li class="nav-donate"><a href="donate.html">Donate</a></li>
 	    </ul>
 	</nav>

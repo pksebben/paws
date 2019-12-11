@@ -1,0 +1,17 @@
+{% extends "base_content.html" %}
+
+{% block content %}
+<div>
+  <h1>Welcome!  Glad you could join us!</h1>
+</div>
+<div>
+  <form action="/signup" method="post">
+    <input type="text" name="email" placeholder="Email">
+    <input type="text" name="password" placeholder="Password">
+    <input type="text" name="name" placeholder="Name">
+    <button>
+      <p>sign up</p>
+    </button>
+  </form>
+</div>
+{% endblock %}

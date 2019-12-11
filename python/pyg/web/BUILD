@@ -2,16 +2,63 @@ python_binary(
     name='app',
     source='app.py',
     dependencies=[
+	':exceptions',
         ':api',
+        ':views',
         ':container',
         ':plugin',
 	':models',
 	':db',
+	':testing',
+	':auth',
         'third_party:flask',
 	'third_party:psycopg2',
 	'third_party:setuptools',
+	'third_party:flask-login',
 	':templates',
 	':static',
+    ],
+)
+
+python_library(
+    name='exceptions',
+    sources=[
+        'exceptions.py',
+    ],
+    dependencies=[],
+)
+
+python_library(
+    name='api',
+    sources=[
+        'api.py',
+    ],
+    dependencies=[
+        ':models',
+	':db',
+    ],
+)
+
+python_library(
+    name='auth',
+    sources=[
+        'auth.py',
+    ],
+    dependencies=[
+        ':db',
+	':models',
+	'third_party:marshmallow',
+    ],
+)
+
+python_library(
+    name='testing',
+    sources=[
+        'testing.py',
+    ],
+    dependencies=[
+        ':models',
+	':db',
     ],
 )
 
@@ -26,10 +73,8 @@ python_library(
 )
 
 python_library(
-    name='api',
-    sources=[
-        'api.py',
-    ],
+    name='views',
+    sources=globs('views/*.py'),
     dependencies=[
         'third_party:flask',
 	'third_party:psycopg2',

@@ -11,13 +11,14 @@
 	</div>
 	<div>
 	    <h3>{{ failure_text }}</h3>
-	    <form action="/authorize" method="post">
+	    <form action="/login" method="post">
 		<input type="text" name="email" placeholder="Email">
 		<input type="text" name="password" placeholder="Password">
 		<button>
 		    <p>login</p>
 		</button>
 	    </form>
+	    <p>Don't have an account yet? You can <a href="signup">create one here</a></p>
 	</div>
     </body>
 </html>
