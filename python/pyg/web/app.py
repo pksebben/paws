@@ -64,7 +64,9 @@ login_manager = LoginManager()  # part of flask-login.  Not yet implemented.
 def load_user(userid):
     return LoginUser(userid)
 
-
+def logout():
+    flask.session.pop('userid')
+    
 def init():
     app.register_blueprint(login.bp)
     app.register_blueprint(home.bp)
@@ -76,6 +78,9 @@ def init():
     app.register_blueprint(userprofile.bp)
     app.register_blueprint(leaderboard.bp)
     login_manager.init_app(app)
+
+
+    app.jinja_env.globals.update(logout=logout)
 
     @app.context_processor
     def dynamic_data():
