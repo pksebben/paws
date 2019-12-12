@@ -30,13 +30,7 @@
 	      </li>
 	      {% if session.userid %}
 	      <li class="nav-profile"><a href="/profile/{{session.userid}}">My Profile</a></li>
-	      <li class="logout">
-
-		<form action="/">
-		  <button onclick="{{ logout() }}" >Log out</button>
-		</form>
-		
-	      </li>
+	      <li><a href="/logout">sign out</a></li>
 	      {% else %}
 	      <li class="nav-signin"><a href="/login">Sign In</a></li>
 	      {% endif %}

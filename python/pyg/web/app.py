@@ -8,7 +8,7 @@ from werkzeug import exceptions
 from flask_login import LoginManager
 
 import pyg.web
-from pyg.web.views import login, home, signup, news, search, about, teamprofile, userprofile, leaderboard
+from pyg.web.views import login, home, signup, news, search, about, teamprofile, userprofile, leaderboard, logout
 
 
 """this class and the following two functions enable loading static assets from the .pex"""
@@ -64,9 +64,6 @@ login_manager = LoginManager()  # part of flask-login.  Not yet implemented.
 def load_user(userid):
     return LoginUser(userid)
 
-def logout():
-    flask.session.pop('userid')
-    
 def init():
     app.register_blueprint(login.bp)
     app.register_blueprint(home.bp)
@@ -77,10 +74,8 @@ def init():
     app.register_blueprint(search.bp)
     app.register_blueprint(userprofile.bp)
     app.register_blueprint(leaderboard.bp)
+    app.register_blueprint(logout.bp)
     login_manager.init_app(app)
-
-
-    app.jinja_env.globals.update(logout=logout)
 
     @app.context_processor
     def dynamic_data():

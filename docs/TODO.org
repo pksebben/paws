@@ -277,10 +277,10 @@ One thing that I could do to be better at this is getting my keyboard movement d
 **** DONE set all the text on the site to the generic text module
 **** TODO implement modals for login
 **** TODO Implement user avatars sitewide
-**** TODO Wire up leaderboard
-**** TODO Implement a logout
+**** DONE Wire up leaderboard
+**** DONE Implement a logout
 **** MINOR FIXES
-***** TODO get rid of submit button on user profile when not in edit mode
+***** DONE get rid of submit button on user profile when not in edit mode
 ***** 
 
 * Next Meeting
