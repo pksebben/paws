@@ -26,3 +26,4 @@ You get to roleplay Santa.  Merry Crimmis! Here's a list of the things we want.
 
 -----little fixes-----
 [ ] - links in home-intro section aren't buttons anymore and the styling is le mess
+[ ] - the search bar input field has gotten shy

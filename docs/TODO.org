@@ -281,8 +281,9 @@ One thing that I could do to be better at this is getting my keyboard movement d
 ***** TODO salt bae tha hashes
 **** TODO Implement user avatars sitewide
 **** DONE Wire up leaderboard
+**** TODO check that user profile updating isnt broken and maybe fix it
 **** DONE Implement a logout
-**** DONE Implement fundraisers / wire up fundraiser module
+**** TODO Implement fundraisers / wire up fundraiser module
 **** TODO remove leaderboard standalone
 **** MINOR FIXES
 ***** DONE get rid of submit button on user profile when not in edit mode
@@ -297,5 +298,7 @@ One thing that I could do to be better at this is getting my keyboard movement d
 *** Answered: we're gonna use chase wepay
 ** Structlog is implemented in it's most basic form.
    I don't really get what the hell is going on, but it seems to work.
+*** dealt with
+made some minor changes.  Read up on it.
 ** If we can structure fundraisers today there are a few more modules I can do deep work on.
 ** I could really use a little high-level look at the tbd.
