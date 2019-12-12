@@ -7,12 +7,6 @@ from pyg.web import db, models
 
 bp = flask.Blueprint('search', __name__)
 
-"""
-IAN:
-This next class is meant to take just what data we need from auth, profile, etc, do what calculations are necessary for like rank and whatever, and funnel it into the template cleanly.
-
-I'm guessing that there may be a better way to accomplish this.  Let me know your thoughts either way.
-"""
 
 
 @bp.route('/search', methods=['GET', 'POST'])

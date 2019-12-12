@@ -85,4 +85,9 @@ def init():
         text_dict = {x.slug: x.text for x in texts}
         return {'text': text_dict}
 
+    @app.context_processor
+    def user_session():
+        usersession = flask.session
+        return usersession
+
     return app

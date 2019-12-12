@@ -18,22 +18,26 @@
 	    <h1 class="nav-logo"><a href="/">Paws Your Game</a></h1>
 	    <ul>
 	      <li><a href="/about">Our Tail</a></li>
-		<li><a href="/leaderboard">Leaderboard</a></li>
-		<li><a href="/news">News</a></li>
-		<li class="nav-search">
-		    <form action="/search" method="post">
-			<button>
-			    <i class="icon icon-standard">search</i>
-			</button>
-			<input type="text" name="name" placeholder="Search for Players / Shelters / Donors">
-		    </form>
-		</li>
-		<li class="nav-signin"><a href="/login">Sign In</a></li>
-		<li class="nav-donate"><a href="/donate">Donate</a></li>
+	      <li><a href="/leaderboard">Leaderboard</a></li>
+	      <li><a href="/news">News</a></li>
+	      <li class="nav-search">
+		<form action="/search" method="post">
+		  <button>
+		    <i class="icon icon-standard">search</i>
+		  </button>
+		  <input type="text" name="name" placeholder="Search for Players / Shelters / Donors">
+		</form>
+	      </li>
+	      {% if session.userid %}
+	      <li class="nav-profile"><a href="/profile/{{session.userid}}">My Profile</a></li>
+	      {% else %}
+	      <li class="nav-signin"><a href="/login">Sign In</a></li>
+	      {% endif %}
+	      <li class="nav-donate"><a href="/donate">Donate</a></li>
 	    </ul>
 	</nav>
 	<div id="content">
-	    {% block content %}{% endblock %}
+	  {% block content %}{% endblock %}
 	</div>
     </body>
 </html>

@@ -6,9 +6,9 @@ bp = flask.Blueprint("userprofile", __name__)
 
 
 def update_user_profile(id, about, birthday, location, twitch_handle):
-    user = db.web.session.query(models.Person).get(id)
+    user = db.web.session.query(models.Member).get(id)
     if not user.profile:
-        user.profile = models.UserProfile(
+        user.profile = models.Profile(
             about=about, birthday=birthday, location=location, twitch_handle=twitch_handle)
         # change to structlog
         # print('added user profile')
@@ -28,7 +28,7 @@ def update_user_profile(id, about, birthday, location, twitch_handle):
 @bp.route('/profile')
 def userprofile(userid=1):
     try:
-        user = db.web.session.query(models.Person).get(userid)
+        user = db.web.session.query(models.Member).get(userid)
         auth = user.auth
         profile = user.profile
     except AttributeError as err:
@@ -45,12 +45,15 @@ def userprofile(userid=1):
             flask.request.form['location'],
             flask.request.form['twitch_handle']
         )
+        """this next bit could probably be done just in the template, now that the session object is available to jinja."""
     if flask.session.get('userid'):
-        if flask.session['userid'] == userid:
+        if flask.session['userid'] == int(userid):
             # show the profile with editable fields
             return flask.render_template(
-                'content_gamer_profile.html', editmode=True, )
+                'content_gamer_profile.html', editmode=True, profile=profile, auth=auth )
+        else:
+            return flask.render_template("content_gamer_profile.html", editmode=False, profile=profile, auth=auth)
     else:
         # show the profile static
         return flask.render_template(
-            'content_gamer_profile.html', editmode=False)
+            'content_gamer_profile.html', editmode=False, profile=profile, auth=auth)
