@@ -279,6 +279,7 @@ One thing that I could do to be better at this is getting my keyboard movement d
 **** TODO Implement user avatars sitewide
 **** DONE Wire up leaderboard
 **** DONE Implement a logout
+**** DONE Implement fundraisers / wire up fundraiser module
 **** MINOR FIXES
 ***** DONE get rid of submit button on user profile when not in edit mode
 ***** 

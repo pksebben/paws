@@ -1,9 +1,7 @@
-{% extends "base_content.html" %}
-
-{% block content %}
+{% block leaderboard %}
 <div id="Leaderboard" class="leaderboard content">
   <ul class="leaderboard-list">
-    {% for i in players %}
+    {% for i in leaderboard_players %}
     <li class="leaderboard-list-item">
       <a class="leaderboard-list-item-link" href="gamer_profile.php">
       </a>

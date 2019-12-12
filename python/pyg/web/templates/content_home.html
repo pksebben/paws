@@ -31,53 +31,39 @@
   </div><!--end home-intro-->
   <div class="home-leaderboard leaderboard section">
     <h2 class="home-leaderboard-header">Leaderboard</h2>
-    <ul class="leaderboard-list">
-      <?php for($i=1; $i<=5; $i++){ ?>
-      <li class="leaderboard-list-item">
-        <a class="leaderboard-list-item-link" href="gamer_profile.php">
-        </a>
-        <span class="leaderboard-list-item-rank"><?php echo $i ?></span>
-        <img class="leaderboard-list-item-avatar" src="{{ url_for('static', filename='img/oscaravatar.jpg')}}"/>
-        <span class="leaderboard-list-item-name">Firstname Lastname</span>
-        <span class="leaderboard-list-item-change icon-block leaderboard-list-item-change-icon_down"></span>
-</span>
-<span class="leaderboard-list-item-amount">$20,000</span>
-</li>
-<?php } ?>
-</ul>
-
-</div><!--end home-leaderboard-->
-<div class="home-news section">
-  {% for i in news %}
-  <div class="home-news-article news-article">
-    <h3 class="news-article-title">{{ i.headline }}</h3>
-    <h4 class="news-article-publisher">{{ i.author }}</h4>
-    <h5 class="news-article-date">{{ i.datetime }}</h5>
-    <div class="news-article-snippet">
-      <p>
-	{{ i.snippet }}
-      </p>
+    {% include 'leaderboard.html' %}
+  </div><!--end home-leaderboard-->
+  <div class="home-news section">
+    {% for i in news %}
+    <div class="home-news-article news-article">
+      <h3 class="news-article-title">{{ i.headline }}</h3>
+      <h4 class="news-article-publisher">{{ i.author }}</h4>
+      <h5 class="news-article-date">{{ i.datetime }}</h5>
+      <div class="news-article-snippet">
+	<p>
+	  {{ i.snippet }}
+	</p>
+      </div>
     </div>
-  </div>
-  {% endfor %}
-</div><!--end home-news-->
-<div class="home-about section">
-  <div class="home-about-goal">
-    <span class="icon icon-standard">dollarsign</span>
-    <p>{{ text.about_goal }}</p>
-  </div>
-  <div class="home-about-funds">
-    <p>{{ text.about_funds }}</p>
-    <span class="icon icon-block">videogame</span>
-  </div>
-  <div class="home-about-gamers">
-    <span class="icon icon-block">timer</span>
-    <p>{{ text.about_gamers }}</p>
-  </div>
-  
-</div><!--end home-about-->
-<div class="home-data section">
-  
-</div><!--end home-data-->
+    {% endfor %}
+  </div><!--end home-news-->
+  <div class="home-about section">
+    <div class="home-about-goal">
+      <span class="icon icon-standard">dollarsign</span>
+      <p>{{ text.about_goal }}</p>
+    </div>
+    <div class="home-about-funds">
+      <p>{{ text.about_funds }}</p>
+      <span class="icon icon-block">videogame</span>
+    </div>
+    <div class="home-about-gamers">
+      <span class="icon icon-block">timer</span>
+      <p>{{ text.about_gamers }}</p>
+    </div>
+    
+  </div><!--end home-about-->
+  <div class="home-data section">
+    
+  </div><!--end home-data-->
 </div><!-- end Home-->
 {% endblock %}
