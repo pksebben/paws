@@ -9,7 +9,7 @@ bp = flask.Blueprint('login', __name__)
 def login_user(email, password):
     try:
         user = db.web.session.query(
-            models.UserAuth).filter_by(
+            models.Auth).filter_by(
             email=email).one()
         assert user.password == password
         flask.session['userid'] = user.id

@@ -114,6 +114,7 @@ class NewsArticle(Base):
     headline = Column(Text(convert_unicode=True))
     author = Column(Text(convert_unicode=True))
     datetime = Column(DateTime, nullable=False)
+    snippet = Column(Text(convert_unicode=True, length=250), nullable=False)
     body = Column(Text(convert_unicode=True))
 
 

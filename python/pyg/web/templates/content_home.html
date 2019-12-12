@@ -48,21 +48,18 @@
 
 </div><!--end home-leaderboard-->
 <div class="home-news section">
-  <?php for($i=1; $i<=3; $i++){ ?>
+  {% for i in news %}
   <div class="home-news-article news-article">
-    <h3 class="news-article-title">GIMME DB</h3>
-    <h4 class="news-article-publisher">GIMME DB</h4>
-    <h5 class="news-article-date">GIMME DB</h5>
+    <h3 class="news-article-title">{{ i.headline }}</h3>
+    <h4 class="news-article-publisher">{{ i.author }}</h4>
+    <h5 class="news-article-date">{{ i.datetime }}</h5>
     <div class="news-article-snippet">
       <p>
-	GIMME DB
-      </p>
-      <p>
-	GIMME DB
+	{{ i.snippet }}
       </p>
     </div>
   </div>
-  <?php } ?>
+  {% endfor %}
 </div><!--end home-news-->
 <div class="home-about section">
   <div class="home-about-goal">

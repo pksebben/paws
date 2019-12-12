@@ -281,5 +281,8 @@ One thing that I could do to be better at this is getting my keyboard movement d
 * Next Meeting
 
 ** What was the external module for donations?
+I want to start work on this, not necessarily finish it, unless that's a completely trivial task.
+I'm assuming it's not.
 ** Structlog is implemented in it's most basic form.
 I don't really get what the hell is going on, but it seems to work.
+** 

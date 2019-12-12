@@ -35,7 +35,9 @@ def articles():
         author=lorem(2),
         datetime=datetime.datetime.now(),
         body=lorem(-1),
-        slug="article-1")
+        slug="article-1",
+        snippet="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium."
+    )
     session.add(article_1)
 
     article_2 = models.NewsArticle(
@@ -43,7 +45,9 @@ def articles():
         author=lorem(2),
         datetime=datetime.datetime.now(),
         body=lorem(-1),
-        slug="article-2")
+        slug="article-2",
+        snippet="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium."
+    )
     session.add(article_2)
 
     session.commit()
