@@ -22,15 +22,18 @@ def main():
 
 
 if __name__ == "__main__":
-    # logging.basicConfig()
-    # logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
-    structlog.configure(
-        processors=[twisted.EventAdapter()],
-        logger_factory=twisted.LoggerFactory(),
-        wrapper_class=twisted.BoundLogger,
-        cache_logger_on_first_use=True
-    )
+    logging.basicConfig()
+    logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
+    # structlog.configure(
+    #     processors=[twisted.EventAdapter()],
+    #     logger_factory=twisted.LoggerFactory(),
+    #     wrapper_class=twisted.BoundLogger,
+    #     cache_logger_on_first_use=True
+    # )
     log.startLogging(sys.stderr)
+    observer = log.PythonLoggingObserver(loggerName='logname')
+    observer.start()
+    
     flag.parse_commandline(sys.argv[1:])
     flag.die_on_missing_required()
     main()

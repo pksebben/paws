@@ -5,7 +5,7 @@
 <div id="Gamer_Profile" class="content">
   {% if session.userid == auth.id %}
   <h2>Welcome, {{ auth.name }}</h2>
-  <form id="submit" action="/profile/{{ auth.id }}">
+  <form id="submit" action="/profile/{{ auth.id }}" method="post">
     <button>Submit changes</button>
   </form>
   {% endif %}
