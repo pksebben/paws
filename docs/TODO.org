@@ -276,20 +276,26 @@ One thing that I could do to be better at this is getting my keyboard movement d
 **** DONE set up structlog 
 **** DONE set all the text on the site to the generic text module
 **** TODO implement modals for login
+**** TODO hashing [0/2]
+***** TODO Basic hashing
+***** TODO salt bae tha hashes
 **** TODO Implement user avatars sitewide
 **** DONE Wire up leaderboard
 **** DONE Implement a logout
 **** DONE Implement fundraisers / wire up fundraiser module
+**** TODO remove leaderboard standalone
 **** MINOR FIXES
 ***** DONE get rid of submit button on user profile when not in edit mode
+***** TODO fix the news module to format the date nicely
 ***** 
 
 * Next Meeting
 
 ** What was the external module for donations?
-I want to start work on this, not necessarily finish it, unless that's a completely trivial task.
-I'm assuming it's not.
+   I want to start work on this, not necessarily finish it, unless that's a completely trivial task.
+   I'm assuming it's not.
+*** Answered: we're gonna use chase wepay
 ** Structlog is implemented in it's most basic form.
-I don't really get what the hell is going on, but it seems to work.
+   I don't really get what the hell is going on, but it seems to work.
 ** If we can structure fundraisers today there are a few more modules I can do deep work on.
 ** I could really use a little high-level look at the tbd.

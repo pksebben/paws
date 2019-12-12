@@ -1,0 +1,28 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+DESIGN ROADMAP
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Dear Kirbslice,
+I hope you are well; looking forward to sunny beaches and sipping daiquiris with you in lovely California in the coming year.  It is more or less a sure thing that I will be joining the fraycas sometime in January. Let's stay in touch, and make some art.
+
+Because of the compressed timeline re:my departure, we have been hard at work like a couple of little web gremlins - cooking up deliciously salted hashes, basing the data, all the things.  I commend you on your professional work - while it does not *quite* look like it did months ago, it has stood up incredibly well to all sorts of tinkering and tomfoolery.
+
+I just wanted to give a little context for what might need doing and how it can be most easily done, which is the purpose of this document.
+_________________________________________________
+///////////////SINCE YOU BEEN GONE\\\\\\\\\\\\\\\
+Things have changed a little in pygland.  We spoke briefly about this before, but we are now using jinja templates and flask to serve stuff up and have completely left react behind. I have since put your styling into these templates and for the most part, nothing changed when I did that. So, whatever design pattern you were using before, works.  No need to change it AFAIK.  There *may* be a little bit of like, conflicts in classes or some such when it comes to particular parts - by which I mean, I don't understand css hardly at all and I don't know how things work when it comes to child classes or selectors or whatever and the structure of the site is no longer the same (some parts of the site use other parts as modules by importing them, some extend base templates).  But, again, as far as I can see nothing is extremely broken.
+
+tl;dr - shit's different but the styling is mostly copasetic so don't stress.
+
+^^^^^^^^^^^^^^^^^^^^^^^^^GETTING THE SITE RUNNING^^^^^^^^^^^^^^^^^^^^^^^^^
+So that thing about the db not working in the copy you had?  Is fix!  We implemented a sqlite db for testing purposes and it pretty much runs itself.  There are now instructions on how to get a dev copy up in the README.md. I recommend (read: seriously do it this way) following the 'python' track.  The PantsBUILD track is a mess you do *not* wanna deal with.  Trust me.  If you have any issues getting things running call me up and I will halp fix em.
+
+tl;dr - Dev installation instructions live in README. Use python instructions.  Call me if it gets explodey.
+_______________________________________________________________
+\\\\\\\\\\\\\\\\\\\\\\\\\WE WANT STUFF/////////////////////////
+You get to roleplay Santa.  Merry Crimmis! Here's a list of the things we want.
+
+####BIG SHIT####
+[ ] - modal for login
+
+-----little fixes-----
+[ ] - links in home-intro section aren't buttons anymore and the styling is le mess
