@@ -7,7 +7,7 @@ from structlog.twisted import LoggerFactory
 from oscar import flag
 from twisted.python import log
 
-from pyg.web import app, container, db
+from pyg.web import admin, app, container, db
 
 FLAGS = flag.namespace(__name__)
 FLAGS.endpoint = flag.String("server endpoint", default="tcp:8080")
@@ -18,6 +18,7 @@ logger = structlog.get_logger()
 def main():
     app.init()
     db.init(app.app)
+    admin.init(app.app)
     container.run(app.app, FLAGS.endpoint, FLAGS.debug)
 
 
