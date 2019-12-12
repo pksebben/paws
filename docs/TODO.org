@@ -114,22 +114,31 @@ These things are not immediately actionable and require a little more study befo
 ** Page work
 these pages need a little love
 
-*** News
- - [ ] Wire up the news item block to be generated based on code
+*** News :ben:
+ - [ ] Wire up the news item block to be generated based on code 
 
-*** Search
- - [ ] Do basically everything on the search page to populate it with data.
+*** Search 
+
+**** Show rankings :ian:
+
+**** Show money raised :ian:
+  - [ ] Do basically everything on the search page to populate it with data.
 
 *** Team Profile
- - [ ] Wire in team profile
+
+**** Show roster :ben:
+
+  - [ ] Wire in team profile
 
 *** Leaderboards
- It occurs that the leaderboard is going to be a thing in more than one place and context.  
- There may be leaderboards in the following places:
- - [ ] Campaigns
- - [ ] Teams
- - [ ] Generalized (like, sitewide or on the homepage)
- because of this, it may be handy to create leaderboards as a module that can morph to the use case.
+
+**** make modular :ben:
+  It occurs that the leaderboard is going to be a thing in more than one place and context.  
+  There may be leaderboards in the following places:
+  - [ ] Campaigns
+  - [ ] Teams
+  - [ ] Generalized (like, sitewide or on the homepage)
+  because of this, it may be handy to create leaderboards as a module that can morph to the use case.
 
 
 ** Pruning Stuff
@@ -139,30 +148,138 @@ These things might be useless
 
 *** registration.py
 
-** Questions
-these are either design decisions that should be made not unilaterally or things I need to ask Ian about to get a sense for how we are going to do them.
-
-*** Big, Important, Coding problems
-high-level stuff that fucks me up.
- - I have no idea what the best practices are for error handling.  When do we make them disappear?  When do we log?  What do we do with particular database errors?  When we do handle them, where do we do it?  How do you keep this shit simple yet robust?  I confuse.
-
-*** design decisions
-- What should the news page look like?  What news are we trying to serve up?
-
-- What do we do about the database being either unpopulated or unavailable?  Are these such edge cases we need not worry about them?
-
-*** data modeling
- - When looking at things like donations, how do we connect those to the other things? things like...
-   - Gamers.  Do we place a key on the donation?  Do we have a relational table that tracks this?
-   - Teams.  Do we pipe the donation relationship through the gamer?  What if a gamer is on more than one team?
-   - Shelters. This is fairly obvious, I think.  Donations are going to be tied to a specific shelter, right?
-
- - Do we really want 'orgs' to be this generic thing for both shelters and teams?  It seems better to split em.
-
- - Some donations won't be related to a fundraiser.  How do we manage that?
-
- - Do all donations have a beneficiary?  How / Where do the donations go?
-
- -  
 
 *** code issues
+
+** Notes for meeting on 12/11
+
+*** specifics on error handling :patterns:
+
+**** handling SQL Errors
+
+***** no result found errors
+context dependant
+- return 404
+
+***** X exists already errors
+
+****** users
+       
+*** How are we calculating rank? :patterns:
+This is a thing that has to do with database efficiency and I have no idea what the concerns are, much less where to begin on this problem.
+
+++what I'm getting from watching Ian make this, are the following:
+Efficient SQL == the fewest possible queries (made possible by using things like joins)
+
+look into
+sqlalchemy.func.sum()
+you need to do a sum and a group_by
+
+also, look up joins, group_by.
+
+**** The answer
+through joins and sql, as much as possible, by taking all the donation data and applying a sql thing to it to return a calculated value rather than doing the calculations in python.
+
+*** How are we structuring the donations models - specifics :patterns:sql:
+This is a major roadblock.  Once this is up like 5 different modules can continue production.
+
+**** Where are people going to be hitting the 'donate' button?  This may help figure out the rest
+
+***** twitch overlay
+I imagine this will tie them directly to a gamer
+
+***** navbar (detatched from signin / user / fundraiser / etc.)
+This is that case that makes the argument for nullable fkeys(or some alternative)
+
+***** gamer profile page
+Straightforward
+
+***** fundraiser page
+Straightforward
+
+***** team page?
+Do they go to the team? To a user who's on the team? Is that chosen randomly? Distributed?  Do we do this at all?
+
+**** what are donations going to be required to be tied to?
+
+***** gamers
+
+***** shelters / beneficiaries
+Are we going to accept "general purpose" donations that get distributed accross the network?
+Is every donation going to be tied to a particular beneficiary?
+-this seems like it might add clicks between people and giving us money
+
+***** teams?  or just teams via gamers?
+are donations going to be associated directly with a team or does that have to go through a gamer?
+-my thoughts on this are that direct team association adds a layer of complexity that's totally unnecessary
+-if we want to do this (and splitting the credit for a donation is a thing) we could autodistribute credit throughout the team.  That said, splitting donation credit is going to make things like rank calculation a royal pain in the ass.
+
+***** fundraisers?
+are donations always going to be part of a fundraiser?
+ 
+*** Is the class-based pattern present in search.py the way to go? :patterns:
+No.
+**** marginally taken care of
+take a look at what Ian put in for the search page - this may reveal some patterns that can be used instead 
+*** how are we going to implement logging? :study:modules:
+I basically just need to be pointed in the right direction for this.  If you have any wisdom on things to look out for or patterns to use throw those in the mix, too.
+
+he put some stuff in app.py in __init__() that might be good to look at.
+
+**** Answer
+Structlog
+*** Where / how are we going to serve up user-uploaded static assets (like avatars)? :patterns:modules:
+I need to know both what (we are going to use for upload) and how (we are going to store them)
+**** worry about it later
+*** What should I be reading up on re: password hashing and salting and such? :study:modules:
+    
+**** Is there a specific library we're going to use? 
+
+python
+maybe flask
+**** Answered
+do this
+https://pythonprogramming.net/password-hashing-flask-tutorial/
+
+*** Second Priority Stuff
+
+**** Is there a good place to put database population / teardown for testing the site manually?
+
+**** Is there a pattern for autogenerating testing data so we have a large amount of things to test against?
+I ask because when it comes to testing the site for readability and composition later it would be useful to see, for example, a search page with many hits.
+
+**** Design Thoughts
+
+***** How are we going to serve up the news?
+
+****** Is it going to be searchable / sortable?
+
+****** Are we going to serve up a featured article?
+
+****** I assume we're going to show the latest news.  How many articles do we want by default?
+*** My notes
+**** what is flask request.url_rule?
+**** passing -debug to python -m yadda/app.py detects changes
+**** take a look at the new news module and implement those patterns sitewide (where applicable)
+**** fixtures.py is the new testing_data.py
+**** study joins
+**** look up sql alias and sqlalchemy alias
+***** .label?
+**** On process
+***** Look for the thing that actually works best.  
+there seems to be a thing that does the thing you want usually in one of the libraries implemented, it's just a matter of finding the correct lib and searching the correct term
+
+Notably, when Ian is doing this he seems to jump around a lot.  I'm not sure exactly what it is he's always looking for (that may just be an instinctual experience type of thing)
+
+One thing that I could do to be better at this is getting my keyboard movement down a little better.  Switching between tabs and processes should take no time at all.
+*** TO DO
+**** DONE set up structlog 
+**** DONE set all the text on the site to the generic text module
+**** TODO implement modals for login
+**** 
+
+* Next Meeting
+
+** What was the external module for donations?
+** Structlog is implemented in it's most basic form.
+I don't really get what the hell is going on, but it seems to work.

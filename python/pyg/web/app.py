@@ -8,7 +8,7 @@ from werkzeug import exceptions
 from flask_login import LoginManager
 
 import pyg.web
-from pyg.web.views import login, home, signup, news, search, about, teamprofile, userprofile
+from pyg.web.views import login, home, signup, news, search, about, teamprofile, userprofile, leaderboard
 
 
 """this class and the following two functions enable loading static assets from the .pex"""
@@ -74,6 +74,7 @@ def init():
     app.register_blueprint(teamprofile.bp)
     app.register_blueprint(search.bp)
     app.register_blueprint(userprofile.bp)
+    app.register_blueprint(leaderboard.bp)
     login_manager.init_app(app)
 
     @app.context_processor

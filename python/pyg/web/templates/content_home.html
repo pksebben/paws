@@ -9,23 +9,23 @@
 <div id="Home" class="content">
   <div class="home-hero section">
     <div class="home-hero-background_color"></div>
-    <h2>Play Games for those without a voice</h2>
+    <h2>{{ text.subheader }}</h2>
     <p>{{ text.subtitle }}</p>
   </div><!--end home-hero-->
   <div class="home-intro section">
     <div class="home-intro-donate_now">
       <img src="{{ url_for('static', filename='img/icon-home-intro-donate_now.png')}}"/>
-      <p>Want to help support Paws Your Game’s mission in providing resources to no kill shelters? Donate today to help support us in our mission to end kill shelters.</p>
+      <p>{{ text.intro_donate }}</p>
       <button class="button" href="#">Donate Now</button>
     </div>
     <div class="home-intro-start_gaming">
       <img src="{{ url_for('static', filename='img/icon-home-intro-start_gaming.png')}}"/>
-      <p>Love playing games? Love animals? Sign up to Paws Your Game and sponsor a local no kill shelter of your choice when we have our first marathon in 2019!</p>
-      <button class="button" href="#">Start Gaming</button>
+      <p>{{ text.intro_start_gaming }}</p>
+      <a class="button" href="/signup">Start Gaming</a>
     </div>
     <div class="home-intro-join_us">
       <img src="{{ url_for('static', filename='img/icon-home-intro-join_us.png')}}"/>
-      <p>Do you represent a no kill shelter? Interested in working or partnering with us? Sign up to learn more today on how you can help and support Paws Your Game.</p>
+      <p>{{ text.intro_join }}</p>
       <button class="button" href="#">Join us</button>
     </div>
   </div><!--end home-intro-->
@@ -67,15 +67,15 @@
 <div class="home-about section">
   <div class="home-about-goal">
     <span class="icon icon-standard">dollarsign</span>
-    <p>Our main goal is to provide funding for non-profit, no-kill animal rescues and refugees that will allow fosters and facilities to rescue more animals than ever before.</p>
+    <p>{{ text.about_goal }}</p>
   </div>
   <div class="home-about-funds">
-    <p>We raise these funds in many ways, the primary source will be community gaming events and marathons.</p>
+    <p>{{ text.about_funds }}</p>
     <span class="icon icon-block">videogame</span>
   </div>
   <div class="home-about-gamers">
     <span class="icon icon-block">timer</span>
-    <p>Participating gamers will be able to fundraise for the rescue of their choice while gaming for 24 hours straight.</p>
+    <p>{{ text.about_gamers }}</p>
   </div>
   
 </div><!--end home-about-->
