@@ -27,10 +27,16 @@ class Member(Base):
     __tablename__ = 'member'
 
     id = Column(Integer, primary_key=True)
+    name = Column(String(80), unique=False, nullable=False)
+    handle = Column(String(80), unique=True)
+    about = Column(Text)
+    avatar_url = Column(String(80))
+    birthday = Column(Date)
+    location = Column(String(40))
+    twitch_handle = Column(String(40))
     created = Column(DateTime, nullable=False)
-    auth = relationship("Auth", uselist=False)
-    profile = relationship(
-        "Profile",
+    auth = relationship(
+        "Auth",
         backref=backref(
             "member",
             uselist=False),
@@ -54,7 +60,6 @@ class Auth(Base):
         Integer,
         ForeignKey("member.id"),
         primary_key=True)
-    name = Column(String(80), unique=False, nullable=False)
     password = Column(String(80), unique=False, nullable=False)
     email = Column(String(80), unique=True, nullable=False)
     member = relationship("Member", uselist=False)
@@ -62,25 +67,6 @@ class Auth(Base):
     def __str__(self):
         return str(self.id)
 
-
-class Profile(Base):
-    """Profile is member specifics."""
-
-    __tablename__ = 'profile'
-
-    id = Column(
-        Integer,
-        ForeignKey("member.id"),
-        primary_key=True)
-    handle = Column(String(80), unique=True)
-    about = Column(Text)
-    avatar_url = Column(String(80))
-    birthday = Column(Date)
-    location = Column(String(40))
-    twitch_handle = Column(String(40))
-
-    def __str__(self):
-        return self.handle
 
 
 class Team(Base):

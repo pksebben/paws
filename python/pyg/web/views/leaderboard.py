@@ -10,9 +10,8 @@ bp =flask.Blueprint('leaderboard', __name__)
 @bp.route('/leaderboard')
 def leaderboard():
     donations = db.web.session.query(
-        models.Profile.handle,
+        models.Member.handle,
         func.sum(models.Donation.amount).label('total')
-    ).join(models.Member.profile
     ).join(models.Donation
     ).group_by(
         models.Profile.handle).order_by(desc('total')).all()

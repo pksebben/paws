@@ -6,21 +6,16 @@ bp = flask.Blueprint("userprofile", __name__)
 
 
 def update_user_profile(id, name, about, location, twitch_handle):
+    """updates Member.  Used primarily in user profile"""
     user = db.web.session.query(models.Member).get(id)
-    if not user.profile:
-        user.profile = models.Profile(
+    if not user:
+        user = models.Member(
             about=about, location=location, twitch_handle=twitch_handle)
-        # change to structlog
-        # print('added user profile')
     else:
-        user.profile.about = about
-        user.profile.location = location
-        user.profile.twitch_handle = str(twitch_handle)
-        # change to structlog
-        # print('updated user profile')
+        user.about = about
+        user.location = location
+        user.twitch_handle = str(twitch_handle)
     db.web.session.commit()
-    # change to structlog
-    # print("user updated")
 
 
 @bp.route('/profile/<userid>', methods=['GET', 'POST'])
@@ -29,14 +24,13 @@ def userprofile(userid=1):
     try:
         user = db.web.session.query(models.Member).get(userid)
         auth = user.auth
-        profile = user.profile
+        profile = user
     except AttributeError as err:
         # how are we going to handle bad values for userid?
         # we want to avoid rendering the page, for sure.
         # we want something logged
         raise err
     if flask.request.method == 'POST':
-        # update the user profile with form data
         update_user_profile(
             userid,
             flask.request.form['name'],
