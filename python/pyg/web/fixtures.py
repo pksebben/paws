@@ -35,7 +35,9 @@ def articles():
         author=lorem(2),
         datetime=datetime.datetime.now(),
         body=lorem(-1),
-        slug="article-1")
+        slug="article-1",
+        snippet="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium."
+    )
     session.add(article_1)
 
     article_2 = models.NewsArticle(
@@ -43,7 +45,9 @@ def articles():
         author=lorem(2),
         datetime=datetime.datetime.now(),
         body=lorem(-1),
-        slug="article-2")
+        slug="article-2",
+        snippet="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium."
+    )
     session.add(article_2)
 
     session.commit()
@@ -127,11 +131,53 @@ def donations():
 def text():
     home = models.Route(id="/")
     session.add(home)
+    home_about_gamers = models.Text(
+        route=home,
+        slug="about_gamers",
+        text="Participating gamers will be able to fundraise for the rescue of their choice while gaming for 24 hours straight."
+    )
+    session.add(home_about_gamers)
+    home_about_funds = models.Text(
+        route=home,
+        slug="about_funds",
+        text="We raise these funds in many ways, the primary source will be community gaming events and marathons."
+    )
+    session.add(home_about_funds)
+    home_about_goal = models.Text(
+        route=home,
+        slug="about_goal",
+        text="Our main goal is to provide funding for non-profit, no-kill animal rescues and refugees that will allow fosters and facilities to rescue more animals than ever before."
+    )
+    session.add(home_about_goal)
+    home_intro_join = models.Text(
+        route=home,
+        slug="intro_join",
+        text="Do you represent a no kill shelter? Interested in working or partnering with us? Sign up to learn more today on how you can help and support Paws Your Game."
+    )
+    session.add(home_intro_join)
+    home_intro_start_gaming = models.Text(
+        route=home,
+        slug="intro_start_gaming",
+        text="Love playing games? Love animals? Sign up to Paws Your Game and sponsor a local no kill shelter of your choice when we have our first marathon in 2019!"
+    )
+    session.add(home_intro_start_gaming)
+    home_intro_donate = models.Text(
+        route = home,
+        slug = "intro_donate",
+        text = "Want to help support Paws Your Game’s mission in providing resources to no kill shelters? Donate today to help support us in our mission to end kill shelters."
+    )
+    session.add(home_intro_donate)
+    home_subtitle_header = models.Text(
+        route = home,
+        slug = "subheader",
+        text="Play Games for those without a voice"
+    )
+    session.add(home_subtitle_header)
     home_subtitle = models.Text(
         route=home,
         slug="subtitle",
         text="Paws Your Game’s mission is to help raise money and other resources for animal rescue organizations through video game marathons.")
-    session.add(home)
+    session.add(home_subtitle)
     session.commit()
 
 

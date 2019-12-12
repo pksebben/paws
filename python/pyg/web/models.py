@@ -55,8 +55,7 @@ class Auth(Base):
     id = Column(
         Integer,
         ForeignKey("member.id"),
-        primary_key=True,
-        onupdate="cascade")
+        primary_key=True)
     name = Column(String(80), unique=False, nullable=False)
     password = Column(String(80), unique=False, nullable=False)
     email = Column(String(80), unique=True, nullable=False)
@@ -70,8 +69,7 @@ class Profile(Base):
     id = Column(
         Integer,
         ForeignKey("member.id"),
-        primary_key=True,
-        onupdate="cascade")
+        primary_key=True)
     handle = Column(String(80), unique=True)
     about = Column(Text)
     avatar_url = Column(String(80))
@@ -114,6 +112,7 @@ class NewsArticle(Base):
     headline = Column(Text(convert_unicode=True))
     author = Column(Text(convert_unicode=True))
     datetime = Column(DateTime, nullable=False)
+    snippet = Column(Text(convert_unicode=True, length=250), nullable=False)
     body = Column(Text(convert_unicode=True))
 
 
