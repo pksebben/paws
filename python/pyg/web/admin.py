@@ -5,14 +5,10 @@ from flask_admin.contrib.sqla import ModelView
 from pyg.web import db, models
 
 
-class TextAdmin(ModelView):
-    list_columns = ['route_id', 'slug', 'text']
-    form_columns = ['route_id', 'slug', 'text']
+class SessionProxy(object):
 
-
-class RouteAdmin(ModelView):
-    list_columns = ['id']
-    form_columns = ['id', 'texts']
+    def __getattr__(self, key, *args, **kwargs):
+        return getattr(db.web.session, key, *args, **kwargs)
 
 
 def init(app):
@@ -21,11 +17,35 @@ def init(app):
         app,
         name='PawsYourGame',
         template_mode='bootstrap3')
-    admin.add_view(ModelView(models.Member, db.web.session))
-    admin.add_view(ModelView(models.Auth, db.web.session))
-    admin.add_view(ModelView(models.Profile, db.web.session))
-    admin.add_view(ModelView(models.Team, db.web.session))
-    admin.add_view(ModelView(models.Donation, db.web.session))
-    admin.add_view(ModelView(models.NewsArticle, db.web.session))
-    admin.add_view(RouteAdmin(models.Route, db.web.session))
-    admin.add_view(TextAdmin(models.Text, db.web.session))
+
+    session = SessionProxy()
+
+    class TextAdmin(ModelView):
+        can_create = False
+        can_delete = False
+        can_edit = True
+        list_columns = ['route_id', 'slug', 'text']
+        form_columns = ['route_id', 'slug', 'text']
+        column_filters = ['route_id']
+        column_searchable_list = ['route_id']
+        column_editable_list = ['text']
+        form_args = dict(
+            route_id=dict(render_kw={'readonly': 'readonly'}),
+            slug=dict(render_kw={'readonly': 'readonly'}),)
+
+    class RouteAdmin(ModelView):
+        can_create = False
+        can_delete = False
+        can_edit = True
+        list_columns = ['id', 'texts']
+        form_columns = ['texts']
+        inline_models = (TextAdmin(models.Text, session),)
+
+    admin.add_view(ModelView(models.Member, session))
+    admin.add_view(ModelView(models.Auth, session))
+    admin.add_view(ModelView(models.Profile, session))
+    admin.add_view(ModelView(models.Team, session))
+    admin.add_view(ModelView(models.Donation, session))
+    admin.add_view(ModelView(models.NewsArticle, session))
+    admin.add_view(RouteAdmin(models.Route, session))
+    admin.add_view(TextAdmin(models.Text, session))
