@@ -25,6 +25,7 @@ def userprofile(userid=1):
         user = db.web.session.query(models.Member).get(userid)
         auth = user.auth
         profile = user
+        fundraisers = user.fundraisers
     except AttributeError as err:
         # how are we going to handle bad values for userid?
         # we want to avoid rendering the page, for sure.
@@ -43,11 +44,11 @@ def userprofile(userid=1):
         if flask.session['userid'] == int(userid):
             # show the profile with editable fields
             return flask.render_template(
-                'content_gamer_profile.html', editmode=True, profile=profile, auth=auth)
+                'content_gamer_profile.html', editmode=True, profile=profile, auth=auth, fundraisers=fundraisers)
         else:
             return flask.render_template(
-                "content_gamer_profile.html", editmode=False, profile=profile, auth=auth)
+                "content_gamer_profile.html", editmode=False, profile=profile, auth=auth, fundraisers=fundraisers)
     else:
         # show the profile static
         return flask.render_template(
-            'content_gamer_profile.html', editmode=False, profile=profile, auth=auth)
+            'content_gamer_profile.html', editmode=False, profile=profile, auth=auth, fundraisers=fundraisers)

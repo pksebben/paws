@@ -43,6 +43,10 @@ class Member(Base):
         "Donation",
         back_populates="member"
     )
+    fundraisers = relationship(
+        "Fundraiser",
+        back_populates="member"
+    )
     teams = relationship("Team", secondary=member_to_team)
 
     def __str__(self):
@@ -81,6 +85,7 @@ class Team(Base):
     twitch_url = Column(Text, nullable=True)
     instagram_url = Column(Text, nullable=True)
     members = relationship("Member", secondary=member_to_team)
+    fundraisers = relationship("Fundraiser", back_populates="team")
 
     def __str__(self):
         return self.name
@@ -95,10 +100,37 @@ class Donation(Base):
     created = Column(DateTime, nullable=False)
     member_id = Column(Integer, ForeignKey("member.id"))
     member = relationship("Member", back_populates="donations")
+    fundraiser_id = Column(Integer, ForeignKey("fundraiser.id"), nullable=True)
+    fundraiser = relationship("Fundraiser", back_populates="donations")
 
     def __str__(self):
         return "$%.2f" % self.amount
 
+class Fundraiser(Base):
+    """having trouble figuring out what the structure of this is going to be, because it might be instantiated from multiple entities. 
+    possible solutions:
+    - have a non-nullable foreign key for member (as a member will always be in some way responsible for creating these) and a nullable foreign key to team and shelter
+    """
+    __tablename__ = "fundraiser"
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(40), nullable=False, unique=True)
+    banner = Column(String(50)) # URL for static banner image
+    about = Column(Text(convert_unicode=True))
+    created = Column(DateTime, nullable=False)
+    start_date = Column(DateTime, nullable=False)
+    end_date = Column(DateTime, nullable=False)
+    target_funds = Column(Integer, nullable=False)
+    
+    member_id = Column(Integer, ForeignKey("member.id"), nullable=False)
+    member = relationship("Member", back_populates="fundraisers")
+    team_id = Column(Integer, ForeignKey("team.id"), nullable=True)
+    team = relationship("Team", back_populates="fundraisers")
+    donations = relationship("Donation", back_populates="fundraiser")
+
+    def __str__(self):
+        return self.name
+    
 
 class NewsArticle(Base):
     __tablename__ = "newsarticle"

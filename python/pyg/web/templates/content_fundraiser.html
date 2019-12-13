@@ -1,0 +1,70 @@
+{% extends "base_content.html" %}
+
+{% block content %}
+{% if fundraiser %}
+<div>
+  <ul class="Fundraiser-upcoming-list">
+    <li class="Fundraiser-upcoming-name">
+      <h3>{{ fundraiser.name }}</h3>
+    </li>
+    <li class="Fundraiser-upcoming-date">
+      <span class="icon icon-standard">calendar</span>
+      <h3>{{ fundraiser.start_date | humanize('naturaldate') }}</h3>
+    </li>
+    <li class="Fundraiser-upcoming-countdown">
+      <span class="icon icon-standard">stopwatch</span>
+      <h3 class="countdown" countdown data-date="Jun 30 2020 21:00:00">
+	<span data-days></span> Days
+	<span data-hours></span> Hours
+	<span data-minutes></span> Minutes
+	<span data-seconds></span> Seconds
+      </h3>
+    </li>
+    <li class="Fundraiser-upcoming-donations">
+      <span class="icon icon-block">moneybag</span>
+      <h3>{{ fundraiser.donations | sum(attribute="amount") | format_currency() }}  / {{ fundraiser.target_funds | format_currency() }}</h3>
+      <div class="Fundraiser-upcoming-donations-progress_bar"></div>
+      <button class="button button-green Fundraiser-upcoming-donations-donate_btn">Donate</button>
+    </li>
+    <li class="Fundraiser-upcoming-donors">
+      <span class="icon icon-standard">user</span>
+      <h3>{{ fundraiser.donations|length }} Donations</h3>
+    </li>
+  </ul>
+  <ul class="Fundraiser-upcoming-share">
+    <li>
+      <a href="#"><span class="icon icon-standard">link</span> Copy Page Link</a>
+    </li>
+    <li>
+      <a href="#"><span class="icon icon-standard">calendar</span> Add to Calendar</a>
+    </li>
+    <li>
+      <a href="#"><span class="icon icon-social">facebook</span> Share to Facebook</a>
+    </li>
+  </ul>
+</div>
+{% else %}
+<div>
+  <table class="Fundraiser-list-fundraisers">
+    <tr>
+      <th>Starts</th>
+      <th>Ends</th>
+      <th>Name</th>
+      <th>Raised</th>
+      <th>Target</th>
+      <th>Owner</th>
+    </tr>
+    {% for i in fundraisers %}
+    <tr onclick="window.location.href='fundraiser/{{ i.id }}'">
+      <td>{{ i.start_date | humanize('naturaldate') }}</td>
+      <td>{{ i.end_date | humanize('naturaldate') }}</td>
+      <td>{{ i.name }}</td>
+      <td>{{ i.donations | sum(attribute="amount") | format_currency() }}</td>
+      <td>{{ i.target_funds | format_currency() }}</td>
+      <td>{{ i.member.name }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endif %}
+{% endblock %}
