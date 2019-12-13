@@ -10,12 +10,11 @@ bp = flask.Blueprint('home', __name__)
 @bp.route('/')
 def home():
     donations = db.web.session.query(
-        models.Profile.handle,
+        models.Member.handle,
         func.sum(models.Donation.amount).label('total')
-    ).join(models.Member.profile
     ).join(models.Donation
     ).group_by(
-        models.Profile.handle).order_by(desc('total')).all()
+        models.Member.handle).order_by(desc('total')).all()
     leaderboard_players = enumerate(donations, start=1)
     news = db.web.session.query(models.NewsArticle).order_by(
         desc("datetime"))

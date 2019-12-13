@@ -17,7 +17,7 @@ def search():
             func.sum(models.Donation.amount).label('total')
         ).join(models.Donation
         ).group_by(
-            models.Profile.handle).order_by(desc('total')).all()
+            models.Member.handle).order_by(desc('total')).all()
         ranked = enumerate(donations, start=1)
         searchname = flask.request.form['name']
         return flask.render_template(

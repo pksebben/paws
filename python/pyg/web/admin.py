@@ -23,7 +23,6 @@ def init(app):
         template_mode='bootstrap3')
     admin.add_view(ModelView(models.Member, db.web.session))
     admin.add_view(ModelView(models.Auth, db.web.session))
-    admin.add_view(ModelView(models.Profile, db.web.session))
     admin.add_view(ModelView(models.Team, db.web.session))
     admin.add_view(ModelView(models.Donation, db.web.session))
     admin.add_view(ModelView(models.NewsArticle, db.web.session))

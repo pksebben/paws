@@ -37,9 +37,7 @@ class Member(Base):
     created = Column(DateTime, nullable=False)
     auth = relationship(
         "Auth",
-        backref=backref(
-            "member",
-            uselist=False),
+        back_populates="member",
         uselist=False)
     donations = relationship(
         "Donation",

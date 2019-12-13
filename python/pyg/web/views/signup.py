@@ -14,9 +14,9 @@ bp = flask.Blueprint('signup', __name__)
 
 def sign_new_user(email, password, name):
     try:
-        newperson = models.Member(created=dt.datetime.now())
+        newperson = models.Member(created=dt.datetime.now(), name=name)
         newperson.auth = models.Auth(
-            name=name, password=password, email=email)
+            password=password, email=email)
         db.web.session.add(newperson)
         db.web.session.commit()
         return newperson.id

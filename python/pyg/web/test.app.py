@@ -29,6 +29,7 @@ def randstring(length):
 
 def setUpModule():
     app.init()
+    db.init(app.app)
 
 
 class HomepageTest(unittest.TestCase):
@@ -64,15 +65,10 @@ class StartTest(unittest.TestCase):
 
     # NEWS PAGE
 
-    def test_retrieve_new_news(self):
-        """test that we get the newest news article"""
-        res = news.retrievenews(news.latestnews())
-        self.assertEqual(res.headline, "read all about it")
-
     def test_news_page_available(self):
         """test that the news page renders and serves a story"""
-        res = self.tester.get('/news', content_type="html/text")
-        self.assertIn(b"demento", res.data)
+        res = self.tester.get('/news', content_type="html/text", follow_redirects=True)
+        self.assertIn(b"lorem", res.data)
 
     # END NEWS PAGE
 
@@ -102,7 +98,7 @@ class StartTest(unittest.TestCase):
         thisemail = "tbob@gmail.com"
         id = self.signup_new_user(email=thisemail)
         res = db.web.session.query(
-            models.UserAuth).get(id)
+            models.Auth).get(id)
         self.assertEqual(thisemail, res.email)
 
     def test_signup_new_user_exists(self):
@@ -123,11 +119,11 @@ class StartTest(unittest.TestCase):
     # SEARCH PAGE
 
     def test_wherestom(self):
-        res = db.web.session.query(models.UserAuth).filter_by(name="tom")
+        res = db.web.session.query(models.Member).filter_by(name="tom")
         self.assertEqual("tom", res.first().name)
 
     def test_manytoms(self):
-        res = db.web.session.query(models.UserAuth).filter_by(name="tom").all()
+        res = db.web.session.query(models.Member).filter_by(name="tom").all()
         self.assertEqual("tom", res[0].name)
 
     def test_search_name_tom(self):
