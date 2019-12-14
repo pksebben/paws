@@ -12,16 +12,13 @@ from pyg.web import models
 class AuthError(Exception):
     pass
 
-# TODO: implement hashing and better password management
-# TODO: implement logging
-# Log in a user.  If successful, sets a flask session variable
-
 
 def user(email, password):
+    """login a user and set flask.session['userid'] to that id"""
 
     try:
         userauth = db.web.session.query(
-            models.UserAuth).filter_by(
+            models.Auth).filter_by(
             email=email).one()
         assert userauth.password == password
         session['userid'] = userauth.id

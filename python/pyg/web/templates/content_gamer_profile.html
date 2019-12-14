@@ -8,6 +8,7 @@
   <form id="submit" action="/profile/{{ auth.id }}" method="post">
     <button>Submit changes</button>
   </form>
+  <a href="/createfundraiser">Start a Fundraiser!</a>
   {% endif %}
   <div class="section gamer_profile-overview">
     <div class="gamer_profile-overview-avatar_username">
@@ -23,7 +24,7 @@
 	<i class="icon icon-block stats-raised-icon">moneybag</i>
 	<dl>
 	  <dt>Raised</dt>
-	  <dd>GIMME DB</dd>
+	  <dd>{{ profile.donations | sum(attribute="amount") | format_currency() }}</dd>
 	</dl>
       </li>
       <li class="gamer_profile-overview-stats-rank">
@@ -87,13 +88,18 @@
 	<a class="nav-link" data-toggle="tab" href="#Gamer_Profile-Fundraisers-Past" role="tab" aria-controls="profile" aria-selected="false">Past Fundraisers</a>
       </li>
     </ul>
-    
+
+
     <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade show active" id="Gamer_Profile-Fundraisers-Upcoming" role="tabpanel" aria-labelledby="Gamer_Profile-Fundraisers-Upcoming-tab">
+	{% for i in fundraisers %}	
 	<ul class="gamer_profile-fundraisers-upcoming-list">
+	  <li class="gamer_profile-fundraisers-upcoming-name">
+	    <h3>{{ i.name }}</h3>
+	  </li>
 	  <li class="gamer_profile-fundraisers-upcoming-date">
 	    <span class="icon icon-standard">calendar</span>
-	    <h3>June 30,2020</h3>
+	    <h3>{{ i.start_date | humanize('naturaldate') }}</h3>
 	  </li>
 	  <li class="gamer_profile-fundraisers-upcoming-countdown">
 	    <span class="icon icon-standard">stopwatch</span>
@@ -106,13 +112,13 @@
 	  </li>
 	  <li class="gamer_profile-fundraisers-upcoming-donations">
 	    <span class="icon icon-block">moneybag</span>
-	    <h3></h3>
+	    <h3>{{ i.donations | sum(attribute="amount") | format_currency() }}  / {{ i.target_funds | format_currency() }}</h3>
 	    <div class="gamer_profile-fundraisers-upcoming-donations-progress_bar"></div>
 	    <button class="button button-green gamer_profile-fundraisers-upcoming-donations-donate_btn">Donate</button>
 	  </li>
 	  <li class="gamer_profile-fundraisers-upcoming-donors">
 	    <span class="icon icon-standard">user</span>
-	    <h3>45 Donations</h3>
+	    <h3>{{ i.donations|length }} Donations</h3>
 	  </li>
 	</ul>
 	<ul class="gamer_profile-fundraisers-upcoming-share">
@@ -127,7 +133,7 @@
 	  </li>
 	</ul>
       </div><!-- end upcoming fundraiser tab -->
-      
+      {% endfor %}
       <div class="tab-pane fade" id="Gamer_Profile-Fundraisers-Past" role="tabpanel" aria-labelledby="profile-tab">
 	<div class="gamer_profile-fundraisers-past-item">
 	  <ul>
@@ -169,6 +175,9 @@
       
     </div><!-- end tab-content -->
   </div><!-- end fundraisers section -->
+
+
+  
   <div class="section gamer_profile-donations">
     <header class="gamer_profile-donations-header"><h1>Donations</h1></header>
     <ul class="gamer_profile-donations-list">

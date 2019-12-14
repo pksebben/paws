@@ -16,24 +16,13 @@ import pyg.web.app as app
 from pyg.web import auth
 from pyg.web import db
 from pyg.web import models
+from pyg.web import fixtures
 from pyg.web.views import signup, news
-
-"""I don't like using this.  It's too workaroundy"""
-
-
-def randstring(length):
-    return ''.join([random.choice(string.ascii_letters)
-                    for n in range(length)])
 
 
 def setUpModule():
     app.init()
-    models.Base.metadata.create_all(db.web.engine)
-
-
-def tearDownModule():
-    print("tearing down")
-    models.Base.metadata.drop_all(db.web.engine)
+    db.init(app.app)
 
 
 class HomepageTest(unittest.TestCase):
@@ -47,27 +36,8 @@ class StartTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
+        fixtures.gogogadget()
         cls.tester = app.app.test_client()
-        signup.sign_new_user("othertom@gmail.com", "pass", "tom")
-        signup.sign_new_user("tom@gmail.com", "pass", "tom")
-        newstestcase = models.NewsArticle(
-            headline="extry extry",
-            author="dr seuss",
-            datetime=dt.datetime.now(),
-            body="there once was a man from nantucket... you know the rest",
-            slug="like a snail but naked"
-        )
-        db.web.session.add(newstestcase)
-        db.web.session.commit()
-        newnewstestcase = models.NewsArticle(
-            headline="read all about it",
-            author="dr demento",
-            datetime=dt.datetime.max,
-            body="there once was a man from peru... you know the rest",
-            slug="it be a living booger"
-        )
-        db.web.session.add(newnewstestcase)
-        db.web.session.commit()
 
     def setUp(self):
         self.templates = []
@@ -80,21 +50,13 @@ class StartTest(unittest.TestCase):
         self.templates.append(template)
         self.context = context
 
-    # BEGIN TESTS
-
-    # NEWS PAGE
-
-    def test_retrieve_new_news(self):
-        """test that we get the newest news article"""
-        res = news.retrievenews(news.latestnews())
-        self.assertEqual(res.headline, "read all about it")
-
     def test_news_page_available(self):
         """test that the news page renders and serves a story"""
-        res = self.tester.get('/news', content_type="html/text")
-        self.assertIn(b"demento", res.data)
-
-    # END NEWS PAGE
+        res = self.tester.get(
+            '/news',
+            content_type="html/text",
+            follow_redirects=True)
+        self.assertIn(b"lorem", res.data)
 
     def test_app_available(self):
         """check if the app makes itself available"""
@@ -122,7 +84,7 @@ class StartTest(unittest.TestCase):
         thisemail = "tbob@gmail.com"
         id = self.signup_new_user(email=thisemail)
         res = db.web.session.query(
-            models.UserAuth).get(id)
+            models.Auth).get(id)
         self.assertEqual(thisemail, res.email)
 
     def test_signup_new_user_exists(self):
@@ -143,22 +105,20 @@ class StartTest(unittest.TestCase):
     # SEARCH PAGE
 
     def test_wherestom(self):
-        res = db.web.session.query(models.UserAuth).filter_by(name="tom")
+        res = db.web.session.query(models.Member).filter_by(name="tom")
         self.assertEqual("tom", res.first().name)
 
     def test_manytoms(self):
-        res = db.web.session.query(models.UserAuth).filter_by(name="tom").all()
+        res = db.web.session.query(models.Member).filter_by(name="tom").all()
         self.assertEqual("tom", res[0].name)
 
     def test_search_name_tom(self):
-        # might be doing the post request wrong
         res = self.tester.post('/search', data=dict(
             name="tom"
         ))
         self.assertIn(b"tom", res.data)
 
     def test_search_name_absent_beelzebub(self):
-        # might be doing the post request wrong
         res = self.tester.post('/search', data=dict(
             name="beelzebub"
         ))

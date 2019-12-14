@@ -1,3 +1,5 @@
 #!/bin/bash
 
 source ~/.venv/pyg/bin/activate
+export PYTHONPATH=~/Documents/code/Work/pyg/python
+cd ~/Documents/code/Work/pyg/python/pyg/web/

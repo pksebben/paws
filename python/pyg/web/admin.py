@@ -17,7 +17,6 @@ def init(app):
         app,
         name='PawsYourGame',
         template_mode='bootstrap3')
-
     session = SessionProxy()
 
     class TextAdmin(ModelView):

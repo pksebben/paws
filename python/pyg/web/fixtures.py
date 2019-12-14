@@ -29,6 +29,19 @@ def init():
     session = sessionmaker()
 
 
+def pick_member():
+    members = session.query(models.Member).all()
+    return random.choice(members)
+
+def pick_team():
+    teams = session.query(models.Team).all()
+    return random.choice(teams)
+
+def pick_fundraiser():
+    fundraisers = session.query(models.Fundraiser).all()
+    return random.choice(fundraisers)
+    
+
 def articles():
     article_1 = models.NewsArticle(
         headline=lorem(5),
@@ -55,60 +68,54 @@ def articles():
 
 def people():
     tom = models.Member(
-        created=datetime.datetime.now()
-    )
-    tom.auth = models.Auth(
         name="tom",
-        password="pass",
-        email="tom@gmail.com"
-    )
-    tom.profile = models.Profile(
+        created=datetime.datetime.now(),
         handle="tom_dawg",
         about="my name is tom.  I am not good with about sections",
         birthday=datetime.datetime.now(),
         location="The town of hogsface, Land of foon"
     )
-    othertom = models.Member(
-        created=datetime.datetime.now()
-    )
-    othertom.auth = models.Auth(
-        name="tom",
+    tom.auth = models.Auth(
         password="pass",
-        email="othertom@gmail.com"
+        email="tom@gmail.com"
     )
-    othertom.profile = models.Profile(
+    othertom = models.Member(
+        name="tom",
+        created=datetime.datetime.now(),
         handle="tom_2",
         about="my name is other tom.  I am not good with about sections",
         birthday=datetime.datetime.now(),
         location="The town of hogsface, Land of foon"
+
+    )
+    othertom.auth = models.Auth(
+        password="pass",
+        email="othertom@gmail.com"
     )
     bob = models.Member(
-        created=datetime.datetime.now()
-    )
-    bob.auth = models.Auth(
         name="bob",
-        password="pass",
-        email="bob@gmail.com"
-    )
-    bob.profile = models.Profile(
+        created=datetime.datetime.now(),
         handle="bob_the_builder",
         about="my name is bob.  I am not good with about sections",
         birthday=datetime.datetime.now(),
         location="The town of pigsface, Land of foon"
     )
-    bill = models.Member(
-        created=datetime.datetime.now()
-    )
-    bill.auth = models.Auth(
-        name="bill",
+    bob.auth = models.Auth(
         password="pass",
-        email="bill@gmail.com"
+        email="bob@gmail.com"
     )
-    bill.profile = models.Profile(
+    bill = models.Member(
+        name="bill",
+        created=datetime.datetime.now(),
         handle="boogie_2988",
         about="my name is bill.  I am not good with about sections",
         birthday=datetime.datetime.now(),
         location="The town of hogsface, Land of foon"
+
+    )
+    bill.auth = models.Auth(
+        password="pass",
+        email="bill@gmail.com"
     )
     session.add(othertom)
     session.add(bill)
@@ -162,14 +169,14 @@ def text():
     )
     session.add(home_intro_start_gaming)
     home_intro_donate = models.Text(
-        route = home,
-        slug = "intro_donate",
-        text = "Want to help support Paws Your Game’s mission in providing resources to no kill shelters? Donate today to help support us in our mission to end kill shelters."
+        route=home,
+        slug="intro_donate",
+        text="Want to help support Paws Your Game’s mission in providing resources to no kill shelters? Donate today to help support us in our mission to end kill shelters."
     )
     session.add(home_intro_donate)
     home_subtitle_header = models.Text(
-        route = home,
-        slug = "subheader",
+        route=home,
+        slug="subheader",
         text="Play Games for those without a voice"
     )
     session.add(home_subtitle_header)
@@ -180,10 +187,44 @@ def text():
     session.add(home_subtitle)
     session.commit()
 
+def fundraisers():
+    forthehorde = models.Fundraiser(
+        name = "Glory to the Horde fundraiser",
+        about = "The pillagers of azeroth are raising money for the fostering and care of orphaned Tauren.  These poor creatures have been left by their owners and have nowhere to turn.  Won't you help us to bring love and care to these cute little unfortunates? -cue sarah mcglaughlin- ",
+        member = pick_member(),
+        created = datetime.datetime.now(),
+        start_date = datetime.datetime(2,1,1),
+        end_date = datetime.datetime(3000,1,1),
+        target_funds = 250
+    )
+    session.add(forthehorde)
+    springbreak = models.Fundraiser(
+        name = "chads spring break fundraiser",
+        about = "what's all this nerd shit?  who plays videogames anyway and why are they all talking about having paws?  Is this some kind of furry convention?  Anyway, my bro brad said I could like, get money here or something, and if we get more fundage, we can get more lit!  You know what I mean?  Yeah, you know what I mean, loser!  Let's paaaaartay like it's like, hey, when did they party really hard?  was that the 70s?  Doesn't matter cause with all the money I'm gonna have I'm sure to get it in! Crush puss like I crush those miller lites yaknow!",
+        member = pick_member(),
+        created = datetime.datetime.now(),
+        start_date = datetime.datetime(1985,1,1),
+        end_date = datetime.datetime(2069,1,1),
+        target_funds = 5000000
+        )
+    session.add(springbreak)
+    session.commit()
 
-if __name__ == "__main__":
+def add_donations_to_fundraisers():
+    donations = session.query(models.Donation).all()
+    for i in donations:
+        i.fundraiser = pick_fundraiser()
+    session.commit()
+
+def gogogadget():
     init()
     articles()
     people()
     donations()
     text()
+    fundraisers()
+    add_donations_to_fundraisers()
+
+
+if __name__ == "__main__":
+    gogogadget()

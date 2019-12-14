@@ -13,12 +13,11 @@ bp = flask.Blueprint('search', __name__)
 def search():
     if flask.request.method == 'POST':
         donations = db.web.session.query(
-            models.Profile.handle,
+            models.Member.handle,
             func.sum(models.Donation.amount).label('total')
-        ).join(models.Member.profile
-               ).join(models.Donation
-                      ).group_by(
-            models.Profile.handle).order_by(desc('total')).all()
+        ).join(models.Donation
+        ).group_by(
+            models.Member.handle).order_by(desc('total')).all()
         ranked = enumerate(donations, start=1)
         searchname = flask.request.form['name']
         return flask.render_template(

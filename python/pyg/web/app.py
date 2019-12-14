@@ -1,14 +1,16 @@
 import os
 import mimetypes
 import pkg_resources
+import locale
 
 import flask
-from jinja2 import PackageLoader
+from jinja2 import PackageLoader, environment
 from werkzeug import exceptions
 from flask_login import LoginManager
+from flask_humanize import Humanize
 
 import pyg.web
-from pyg.web.views import login, home, signup, news, search, about, teamprofile, userprofile, leaderboard, logout
+from pyg.web.views import login, home, signup, news, search, about, teamprofile, userprofile, leaderboard, logout, fundraiser, create_fundraiser
 
 
 """this class and the following two functions enable loading static assets from the .pex"""
@@ -64,6 +66,7 @@ login_manager = LoginManager()  # part of flask-login.  Not yet implemented.
 def load_user(userid):
     return LoginUser(userid)
 
+
 def init():
     app.register_blueprint(login.bp)
     app.register_blueprint(home.bp)
@@ -75,7 +78,20 @@ def init():
     app.register_blueprint(userprofile.bp)
     app.register_blueprint(leaderboard.bp)
     app.register_blueprint(logout.bp)
+    app.register_blueprint(fundraiser.bp)
+    app.register_blueprint(create_fundraiser.bp)
     login_manager.init_app(app)
+
+    humanize = Humanize(app)
+    locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
+
+    @app.template_filter()
+    def format_currency(value):
+        return locale.currency(value, symbol=True, grouping=True)
+
+    @humanize.localeselector
+    def get_locale():
+        return 'en_US'
 
     @app.context_processor
     def dynamic_data():

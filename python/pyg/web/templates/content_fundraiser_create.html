@@ -1,0 +1,42 @@
+{% extends "base_content.html" %}
+
+
+{% block content %}
+{% if session.userid %}
+<div>
+  <ul class="Fundraiser-upcoming-list">
+    <li class="Fundraiser-upcoming-name">
+      <input name="name" form="submit" placeholder="name your fundraiser"></input>
+    </li>
+    <li class="Fundraiser-upcoming-date">
+      <span class="icon icon-standard">calendar</span>
+      <!-- <input name="start_date" form="submit" placeholder="when will it start?">This should be a dropdown</input> -->
+    </li>
+    <li class="Fundraiser-upcoming-donations">
+      <span class="icon icon-block">moneybag</span>
+      <input name="target_funds" form="submit" placeholder="how much do you want to raise?"></input>
+    </li>
+    <li class="Fundraiser-create-about">
+      <textarea name="about" form="submit" rows="10" cols="30">Write a little about your fundraiser!</textarea>
+    </li>
+  </ul>
+  <ul class="Fundraiser-upcoming-share">
+    <li>
+      <a href="#"><span class="icon icon-standard">link</span> Copy Page Link</a>
+    </li>
+    <li>
+      <a href="#"><span class="icon icon-standard">calendar</span> Add to Calendar</a>
+    </li>
+    <li>
+      <a href="#"><span class="icon icon-social">facebook</span> Share to Facebook</a>
+    </li>
+  </ul>
+  <form id="submit" action="/fundraiser" method="post">
+    <button>SUBMIT!!!</button>
+    <input name="userid" type="hidden" form="submit">{{ session.userid }}</input>
+  </form>
+</div>
+{% else %}
+<h1 color="red">YOU MUST BE LOGGED IN TO CREATE A FUNDRAISER. GO LOG IN.</h1>
+{% endif %}
+{% endblock%}

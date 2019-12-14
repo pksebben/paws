@@ -272,23 +272,6 @@ there seems to be a thing that does the thing you want usually in one of the lib
 Notably, when Ian is doing this he seems to jump around a lot.  I'm not sure exactly what it is he's always looking for (that may just be an instinctual experience type of thing)
 
 One thing that I could do to be better at this is getting my keyboard movement down a little better.  Switching between tabs and processes should take no time at all.
-*** TO DO
-**** DONE set up structlog 
-**** DONE set all the text on the site to the generic text module
-**** TODO implement modals for login
-**** TODO hashing [0/2]
-***** TODO Basic hashing
-***** TODO salt bae tha hashes
-**** TODO Implement user avatars sitewide
-**** DONE Wire up leaderboard
-**** TODO check that user profile updating isnt broken and maybe fix it
-**** DONE Implement a logout
-**** TODO Implement fundraisers / wire up fundraiser module
-**** TODO remove leaderboard standalone
-**** MINOR FIXES
-***** DONE get rid of submit button on user profile when not in edit mode
-***** TODO fix the news module to format the date nicely
-***** 
 
 * Next Meeting
 
@@ -302,3 +285,38 @@ One thing that I could do to be better at this is getting my keyboard movement d
 made some minor changes.  Read up on it.
 ** If we can structure fundraisers today there are a few more modules I can do deep work on.
 ** I could really use a little high-level look at the tbd.
+ 
+* Meeting Friday 12/13/19
+** high-level todo
+** Leaderboard module
+*** Can we use func.rank and within_group to grab out a user's rank and then use that to apply an offset on the query object?
+** 
+
+* TO DO
+** TODO make fundraiser creatable
+** TODO research chase WePay
+** TODO implement modals for login
+might need kirby for this
+** TODO hashing [0/2]
+*** TODO Basic hashing
+*** TODO salt bae tha hashes
+** TODO Implement user avatars sitewide
+** TODO team management
+*** TODO who owns it
+**** TODO add ownership bit to the assoc table.
+*** TODO how do people add other owners
+*** TODO create team
+*** TODO disband team
+*** TODO add members to team (send invite)
+**** TODO send invite
+**** TODO receive invite
+** TODO remove leaderboard standalone
+** TODO implement flask-login manager
+** TODO change all 'name' fields to 'handle'
+** TODO try not to pass auth around 
+** TODO factor out leaderboard query
+   should take number of players as input
+** TODO move the user update function into the view
+** MINOR FIXES
+*** TODO fix the news module to format the date nicely
+*** 
