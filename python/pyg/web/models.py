@@ -163,3 +163,6 @@ class Text(Base):
     slug = Column(String(32), primary_key=True)
     text = Column(Text(convert_unicode=True))
     route = relationship("Route", back_populates="texts")
+
+    def __str__(self):
+        return "{}".format(self.slug)

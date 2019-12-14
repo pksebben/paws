@@ -14,7 +14,7 @@
     <div class="gamer_profile-overview-avatar_username">
       <img class="gamer_profile-overview-avatar avatar"/>
       {% if editmode == True %}
-      <textarea rows="1" cols="25" name="name" form="submit">{{ auth.name }}</textarea>
+      <input type="text" class="gamer_profile-overview-username" rows="1" cols="25" name="name" form="submit" value="{{ auth.name }}" />
       {% else %}
       <h1 class="gamer_profile-overview-username">{{ auth.name }}</h1>
       {% endif %}
