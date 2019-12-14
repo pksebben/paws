@@ -10,7 +10,7 @@ from flask_login import LoginManager
 from flask_humanize import Humanize
 
 import pyg.web
-from pyg.web.views import login, home, signup, news, search, about, teamprofile, userprofile, leaderboard, logout, fundraiser
+from pyg.web.views import login, home, signup, news, search, about, teamprofile, userprofile, leaderboard, logout, fundraiser, create_fundraiser
 
 
 """this class and the following two functions enable loading static assets from the .pex"""
@@ -79,6 +79,7 @@ def init():
     app.register_blueprint(leaderboard.bp)
     app.register_blueprint(logout.bp)
     app.register_blueprint(fundraiser.bp)
+    app.register_blueprint(create_fundraiser.bp)
     login_manager.init_app(app)
 
     humanize = Humanize(app)

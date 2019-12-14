@@ -19,13 +19,6 @@ from pyg.web import models
 from pyg.web import fixtures
 from pyg.web.views import signup, news
 
-"""I don't like using this.  It's too workaroundy"""
-
-
-def randstring(length):
-    return ''.join([random.choice(string.ascii_letters)
-                    for n in range(length)])
-
 
 def setUpModule():
     app.init()
@@ -46,10 +39,6 @@ class StartTest(unittest.TestCase):
         fixtures.gogogadget()
         cls.tester = app.app.test_client()
 
-    # @classmethod
-    # def tearDownClass(cls):
-    #     models.Base.metadata.drop_all(db.web.engine)
-
     def setUp(self):
         self.templates = []
         flask.template_rendered.connect(self._record_template, app.app)
@@ -61,16 +50,13 @@ class StartTest(unittest.TestCase):
         self.templates.append(template)
         self.context = context
 
-    # BEGIN TESTS
-
-    # NEWS PAGE
-
     def test_news_page_available(self):
         """test that the news page renders and serves a story"""
-        res = self.tester.get('/news', content_type="html/text", follow_redirects=True)
+        res = self.tester.get(
+            '/news',
+            content_type="html/text",
+            follow_redirects=True)
         self.assertIn(b"lorem", res.data)
-
-    # END NEWS PAGE
 
     def test_app_available(self):
         """check if the app makes itself available"""
@@ -127,14 +113,12 @@ class StartTest(unittest.TestCase):
         self.assertEqual("tom", res[0].name)
 
     def test_search_name_tom(self):
-        # might be doing the post request wrong
         res = self.tester.post('/search', data=dict(
             name="tom"
         ))
         self.assertIn(b"tom", res.data)
 
     def test_search_name_absent_beelzebub(self):
-        # might be doing the post request wrong
         res = self.tester.post('/search', data=dict(
             name="beelzebub"
         ))

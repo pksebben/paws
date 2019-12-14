@@ -293,20 +293,14 @@ made some minor changes.  Read up on it.
 ** 
 
 * TO DO
-** DONE set up structlog 
+** TODO make fundraiser creatable
 ** TODO research chase WePay
-** DONE structure fundraiser data?
-I kind of wish I had some backup on this but might as well do the basics
-** DONE set all the text on the site to the generic text module
 ** TODO implement modals for login
 might need kirby for this
 ** TODO hashing [0/2]
 *** TODO Basic hashing
 *** TODO salt bae tha hashes
 ** TODO Implement user avatars sitewide
-** DONE Wire up leaderboard
-** TODO fundraisers page
-** DONE check that user profile updating isnt broken and maybe fix it
 ** TODO team management
 *** TODO who owns it
 **** TODO add ownership bit to the assoc table.
@@ -316,21 +310,13 @@ might need kirby for this
 *** TODO add members to team (send invite)
 **** TODO send invite
 **** TODO receive invite
-** DONE Implement a logout
-** DONE Implement fundraisers / wire up fundraiser module [3/3]
-*** DONE make some juicy schema
-*** DONE wire up a lil bit of fixture deliciousness.  Not a lot, baby gurrrrl.
-*** DONE Test Drive for no money down and 0% APR for 69 months
 ** TODO remove leaderboard standalone
 ** TODO implement flask-login manager
 ** TODO change all 'name' fields to 'handle'
-** DONE move name from auth to member
-** DONE integrate profile into member
 ** TODO try not to pass auth around 
 ** TODO factor out leaderboard query
    should take number of players as input
 ** TODO move the user update function into the view
 ** MINOR FIXES
-*** DONE get rid of submit button on user profile when not in edit mode
 *** TODO fix the news module to format the date nicely
 *** 
