@@ -15,6 +15,7 @@ This runs app.py through Python3
 1. [Install Python3](https://www.python.org/downloads/)
 2. Open a terminal and [create a venv](https://docs.python.org/3/library/venv.html)
 3. [Start that venv](https://packaging.python.org/tutorials/installing-packages/#creating-virtual-environments)
+3. `export PYTHONPATH=path/to/pyg/python`
 4. cd to pyg/python/pyg/web/
 5. do this: `python3 run.py`
 6. It will bitch about some stuff missing. `pip install` whatever it says is missing.
