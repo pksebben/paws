@@ -33,7 +33,7 @@
   </ul>
   <form id="submit" action="/fundraiser" method="post">
     <button>SUBMIT!!!</button>
-    <input name="userid" type="hidden" form="submit">{{ session.userid }}</input>
+    <input name="userid" type="hidden" form="submit" value={{ session.userid }} /input>
   </form>
 </div>
 {% else %}

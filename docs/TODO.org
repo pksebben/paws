@@ -294,6 +294,10 @@ made some minor changes.  Read up on it.
 
 * TO DO
 ** TODO make fundraiser creatable
+in the middle of trying to get validation working via marshmallow.  At the moment it's not taking the objects in properly.
+*** DONE make module that creates fundraisers
+*** TODO implement marshmallow validation
+*** 
 ** TODO research chase WePay
 ** TODO implement modals for login
 might need kirby for this
@@ -304,6 +308,8 @@ might need kirby for this
 ** TODO team management
 *** TODO who owns it
 **** TODO add ownership bit to the assoc table.
+***** TODO how are we going to use this?
+what I mean is, how are we going to access this data?  
 *** TODO how do people add other owners
 *** TODO create team
 *** TODO disband team
@@ -319,4 +325,3 @@ might need kirby for this
 ** TODO move the user update function into the view
 ** MINOR FIXES
 *** TODO fix the news module to format the date nicely
-*** 

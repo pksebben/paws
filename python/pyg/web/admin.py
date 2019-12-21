@@ -42,7 +42,6 @@ def init(app):
 
     admin.add_view(ModelView(models.Member, session))
     admin.add_view(ModelView(models.Auth, session))
-    admin.add_view(ModelView(models.Profile, session))
     admin.add_view(ModelView(models.Team, session))
     admin.add_view(ModelView(models.Donation, session))
     admin.add_view(ModelView(models.NewsArticle, session))

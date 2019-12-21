@@ -210,6 +210,25 @@ def fundraisers():
     session.add(springbreak)
     session.commit()
 
+def create_team(owner, **data):
+    """all the things that teams start with, including an owner"""
+    team = models.Team(
+        name = name,
+        date_joined = datetime.datetime.now(),
+        missionstatement = missionstatement,
+        location = location,    # TODO do we need this?  Seems pointless.
+        website = website,
+        facebook_url = facebook_url,
+        twitter_url = twitter_url,
+        twitch_url = twitch_url,
+        instagram_url = instagram_url
+    )
+    # TODO add the current user as the team owner.
+    # TODO return something?
+    
+def teams():
+    pass
+    
 def add_donations_to_fundraisers():
     donations = session.query(models.Donation).all()
     for i in donations:
@@ -223,6 +242,7 @@ def gogogadget():
     donations()
     text()
     fundraisers()
+    teams()
     add_donations_to_fundraisers()
 
 
