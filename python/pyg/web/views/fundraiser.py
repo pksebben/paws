@@ -1,5 +1,6 @@
 import re
 from marshmallow import Schema, fields, ValidationError
+from wtforms import Form, StringField, IntegerField, DateTimeField, DateField, TextAreaField, validators
 ###############
 
 import flask
@@ -8,6 +9,13 @@ import datetime
 from pyg.web import db, models
 
 """TODO: finish"""
+
+
+class FundraiserForm(Form):
+    name = StringField("Name")
+    end_date = DateField("End Date")
+    target_funds = IntegerField("Target Funds")
+    about = TextAreaField("About")
 
 
 class FundraiserSchema(Schema):

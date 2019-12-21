@@ -325,3 +325,32 @@ what I mean is, how are we going to access this data?
 ** TODO move the user update function into the view
 ** MINOR FIXES
 *** TODO fix the news module to format the date nicely
+
+
+* Fixes
+
+** TODO Gamer Profile no longer shows name properly after ian fucked with it.
+
+* Implement Me
+
+** WTForms [/] 
+
+*** Pages [/] 
+
+**** DONE Gamer profile page // edit gamer profile.
+
+**** TODO fundraiser CRUD
+
+*** Validation [/] 
+
+**** TODO sign up
+
+**** TODO sign in
+
+**** TODO gamer profile
+
+* SCHEDULED TODO
+
+** Implement WTForms
+
+** Implement Flask-Security
