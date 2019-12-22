@@ -1,48 +1,66 @@
 {% extends "base_content.html" %}
+{% from "_formhelpers.html" import render_field %}
 
 {% block content %}
 
 {% if fundraiser %}
 <div>
-  <ul class="Fundraiser-upcoming-list">
-    <li class="Fundraiser-upcoming-name">
-      <h3>{{ fundraiser.name }}</h3>
-    </li>
-    <li class="Fundraiser-upcoming-date">
-      <span class="icon icon-standard">calendar</span>
-      <h3>{{ fundraiser.start_date | humanize('naturaldate') }}</h3>
-    </li>
-    <li class="Fundraiser-upcoming-countdown">
-      <span class="icon icon-standard">stopwatch</span>
-      <h3 class="countdown" countdown data-date="Jun 30 2020 21:00:00">
-	<span data-days></span> Days
-	<span data-hours></span> Hours
-	<span data-minutes></span> Minutes
-	<span data-seconds></span> Seconds
-      </h3>
-    </li>
-    <li class="Fundraiser-upcoming-donations">
-      <span class="icon icon-block">moneybag</span>
-      <h3>{{ fundraiser.donations | sum(attribute="amount") | format_currency() }}  / {{ fundraiser.target_funds | format_currency() }}</h3>
-      <div class="Fundraiser-upcoming-donations-progress_bar"></div>
-      <button class="button button-green Fundraiser-upcoming-donations-donate_btn">Donate</button>
-    </li>
-    <li class="Fundraiser-upcoming-donors">
-      <span class="icon icon-standard">user</span>
-      <h3>{{ fundraiser.donations|length }} Donations</h3>
-    </li>
-  </ul>
-  <ul class="Fundraiser-upcoming-share">
-    <li>
-      <a href="#"><span class="icon icon-standard">link</span> Copy Page Link</a>
-    </li>
-    <li>
-      <a href="#"><span class="icon icon-standard">calendar</span> Add to Calendar</a>
-    </li>
-    <li>
-      <a href="#"><span class="icon icon-social">facebook</span> Share to Facebook</a>
-    </li>
-  </ul>
+  {% if session.userid == fundraiser.member_id %}
+  <h1>EDITS MODE!</h1>
+  <form method="post">
+    <p><input type=submit value="submit changes">
+      {% endif %}
+      <ul class="Fundraiser-upcoming-list">
+	<li class="Fundraiser-upcoming-name">
+	  {% if session.userid == fundraiser.member_id %}
+	  {{ render_field(form.name) }}
+	  {% else %}
+	  <h3>{{ fundraiser.name }}</h3>
+	  {% endif %}
+	</li>
+	<li class="Fundraiser-upcoming-date">
+	  <span class="icon icon-standard">calendar</span>
+	  {% if session.userid == fundraiser.member_id %}
+	  {{ render_field(form.start_date) }}
+	  {{ render_field(form.end_date) }}
+	  {% else %}
+	  <h3>{{ fundraiser.start_date | humanize('naturaldate') }}</h3>
+	  {% endif %}
+	</li>
+	<li class="Fundraiser-upcoming-countdown">
+	  <span class="icon icon-standard">stopwatch</span>
+	  <h3 class="countdown" countdown data-date="Jun 30 2020 21:00:00">
+	    <span data-days></span> Days
+	    <span data-hours></span> Hours
+	    <span data-minutes></span> Minutes
+	    <span data-seconds></span> Seconds
+	  </h3>
+	</li>
+	<li class="Fundraiser-upcoming-donations">
+	  <span class="icon icon-block">moneybag</span>
+	  <h3>{{ fundraiser.donations | sum(attribute="amount") | format_currency() }}  / {{ fundraiser.target_funds | format_currency() }}</h3>
+	  <div class="Fundraiser-upcoming-donations-progress_bar"></div>
+	  <button class="button button-green Fundraiser-upcoming-donations-donate_btn">Donate</button>
+	</li>
+	<li class="Fundraiser-upcoming-donors">
+	  <span class="icon icon-standard">user</span>
+	  <h3>{{ fundraiser.donations|length }} Donations</h3>
+	</li>
+      </ul>
+      <ul class="Fundraiser-upcoming-share">
+	<li>
+	  <a href="#"><span class="icon icon-standard">link</span> Copy Page Link</a>
+	</li>
+	<li>
+	  <a href="#"><span class="icon icon-standard">calendar</span> Add to Calendar</a>
+	</li>
+	<li>
+	  <a href="#"><span class="icon icon-social">facebook</span> Share to Facebook</a>
+	</li>
+      </ul>
+      {% if session.userid == fundraiser.member_id %}
+  </form>
+  {% endif %}
 </div>
 {% else %}
 <div>

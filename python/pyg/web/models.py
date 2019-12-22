@@ -117,13 +117,14 @@ class Fundraiser(Base):
     __tablename__ = "fundraiser"
 
     id = Column(Integer, primary_key=True)
-    name = Column(String(40), nullable=False, unique=True)
+    name = Column(String(40), nullable=False)
     banner = Column(String(50))  # URL for static banner image
     about = Column(Text(convert_unicode=True))
     created = Column(DateTime, nullable=False)
     start_date = Column(DateTime, nullable=False)
     end_date = Column(DateTime, nullable=False)
     target_funds = Column(Integer, nullable=False)
+    active = Column(Boolean, nullable=False)
 
     member_id = Column(Integer, ForeignKey("member.id"), nullable=False)
     member = relationship("Member", back_populates="fundraisers")

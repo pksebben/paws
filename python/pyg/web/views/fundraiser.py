@@ -1,44 +1,50 @@
-import re
-from marshmallow import Schema, fields, ValidationError
-from wtforms import Form, StringField, IntegerField, DateTimeField, DateField, TextAreaField, validators
-###############
-
-import flask
 import datetime
 
-from pyg.web import db, models
+import flask
+from wtforms import Form, StringField, IntegerField, DateTimeField, DateField, TextAreaField, validators
 
-"""TODO: finish"""
+from pyg.web import db, models
 
 
 class FundraiserForm(Form):
     name = StringField("Name")
     end_date = DateField("End Date")
+    start_date = DateField("Start Date")
     target_funds = IntegerField("Target Funds")
     about = TextAreaField("About")
-
-
-class FundraiserSchema(Schema):
-    name = fields.String(required=True)
-    """this next field might need to be extended via the _serialize method."""
-    start_date = fields.DateTime(required=True)
-    end_date = fields.DateTime(required=True)
-    target_funds = fields.Integer(required=True)
-    about = fields.String(required=True)
-    member_id = fields.Integer(required=True)
-    created = fields.DateTime(required=True, default=datetime.datetime.now())
 
 
 bp = flask.Blueprint("fundraiser", __name__)
 
 
+def new_fundraiser(name, target_funds, about, member_id, end_date):
+    fraiser = models.Fundraiser(
+        name=name,
+        start_date=datetime.datetime.now(),
+        target_funds=target_funds,
+        about=about,
+        member_id=int(member_id),
+        created=datetime.datetime.now(),
+        end_date=end_date
+    )
+
+    frid = db.web.session.add(fraiser)
+
+
 @bp.route("/fundraiser/<frid>")
 @bp.route("/fundraiser", methods=['GET', 'POST'])
 def fundraiser(frid=None):
+    form = FundraiserForm(flask.request.form)
     if frid:
         fundraiser = db.web.session.query(models.Fundraiser).get(frid)
         return flask.render_template(
-            "content_fundraiser.html", fundraiser=fundraiser)
+            "content_fundraiser.html", fundraiser=fundraiser, form=form)
+
+
+
+
+
+    
     else:
         if flask.request.method == 'POST':
             fraiser = models.Fundraiser(
@@ -50,19 +56,6 @@ def fundraiser(frid=None):
                 created=datetime.datetime.now(),
                 end_date=datetime.datetime.now()
             )
-            schema = FundraiserSchema()
-            dumped = schema.dump(fraiser)
-            errors = FundraiserSchema().validate(data={
-                "name": fraiser.name,
-                "start_date": str(fraiser.start_date),
-                "end_date": str(fraiser.end_date),
-                "target_funds": fraiser.target_funds,
-                "about": fraiser.about,
-                "member_id": fraiser.member_id,
-                "created": str(fraiser.created)
-            })
-            print(fraiser.__dict__)
-            print(errors)
             frid = db.web.session.add(fraiser)
             try:
                 db.web.session.commit()
