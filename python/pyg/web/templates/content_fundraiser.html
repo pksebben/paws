@@ -39,6 +39,9 @@
 	<li class="Fundraiser-upcoming-donations">
 	  <span class="icon icon-block">moneybag</span>
 	  <h3>{{ fundraiser.donations | sum(attribute="amount") | format_currency() }}  / {{ fundraiser.target_funds | format_currency() }}</h3>
+	  {% if session.userid == fundraiser.member_id %}
+	  {{ render_field(form.target_funds) }}
+	  {% endif %}
 	  <div class="Fundraiser-upcoming-donations-progress_bar"></div>
 	  <button class="button button-green Fundraiser-upcoming-donations-donate_btn">Donate</button>
 	</li>

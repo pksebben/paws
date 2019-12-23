@@ -1,14 +1,40 @@
 import datetime
 
 import flask
-from wtforms import Form, StringField, IntegerField, DateTimeField, DateField, TextAreaField, validators
+from wtforms import Form, StringField, TextAreaField, validators
+from wtforms.fields.html5 import DateField, IntegerField
+from wtforms.validators import InputRequired, Length, ValidationError
 
 from pyg.web import db, models
 
 
+def daterange(soonest, latest):
+    msg = "Must be no sooner than %s and no later than %s" % (soonest, latest)
+
+    def _daterange(form, field):
+        date = field.data
+        if date < soonest or date > latest:
+            raise ValidationError(msg)
+    return _daterange
+
+
 class FundraiserForm(Form):
-    name = StringField("Name")
-    end_date = DateField("End Date")
+    """
+    TODO
+    decide a reasonable max length for names
+    update date validators to reflect desired ranges
+    """
+    name = StringField("Name", validators=[InputRequired(), Length(max=25)])
+    end_date = DateField(
+        "End Date",
+        validators=[
+            InputRequired(),
+            daterange(
+                datetime.date.today(),
+                datetime.date(
+                    year=2050,
+                    month=1,
+                    day=1))])
     start_date = DateField("Start Date")
     target_funds = IntegerField("Target Funds")
     about = TextAreaField("About")
