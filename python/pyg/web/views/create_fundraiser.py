@@ -3,14 +3,14 @@ import datetime
 import flask
 from wtforms import StringField, DateField, IntegerField, TextAreaField, Form, validators
 from wtforms.ext import dateutil
+
 from pyg.web import db, models
 
 bp = flask.Blueprint("create_fundraiser", __name__)
 
 
-@bp.route('/createfundraiser/<errtype>')
 @bp.route('/createfundraiser', methods=["GET", "POST"])
-def create_fundraiser(errtype=None):
+def create_fundraiser():
     """create a new fundraiser and reroute to the fundraiser page"""
     fundraiser = models.Fundraiser(
         name="Name your fundraiser",
@@ -19,7 +19,7 @@ def create_fundraiser(errtype=None):
         end_date=datetime.datetime.now(),
         target_funds=500,
         active=False,
-        member_id = flask.session['userid']
+        member_id=flask.session['userid']
     )
     frid = db.web.session.add(fundraiser)
     db.web.session.commit()

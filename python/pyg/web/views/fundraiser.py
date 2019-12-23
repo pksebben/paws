@@ -27,53 +27,41 @@ def new_fundraiser(name, target_funds, about, member_id, end_date):
         created=datetime.datetime.now(),
         end_date=end_date
     )
-
     frid = db.web.session.add(fraiser)
 
 
-@bp.route("/fundraiser/<frid>")
+@bp.route("/fundraiser/<frid>", methods=['GET', 'POST'])
 @bp.route("/fundraiser", methods=['GET', 'POST'])
 def fundraiser(frid=None):
-    form = FundraiserForm(flask.request.form)
+    """
+    Fundraiser Page.
+    If fundraiser is owned by the currently logged in user, view the fundraiser in
+    'edit mode' - this behavior is controlled in the template.
+
+    If no fundraiser is selected to view (via fundraiser ID), show a list of all fundraisers.
+
+    TODO
+    make the list of fundraisers searchable
+
+
+    """
     if frid:
         fundraiser = db.web.session.query(models.Fundraiser).get(frid)
+        form = FundraiserForm(flask.request.form, fundraiser)
+        if flask.request.method == "POST":
+            fundraiser.name = form.name.data
+            fundraiser.end_date = form.end_date.data
+            fundraiser.start_date = form.start_date.data
+            fundraiser.target_funds = form.target_funds.data
+            fundraiser.about = form.about.data
+            db.web.session.commit()
+        # form.name.data = fundraiser.name
+        # form.end_date = fundraiser.end_date
         return flask.render_template(
             "content_fundraiser.html", fundraiser=fundraiser, form=form)
 
-
-
-
-
-    
     else:
-        if flask.request.method == 'POST':
-            fraiser = models.Fundraiser(
-                name=flask.request.form['name'],
-                start_date=datetime.datetime.now(),
-                target_funds=flask.request.form['target_funds'],
-                about=flask.request.form['about'],
-                member_id=int(flask.request.form['userid']),
-                created=datetime.datetime.now(),
-                end_date=datetime.datetime.now()
-            )
-            frid = db.web.session.add(fraiser)
-            try:
-                db.web.session.commit()
-                print(frid)
-                fundraiser = db.web.session.query(models.Fundraiser).get(frid)
-                return flask.render_template(
-                    "content_fundraiser.html", fundraiser=fundraiser)
-            except Exception as err:
-                # TODO: Create a pattern for form validation sitewide
-                # may use WTForms
-                # may use marshmallow and raw flask.
-                raise err
-            # except ValidationError as err:
-            #     # TODO: what happens on validation errors?
-            #     pass
-            # except IntegrityError as err:
-            #     return flask.redirect("/createfundraiser")
-        else:
-            fundraisers = db.web.session.query(models.Fundraiser).all()
-            return flask.render_template(
-                "content_fundraiser.html", fundraisers=fundraisers)
+
+        fundraisers = db.web.session.query(models.Fundraiser).all()
+        return flask.render_template(
+            "content_fundraiser.html", fundraisers=fundraisers)

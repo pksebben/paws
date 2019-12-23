@@ -351,6 +351,7 @@ what I mean is, how are we going to access this data?
 
 * SCHEDULED TODO
 
-** Implement WTForms
+** DONE Implement WTForms
 
 ** Implement Flask-Security
+
