@@ -1,33 +1,46 @@
 import datetime
 
 import flask
-from wtforms import Form, StringField, IntegerField, DateTimeField, DateField, TextAreaField, validators
+from wtforms import Form, StringField, TextAreaField, validators
+from wtforms.fields.html5 import DateField, IntegerField
+from wtforms.validators import InputRequired, Length, ValidationError
 
 from pyg.web import db, models
 
 
+def daterange(soonest, latest):
+    msg = "Must be no sooner than %s and no later than %s" % (soonest, latest)
+
+    def _daterange(form, field):
+        date = field.data
+        if date < soonest or date > latest:
+            raise ValidationError(msg)
+    return _daterange
+
+
 class FundraiserForm(Form):
-    name = StringField("Name")
-    end_date = DateField("End Date")
+    """
+    TODO
+    decide a reasonable max length for names
+    update date validators to reflect desired ranges
+    """
+    name = StringField("Name", validators=[InputRequired(), Length(max=25)])
+    end_date = DateField(
+        "End Date",
+        validators=[
+            InputRequired(),
+            daterange(
+                datetime.date.today(),
+                datetime.date(
+                    year=2050,
+                    month=1,
+                    day=1))])
     start_date = DateField("Start Date")
     target_funds = IntegerField("Target Funds")
     about = TextAreaField("About")
 
 
 bp = flask.Blueprint("fundraiser", __name__)
-
-
-def new_fundraiser(name, target_funds, about, member_id, end_date):
-    fraiser = models.Fundraiser(
-        name=name,
-        start_date=datetime.datetime.now(),
-        target_funds=target_funds,
-        about=about,
-        member_id=int(member_id),
-        created=datetime.datetime.now(),
-        end_date=end_date
-    )
-    frid = db.web.session.add(fraiser)
 
 
 @bp.route("/fundraiser/<frid>", methods=['GET', 'POST'])
@@ -42,13 +55,13 @@ def fundraiser(frid=None):
 
     TODO
     make the list of fundraisers searchable
-
-
+    update the template to show 'about' section
     """
+    
     if frid:
         fundraiser = db.web.session.query(models.Fundraiser).get(frid)
         form = FundraiserForm(flask.request.form, fundraiser)
-        if flask.request.method == "POST":
+        if flask.request.method == "POST" and form.validate():
             fundraiser.name = form.name.data
             fundraiser.end_date = form.end_date.data
             fundraiser.start_date = form.start_date.data

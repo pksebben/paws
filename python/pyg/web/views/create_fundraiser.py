@@ -1,8 +1,6 @@
 import datetime
 
 import flask
-from wtforms import StringField, DateField, IntegerField, TextAreaField, Form, validators
-from wtforms.ext import dateutil
 
 from pyg.web import db, models
 

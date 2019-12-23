@@ -13,7 +13,7 @@ class UserProfileForm(Form):
     about = TextAreaField("About")
 
 
-def update_user_profile(id, name, about, location, twitch_handle):
+def update_user_profile(id, name, about, location, twitch_handle, handle):
     """updates Member.  Used primarily in user profile"""
     user = db.web.session.query(models.Member).get(id)
     if not user:
@@ -23,6 +23,7 @@ def update_user_profile(id, name, about, location, twitch_handle):
         user.about = about
         user.location = location
         user.twitch_handle = str(twitch_handle)
+        user.handle = handle
     db.web.session.commit()
 
 
@@ -33,13 +34,14 @@ def userprofile(userid=1):
     auth = member.auth
     fundraisers = member.fundraisers
     form = UserProfileForm(flask.request.form, member)
-    if flask.request.method == 'POST':
+    if flask.request.method == 'POST' and form.validate():
         update_user_profile(
             flask.session['userid'],
             form.handle.data,
             form.about.data,
             form.location.data,
-            form.twitch_handle.data
+            form.twitch_handle.data,
+            form.handle.data
         )
     return flask.render_template(
         'content_gamer_profile.html', form=form, member=member, auth=auth, fundraisers=fundraisers)

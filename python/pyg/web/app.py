@@ -62,6 +62,8 @@ app.secret_key = "2380b817f0f6dc67cebcc4068fc6b437"
 login_manager = LoginManager()  # part of flask-login.  Not yet implemented.
 
 
+
+
 @login_manager.user_loader
 def load_user(userid):
     return LoginUser(userid)
