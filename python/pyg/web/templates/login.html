@@ -1,24 +1,25 @@
 <!DOCTYPE html>
+{% from "_formhelpers.html" import render_field %}
 
 <html>
-    <head>
-	<title>Paws Your Game</title>
-	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    </head>
-    <body>
-	<div>
-	    <h1>Login please</h1>
-	</div>
-	<div>
-	    <h3>{{ failure_text }}</h3>
-	    <form action="/login" method="post">
-		<input type="text" name="email" placeholder="Email">
-		<input type="text" name="password" placeholder="Password">
-		<button>
-		    <p>login</p>
-		</button>
-	    </form>
-	    <p>Don't have an account yet? You can <a href="signup">create one here</a></p>
-	</div>
-    </body>
+  <head>
+    <title>Paws Your Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body>
+    <div>
+      <h1>Login please</h1>
+    </div>
+    <div>
+      <h3>{{ failure_text }}</h3>
+      <form method="post">
+	<dl>
+	  {{ render_field(form.email) }}
+	  {{ render_field(form.password) }}
+	</dl>
+	<p><input type=submit value=login>
+      </form>
+      <p>Don't have an account yet? You can <a href="signup">create one here</a></p>
+    </div>
+  </body>
 </html>

@@ -1,20 +1,20 @@
 {% extends "base_content.html" %}
 
 {% block content %}
-{% if profile %}
+
+{% if member %}
 <div id="Gamer_Profile" class="content">
   {% if session.userid == auth.id %}
   <h2>Welcome, {{ auth.name }}</h2>
   <form id="submit" action="/profile/{{ auth.id }}" method="post">
     <button>Submit changes</button>
-  </form>
   <a href="/createfundraiser">Start a Fundraiser!</a>
   {% endif %}
   <div class="section gamer_profile-overview">
     <div class="gamer_profile-overview-avatar_username">
       <img class="gamer_profile-overview-avatar avatar"/>
-      {% if editmode == True %}
-      <input type="text" class="gamer_profile-overview-username" rows="1" cols="25" name="name" form="submit" value="{{ auth.name }}" />
+      {% if session.userid == auth.id %}
+	{{ form.handle }}
       {% else %}
       <h1 class="gamer_profile-overview-username">{{ auth.name }}</h1>
       {% endif %}
@@ -24,7 +24,7 @@
 	<i class="icon icon-block stats-raised-icon">moneybag</i>
 	<dl>
 	  <dt>Raised</dt>
-	  <dd>{{ profile.donations | sum(attribute="amount") | format_currency() }}</dd>
+	  <dd>{{ member.donations | sum(attribute="amount") | format_currency() }}</dd>
 	</dl>
       </li>
       <li class="gamer_profile-overview-stats-rank">
@@ -45,10 +45,10 @@
 	<i class="icon icon-block">earth</i>
 	<dl>
 	  <dt>Location</dt>
-	  {% if editmode == True %}
-	  <textarea rows="1" cols="25" name="location" form="submit">{{ profile.location }}</textarea>
+	  {% if session.userid == auth.id %}
+	    {{ form.location }}
 	  {% else %}
-	  <dd>{{ profile.location }}</dd>
+	  <dd>{{ member.location }}</dd>
 	  {% endif %}
 	  
 	</dl>
@@ -57,10 +57,10 @@
 	<i class="icon"></i>
 	<dl>
 	  <dt>Twitch Handle</dt>
-	  {% if editmode == True %}
-	  <textarea rows="1" cols="25" name="twitch_handle" form="submit">{{ profile.twitch_handle }}</textarea>
+	  {% if session.userid == auth.id %}
+	    {{ form.twitch_handle }}
 	  {% else %}
-	  <dd>{{ profile.twitch_handle }}</dd>
+	  <dd>{{ member.twitch_handle }}</dd>
 	  {% endif %}
 	</dl>
       </li>
@@ -70,10 +70,12 @@
   <div class="section gamer_profile-why_i_paws">
     <div class="why_i_paws">
       <header><h1>Why I Paws</h1><i class="icon"></i></header>
-      {% if editmode == True %}
-      <textarea rows="5" cols="33" name="about" form="submit">{{ profile.about }}</textarea>
+      {% if session.userid == auth.id %}
+      {{ form.about }}
       {% else %}
-      <p>{{ profile.about }}</p>
+	<p>{{ member.about }}</p>
+	  </form>
+
       {% endif %}
     </div>
   </div>

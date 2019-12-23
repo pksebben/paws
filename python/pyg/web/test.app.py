@@ -138,6 +138,14 @@ class StartTest(unittest.TestCase):
     def test_userprofile_update_bad_input(self):
         pass
 
+    def test_fundraiser_validate(self):
+        res = self.tester.post('/fundraiser', data=dict(
+            name="krane",
+            target_funds=500,
+            about="this is about this fundraiser",
+            userid=3
+        ))
+        self.assertIn(b"krane", res.data)
 
 if __name__ == '__main__':
     unittest.main()

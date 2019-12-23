@@ -1,4 +1,4 @@
-import datetime
+\import datetime
 import random
 
 import sqlalchemy
@@ -189,6 +189,7 @@ def text():
 
 def fundraisers():
     forthehorde = models.Fundraiser(
+        active = True,
         name = "Glory to the Horde fundraiser",
         about = "The pillagers of azeroth are raising money for the fostering and care of orphaned Tauren.  These poor creatures have been left by their owners and have nowhere to turn.  Won't you help us to bring love and care to these cute little unfortunates? -cue sarah mcglaughlin- ",
         member = pick_member(),
@@ -199,6 +200,7 @@ def fundraisers():
     )
     session.add(forthehorde)
     springbreak = models.Fundraiser(
+        active = True,
         name = "chads spring break fundraiser",
         about = "what's all this nerd shit?  who plays videogames anyway and why are they all talking about having paws?  Is this some kind of furry convention?  Anyway, my bro brad said I could like, get money here or something, and if we get more fundage, we can get more lit!  You know what I mean?  Yeah, you know what I mean, loser!  Let's paaaaartay like it's like, hey, when did they party really hard?  was that the 70s?  Doesn't matter cause with all the money I'm gonna have I'm sure to get it in! Crush puss like I crush those miller lites yaknow!",
         member = pick_member(),
@@ -210,6 +212,25 @@ def fundraisers():
     session.add(springbreak)
     session.commit()
 
+def create_team(owner, **data):
+    """all the things that teams start with, including an owner"""
+    team = models.Team(
+        name = name,
+        date_joined = datetime.datetime.now(),
+        missionstatement = missionstatement,
+        location = location,    # TODO do we need this?  Seems pointless.
+        website = website,
+        facebook_url = facebook_url,
+        twitter_url = twitter_url,
+        twitch_url = twitch_url,
+        instagram_url = instagram_url
+    )
+    # TODO add the current user as the team owner.
+    # TODO return something?
+    
+def teams():
+    pass
+    
 def add_donations_to_fundraisers():
     donations = session.query(models.Donation).all()
     for i in donations:
@@ -223,6 +244,7 @@ def gogogadget():
     donations()
     text()
     fundraisers()
+    teams()
     add_donations_to_fundraisers()
 
 

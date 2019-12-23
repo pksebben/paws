@@ -1,50 +1,67 @@
-import re
-from marshmallow import Schema, fields, ValidationError
-###############
+import datetime
 
 import flask
-import datetime
+from wtforms import Form, StringField, IntegerField, DateTimeField, DateField, TextAreaField, validators
 
 from pyg.web import db, models
 
 
-class FundraiserSchema(Schema):
-    name = fields.String(required=True)
-    """this next field might need to be extended via the _serialize method."""
-    start_date = fields.DateTime(required=True)
-    end_date = fields.DateTime(required=True)
-    target_funds = fields.Integer(required=True)
-    about = fields.String(required=True)
-    member_id = fields.Integer(required=True)
-    created = fields.DateTime(required=True, default=datetime.datetime.now())
-    
-
-
+class FundraiserForm(Form):
+    name = StringField("Name")
+    end_date = DateField("End Date")
+    start_date = DateField("Start Date")
+    target_funds = IntegerField("Target Funds")
+    about = TextAreaField("About")
 
 
 bp = flask.Blueprint("fundraiser", __name__)
 
-@bp.route("/fundraiser/<frid>")
+
+def new_fundraiser(name, target_funds, about, member_id, end_date):
+    fraiser = models.Fundraiser(
+        name=name,
+        start_date=datetime.datetime.now(),
+        target_funds=target_funds,
+        about=about,
+        member_id=int(member_id),
+        created=datetime.datetime.now(),
+        end_date=end_date
+    )
+    frid = db.web.session.add(fraiser)
+
+
+@bp.route("/fundraiser/<frid>", methods=['GET', 'POST'])
 @bp.route("/fundraiser", methods=['GET', 'POST'])
 def fundraiser(frid=None):
+    """
+    Fundraiser Page.
+    If fundraiser is owned by the currently logged in user, view the fundraiser in
+    'edit mode' - this behavior is controlled in the template.
+
+    If no fundraiser is selected to view (via fundraiser ID), show a list of all fundraisers.
+
+    TODO
+    make the list of fundraisers searchable
+
+
+    """
     if frid:
         fundraiser = db.web.session.query(models.Fundraiser).get(frid)
-        return flask.render_template("content_fundraiser.html", fundraiser=fundraiser)
-    else:
-        if flask.request.method == 'POST':
-            fraiser = models.Fundraiser(
-                name = flask.request.form['name'],
-                start_date = datetime.datetime.now(),
-                target_funds = flask.request.form['target_funds'],
-                about = flask.request.form['about'],
-                member_id = flask.request.form['userid'],
-                created = datetime.datetime.now(),
-                end_date = datetime.datetime.now()
-            )
-            frid = db.web.session.add(fraiser)
+        form = FundraiserForm(flask.request.form, fundraiser)
+        if flask.request.method == "POST":
+            fundraiser.name = form.name.data
+            fundraiser.end_date = form.end_date.data
+            fundraiser.start_date = form.start_date.data
+            fundraiser.target_funds = form.target_funds.data
+            fundraiser.about = form.about.data
             db.web.session.commit()
-            fundraiser = db.web.session.query(models.Fundraiser).get(frid)
-            return flask.render_template("content_fundraiser.html", fundraiser=fundraiser)
-        else:
-            fundraisers = db.web.session.query(models.Fundraiser).all()
-            return flask.render_template("content_fundraiser.html", fundraisers=fundraisers)
+        # form.name.data = fundraiser.name
+        # form.end_date = fundraiser.end_date
+        return flask.render_template(
+            "content_fundraiser.html", fundraiser=fundraiser, form=form)
+
+    else:
+
+        fundraisers = db.web.session.query(models.Fundraiser).all()
+        return flask.render_template(
+            "content_fundraiser.html", fundraisers=fundraisers)
