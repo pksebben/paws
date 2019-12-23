@@ -6,6 +6,7 @@ from structlog import twisted
 from structlog.twisted import LoggerFactory
 from oscar import flag
 from twisted.python import log
+from flask_security import SQLAlchemySessionUserDatastore, Security
 
 from pyg.web import admin, app, container, db
 
@@ -21,6 +22,11 @@ def main():
     admin.init(app.app)
     app.app.jinja_env.auto_reload = True
     container.run(app.app, FLAGS.endpoint, FLAGS.debug)
+    # SECURITY STUFFS (in dev)
+    user_datastore = SQLAlchemySessionUserDatastore(db.web.session, models.Auth, models.Role)
+    security = Security(app.app,user_datastore)
+    
+    # END SEC STUFFS
 
 
 if __name__ == "__main__":

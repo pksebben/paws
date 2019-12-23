@@ -55,9 +55,9 @@ def fundraiser(frid=None):
 
     TODO
     make the list of fundraisers searchable
-
-
+    update the template to show 'about' section
     """
+    
     if frid:
         fundraiser = db.web.session.query(models.Fundraiser).get(frid)
         form = FundraiserForm(flask.request.form, fundraiser)

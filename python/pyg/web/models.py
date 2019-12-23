@@ -12,7 +12,7 @@ from sqlalchemy import (
     Boolean)
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy import create_engine
-
+from flask_security import Security, SQLAlchemyUserDatastore, UserMixin, RoleMixin
 
 Base = declarative_base()
 
@@ -22,6 +22,19 @@ member_to_team = Table("member_to_team", Base.metadata,
                        Column('team_id', Integer, ForeignKey('team.id')),
                        Column('owner', Boolean, nullable=False)
                        )
+
+roles_auths = Table("roles_auths", Base.metadata,
+                    Column("auth_id", Integer, ForeignKey('auth.id')),
+                    Column("role_id", Integer, ForeignKey('role.id'))
+                    )
+
+
+class Role(Base, RoleMixin):
+    __tablename__ = 'role'
+    
+    id = Column(Integer, primary_key=True)
+    name = Column(String(80), unique=True)
+    desc = Column(String(255))
 
 
 class Member(Base):
@@ -38,6 +51,8 @@ class Member(Base):
     location = Column(String(40))
     twitch_handle = Column(String(40))
     created = Column(DateTime, nullable=False)
+
+    # Relationship Config
     auth = relationship(
         "Auth",
         back_populates="member",
@@ -56,8 +71,12 @@ class Member(Base):
         return str(self.id)
 
 
-class Auth(Base):
-    """UserAuth is for "native" or username/password auth into pyg."""
+class Auth(Base, UserMixin):
+    """
+    UserAuth is for "native" or username/password auth into pyg.
+    Flask-Security is being mixed in here, as there are more shared fields natively.
+    It may be necessary to factor those elements out to Member.  Revisit.
+    """
 
     __tablename__ = 'auth'
 
@@ -67,6 +86,7 @@ class Auth(Base):
         primary_key=True)
     password = Column(String(80), unique=False, nullable=False)
     email = Column(String(80), unique=True, nullable=False)
+    active = Column(Boolean)
     member = relationship("Member", uselist=False)
 
     def __str__(self):
