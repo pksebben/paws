@@ -17,19 +17,6 @@ class FundraiserForm(Form):
 bp = flask.Blueprint("fundraiser", __name__)
 
 
-def new_fundraiser(name, target_funds, about, member_id, end_date):
-    fraiser = models.Fundraiser(
-        name=name,
-        start_date=datetime.datetime.now(),
-        target_funds=target_funds,
-        about=about,
-        member_id=int(member_id),
-        created=datetime.datetime.now(),
-        end_date=end_date
-    )
-    frid = db.web.session.add(fraiser)
-
-
 @bp.route("/fundraiser/<frid>", methods=['GET', 'POST'])
 @bp.route("/fundraiser", methods=['GET', 'POST'])
 def fundraiser(frid=None):
@@ -48,7 +35,7 @@ def fundraiser(frid=None):
     if frid:
         fundraiser = db.web.session.query(models.Fundraiser).get(frid)
         form = FundraiserForm(flask.request.form, fundraiser)
-        if flask.request.method == "POST":
+        if flask.request.method == "POST" and form.validate():
             fundraiser.name = form.name.data
             fundraiser.end_date = form.end_date.data
             fundraiser.start_date = form.start_date.data

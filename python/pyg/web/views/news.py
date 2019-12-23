@@ -1,5 +1,6 @@
 import flask
 from sqlalchemy import desc
+from sqlalchemy import session
 
 from pyg.web import models, db
 
