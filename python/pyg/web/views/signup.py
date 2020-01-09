@@ -4,6 +4,7 @@ import flask
 from flask import render_template, flash, request, redirect
 from sqlalchemy.exc import IntegrityError
 from wtforms import Form, validators, StringField, PasswordField
+from passlib.hash import bcrypt
 
 from pyg.web import models
 from pyg.web import db
@@ -21,8 +22,9 @@ class RegistrationForm(Form):
 def sign_new_user(email, password, name):
     try:
         newperson = models.Member(created=dt.datetime.now(), name=name)
+        passhash = bcrypt.hash(password)
         newperson.auth = models.Auth(
-            password=password, email=email)
+            passhash=passhash, email=email)
         db.web.session.add(newperson)
         db.web.session.commit()
         return newperson.id

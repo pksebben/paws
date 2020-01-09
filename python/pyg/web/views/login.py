@@ -1,6 +1,7 @@
 import flask
 from sqlalchemy.orm.exc import NoResultFound
 from wtforms import Form, StringField, PasswordField, validators
+from passlib.hash import bcrypt
 
 from pyg.web import db, models
 
@@ -19,7 +20,7 @@ def login_user(email, password):
         user = db.web.session.query(
             models.Auth).filter_by(
             email=email).one()
-        assert user.password == password
+        assert bcrypt.verify(password, user.passhash)
         flask.session['userid'] = user.id
         return flask.redirect('/')
     except AssertionError:

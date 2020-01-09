@@ -3,6 +3,7 @@ import random
 
 import sqlalchemy
 from sqlalchemy import orm
+from passlib.hash import bcrypt
 
 from pyg.web import models
 from pyg.web import db
@@ -76,7 +77,7 @@ def people():
         location="The town of hogsface, Land of foon"
     )
     tom.auth = models.Auth(
-        password="pass",
+        passhash = bcrypt.hash("pass"),
         email="tom@gmail.com"
     )
     othertom = models.Member(
@@ -89,7 +90,7 @@ def people():
 
     )
     othertom.auth = models.Auth(
-        password="pass",
+        passhash = bcrypt.hash("pass"),
         email="othertom@gmail.com"
     )
     bob = models.Member(
@@ -101,7 +102,7 @@ def people():
         location="The town of pigsface, Land of foon"
     )
     bob.auth = models.Auth(
-        password="pass",
+        passhash = bcrypt.hash("pass"),
         email="bob@gmail.com"
     )
     bill = models.Member(
@@ -114,7 +115,7 @@ def people():
 
     )
     bill.auth = models.Auth(
-        password="pass",
+        passhash = bcrypt.hash("pass"),
         email="bill@gmail.com"
     )
     session.add(othertom)

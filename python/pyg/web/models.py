@@ -84,7 +84,7 @@ class Auth(Base, UserMixin):
         Integer,
         ForeignKey("member.id"),
         primary_key=True)
-    password = Column(String(80), unique=False, nullable=False)
+    passhash = Column(String(80), unique=False, nullable=False)
     email = Column(String(80), unique=True, nullable=False)
     active = Column(Boolean)
     member = relationship("Member", uselist=False)
