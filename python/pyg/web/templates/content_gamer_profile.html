@@ -8,7 +8,8 @@
   <h2>Welcome, {{ auth.name }}</h2>
   <form id="submit" action="/profile/{{ auth.id }}" method="post">
     <button>Submit changes</button>
-  <a href="/createfundraiser">Start a Fundraiser!</a>
+    <a href="/createfundraiser">Start a Fundraiser!</a>
+    <a href="/account/{{ auth.id }}">Account Management</a>
   {% endif %}
   <div class="section gamer_profile-overview">
     <div class="gamer_profile-overview-avatar_username">

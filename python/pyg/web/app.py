@@ -10,7 +10,7 @@ from flask_login import LoginManager
 from flask_humanize import Humanize
 
 import pyg.web
-from pyg.web.views import login, home, signup, news, search, about, teamprofile, userprofile, leaderboard, logout, fundraiser, create_fundraiser
+from pyg.web.views import login, home, signup, news, search, about, teamprofile, userprofile, leaderboard, logout, fundraiser, create_fundraiser, account_management
 
 
 """this class and the following two functions enable loading static assets from the .pex"""
@@ -62,14 +62,26 @@ app.secret_key = "2380b817f0f6dc67cebcc4068fc6b437"
 login_manager = LoginManager()  # part of flask-login.  Not yet implemented.
 
 
-
-
+# TODO: Is this deprecated?  
 @login_manager.user_loader
 def load_user(userid):
     return LoginUser(userid)
 
+"""
+A couple of notes on the init()----
 
+Blueprint registration:
+The pattern we are using requires a few things to be in place for each blueprint:
+1. There must be a view for the blueprint in /views/, which should contain all the methods pertinent to that view and register a blueprint as bp.  Any of the existing views can be referred to re: the specifics of this pattern
+2. The view in question should reference a template (in the case that it presents any client-facing interface) in /templates/
+3. The view should be imported in this module and registered according to the pattern visible below.
+
+Template Filters and Context Processors:
+All template filters and context processors (methods for mutating data within templates or providing data to templates, respectively) are registered here.  See below the @app.foo decorators.
+
+"""
 def init():
+    app.register_blueprint(account_management.bp)
     app.register_blueprint(login.bp)
     app.register_blueprint(home.bp)
     app.register_blueprint(signup.bp)

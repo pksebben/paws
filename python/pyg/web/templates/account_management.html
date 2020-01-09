@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+{% from "_formhelpers.html" import render_field %}
+
+<html>
+  <head>
+    <title>Paws Your Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body>
+    <div>
+      <h1>Account Management</h1>
+    </div>
+    <div>
+      <h2>Change your password</h2>
+      <h3>{{ failure_text }}</h3>
+      <form method="post">
+	<dl>
+	  {{ render_field(passform.oldpassword) }}
+	  {{ render_field(passform.newpassword) }}
+	  {{ render_field(passform.newpasswordconfirm) }}
+	</dl>
+	<p><input type=submit value=submit>
+      </form>
+    </div>
+  </body>
+</html>

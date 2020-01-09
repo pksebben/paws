@@ -344,52 +344,148 @@ what I mean is, how are we going to access this data?
 
 **** TODO gamer profile
 
+* The List
+These are the TODOs.  They change a lot.
 
-* SCHEDULED TODO
+** Implement features from flask-security
 
-** DONE Implement WTForms
+*** TODO Whatever the hell Flask-Login does
+look into it.
+*** TODO Identity Access Management
+Users that are owners of teams or other assets need control of them.  Flask-Security does this using roles and that's probably a good pattern.   It's done in flask-security with Flask-Principal.  Look into it
 
-** Implement Flask-Security
+*** DONE Passwerd Hashin'
+Booya.
 
-* Notes for the next talk with Ian
+*** TODO Token Authentication
+*** TODO Change password
 
-** Flask-Security 
+** Dumb shit
+This can be done super quick and mostly represents wiring up views and making buttons real and such.
 
-We need to configure flask-security.  I want your opinion on this.
+*** TODO 'Donate now' and 'Join us' links on the homepage
 
-*** are we going to use account confirmation?
-SECURITY_CONFIRMABLE
+** Tiny think
+These are fairly straightforward but likely represent a slight design rabbithole
 
-**** TODO add confirmed_at to member model 
+*** TODO Donate module
 
-*** Are we going to enable tracking?
-SECURITY_TRACKABLE
+**** Questions
 
-**** TODO add these to member model:
+***** How, again, are donations being handled?  I wrote this down somewhere (perhaps earlier in this doc) and I need to know it here.
 
-***** TODO last_login
+**** Requirements TODO
 
-***** TODO current_login_at
+***** TODO Get the models for donations tracking all necessary info
+What *is* all necessary info?
 
-***** TODO last_login_ip
+** Design considerations
+These are the high-level decisions that need to be made about how the site is going to work, and should all generate low-level TODOs.
 
-***** TODO current_login_ip
+*** The news page
+What else needs to be a part of this?  What is the UX involved here?
 
-***** TODO login_count
+*** Teams
+Again, UX for this should be better fleshed out.
 
-*** 
+*** Shelter Pages
+*** Search
+SUPER IMPORTANT! How is search going to work, and what should it operate on?  Teams and such.
+
+**** Things that search should search for
+
+***** Teams
+
+***** Players
+
+***** Fundraisers
+
+***** Shelters
 
 * Meeting thursday 1/9/20
 
 ** Overview
 There are some things that I can do myself, and others that I need a little help with.
 
-** Ian, please help!
-
-*** Flask-Security
-I should hack on this for a little while today to get down exactly what I know and what I need
-
+** For Ian
 
 ** What can I do myself
+
 ** Hey Kirby
 I should make a call and check on the status.  Also to say hi.
+
+* From Journal.ln
+
+They have a system in extra life where you create a fundraising page
+[ ] Search page
+  -search by
+  	  -name
+	  -region
+	  -affiliation?
+	  -browse (no search parameters but order by X)
+  [ ] Search gamers
+  [ ] Search teams
+  [ ] Search shelters
+[ ] Shelter page
+  [ ] location
+  [ ] about
+  [ ] connected gamers?  teams?
+[ ] Team page
+  [ ] Team stats
+  [ ] Gamer roster
+  [ ] about
+[ ] Gamer page
+  [ ] gamer stats
+  [ ] about
+  [ ] *links to gamer profiles
+  [ ] Donate
+  [ ] *followers
+  [ ] STUFF
+  [ ] *streaming schedule
+[ ] Ranking
+[ ] Campaign
+  - it's like a user-generated (or otherwise) fundraising event of arbitrary length with arb ownership and arb owners
+  - breakdown by
+    - ownership
+    - beneficiary
+    - donors
+    - participants
+  - WHAT IS A CAMPAIGN MADE OF
+    -start
+    -end
+    name
+    blurb
+    people / orgs
+    targets
+[ ] gamers want to
+  [ ] *promote
+  [ ] check rankings
+  [ ] is there a campaign?  How far am I? What needs done?
+  [ ] edit profile widget 
+[ ] Donate module
+[ ] Shelter Profile
+[ ] add profile management page
+[ ] dick around with BUILD and see if I can prune some dependencies
+[ ] factor out testing.populate()
+[ ] implement marshmallow for form submissions to parse and validate.
+
+~~~~Generalized thoughts on the site~~~~
+We need to make it easy to go to a player's stream.
+
+[ ] Donate button - do we want a modal?  Should this redirect to it's own page?  To an outside page?  What's going on here?
+* Styling considerations
+These are all the things that eventually I want to run by Kirby.
+
+I am noticing that attempting to think about this my first thought is "what would she be doing" so perhaps a more in depth look at these, done together, is in order.
+** Implement Modal for login
+** Need to create some sort of menu-dropdown or whatever is the prettiest implementation for controls on the member page 
+*** Account stuff (like deletion)
+*** Starting fundraisers
+*** changing passwords
+** Member Profile page needs to be brought up to speed
+** Need a field for about text re: fundraisers.
+** News is almost entirely unstyled
+** Pages that are entirely unstyled
+*** News
+*** Login
+*** Signup
