@@ -293,19 +293,14 @@ made some minor changes.  Read up on it.
 ** 
 
 * TO DO
-** TODO make fundraiser creatable
-in the middle of trying to get validation working via marshmallow.  At the moment it's not taking the objects in properly.
-*** DONE make module that creates fundraisers
-*** TODO implement marshmallow validation
-*** 
 ** TODO research chase WePay
-** TODO implement modals for login
-might need kirby for this
-** TODO hashing [0/2]
-*** TODO Basic hashing
-*** TODO salt bae tha hashes
-** TODO Implement user avatars sitewide
-** TODO team management
+** TODO Finish integrating Flask-Security
+** TODO Static asset upload
+This is going to be necessary for avatars etc.
+** TODO Create Team management [0/8]
+*** TODO Can users create teams?
+*** TODO Can users edit teams?
+how are we going
 *** TODO who owns it
 **** TODO add ownership bit to the assoc table.
 ***** TODO how are we going to use this?
@@ -330,7 +325,7 @@ what I mean is, how are we going to access this data?
 * Fixes
 
 ** TODO Gamer Profile no longer shows name properly after ian fucked with it.
-
+   
 * Implement Me
 
 ** WTForms [/] 
@@ -349,9 +344,52 @@ what I mean is, how are we going to access this data?
 
 **** TODO gamer profile
 
+
 * SCHEDULED TODO
 
 ** DONE Implement WTForms
 
 ** Implement Flask-Security
 
+* Notes for the next talk with Ian
+
+** Flask-Security 
+
+We need to configure flask-security.  I want your opinion on this.
+
+*** are we going to use account confirmation?
+SECURITY_CONFIRMABLE
+
+**** TODO add confirmed_at to member model 
+
+*** Are we going to enable tracking?
+SECURITY_TRACKABLE
+
+**** TODO add these to member model:
+
+***** TODO last_login
+
+***** TODO current_login_at
+
+***** TODO last_login_ip
+
+***** TODO current_login_ip
+
+***** TODO login_count
+
+*** 
+
+* Meeting thursday 1/9/20
+
+** Overview
+There are some things that I can do myself, and others that I need a little help with.
+
+** Ian, please help!
+
+*** Flask-Security
+I should hack on this for a little while today to get down exactly what I know and what I need
+
+
+** What can I do myself
+** Hey Kirby
+I should make a call and check on the status.  Also to say hi.
