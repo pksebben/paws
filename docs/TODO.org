@@ -346,7 +346,9 @@ what I mean is, how are we going to access this data?
 
 * The List
 These are the TODOs.  They change a lot.
-
+** Gruntwork
+these are the things that need to be done by sort of crawling through the code and making minor adjustments, but are of critical importance 
+*** TODO go over all the wtforms instances and ensure proper validation
 ** Implement features from flask-security
 
 *** TODO Whatever the hell Flask-Login does
@@ -389,6 +391,7 @@ What else needs to be a part of this?  What is the UX involved here?
 Again, UX for this should be better fleshed out.
 
 *** Shelter Pages
+What does the workflow look like to sign up partners? (such as shelters etc.)
 *** Search
 SUPER IMPORTANT! How is search going to work, and what should it operate on?  Teams and such.
 
@@ -401,6 +404,12 @@ SUPER IMPORTANT! How is search going to work, and what should it operate on?  Te
 ***** Fundraisers
 
 ***** Shelters
+
+** Ian-Actionable
+
+*** Work out a donations workflow
+
+*** Get Oauth provider keys from facebook, Google
 
 * Meeting thursday 1/9/20
 
