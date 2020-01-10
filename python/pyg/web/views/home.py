@@ -4,6 +4,15 @@ from sqlalchemy import desc, func
 
 from pyg.web import models, db
 
+
+"""
+Home page
+fairly self-explanatory.
+
+TODO:
+- do we want to factor out the leaderboard donations function present here?  I believe that it shows up in a couple of other places.  Might be slightly awkward given that there's a leaderboard function here and a leaderboard view, but really no less awkward than doing the same thing just with duplicate code.
+"""
+
 bp = flask.Blueprint('home', __name__)
 
 

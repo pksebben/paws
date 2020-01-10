@@ -14,6 +14,20 @@ from sqlalchemy.orm import relationship, backref
 from sqlalchemy import create_engine
 from flask_security import Security, SQLAlchemyUserDatastore, UserMixin, RoleMixin
 
+
+
+
+"""
+models.py
+This is where all the db models (and, by ORM extension, the schema) are created / configured.
+If things here seem broken, a good place to start is the "basic relationship patterns" section of the SQLAlchemy docs.
+
+TODO:
+- implement the declarative method for member-to-team IOT use the recommended pattern re: additional data on relational fields.
+- Scrap all the flask_security nonsense.
+"""
+
+
 Base = declarative_base()
 
 

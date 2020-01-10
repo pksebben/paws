@@ -9,6 +9,15 @@ from pyg.web import db
 from pyg.web import models
 
 
+"""
+Auth.py
+This **should** be totally broken since implementing bcrypt, but login seems to work just fine still.
+
+TODO:
+- investigate this zombie module, potentially deprecate.  Maybe fix.
+"""
+
+
 class AuthError(Exception):
     pass
 

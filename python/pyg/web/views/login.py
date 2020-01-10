@@ -5,6 +5,16 @@ from passlib.hash import bcrypt
 
 from pyg.web import db, models
 
+
+"""
+Login page
+This is probably going to change a little, as I think we want this to be a modal rather than it's own whole thing.
+
+TODO:
+- how are all these functions going to be handled when this is a modal, potentially present on multiple views?
+"""
+
+
 bp = flask.Blueprint('login', __name__)
 
 

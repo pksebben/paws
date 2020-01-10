@@ -6,6 +6,15 @@ import sqlalchemy
 from sqlalchemy import orm
 
 
+
+"""
+plugin.py
+This mysteriously-named little gem provides an interface between flask and SQLAlchemy, functionally parallel to flask-sqlalchemy but without all the spooky action-at-a-distance and weird side effects.  Ian wrote it, so if it's fucked up go talk to him first.
+
+WARNING: At least on three seperate occassions (that I can think of right now) other third-party flask modules have expected use of flask-sqlalchemy and in only one of them was this not a breaking interaction.  The design decision to use this relates to keeping the important code present and readable and NOT buried under a mountain of 'assumptions-some-other-douchebag-made'.  Be careful when implementing third-party flask plugins to make sure that they don't mention assumptions re: flask-sqlalchemy.  IF YOU DO RUN INTO A BUG YOU THINK IS RELATED: ask yourself if the extension is really doing something we cannot do ourselves.  If you absolutely cannot live without the new shiny thing, you're gonna have to ask Ian to 'fix his code' to work with yours.  Good luck.
+
+"""
+
 class SQLAlchemy(object):
 
     DEFAULT_ENGINE_CONF = {

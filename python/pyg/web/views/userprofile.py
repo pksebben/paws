@@ -3,6 +3,17 @@ import flask
 from wtforms import Form, StringField, TextAreaField, HiddenField, validators
 from pyg.web import db, models
 
+
+"""
+Member Profile page
+Is a view if it's not *your* member profile, otherwise is an editable form that allows you to update your profile information.  This behavior is controlled by the template.
+
+This is the view that links to all the admin things for stuff like teams, fundraisers, etc.
+
+TODO:
+- currently, this view shows some arbitrary member if no member is selected (via setting the userid).  This is not something that's likely to ever happen (the user would have to type the URL in manually) but it's weird and pointless and I should change it.
+"""
+
 bp = flask.Blueprint("userprofile", __name__)
 
 

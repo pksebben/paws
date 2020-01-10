@@ -8,6 +8,16 @@ from twisted.web import server
 from twisted.web import wsgi
 
 
+
+"""
+container.py
+I'm gonna be honest, I have *no idea* what this does.
+
+TODO:
+- essplain me what dafuq dis be, bossman.
+
+"""
+
 logger = logging.getLogger(__name__)
 
 FLAGS = flag.namespace(__name__)

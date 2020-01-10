@@ -13,7 +13,20 @@ import pyg.web
 from pyg.web.views import login, home, signup, news, search, about, teamprofile, userprofile, leaderboard, logout, fundraiser, create_fundraiser, account_management, partnering
 
 
-"""this class and the following two functions enable loading static assets from the .pex"""
+"""
+App.py
+
+A note for those familiar with flask:
+Many of the functions that a traditional app.py handle in a flask app have been moved to run.py (such as the actual running of the app).  This was done to avoid a circular import problem relating to (I can't quite remember if it was the CMS or test suite or both.)
+
+Things this app.py still does:
+-provides an interface for the app and it's static assets in the PexFlask class that solves an earlier issue with running the app as a .pex executable (see Pantsbuild docs for more on that)
+-registers all views
+-configures methods and data available to templates
+-performs some basic app configurations
+
+see below docstrings for more info
+"""
 
 
 class PexFlask(flask.Flask):
@@ -62,10 +75,11 @@ app.secret_key = "2380b817f0f6dc67cebcc4068fc6b437"
 login_manager = LoginManager()  # part of flask-login.  Not yet implemented.
 
 
-# TODO: Is this deprecated?  
+# TODO: Is this deprecated?
 @login_manager.user_loader
 def load_user(userid):
     return LoginUser(userid)
+
 
 """
 A couple of notes on the init()----
@@ -80,6 +94,8 @@ Template Filters and Context Processors:
 All template filters and context processors (methods for mutating data within templates or providing data to templates, respectively) are registered here.  See below the @app.foo decorators.
 
 """
+
+
 def init():
     app.register_blueprint(account_management.bp)
     app.register_blueprint(login.bp)

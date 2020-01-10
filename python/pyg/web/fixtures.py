@@ -9,6 +9,15 @@ from pyg.web import models
 from pyg.web import db
 
 
+
+"""
+fixtures.py
+This is a module for populating testing data into the db.  It's used in two places:
+1 - the test suite
+2 - as a standalone, whenever the dev version of the site is being data wacky or you want to add new testing data.
+
+"""
+
 def lorem(n):
     return " ".join("""Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 

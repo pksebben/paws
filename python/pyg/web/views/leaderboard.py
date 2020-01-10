@@ -7,7 +7,17 @@ from pyg.web import models, db
 
 bp =flask.Blueprint('leaderboard', __name__)
 
-"""TODO: This next module is not finished.  Finish him!"""
+"""
+Leaderboard view
+This module is under a bit of limbo at the moment.  The leaderboard itself was factored out so the view it references no longer exists.  We may or may not want to do something about this, dependant on whether we find it useful to have a dedicated leaderboard page.
+
+IMPORTANT QUESTION:
+What purpose would a dedicated leaderboard serve that is not served by having leaderboards in the home page / fundraiser pages / team pages?
+
+TODO:
+- Create a leaderboard page that uses the leaderboard macro in 'leaderboard.html' 
+- This next module is not finished.  Finish him!
+"""
 # def pull_leaders(listsize = None, center = None):
 #     donations = db.web.session.query(
 #         models.Member.handle,

@@ -8,6 +8,15 @@ from wtforms.validators import InputRequired, Length, ValidationError
 from pyg.web import db, models
 
 
+"""
+Fundraiser page
+
+This is both the view to look at a fundraiser (if you're not an owner) and the view to edit fundraisers (if you are.)  Newly created fundraisers are modified here before going live by setting the 'active' bit.
+
+Whether the fundraiser is displayed in 'edit' or 'view' mode is controlled in the template.
+"""
+
+
 def daterange(soonest, latest):
     msg = "Must be no sooner than %s and no later than %s" % (soonest, latest)
 
@@ -57,7 +66,7 @@ def fundraiser(frid=None):
     make the list of fundraisers searchable
     update the template to show 'about' section
     """
-    
+
     if frid:
         fundraiser = db.web.session.query(models.Fundraiser).get(frid)
         form = FundraiserForm(flask.request.form, fundraiser)
