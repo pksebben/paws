@@ -3,7 +3,7 @@ import datetime
 import flask
 from wtforms import Form, StringField, TextAreaField, validators
 from wtforms.fields.html5 import DateField, IntegerField
-from wtforms.validators import InputRequired, Length, ValidationError
+from wtforms.validators import InputRequired, Length, ValidationError, DataRequired
 
 from pyg.web import db, models
 
@@ -14,6 +14,11 @@ Fundraiser page
 This is both the view to look at a fundraiser (if you're not an owner) and the view to edit fundraisers (if you are.)  Newly created fundraisers are modified here before going live by setting the 'active' bit.
 
 Whether the fundraiser is displayed in 'edit' or 'view' mode is controlled in the template.
+
+Note on forms: WTForms has this great feature that will take an object and attempt to assume default values for fields based on matching the data in that object to the names of the fields. This is done here, and any changes to the fundraiser model or the fundraiser form must be reflected in the other.
+
+TODO:
+Implement 'hiding' behavior for inactive fundraisers.
 """
 
 
@@ -30,22 +35,24 @@ def daterange(soonest, latest):
 class FundraiserForm(Form):
     """
     TODO
-    decide a reasonable max length for names
-    update date validators to reflect desired ranges
+    - decide a reasonable max length for names
+    - is it possible to compare start and end dates to ensure that one precedes the other?
     """
+    date_constraint = daterange(datetime.date.today(),
+                                datetime.date.max)
     name = StringField("Name", validators=[InputRequired(), Length(max=25)])
     end_date = DateField(
         "End Date",
         validators=[
-            InputRequired(),
-            daterange(
-                datetime.date.today(),
-                datetime.date(
-                    year=2050,
-                    month=1,
-                    day=1))])
-    start_date = DateField("Start Date")
-    target_funds = IntegerField("Target Funds")
+            DataRequired(),
+            date_constraint])
+    start_date = DateField(
+        "Start Date",
+        validators=[
+            DataRequired(),
+            date_constraint
+        ])
+    target_funds = IntegerField("Target Funds", validators=[DataRequired()])
     about = TextAreaField("About")
 
 
@@ -76,6 +83,7 @@ def fundraiser(frid=None):
             fundraiser.start_date = form.start_date.data
             fundraiser.target_funds = form.target_funds.data
             fundraiser.about = form.about.data
+            fundraiser.active = True
             db.web.session.commit()
         # form.name.data = fundraiser.name
         # form.end_date = fundraiser.end_date

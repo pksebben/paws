@@ -25,7 +25,7 @@ bp = flask.Blueprint("account_management", __name__)
 # TODO: add validators
 class ChangePasswordForm(Form):
     oldpassword = StringField("Old Password")
-    newpassword = StringField("New Password")
+    newpassword = StringField("New Password", validators=[validators.EqualTo(newpasswordconfirm)])
     newpasswordconfirm = StringField("Confirm New Password")
 
 

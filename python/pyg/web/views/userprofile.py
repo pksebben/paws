@@ -12,6 +12,7 @@ This is the view that links to all the admin things for stuff like teams, fundra
 
 TODO:
 - currently, this view shows some arbitrary member if no member is selected (via setting the userid).  This is not something that's likely to ever happen (the user would have to type the URL in manually) but it's weird and pointless and I should change it.
+- Couldn't think of any validators for the profile form off the top of my head.
 """
 
 bp = flask.Blueprint("userprofile", __name__)

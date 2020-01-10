@@ -348,12 +348,12 @@ what I mean is, how are we going to access this data?
 These are the TODOs.  They change a lot.
 ** Gruntwork
 these are the things that need to be done by sort of crawling through the code and making minor adjustments, but are of critical importance 
-*** TODO go over all the wtforms instances and ensure proper validation
+*** DONE go over all the wtforms instances and ensure proper validation
 *** TODO code-cleanup
 **** deprecated modules
 **** PEP8
 *** TODO Clean the hell out of this TODO
-*** TODO Add documentation to any modules that even kind of need it
+*** DONE Add documentation to any modules that even kind of need it
 an idiot should be able to maintain the site without any primer whatsoever.
 ** Implement features from flask-security
 
