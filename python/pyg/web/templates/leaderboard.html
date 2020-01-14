@@ -3,16 +3,15 @@
   <ul class="leaderboard-list">
     {% for i in leaderboard_players %}
     <li class="leaderboard-list-item">
-      <a class="leaderboard-list-item-link" href="gamer_profile.php">
+      <a class="leaderboard-list-item-link" href="/profile/{{i.id}}">
       </a>
       <span class="leaderboard-list-item-rank">{{ i.0 }}</span>
       <img class="leaderboard-list-item-avatar" src="img/placeholder-user-avatar.png"/>
       <span class="leaderboard-list-item-name">{{ i.1.handle }}</span>
       <span class="leaderboard-list-item-change icon-block leaderboard-list-item-change-icon_up">navigateup</span>
-</span>
-<span class="leaderboard-list-item-amount">{{ "$%.2f"|format(i.1.total|float) }}</span>
-</li>
-{% endfor %}
-</ul> <!--end leaderboard-list -->
+      <span class="leaderboard-list-item-amount">{{ "$%.2f"|format(i.1.total|float) }}</span>
+    </li>
+    {% endfor %}
+  </ul> <!--end leaderboard-list -->
 </div> <!--end leaderboard-->
 {% endblock %}

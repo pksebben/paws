@@ -21,16 +21,22 @@
     {% endif %}
     {% endwith %}
     <div>
-      <h2>Change your password</h2>
-      <h3>{{ failure_text }}</h3>
-      <form method="post">
+      
+      <form method="post" name="passform">
+	<h2>Change your password</h2>
 	<dl>
 	  {{ render_field(passform.oldpassword) }}
 	  {{ render_field(passform.newpassword) }}
 	  {{ render_field(passform.newpasswordconfirm) }}
 	</dl>
-	<p><input type=submit value=submit>
+	{{ render_field(passform.submit) }}
       </form>
+      <form method="post">
+	<h2>Delete your account</h2>
+	{{ render_field(deleteform.confirmdelete) }}
+	{{ render_field(deleteform.submit) }}
+      </form>
+      
     </div>
   </body>
 </html>

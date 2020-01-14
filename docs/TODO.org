@@ -354,7 +354,7 @@ these are the things that need to be done by sort of crawling through the code a
 **** PEP8
 *** TODO Clean the hell out of this TODO
 *** DONE Add documentation to any modules that even kind of need it
-an idiot should be able to maintain the site without any primer whatsoever.
+    an idiot should be able to maintain the site without any primer whatsoever.
 ** Implement features from flask-security
 
 *** TODO Whatever the hell Flask-Login does
@@ -376,7 +376,7 @@ This can be done super quick and mostly represents wiring up views and making bu
 
 ** Tiny think
 These are fairly straightforward but likely represent a slight design rabbithole
-
+*** TODO "my fundraisers" menu
 *** TODO Donate module
 
 **** Questions
