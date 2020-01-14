@@ -72,7 +72,7 @@ These are the pages we are gonna need, with the relevant data nested.
 
 ** TODO Campaign Page [0/1]
 - [ ] 
-
+  
 * Data
 
 ** Player Data
@@ -230,7 +230,10 @@ he put some stuff in app.py in __init__() that might be good to look at.
 Structlog
 *** Where / how are we going to serve up user-uploaded static assets (like avatars)? :patterns:modules:
 I need to know both what (we are going to use for upload) and how (we are going to store them)
+<<<<<<< HEAD
 **** worry about it later
+=======
+>>>>>>> hashing
 *** What should I be reading up on re: password hashing and salting and such? :study:modules:
     
 **** Is there a specific library we're going to use? 
@@ -258,7 +261,11 @@ I ask because when it comes to testing the site for readability and composition 
 
 ****** I assume we're going to show the latest news.  How many articles do we want by default?
 *** My notes
+<<<<<<< HEAD
 **** what is flask request.url_rule?
+=======
+
+>>>>>>> hashing
 **** passing -debug to python -m yadda/app.py detects changes
 **** take a look at the new news module and implement those patterns sitewide (where applicable)
 **** fixtures.py is the new testing_data.py
@@ -272,6 +279,7 @@ there seems to be a thing that does the thing you want usually in one of the lib
 Notably, when Ian is doing this he seems to jump around a lot.  I'm not sure exactly what it is he's always looking for (that may just be an instinctual experience type of thing)
 
 One thing that I could do to be better at this is getting my keyboard movement down a little better.  Switching between tabs and processes should take no time at all.
+<<<<<<< HEAD
 
 * Next Meeting
 
@@ -523,3 +531,8 @@ I am noticing that attempting to think about this my first thought is "what woul
 *** News
 *** Login
 *** Signup
+=======
+*** TO DO
+**** TODO set up structlog
+**** 
+>>>>>>> hashing
