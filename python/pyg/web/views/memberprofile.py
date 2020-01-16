@@ -41,7 +41,7 @@ def update_user_profile(id, name, about, location, twitch_handle, handle):
 
 @bp.route('/profile/<userid>', methods=['GET', 'POST'])
 @bp.route('/profile')
-def userprofile(userid=1):
+def memberprofile(userid=1):
     member = db.web.session.query(models.Member).get(userid)
     auth = member.auth
     fundraisers = member.fundraisers
@@ -56,4 +56,4 @@ def userprofile(userid=1):
             form.handle.data
         )
     return flask.render_template(
-        'content_gamer_profile.html', form=form, member=member, auth=auth, fundraisers=fundraisers)
+        'content_member_profile.html', form=form, member=member, auth=auth, fundraisers=fundraisers)

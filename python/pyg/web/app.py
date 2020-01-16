@@ -10,7 +10,7 @@ from flask_login import LoginManager
 from flask_humanize import Humanize
 
 import pyg.web
-from pyg.web.views import login, home, signup, news, search, about, teamprofile, userprofile, leaderboard, logout, fundraiser, create_fundraiser, account_management, partnering, account_deleted
+from pyg.web.views import login, home, signup, news, search, about, teamprofile, memberprofile, leaderboard, logout, fundraiser, create_fundraiser, account_management, partnering, account_deleted
 
 
 """
@@ -105,7 +105,7 @@ def init():
     app.register_blueprint(about.bp)
     app.register_blueprint(teamprofile.bp)
     app.register_blueprint(search.bp)
-    app.register_blueprint(userprofile.bp)
+    app.register_blueprint(memberprofile.bp)
     app.register_blueprint(leaderboard.bp)
     app.register_blueprint(logout.bp)
     app.register_blueprint(fundraiser.bp)

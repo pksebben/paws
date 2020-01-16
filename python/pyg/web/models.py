@@ -43,6 +43,10 @@ roles_auths = Table("roles_auths", Base.metadata,
                     )
 
 
+"""
+TODO:
+DEPRECATED?
+"""
 class Role(Base, RoleMixin):
     __tablename__ = 'role'
     
@@ -50,6 +54,14 @@ class Role(Base, RoleMixin):
     name = Column(String(80), unique=True)
     desc = Column(String(255))
 
+
+class Shelter(Base):
+    __tablename__ = 'shelter'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(80), unique=True)
+    location = Column(String(80))
+    about = Column(Text)
 
 class Member(Base):
     """Member is the central table which ties all member data together."""

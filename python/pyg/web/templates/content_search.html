@@ -1,30 +1,95 @@
 {% extends "base_content.html" %}
-
+{% from "_formhelpers.html" import render_field %}
 {% block content %}
 <div class="search">
   <p>TODO: Structure out a list for search results</p>
+  
   <div class="searchBar">
-    <form id="searchform" action="/search" method="post">
-      <input type="text" name="name" placeholder="search name">
-      <button>search</button>
+    <form method="post">
+      {{ render_field(form.querystring) }}
+      {{ render_field(form.submit) }}
+      {{ render_field(form.searchfor) }}
     </form>
   </div>
   <div class="searchResults">
+
+    {% if results.players[0] %}
     <label for="player_results">Players</label>
     <table id="player_results">
       <tr>
-	<th>Rank</th>
+	<th>ID</th>
 	<th>Name</th>
 	<th>Amount raised</th>
       </tr>
-      {% for i in donations %}
+      {% for i in results.players %}
       <tr>
-	<td>{{ i.0 }}</td>
-	<td>{{ i.1.handle }}</td>
-	<td>{{ "$%.2f"|format(i.1.total|float) }}</td>
+	<td>{{ i.id }}</td>
+	<td>{{ i.handle }}</td>
+	<td>{{ i.donations|sum(attribute="amount") }}</td>
       </tr>
       {% endfor %}
     </table>
+    {% endif %}
+
+    {% if results.teams[0] %}
+    <label for="team_results">Teams</label>
+    <table id="team_results">
+      <tr>
+	<th>ID</th>
+	<th>Name</th>
+	<th>Amount Raised</th>
+	<th>Members</th>
+      </tr>
+      {% for i in results.teams %}
+      <tr>
+	<td>{{ i.id }}</td>
+	<td>{{ i.name }}</td>
+	<td>{{ i.members.donations|sum(attribute="amount") }}</td>
+	<td>{{ length(i.members) }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %}
+
+    {% if results.fundraisers[0] %}
+    <label for="fundraiser_results">Fundraisers</label>
+    <table id="fundraiser_results">
+      <tr>
+	<th>ID</th>
+	<th>Name</th>
+	<th>Amount Raised</th>
+	<th>Start Date</th>
+	<th>End Date</th>
+      </tr>
+      {% for i in results.fundraisers %}
+      <tr>
+	<td>{{ i.id }}</td>
+	<td>{{ i.name }}</td>
+	<td>{{ i.donations|sum(attribute="amount") }}</td>
+	<td>{{ i.start_date }}</td>
+	<td>{{ i.end_date }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %}
+
+    {% if results.shelters[0] %}
+    <label for="shelter_results">Shelters</label>
+    <table id="shelter_results">
+      <tr>
+	<th>Name</th>
+	<th>Location</th>
+      </tr>
+      {% for i in results.shelters %}
+      <tr>
+	{{ i.name }}
+	{{ i.location }}
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %}
+
+    
   </div>
 </div>
 {% endblock %}

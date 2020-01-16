@@ -375,6 +375,8 @@ Users that are owners of teams or other assets need control of them.  Flask-Secu
 Booya.
 
 *** TODO Token Authentication
+Need Ian to set up a dev oauth thing for this
+
 *** DONE Change password
 
 ** Dumb shit
@@ -536,3 +538,39 @@ I am noticing that attempting to think about this my first thought is "what woul
 **** TODO set up structlog
 **** 
 >>>>>>> hashing
+* Notes 1/16/20
+** TODO Players vs Members
+We need to distinguish streamers from other members.
+Questions:
+1. Are there members that are not streamers?
+- absolutely.  They may have a shelter or just be a contributor.
+
+** TODO ADD TEAMS TO FIXTURES!
+
+** TODO ADD SHELTERS TOO!
+
+* IAN: from 1/16 on
+
+** Will we have members that are just contributors?
+My answer:
+I think this could be a powerful driver for revenue.  Consider this: I am a streamer and I want to recruit people.  My friends make profiles and now they're recruited as dissemination points (with a profile, they can share their contributions and level up by recruiting others).  It turns watching a stream into an active role. Just picture Ethan and his youtubers - I think that if given a chance to gameify watching and being a part of the thing his involvement would skyrocket.
+Now that I'm writing this out I'm kind of thinking that maybe this course of action is slightly evil.  Wanna know what you think.
+
+** How can we best apply rank to streamers?
+The question: Doing a whole extra hit on the db and calculation for rank seems expensive in a few ways (server load, page loading times, bugfixing).  Am I wrong here?  Or should we implement some kind of crawler that periodically updates the rankings based on when they were last updated 
+My Idea: When someone makes a request involving player rankings, the server checks whether those have been updated in the past, say, 15 seconds, and if they haven't it updates them.
+
+** A question on playing nice with others
+One of the things I've done in the past to make things more readable for myself is using variables to store the output of functions rather than just using the functions inline, esp. in cases where I had to deep read the docs to get a sense of what the return value of that function actually meant.  This was also meant to improve readability.  What I mean is:
+
+Prefer This:
+data = db.web.session.query(models.Whatever).filter_by(something)
+do_thing_with_data(data)
+
+Over This:
+do_thing_with_data(db.web.session.query(models.Whatever).filter_by(something))
+
+Is this the right way to do this, in your estimation?  More to the point, if I were part of a team would this be the thing to do?
+
+** A question about grouping fundraiser donations.
+Need to figure out what the best way for this is.
