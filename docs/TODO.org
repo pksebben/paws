@@ -545,6 +545,12 @@ Questions:
 1. Are there members that are not streamers?
 - absolutely.  They may have a shelter or just be a contributor.
 
+** TODO Finish the search page
+
+*** TODO implement sorting
+
+*** TODO Formatting for dates and cash
+
 ** TODO ADD TEAMS TO FIXTURES!
 
 ** TODO ADD SHELTERS TOO!
