@@ -10,8 +10,7 @@ This just serves a notification that account deletion has been successful.
 until deletion mechanics are better fleshed out.
 
 TODO:
-Are there further instructions that we want to implement?
-Should there be a timed redirect here?
+- figure out deletion mechanics
 """
 
 bp = flask.Blueprint("account_deleted", __name__)

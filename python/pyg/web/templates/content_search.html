@@ -2,7 +2,6 @@
 {% from "_formhelpers.html" import render_field %}
 {% block content %}
 <div class="search">
-  <p>TODO: Structure out a list for search results</p>
   
   <div class="searchBar">
     <form method="post">
@@ -13,15 +12,15 @@
   </div>
   <div class="searchResults">
 
-    {% if results.players[0] %}
+    {% if results.players[0] is defined %}
     <label for="player_results">Players</label>
     <table id="player_results">
       <tr>
-	<th>ID</th>
-	<th>Name</th>
+	<th><button onclick={% set sortby = "id" %}>ID</button></th>
+	<th><button onclick={% set sortby = "name" %}>Name</button></th>
 	<th>Amount raised</th>
       </tr>
-      {% for i in results.players %}
+      {% for i in results.players|sort(attribute=sortby) %}
       <tr>
 	<td>{{ i.id }}</td>
 	<td>{{ i.handle }}</td>
@@ -31,7 +30,7 @@
     </table>
     {% endif %}
 
-    {% if results.teams[0] %}
+    {% if results.teams[0] is defined %}
     <label for="team_results">Teams</label>
     <table id="team_results">
       <tr>
@@ -45,13 +44,13 @@
 	<td>{{ i.id }}</td>
 	<td>{{ i.name }}</td>
 	<td>{{ i.members.donations|sum(attribute="amount") }}</td>
-	<td>{{ length(i.members) }}</td>
+	<td>{{ i.members|length() }}</td>
       </tr>
       {% endfor %}
     </table>
     {% endif %}
 
-    {% if results.fundraisers[0] %}
+    {% if results.fundraisers[0] is defined %}
     <label for="fundraiser_results">Fundraisers</label>
     <table id="fundraiser_results">
       <tr>
@@ -73,7 +72,7 @@
     </table>
     {% endif %}
 
-    {% if results.shelters[0] %}
+    {% if results.shelters[0] is defined %}
     <label for="shelter_results">Shelters</label>
     <table id="shelter_results">
       <tr>
@@ -82,8 +81,8 @@
       </tr>
       {% for i in results.shelters %}
       <tr>
-	{{ i.name }}
-	{{ i.location }}
+	<td>{{ i.name }}</td>
+	<td>{{ i.location }}</td>
       </tr>
       {% endfor %}
     </table>

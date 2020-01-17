@@ -15,7 +15,7 @@ Allows users to do things like change passwords, delete their account, that kind
 Design decisions need to be made re: account deletion
 
 TODO:
-- account deletion
+- account deletion mechanics
 - have a conversation about what else should go in here.
 - have a brief conversation about whether there should be an extra layer of security over this module, as it concerns the changing and recovery of passwords
 - should the change password function be factored out?  Maybe a modal?
@@ -101,9 +101,7 @@ def accountmanagement(memberid):
                 # db.web.session.commit()
                 return flask.redirect('/account_deleted')
         else:
-            print("####################")
-            print("SOMEHOW A POST METHOD GOT CALLED BUT IT WASN'T ONE OF THESE")
-            return showpage()
+            return flask.render_template("errorpage.html")
     else:
         # Is this secure enough?  Should we implement some form of security
         # validation?

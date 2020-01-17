@@ -10,11 +10,21 @@ Home page
 fairly self-explanatory.
 
 TODO:
-- do we want to factor out the leaderboard donations function present here?  I believe that it shows up in a couple of other places.  Might be slightly awkward given that there's a leaderboard function here and a leaderboard view, but really no less awkward than doing the same thing just with duplicate code.
+- Implement windowing for the leaderboard query
+- find a home for the leaderboard windowing function so it becomes useful for member profile pages, the homepage, team profiles, and fundraisers.
 """
 
 bp = flask.Blueprint('home', __name__)
 
+def rankedlist():
+    donations = db.web.session.query(
+        models.Member.handle,
+        func.sum(models.Donation.amount).label('total')
+    ).join(models.Donation
+    ).group_by(
+        models.Member.handle).order_by(desc('total')).all()
+    leaderboard_players = enumerate(donations, start=1)
+    return leaderboard_players
 
 @bp.route('/')
 def home():

@@ -126,7 +126,6 @@ class Team(Base):
     name = Column(String(80))
     date_joined = Column(Date)
     missionstatement = Column(Text, nullable=True)
-    location = Column(String(50), nullable=True, unique=False)
     website = Column(Text, nullable=True)
     facebook_url = Column(Text, nullable=True)
     twitter_url = Column(Text, nullable=True)

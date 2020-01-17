@@ -1,5 +1,6 @@
 import datetime
 import random
+import string
 
 import sqlalchemy
 from sqlalchemy import orm
@@ -76,6 +77,41 @@ def articles():
     session.commit()
 
 
+vowels = ['a','e','i','o','u']
+consonants = [i for i in string.ascii_lowercase if i not in vowels]
+
+def makeaname(length):
+    name = []
+    name.append(random.choice(string.ascii_uppercase))
+    for i in range(length):
+        if name[-1].lower() == 'q':
+            name.append('u')
+        elif name[-1].lower() in vowels:
+            name.append(random.choice(consonants))
+        else:
+            name.append(random.choice(vowels))
+    return ''.join(name)
+        
+    
+def garble(length):
+    return "".join(random.choice(string.ascii_uppercase) for i in range(length))
+
+def generate_person():
+    person = models.Member(
+        name = makeaname(8),
+        created=datetime.datetime.now(),
+        handle=makeaname(8),
+        about=garble(150),
+        birthday=datetime.datetime.now(),
+        location=garble(12)
+    )
+    session.add(person)
+    session.commit()
+
+def crowd(numpeople):
+    for i in range(numpeople):
+        generate_person()
+
 def people():
     tom = models.Member(
         name="tom",
@@ -134,9 +170,9 @@ def people():
     session.commit()
 
 
-def donations():
+def donations(numdonations):
     members = session.query(models.Member).all()
-    for _ in range(90):
+    for _ in range(numdonations):
         donation = models.Donation(member_id=random.choice(members).id,
                                    donor_name="Scroog McDuck",
                                    created=datetime.datetime.now(),
@@ -228,17 +264,39 @@ def create_team(owner, **data):
         name = name,
         date_joined = datetime.datetime.now(),
         missionstatement = missionstatement,
-        location = location,    # TODO do we need this?  Seems pointless.
         website = website,
         facebook_url = facebook_url,
         twitter_url = twitter_url,
         twitch_url = twitch_url,
         instagram_url = instagram_url
     )
+    session.add(team)
+    session.commit()
     # TODO add the current user as the team owner.
     # TODO return something?
     
 def teams():
+    team1 = models.Team(
+        name = "tom's team"
+    )
+    team2 = models.Team(
+        name = "chad's fuckin' badass beach bros"
+    )
+    team3 = models.Team(
+        name = "Go Team"
+    )
+    session.add(team1)
+    session.add(team2)
+    session.add(team3)
+    session.commit()
+
+def shelters():
+    shelter1 = models.Shelter(
+        name = "big bob's discount doggos",
+        location = "pittsburgh"
+    )
+    session.add(shelter1)
+    session.commit()
     pass
     
 def add_donations_to_fundraisers():
@@ -251,10 +309,12 @@ def gogogadget():
     init()
     articles()
     people()
-    donations()
+    crowd(50)
+    donations(500)
     text()
     fundraisers()
     teams()
+    shelters()
     add_donations_to_fundraisers()
 
 

@@ -34,13 +34,17 @@ Behaviors
  - Search results should be split into multiple tables for each of the different classes of thing to search for, such as players and teams.
 
 TODO:
-- Basically everything.  There's a ton of awkward SQL necessary to perform the correct sorting on all of these so I haven't gotten terribly far yet.
- - Fundraisers should track their own donations.
+ - Sorting is becoming a bit of a monster. See note below
 
-FIGGERITOUT:
-So what I want to do is to factor out some of the query logic and have a set of configurable fields that would show a few different things:
-1 - Ranking should be it's own thing, kind of.  When performed, it would be best to have a function that applies those rankings to a data object that's accessed intuitively.
+SORTING
+Jinja has a sort filter, using it in it's raw form:
+{% thingtosort|sort(attribute="attributetosort") %}
+I want to tie this to an onclick
+perhaps also to rerender the page?
 
+I think turning this into a macro and then tying that to a click is the way
+
+It seems like getting the page to rerender might be a bit of a hassle. I don't know what to do about this.
 """
 
 class SearchForm(Form):
@@ -82,7 +86,10 @@ queryselector = {'players':queryforplayers,
 @bp.route('/search', methods=['GET', 'POST'])
 def search():
     form = SearchForm(flask.request.form)
-    results = {}
+    results = {"players":[],
+               "teams":[],
+               "fundraisers":[],
+               "shelters":[]}
     if flask.request.method == 'POST':
 
         querystring = form.querystring.data
@@ -100,9 +107,9 @@ def search():
 
         What I think we should do is move this function somewhere such that it will live in the db
         """
-        donations = db.web.session.query( # create query object...
-            models.Member.handle,         # ...give me a table with member handles...
-            func.sum(models.Donation.amount).label('total') # ..and the sum of 
+        donations = db.web.session.query(
+            models.Member.handle,         
+            func.sum(models.Donation.amount).label('total') 
         ).join(models.Donation
                ).group_by(
             models.Member.handle).order_by(desc('total')).all()
@@ -112,10 +119,10 @@ def search():
 
         
         return flask.render_template(
-            'content_search.html', donations=ranked, form=form, results=results)
+            'content_search.html', donations=ranked, form=form, results=results, sortby="id")
     else:
         results["players"] = queryforplayers("")
         results["teams"] = queryforteams("")
         results["fundraisers"] = queryforfundraisers("")
         results["shelters"] = queryforshelters("")
-        return flask.render_template('content_search.html', form=form, results=results)
+        return flask.render_template('content_search.html', form=form, results=results, sortby="id")
