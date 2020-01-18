@@ -12,7 +12,6 @@ from sqlalchemy import (
     Boolean)
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy import create_engine
-from flask_security import Security, SQLAlchemyUserDatastore, UserMixin, RoleMixin
 
 
 
@@ -30,29 +29,13 @@ TODO:
 
 Base = declarative_base()
 
-
-member_to_team = Table("member_to_team", Base.metadata,
-                       Column('member_id', Integer, ForeignKey('member.id')),
-                       Column('team_id', Integer, ForeignKey('team.id')),
-                       Column('owner', Boolean, nullable=False)
-                       )
-
-roles_auths = Table("roles_auths", Base.metadata,
-                    Column("auth_id", Integer, ForeignKey('auth.id')),
-                    Column("role_id", Integer, ForeignKey('role.id'))
-                    )
-
-
-"""
-TODO:
-DEPRECATED?
-"""
-class Role(Base, RoleMixin):
-    __tablename__ = 'role'
-    
-    id = Column(Integer, primary_key=True)
-    name = Column(String(80), unique=True)
-    desc = Column(String(255))
+class MemberToTeam(Base):
+    __tablename__ = "member_to_team"
+    member_id = Column(Integer, ForeignKey('member.id'), primary_key=True)
+    team_id = Column(Integer, ForeignKey('team.id'), primary_key=True)
+    is_owner = Column(Boolean, nullable=False)
+    member = relationship("Member", back_populates="teams")
+    team = relationship("Team", back_populates="members")
 
 
 class Shelter(Base):
@@ -91,13 +74,13 @@ class Member(Base):
         "Fundraiser",
         back_populates="member"
     )
-    teams = relationship("Team", secondary=member_to_team)
+    teams = relationship("MemberToTeam", back_populates="member")
 
     def __str__(self):
         return str(self.id)
 
 
-class Auth(Base, UserMixin):
+class Auth(Base):
     """
     UserAuth is for "native" or username/password auth into pyg.
     Flask-Security is being mixed in here, as there are more shared fields natively.
@@ -131,7 +114,7 @@ class Team(Base):
     twitter_url = Column(Text, nullable=True)
     twitch_url = Column(Text, nullable=True)
     instagram_url = Column(Text, nullable=True)
-    members = relationship("Member", secondary=member_to_team)
+    members = relationship("MemberToTeam", back_populates="team")
     fundraisers = relationship("Fundraiser", back_populates="team")
 
     def __str__(self):

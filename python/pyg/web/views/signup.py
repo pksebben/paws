@@ -8,7 +8,6 @@ from passlib.hash import bcrypt
 
 from pyg.web import models
 from pyg.web import db
-from pyg.web import auth
 
 
 """
@@ -58,7 +57,7 @@ def home():
     if request.method == "POST" and form.validate():
         try:
             sign_new_user(form.email.data, form.password.data, form.name.data)
-            auth.user(form.email.data, form.password.data)
+            # TODO: replace auth module
             return redirect('/')
         except IntegrityError as err:
             flash("we found a user with that email already.")
