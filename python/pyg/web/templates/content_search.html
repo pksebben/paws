@@ -41,8 +41,9 @@
       </tr>
       {% for i in results.teams %}
       <tr>
+
 	<td>{{ i.id }}</td>
-	<td>{{ i.name }}</td>
+	<td><a href="/teamprofile/{{i.id}}">{{ i.name }}</a></td>
 	<td>{{ i.members.donations|sum(attribute="amount") }}</td>
 	<td>{{ i.members|length() }}</td>
       </tr>
@@ -63,7 +64,7 @@
       {% for i in results.fundraisers %}
       <tr>
 	<td>{{ i.id }}</td>
-	<td>{{ i.name }}</td>
+	<td><a href="/fundraiser/{{ i.id }}">{{ i.name }}</a></td>
 	<td>{{ i.donations|sum(attribute="amount") }}</td>
 	<td>{{ i.start_date }}</td>
 	<td>{{ i.end_date }}</td>
@@ -81,7 +82,7 @@
       </tr>
       {% for i in results.shelters %}
       <tr>
-	<td>{{ i.name }}</td>
+	<td><a href="/shelter/{{ i.id }}">{{ i.name }}</td>
 	<td>{{ i.location }}</td>
       </tr>
       {% endfor %}

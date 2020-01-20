@@ -3,7 +3,7 @@
 {% block content %}
 <div id="Shelter_Profile" class="content">
   <div class="section shelter_profile-about">
-    <p class="shelter_profile-name">Big bob's discount doggos</p>
+    <p class="shelter_profile-name">{{ shelter.name }}</p>
     <img src="{{ url_for('static', filename='img/undersonctruction.jpg') }}"/>
     <h3>Mission</h3>
     <p class="shelter_profile-mission-statement">

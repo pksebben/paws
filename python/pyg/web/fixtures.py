@@ -277,13 +277,16 @@ def create_team(owner, **data):
     
 def teams():
     team1 = models.Team(
-        name = "tom's team"
+        name = "tom's team",
+        date_joined = datetime.datetime.now()
     )
     team2 = models.Team(
-        name = "chad's fuckin' badass beach bros"
+        name = "chad's fuckin' badass beach bros",
+        date_joined = datetime.datetime.now()
     )
     team3 = models.Team(
-        name = "Go Team"
+        name = "Go Team",
+        date_joined = datetime.datetime.now()
     )
     session.add(team1)
     session.add(team2)
@@ -305,6 +308,12 @@ def add_donations_to_fundraisers():
         i.fundraiser = pick_fundraiser()
     session.commit()
 
+def add_fundraisers_to_teams():
+    fundraisers = session.query(models.Fundraiser).all()
+    for i in fundraisers:
+        i.team = pick_team()
+    session.commit()
+
 def gogogadget():
     init()
     articles()
@@ -316,6 +325,7 @@ def gogogadget():
     teams()
     shelters()
     add_donations_to_fundraisers()
+    add_fundraisers_to_teams()
 
 
 if __name__ == "__main__":

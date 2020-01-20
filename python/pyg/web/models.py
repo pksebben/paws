@@ -101,13 +101,18 @@ class Auth(Base):
     def __str__(self):
         return str(self.id)
 
+"""
+Team model
 
+TODO:
+there's a bug in date_joined that returns None in the team profile page.  Check it out (perhaps a fixtures problem?)
+"""
 class Team(Base):
     __tablename__ = 'team'
 
     id = Column(Integer, primary_key=True)
     name = Column(String(80))
-    date_joined = Column(Date)
+    date_joined = Column(Date, nullable=False)
     missionstatement = Column(Text, nullable=True)
     website = Column(Text, nullable=True)
     facebook_url = Column(Text, nullable=True)

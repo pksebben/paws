@@ -18,7 +18,7 @@ TODO:
 bp = flask.Blueprint("userprofile", __name__)
 
 
-class UserProfileForm(Form):
+class MemberProfileForm(Form):
     handle = StringField("Handle")
     location = StringField("Location")
     twitch_handle = StringField("Twitch Handle")
@@ -45,7 +45,7 @@ def memberprofile(userid=1):
     member = db.web.session.query(models.Member).get(userid)
     auth = member.auth
     fundraisers = member.fundraisers
-    form = UserProfileForm(flask.request.form, member)
+    form = MemberProfileForm(flask.request.form, member)
     if flask.request.method == 'POST' and form.validate():
         update_user_profile(
             flask.session['userid'],

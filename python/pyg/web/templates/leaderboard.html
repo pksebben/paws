@@ -3,7 +3,7 @@
   <ul class="leaderboard-list">
     {% for i in leaderboard_players %}
     <li class="leaderboard-list-item">
-      <a class="leaderboard-list-item-link" href="/profile/{{i.id}}">
+      <a class="leaderboard-list-item-link" href="/profile/{{ i.1.id }}" >
       </a>
       <span class="leaderboard-list-item-rank">{{ i.0 }}</span>
       <img class="leaderboard-list-item-avatar" src="img/placeholder-user-avatar.png"/>
