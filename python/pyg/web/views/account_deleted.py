@@ -11,6 +11,12 @@ until deletion mechanics are better fleshed out.
 
 TODO:
 - figure out deletion mechanics
+ -- Active bit on models
+ -- Deactivate accounts on deletion
+ -- Accounts should not be displayed (or visible) once made inactive
+  --- Profile view
+  --- leaderboards
+  --- membership on teams
 """
 
 bp = flask.Blueprint("account_deleted", __name__)

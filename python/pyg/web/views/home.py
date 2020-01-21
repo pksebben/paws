@@ -29,7 +29,7 @@ def rankedlist():
 @bp.route('/')
 def home():
     donations = db.web.session.query(
-        models.Member.handle,
+        models.Member.handle, models.Member.id,
         func.sum(models.Donation.amount).label('total')
     ).join(models.Donation
     ).group_by(

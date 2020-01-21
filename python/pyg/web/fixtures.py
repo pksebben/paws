@@ -103,7 +103,8 @@ def generate_person():
         handle=makeaname(8),
         about=garble(150),
         birthday=datetime.datetime.now(),
-        location=garble(12)
+        location=garble(12),
+        active = True
     )
     session.add(person)
     session.commit()
@@ -119,7 +120,8 @@ def people():
         handle="tom_dawg",
         about="my name is tom.  I am not good with about sections",
         birthday=datetime.datetime.now(),
-        location="The town of hogsface, Land of foon"
+        location="The town of hogsface, Land of foon",
+        active = True
     )
     tom.auth = models.Auth(
         passhash = bcrypt.hash("pass"),
@@ -131,8 +133,8 @@ def people():
         handle="tom_2",
         about="my name is other tom.  I am not good with about sections",
         birthday=datetime.datetime.now(),
-        location="The town of hogsface, Land of foon"
-
+        location="The town of hogsface, Land of foon",
+        active = True
     )
     othertom.auth = models.Auth(
         passhash = bcrypt.hash("pass"),
@@ -144,7 +146,8 @@ def people():
         handle="bob_the_builder",
         about="my name is bob.  I am not good with about sections",
         birthday=datetime.datetime.now(),
-        location="The town of pigsface, Land of foon"
+        location="The town of pigsface, Land of foon",
+        active = True
     )
     bob.auth = models.Auth(
         passhash = bcrypt.hash("pass"),
@@ -156,8 +159,8 @@ def people():
         handle="boogie_2988",
         about="my name is bill.  I am not good with about sections",
         birthday=datetime.datetime.now(),
-        location="The town of hogsface, Land of foon"
-
+        location="The town of hogsface, Land of foon",
+        active = True
     )
     bill.auth = models.Auth(
         passhash = bcrypt.hash("pass"),

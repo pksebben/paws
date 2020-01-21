@@ -60,6 +60,7 @@ class Member(Base):
     location = Column(String(40))
     twitch_handle = Column(String(40))
     created = Column(DateTime, nullable=False)
+    active = Column(Boolean, nullable=False) # for account deletion
 
     # Relationship Config
     auth = relationship(
