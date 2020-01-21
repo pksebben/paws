@@ -34,7 +34,6 @@
                 align-items:stretch;
 
                 li{
-                        flex-grow: 1;
                         display: flex;
                         justify-content: center;
                         align-items:center;
@@ -44,33 +43,89 @@
                                 text-transform: uppercase;
                                 color:$dkpurple;
                                 transition:all .75s;
+                                font-size:16px;
                         }
                         i{
                                 transition:all .75s;
                         }
 
                         &:hover{
-                                cursor:pointer; 
-                                a,i{
-                                    color:$purple;   
-                                }    
+                                cursor:pointer;    
                         }
+                        &.nav-our_tail,
+                        &.nav-news{
+                                @include flex-grow(3);
+                        }
+                        &.nav-search{
+                                @include flex-grow(1);
+                                background-color:$dkpurple;
 
-                        &.nav-search input[type=text]{
-                                width:0px;
-                                transition:width 0.5s ease-in-out;
-                                border:0px;
-                                font-family:alphaHeadline;
+                                &.active{
+                                        .nav-search-icon{
+                                                padding: 0 20px;
+                                                &:hover{
+                                                        color:$purple;
+                                                }
+                                        }
+                                }
+                                .nav-search-icon{
+                                        color:$purple;
+                                        &:hover{
+                                                color:$white;
+                                        }
+                                }
+                                .nav-search-form_container{
+                                        display:none;
+                                        width:100%;
+                                        height: 100%;
+                                        position:relative;
+
+                                        .nav-search-exit{
+                                                position:absolute;
+                                                font-family:alphaHeadline;
+                                                top:24%;
+                                                color:$purple;
+                                                font-size:18px;
+                                                right:20px;
+                                                transition:all 0.5s ease;
+                                                &:hover{
+                                                        color:$white;
+                                                }
+                                        }
+                                }
+                                form{
+                                        @include flexbox();
+                                        @include flex-direction(row);
+                                        @include flex-wrap(nowrap);
+                                        @include align-items(center);
+                                        height:100%;
+                                        input[type=text]{
+                                                width:100%;
+                                                transition:width 0.5s ease-in-out;
+                                                border:0px;
+                                                font-family:alphaHeadline;
+                                                padding:0 15px;
+                                                color:$white;
+                                                &::placeholder{
+                                                        color:$ltpurple;
+                                                }
+                                        }
+                                        button.nav-search-submit{
+                                                color:$purple;
+                                                font-family: alphaHeadline;
+                                                margin-right:50px;
+                                                transition: all 0.5s ease;
+
+                                                &:hover{
+                                                       color:$white;
+                                                }
+                                        }
+                                }
                         }
-                        // &.nav-search:hover{
-                        //         input{
-                        //                 width:100%;
-                        //         }
-                        // }
                         &.nav-signin{
                                 background-color:$purple;
                                 transition:all .75s;
-                                padding:0 15px;
+                                padding:0 20px;
                                 position:relative;
                                 a{
                                         color:$white;
@@ -115,7 +170,7 @@
                         &.nav-donate{
                                 background-color:$green;
                                 transition:all .75s;
-                                padding: 0 15px;
+                                padding: 0 20px;
                                 a{
                                         color:$white;
                                 }
