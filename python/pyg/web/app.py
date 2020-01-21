@@ -26,6 +26,10 @@ Things this app.py still does:
 -performs some basic app configurations
 
 see below docstrings for more info
+
+TODO
+- this todo is not specific to app.py.  I have it here because it's the first place I look when I open the app. - 
+[ ] Fix the member profile to close the hole when there is no logged in user AND no auth.  I think the solution for this is in the jinja docs.
 """
 
 
