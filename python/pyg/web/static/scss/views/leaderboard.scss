@@ -1,0 +1,70 @@
+.leaderboard{
+        background-color:$dkpurple;
+}
+ul.leaderboard-list{}
+li.leaderboard-list-item{
+        padding:0 40px;
+        display:flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+        height:100px;
+        position: relative;
+        transition: background-color .5s ease-in-out; 
+
+        &:hover{
+                background-color: rgba(89, 0, 255, .3);
+                cursor:pointer;
+        }
+        &:not(:last-child){
+                border-bottom:1px solid rgba(89, 0, 255, .3);
+        }
+        &:first-child{
+                .leaderboard-list-item-rank,
+                .leaderboard-list-item-name{
+                        color:$teal;
+                }
+        }
+}
+.leaderboard-list-item-link{
+        position:absolute;
+        width: 100%;
+        height: 100%;
+        z-index:1;
+
+}
+.leaderboard-list-item-rank{
+        color:$purple;
+        font-family: alphaHeadline;
+        font-size:46px;
+        z-index:2;
+}
+.leaderboard-list-item-avatar{
+        max-height: 50px;
+        width:auto;
+        border-radius:100px;
+        z-index:2;
+}
+.leaderboard-list-item-name{
+        color:$white;
+        @include alpha-xl;
+        font-size:30px;
+        z-index:2;
+}
+.leaderboard-list-item-change{
+        font-size: 24px;
+        z-index:2;
+        width:50px;
+        &.leaderboard-list-item-change-icon_down{
+                color:$orange;
+        }
+        &.leaderboard-list-item-change-icon_up{
+                color:$green;  
+        }
+}
+.leaderboard-list-item-amount{
+        color:$green;
+        @include alpha-xl;
+        z-index:2;
+}

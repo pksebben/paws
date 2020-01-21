@@ -1,0 +1,318 @@
+
+// ********************************
+// Progress Bar
+// ********************************
+.goalProgress {
+  background: $ltgreen;
+  height:60px;
+}
+
+.progressBar {
+  background: $green;
+  color: #fff;
+  display: block;
+  overflow: hidden;
+  padding:5px;
+  height:60px;
+}
+
+// ********************************
+// Gamer Profile 
+// ********************************
+
+ul.gamer_profile-list li{
+        display:flex;
+        flex-direction:row;
+        flex-wrap:nowrap;
+        align-items:center;
+        padding:25px 0;
+
+        .icon{
+                font-size:30px;
+                text-align: center;
+                padding-right:40px;
+        }
+}
+
+@mixin list_style{
+        display:flex;
+        flex-direction:row;
+        flex-wrap:nowrap;
+        align-items:center;
+        padding:25px 0;
+
+        .icon{
+                font-size:30px;
+                text-align: center;
+                padding-right:40px;
+        }   
+}
+
+#Gamer_Profile{
+        .section{
+                display:flex;
+                flex-direction:row;
+                flex-wrap:wrap;
+                justify-content: center;
+                align-items:center;
+                padding:40px;
+        }
+}
+// ********************************
+// Gamer Profile  - Overview
+// ********************************
+.gamer_profile-overview{
+        background-color: $dkpurple;
+}
+.gamer_profile-overview-avatar_username,
+.gamer_profile-overview-stats{
+        flex-grow:1;
+}
+.gamer_profile-overview-avatar_username{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        padding-right:40px;
+        max-width: 600px;
+}
+.gamer_profile-overview-avatar_username{
+        .avatar{
+                height:200px;
+                width:200px;
+                border:3px solid $white;
+                border-radius:100px;
+                margin-bottom:20px;
+        }
+        .gamer_profile-overview-username{
+                color:$white;
+                text-align: center;
+        }
+}
+ul.gamer_profile-overview-stats{
+        max-width: 600px;
+
+        li{
+                @include list_style;
+                &:not(:last-child){
+                         border-bottom:1px solid $purple;
+                }
+        }
+        .icon, dd{
+                color:$white;
+        }
+        .icon{
+                padding-left:20px;
+                margin-top:10px;
+        }
+        dl{
+                flex-grow:3;
+        }
+        dd, dt{
+                text-transform: uppercase;
+        }
+        dt{
+                font-family:sourceSansPro;
+                font-style:light;
+                color:$purple;
+                font-size:12px;
+                letter-spacing: .1em;
+                padding-bottom: 5px;
+        }
+        dd{
+                font-family:alphaHeadline;
+                font-size:28px;
+                margin:0;
+        }
+        .gamer_profile-overview-stats-raised{
+                i, dt, dd{
+                        color:$green;
+                }
+        }
+        
+}
+.gamer_profile-why_i_paws{
+        background-color: $dkpurple;
+        .why_i_paws{
+                padding:40px;
+                border:1px solid $purple;
+                width:100%;
+                max-width: 1200px;
+                header{
+                        color:$purple;
+                        text-align: center;
+                        margin-bottom: 15px;
+                }
+                p{
+                        color:$white;
+                        max-width:700px;
+                        margin:0 auto;
+                }
+        }
+        
+}
+// ********************************
+// Gamer Profile  - Fundraisers
+// ********************************
+.gamer_profile-fundraisers{
+        background-color:$teal;
+        display:flex;
+        flex-direction:row;
+        flex-wrap:wrap;
+        justify-content: center;
+        align-items:center;
+        padding:40px;
+
+         ul.nav-tabs{
+                display:flex;
+                flex-direction:row;
+                flex-wrap: nowrap;
+                width:100%;
+
+                li{
+                        flex-grow:1;
+                        width:50%;
+
+                        a{
+                                font-family:alphaHeadline;
+                                font-size:28px;
+                                color:$white;
+                                padding:1rem 40px;
+                                text-transform: uppercase; 
+
+                                &.active{
+                                        color:$navyblue;
+                                }
+                        }
+                }
+        }
+
+        .tab-content{
+                flex:1;
+        }
+
+        h3{
+                @include alpha-xl;
+
+                span{
+                        font-size:22px;
+                }
+        }
+
+        #Gamer_Profile-Fundraisers-Upcoming{
+                background-color:$white;
+                padding:40px;
+                .gamer_profile-fundraisers-upcoming-list >li{
+                        @include list_style;
+                }
+                li{
+                        &.gamer_profile-fundraisers-upcoming-donations{
+                                justify-content: space-between;
+
+                                .icon{
+                                        color:$green;
+                                }
+                                .gamer_profile-fundraisers-upcoming-donations-progress_bar{
+                                        flex-grow: 1;
+                                        margin-right:40px;
+
+                                        h3{
+                                                color:$green;
+                                        }
+                                }
+                                .gamer_profile-fundraisers-upcoming-donations-donate_btn{
+                                        align-self:flex-end;
+                                }
+
+                        }
+
+                        &.gamer_profile-fundraisers-upcoming-countdown h3{
+                                font-size:22px;
+                                span{
+                                        @include alpha-xl;
+                                }
+                        }
+                }
+        }
+        .gamer_profile-fundraisers-upcoming-share{
+                display:flex;
+                flex-direction:row;
+                flex-wrap: none;
+                justify-content: center;
+                margin:40px 0;
+
+                li:not(:last-child){
+                        padding-right:20px;
+                }
+                .text{
+                        font-family:sourceSansPro;
+                        font-style:light;
+                }
+        }
+}
+
+/* Fundraisers Past */
+#Gamer_Profile-Fundraisers-Past{
+        .gamer_profile-fundraisers-past-item{
+                background-color:$white;
+                padding:40px;
+                margin-bottom:20px;
+
+                > ul li{
+                        @include list_style;
+                }
+                .gamer_profile-fundraisers-past-donations-progress_bar{
+                        flex-grow:1;
+                }
+                .gamer_profile-fundraisers-past-donations .icon,
+                .gamer_profile-fundraisers-past-donations h3{
+                        color:$green;
+                }
+        }
+}
+
+/* Donations */
+.gamer_profile-donations{
+        background-color:$ltgreen;
+
+        header{
+                display:flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                width: 100%;
+        }
+}
+.gamer_profile-donations-header h1{
+        color:$green;
+}
+.gamer_profile-donations-list{
+        flex-grow: 1;
+}
+.gamer_profile-donations-list-item{
+        background-color:$white;
+        position:relative;
+        padding:20px;
+
+        h3{
+                font-family:sourceSansPro;
+                font-size:32px;
+                text-transform:uppercase;
+        }
+        .gamer_profile-donations-list-item-amount{
+                position:absolute;
+                top:20px;
+                right:20px;
+                color:$green;
+                @include alpha-xl;
+        }
+        date{
+                font-family:sourceSansPro;
+                font-style:light;
+                font-size:12px;
+        }
+        p{
+                font-family:sourceSansPro;
+                font-style:italic;
+                font-size:12px;
+        }
+
+}

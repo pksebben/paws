@@ -1,0 +1,155 @@
+#Home .section{
+        position:relative;
+}
+.home-hero{
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height:75vh;
+        background-image:url("../img/home-hero.jpg");
+        background-repeat:no-repeat;
+        background-size:cover;
+        background-position:center;
+        .home-hero-background_color{
+                background-color: $purple;
+                opacity: 0.36;
+                position:absolute;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+        }
+        h2, p{
+                max-width: 700px;
+                text-align: center;
+        }
+        h2{
+                font-family: junegull;
+                font-size:50px;
+                margin-bottom: 20px;
+                z-index: 2;
+        }
+        p{
+                font-family:sourceSansPro;
+                font-size: 32px;
+                line-height:45px;
+                color:$dkpurple;
+                z-index: 2;
+        }
+}
+.home-intro{
+        display:flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        padding:0 40px;
+        height:75vh;
+
+        .home-intro-donate_now,
+        .home-intro-start_gaming,
+        .home-intro-join_us{
+                max-width: 400px;
+                display: flex;
+                flex-direction: column;
+                flex-wrap: nowrap;
+                align-items:center;
+        }
+        .home-intro-start_gaming{
+                margin:0 40px;
+        }
+        img{
+                max-width: 200px;
+                height:auto;
+        }
+        p{
+                padding:40px 0;
+        }
+        button{
+                border:2px solid $navyblue;
+                transition:all .5s ease-in-out;
+                &:hover{
+                        background-color:$navyblue;
+                        color:$white;
+                }
+        } 
+
+        
+}
+.home-leaderboard{
+        padding-bottom: 40px;
+}
+.home-leaderboard-header{
+        @include alpha-xl;
+        color:$purple;
+        text-align: center;
+        padding:40px 0;
+        border-bottom:2px solid $purple;
+}
+.home-news{
+        display:flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        padding:80px 40px;
+        background-color:$ltgray;
+
+        .news-article{
+                max-width:500px;
+                padding:40px;
+                background-color:$white;
+
+                &:first-child{
+                        margin-right:10px;
+                }
+                &:last-child{
+                        margin-left:10px;
+                }
+        }
+}
+.home-about{
+        display:flex;
+        flex-direction:column;
+        flex-wrap:nowrap;
+        justify-content: center;
+        align-items:stretch;
+
+        > div{
+                padding:80px 40px;
+                display:flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                justify-content: space-around;
+                align-items:center;
+        }
+        .icon{
+                font-size:112px;
+                padding:0 40px;
+        }
+        p{
+                font-family:sourceSansPro;
+                font-size:24px;
+                text-transform: uppercase;
+                line-height:40px;
+        }
+        .home-about-goal{
+                background-color:$ltgreen;
+                .icon{
+                        color:$green;
+                }
+        }
+        .home-about-funds{
+                background-color: $ltpurple;
+                .icon{
+                        color:$purple;
+                }
+        }
+        .home-about-gamers{
+                background-color:$ltteal;
+                .icon{
+                        color:$teal;
+                }
+        }
+}

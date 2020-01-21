@@ -1,0 +1,49 @@
+// ********************************
+// Modules
+// ********************************
+@import 'modules/resets.scss';
+@import 'modules/resets-forms.scss';
+@import 'modules/resets-bootstrap.scss';
+@import 'modules/colors.scss';
+@import 'modules/mixins.scss';
+@import 'modules/typography.scss';
+@import 'modules/buttons.scss';
+@import 'modules/variables.scss';
+@import 'modules/nav.scss';
+
+// ********************************
+// Views
+// ********************************
+@import 'views/gamer-profile.scss';
+@import 'views/leaderboard.scss';
+@import 'views/home.scss';
+@import 'views/news.scss';
+
+
+// ********************************
+// Devices
+// ********************************
+@import 'modules/media.scss';
+
+// ********************************
+// Global
+// ********************************
+.section{
+//         display:flex;
+//         flex-direction:row;
+//         flex-wrap:wrap;
+//         justify-content: center;
+//         align-items:center;
+        // padding:40px;
+}
+.section-vertical{
+        display:flex;
+        flex-direction:column;
+        flex-wrap:nowrap;
+        justify-content: center;
+        align-items:center;
+        padding:40px;
+}
+
+
+  

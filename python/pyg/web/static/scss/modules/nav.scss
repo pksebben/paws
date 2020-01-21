@@ -1,0 +1,128 @@
+#Nav{
+        position:fixed;
+        display:flex;
+        flex-direction:row;
+        flex-wrap:nowrap;
+        justify-content: space-between;
+        align-items:stretch;
+        height: $headerHeight;
+        width: 100%;
+        background-color: $white;
+        z-index:1000;
+
+        h1{
+                display: flex;
+                align-items:center;
+                padding:0 20px;
+                color:$dkpurple;
+                font-family:junegull;
+                font-size:36px;
+                transition:all .75s;
+
+                &:hover{
+                        color:$purple;
+                        cursor:pointer;
+                }
+        }
+
+        ul{
+                display:flex;
+                flex-direction:row;
+                flex-wrap:nowrap;
+                justify-content: flex-end;
+                flex-grow: 1;
+                align-items:stretch;
+
+                li{
+                        flex-grow: 1;
+                        display: flex;
+                        justify-content: center;
+                        align-items:center;
+
+                        a{
+                                @include alpha-s;
+                                text-transform: uppercase;
+                                color:$dkpurple;
+                                transition:all .75s;
+                        }
+                        i{
+                                transition:all .75s;
+                        }
+
+                        &:hover{
+                                cursor:pointer; 
+                                a,i{
+                                    color:$purple;   
+                                }    
+                        }
+
+                        &.nav-search input[type=text]{
+                                width:0px;
+                                transition:width 0.5s ease-in-out;
+                                border:0px;
+                                font-family:alphaHeadline;
+                        }
+                        // &.nav-search:hover{
+                        //         input{
+                        //                 width:100%;
+                        //         }
+                        // }
+                        &.nav-signin{
+                                background-color:$purple;
+                                transition:all .75s;
+                                padding:0 15px;
+                                position:relative;
+                                a{
+                                        color:$white;
+                                }
+                                &:hover{
+                                        background-color:darken($purple,10%);
+                                }
+                                form{
+                                        position:absolute;
+                                        top:$headerHeight;
+                                        left:0;
+                                        padding:20px;
+                                        background-color:$purple;
+                                        fieldset{
+                                                position:relative;
+                                                margin-bottom:20px;
+                                        }
+                                        legend{
+                                                color:$white;
+                                                text-transform: uppercase; 
+                                                position:absolute; 
+                                                background-color: $purple;
+                                                width:auto;
+                                                padding-right: 10px;
+                                                top: -10px;
+                                                left: -1px;
+                                                margin-bottom:20px;
+                                        }
+                                        input{
+                                                background-color:transparent;
+                                                height: 50px;
+                                                border:1px solid $white;
+                                                min-width: 300px;
+                                        }
+                                        .nav-signin-form-create{
+                                                @include flexbox();
+                                                @include flex-direction(row);
+                                                @include flex-wrap(nowrap);
+                                        }
+                                }
+                        }
+                        &.nav-donate{
+                                background-color:$green;
+                                transition:all .75s;
+                                padding: 0 15px;
+                                a{
+                                        color:$white;
+                                }
+                                &:hover{
+                                        background-color:darken($green,8%);
+                                }
+                        }
+                }
+        }
+}
