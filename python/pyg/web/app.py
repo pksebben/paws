@@ -10,10 +10,27 @@ from flask_login import LoginManager
 from flask_humanize import Humanize
 
 import pyg.web
-from pyg.web.views import login, home, signup, news, search, about, teamprofile, userprofile, leaderboard, logout, fundraiser, create_fundraiser
+from pyg.web.views import login, home, signup, news, search, about, teamprofile, memberprofile, leaderboard, logout, fundraiser, create_fundraiser, account_management, partnering, account_deleted, shelterprofile
 
 
-"""this class and the following two functions enable loading static assets from the .pex"""
+"""
+App.py
+
+A note for those familiar with flask:
+Many of the functions that a traditional app.py handle in a flask app have been moved to run.py (such as the actual running of the app).  This was done to avoid a circular import problem relating to (I can't quite remember if it was the CMS or test suite or both.)
+
+Things this app.py still does:
+-provides an interface for the app and it's static assets in the PexFlask class that solves an earlier issue with running the app as a .pex executable (see Pantsbuild docs for more on that)
+-registers all views
+-configures methods and data available to templates
+-performs some basic app configurations
+
+see below docstrings for more info
+
+TODO
+- this todo is not specific to app.py.  I have it here because it's the first place I look when I open the app. - 
+[ ] Fix the member profile to close the hole when there is no logged in user AND no auth.  I think the solution for this is in the jinja docs.
+"""
 
 
 class PexFlask(flask.Flask):
@@ -62,14 +79,30 @@ app.secret_key = "2380b817f0f6dc67cebcc4068fc6b437"
 login_manager = LoginManager()  # part of flask-login.  Not yet implemented.
 
 
-
-
+# TODO: Is this deprecated?
 @login_manager.user_loader
 def load_user(userid):
     return LoginUser(userid)
 
 
+"""
+A couple of notes on the init()----
+
+Blueprint registration:
+The pattern we are using requires a few things to be in place for each blueprint:
+1. There must be a view for the blueprint in /views/, which should contain all the methods pertinent to that view and register a blueprint as bp.  Any of the existing views can be referred to re: the specifics of this pattern
+2. The view in question should reference a template (in the case that it presents any client-facing interface) in /templates/
+3. The view should be imported in this module and registered according to the pattern visible below.
+
+Template Filters and Context Processors:
+All template filters and context processors (methods for mutating data within templates or providing data to templates, respectively) are registered here.  See below the @app.foo decorators.
+
+"""
+
+
 def init():
+    app.register_blueprint(shelterprofile.bp)
+    app.register_blueprint(account_management.bp)
     app.register_blueprint(login.bp)
     app.register_blueprint(home.bp)
     app.register_blueprint(signup.bp)
@@ -77,11 +110,13 @@ def init():
     app.register_blueprint(about.bp)
     app.register_blueprint(teamprofile.bp)
     app.register_blueprint(search.bp)
-    app.register_blueprint(userprofile.bp)
+    app.register_blueprint(memberprofile.bp)
     app.register_blueprint(leaderboard.bp)
     app.register_blueprint(logout.bp)
     app.register_blueprint(fundraiser.bp)
     app.register_blueprint(create_fundraiser.bp)
+    app.register_blueprint(partnering.bp)
+    app.register_blueprint(account_deleted.bp)
     login_manager.init_app(app)
 
     humanize = Humanize(app)

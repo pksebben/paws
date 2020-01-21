@@ -1,8 +1,19 @@
 import flask
 from sqlalchemy.orm.exc import NoResultFound
 from wtforms import Form, StringField, PasswordField, validators
+from passlib.hash import bcrypt
 
 from pyg.web import db, models
+
+
+"""
+Login page
+This is probably going to change a little, as I think we want this to be a modal rather than it's own whole thing.
+
+TODO:
+- how are all these functions going to be handled when this is a modal, potentially present on multiple views?
+"""
+
 
 bp = flask.Blueprint('login', __name__)
 
@@ -19,13 +30,10 @@ def login_user(email, password):
         user = db.web.session.query(
             models.Auth).filter_by(
             email=email).one()
-        assert user.password == password
+        assert bcrypt.verify(password, user.passhash)
         flask.session['userid'] = user.id
         return flask.redirect('/')
-    except AssertionError:
-        return flask.render_template(
-            "login.html", failure_text="bad credentials. please retry")
-    except NoResultFound:
+    except (AssertionError, NoResultFound):
         return flask.render_template(
             "login.html", failure_text="bad credentials. please retry")
 

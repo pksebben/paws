@@ -1,12 +1,23 @@
 import datetime
 import random
+import string
 
 import sqlalchemy
 from sqlalchemy import orm
+from passlib.hash import bcrypt
 
 from pyg.web import models
 from pyg.web import db
 
+
+
+"""
+fixtures.py
+This is a module for populating testing data into the db.  It's used in two places:
+1 - the test suite
+2 - as a standalone, whenever the dev version of the site is being data wacky or you want to add new testing data.
+
+"""
 
 def lorem(n):
     return " ".join("""Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -66,6 +77,42 @@ def articles():
     session.commit()
 
 
+vowels = ['a','e','i','o','u']
+consonants = [i for i in string.ascii_lowercase if i not in vowels]
+
+def makeaname(length):
+    name = []
+    name.append(random.choice(string.ascii_uppercase))
+    for i in range(length):
+        if name[-1].lower() == 'q':
+            name.append('u')
+        elif name[-1].lower() in vowels:
+            name.append(random.choice(consonants))
+        else:
+            name.append(random.choice(vowels))
+    return ''.join(name)
+        
+    
+def garble(length):
+    return "".join(random.choice(string.ascii_uppercase) for i in range(length))
+
+def generate_person():
+    person = models.Member(
+        name = makeaname(8),
+        created=datetime.datetime.now(),
+        handle=makeaname(8),
+        about=garble(150),
+        birthday=datetime.datetime.now(),
+        location=garble(12),
+        active = True
+    )
+    session.add(person)
+    session.commit()
+
+def crowd(numpeople):
+    for i in range(numpeople):
+        generate_person()
+
 def people():
     tom = models.Member(
         name="tom",
@@ -73,10 +120,11 @@ def people():
         handle="tom_dawg",
         about="my name is tom.  I am not good with about sections",
         birthday=datetime.datetime.now(),
-        location="The town of hogsface, Land of foon"
+        location="The town of hogsface, Land of foon",
+        active = True
     )
     tom.auth = models.Auth(
-        password="pass",
+        passhash = bcrypt.hash("pass"),
         email="tom@gmail.com"
     )
     othertom = models.Member(
@@ -85,11 +133,11 @@ def people():
         handle="tom_2",
         about="my name is other tom.  I am not good with about sections",
         birthday=datetime.datetime.now(),
-        location="The town of hogsface, Land of foon"
-
+        location="The town of hogsface, Land of foon",
+        active = True
     )
     othertom.auth = models.Auth(
-        password="pass",
+        passhash = bcrypt.hash("pass"),
         email="othertom@gmail.com"
     )
     bob = models.Member(
@@ -98,10 +146,11 @@ def people():
         handle="bob_the_builder",
         about="my name is bob.  I am not good with about sections",
         birthday=datetime.datetime.now(),
-        location="The town of pigsface, Land of foon"
+        location="The town of pigsface, Land of foon",
+        active = True
     )
     bob.auth = models.Auth(
-        password="pass",
+        passhash = bcrypt.hash("pass"),
         email="bob@gmail.com"
     )
     bill = models.Member(
@@ -110,11 +159,11 @@ def people():
         handle="boogie_2988",
         about="my name is bill.  I am not good with about sections",
         birthday=datetime.datetime.now(),
-        location="The town of hogsface, Land of foon"
-
+        location="The town of hogsface, Land of foon",
+        active = True
     )
     bill.auth = models.Auth(
-        password="pass",
+        passhash = bcrypt.hash("pass"),
         email="bill@gmail.com"
     )
     session.add(othertom)
@@ -124,9 +173,9 @@ def people():
     session.commit()
 
 
-def donations():
+def donations(numdonations):
     members = session.query(models.Member).all()
-    for _ in range(90):
+    for _ in range(numdonations):
         donation = models.Donation(member_id=random.choice(members).id,
                                    donor_name="Scroog McDuck",
                                    created=datetime.datetime.now(),
@@ -218,17 +267,42 @@ def create_team(owner, **data):
         name = name,
         date_joined = datetime.datetime.now(),
         missionstatement = missionstatement,
-        location = location,    # TODO do we need this?  Seems pointless.
         website = website,
         facebook_url = facebook_url,
         twitter_url = twitter_url,
         twitch_url = twitch_url,
         instagram_url = instagram_url
     )
+    session.add(team)
+    session.commit()
     # TODO add the current user as the team owner.
     # TODO return something?
     
 def teams():
+    team1 = models.Team(
+        name = "tom's team",
+        date_joined = datetime.datetime.now()
+    )
+    team2 = models.Team(
+        name = "chad's fuckin' badass beach bros",
+        date_joined = datetime.datetime.now()
+    )
+    team3 = models.Team(
+        name = "Go Team",
+        date_joined = datetime.datetime.now()
+    )
+    session.add(team1)
+    session.add(team2)
+    session.add(team3)
+    session.commit()
+
+def shelters():
+    shelter1 = models.Shelter(
+        name = "big bob's discount doggos",
+        location = "pittsburgh"
+    )
+    session.add(shelter1)
+    session.commit()
     pass
     
 def add_donations_to_fundraisers():
@@ -237,15 +311,24 @@ def add_donations_to_fundraisers():
         i.fundraiser = pick_fundraiser()
     session.commit()
 
+def add_fundraisers_to_teams():
+    fundraisers = session.query(models.Fundraiser).all()
+    for i in fundraisers:
+        i.team = pick_team()
+    session.commit()
+
 def gogogadget():
     init()
     articles()
     people()
-    donations()
+    crowd(50)
+    donations(500)
     text()
     fundraisers()
     teams()
+    shelters()
     add_donations_to_fundraisers()
+    add_fundraisers_to_teams()
 
 
 if __name__ == "__main__":

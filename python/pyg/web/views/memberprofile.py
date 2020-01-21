@@ -3,10 +3,22 @@ import flask
 from wtforms import Form, StringField, TextAreaField, HiddenField, validators
 from pyg.web import db, models
 
+
+"""
+Member Profile page
+Is a view if it's not *your* member profile, otherwise is an editable form that allows you to update your profile information.  This behavior is controlled by the template.
+
+This is the view that links to all the admin things for stuff like teams, fundraisers, etc.
+
+TODO:
+- currently, this view shows some arbitrary member if no member is selected (via setting the userid).  This is not something that's likely to ever happen (the user would have to type the URL in manually) but it's weird and pointless and I should change it.
+- Couldn't think of any validators for the profile form off the top of my head.
+"""
+
 bp = flask.Blueprint("userprofile", __name__)
 
 
-class UserProfileForm(Form):
+class MemberProfileForm(Form):
     handle = StringField("Handle")
     location = StringField("Location")
     twitch_handle = StringField("Twitch Handle")
@@ -29,11 +41,11 @@ def update_user_profile(id, name, about, location, twitch_handle, handle):
 
 @bp.route('/profile/<userid>', methods=['GET', 'POST'])
 @bp.route('/profile')
-def userprofile(userid=1):
+def memberprofile(userid=1):
     member = db.web.session.query(models.Member).get(userid)
     auth = member.auth
     fundraisers = member.fundraisers
-    form = UserProfileForm(flask.request.form, member)
+    form = MemberProfileForm(flask.request.form, member)
     if flask.request.method == 'POST' and form.validate():
         update_user_profile(
             flask.session['userid'],
@@ -44,4 +56,4 @@ def userprofile(userid=1):
             form.handle.data
         )
     return flask.render_template(
-        'content_gamer_profile.html', form=form, member=member, auth=auth, fundraisers=fundraisers)
+        'content_member_profile.html', form=form, member=member, auth=auth, fundraisers=fundraisers)

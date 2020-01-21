@@ -12,30 +12,39 @@ from sqlalchemy import (
     Boolean)
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy import create_engine
-from flask_security import Security, SQLAlchemyUserDatastore, UserMixin, RoleMixin
+
+
+
+
+"""
+models.py
+This is where all the db models (and, by ORM extension, the schema) are created / configured.
+If things here seem broken, a good place to start is the "basic relationship patterns" section of the SQLAlchemy docs.
+
+TODO:
+- implement the declarative method for member-to-team IOT use the recommended pattern re: additional data on relational fields.
+- Scrap all the flask_security nonsense.
+"""
+
 
 Base = declarative_base()
 
-
-member_to_team = Table("member_to_team", Base.metadata,
-                       Column('member_id', Integer, ForeignKey('member.id')),
-                       Column('team_id', Integer, ForeignKey('team.id')),
-                       Column('owner', Boolean, nullable=False)
-                       )
-
-roles_auths = Table("roles_auths", Base.metadata,
-                    Column("auth_id", Integer, ForeignKey('auth.id')),
-                    Column("role_id", Integer, ForeignKey('role.id'))
-                    )
+class MemberToTeam(Base):
+    __tablename__ = "member_to_team"
+    member_id = Column(Integer, ForeignKey('member.id'), primary_key=True)
+    team_id = Column(Integer, ForeignKey('team.id'), primary_key=True)
+    is_owner = Column(Boolean, nullable=False)
+    member = relationship("Member", back_populates="teams")
+    team = relationship("Team", back_populates="members")
 
 
-class Role(Base, RoleMixin):
-    __tablename__ = 'role'
-    
+class Shelter(Base):
+    __tablename__ = 'shelter'
+
     id = Column(Integer, primary_key=True)
     name = Column(String(80), unique=True)
-    desc = Column(String(255))
-
+    location = Column(String(80))
+    about = Column(Text)
 
 class Member(Base):
     """Member is the central table which ties all member data together."""
@@ -51,6 +60,7 @@ class Member(Base):
     location = Column(String(40))
     twitch_handle = Column(String(40))
     created = Column(DateTime, nullable=False)
+    active = Column(Boolean, nullable=False) # for account deletion
 
     # Relationship Config
     auth = relationship(
@@ -65,13 +75,13 @@ class Member(Base):
         "Fundraiser",
         back_populates="member"
     )
-    teams = relationship("Team", secondary=member_to_team)
+    teams = relationship("MemberToTeam", back_populates="member")
 
     def __str__(self):
         return str(self.id)
 
 
-class Auth(Base, UserMixin):
+class Auth(Base):
     """
     UserAuth is for "native" or username/password auth into pyg.
     Flask-Security is being mixed in here, as there are more shared fields natively.
@@ -84,7 +94,7 @@ class Auth(Base, UserMixin):
         Integer,
         ForeignKey("member.id"),
         primary_key=True)
-    password = Column(String(80), unique=False, nullable=False)
+    passhash = Column(String(80), unique=False, nullable=False)
     email = Column(String(80), unique=True, nullable=False)
     active = Column(Boolean)
     member = relationship("Member", uselist=False)
@@ -92,21 +102,25 @@ class Auth(Base, UserMixin):
     def __str__(self):
         return str(self.id)
 
+"""
+Team model
 
+TODO:
+there's a bug in date_joined that returns None in the team profile page.  Check it out (perhaps a fixtures problem?)
+"""
 class Team(Base):
     __tablename__ = 'team'
 
     id = Column(Integer, primary_key=True)
     name = Column(String(80))
-    date_joined = Column(Date)
+    date_joined = Column(Date, nullable=False)
     missionstatement = Column(Text, nullable=True)
-    location = Column(String(50), nullable=True, unique=False)
     website = Column(Text, nullable=True)
     facebook_url = Column(Text, nullable=True)
     twitter_url = Column(Text, nullable=True)
     twitch_url = Column(Text, nullable=True)
     instagram_url = Column(Text, nullable=True)
-    members = relationship("Member", secondary=member_to_team)
+    members = relationship("MemberToTeam", back_populates="team")
     fundraisers = relationship("Fundraiser", back_populates="team")
 
     def __str__(self):

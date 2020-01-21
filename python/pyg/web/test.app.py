@@ -20,6 +20,12 @@ from pyg.web import fixtures
 from pyg.web.views import signup, news
 
 
+
+"""
+test.app.py
+This is our test suite!  I've been writing documentation for the past forever and don't feel like explaining it!  For more info visit lmgtfy.com
+"""
+
 def setUpModule():
     app.init()
     db.init(app.app)

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+{% from "_formhelpers.html" import render_field %}
+
+<html>
+  <head>
+    <title>Paws Your Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body>
+    <div>
+      <h1>Account Management</h1>
+    </div>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    <div>
+      
+      <form method="post" name="passform">
+	<h2>Change your password</h2>
+	<dl>
+	  {{ render_field(passform.oldpassword) }}
+	  {{ render_field(passform.newpassword) }}
+	  {{ render_field(passform.newpasswordconfirm) }}
+	</dl>
+	{{ render_field(passform.submit) }}
+      </form>
+      <form method="post">
+	<h2>Delete your account</h2>
+	{{ render_field(deleteform.confirmdelete) }}
+	{{ render_field(deleteform.submit) }}
+      </form>
+      
+    </div>
+  </body>
+</html>

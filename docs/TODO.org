@@ -72,7 +72,7 @@ These are the pages we are gonna need, with the relevant data nested.
 
 ** TODO Campaign Page [0/1]
 - [ ] 
-
+  
 * Data
 
 ** Player Data
@@ -230,7 +230,10 @@ he put some stuff in app.py in __init__() that might be good to look at.
 Structlog
 *** Where / how are we going to serve up user-uploaded static assets (like avatars)? :patterns:modules:
 I need to know both what (we are going to use for upload) and how (we are going to store them)
+<<<<<<< HEAD
 **** worry about it later
+=======
+>>>>>>> hashing
 *** What should I be reading up on re: password hashing and salting and such? :study:modules:
     
 **** Is there a specific library we're going to use? 
@@ -258,7 +261,11 @@ I ask because when it comes to testing the site for readability and composition 
 
 ****** I assume we're going to show the latest news.  How many articles do we want by default?
 *** My notes
+<<<<<<< HEAD
 **** what is flask request.url_rule?
+=======
+
+>>>>>>> hashing
 **** passing -debug to python -m yadda/app.py detects changes
 **** take a look at the new news module and implement those patterns sitewide (where applicable)
 **** fixtures.py is the new testing_data.py
@@ -272,6 +279,7 @@ there seems to be a thing that does the thing you want usually in one of the lib
 Notably, when Ian is doing this he seems to jump around a lot.  I'm not sure exactly what it is he's always looking for (that may just be an instinctual experience type of thing)
 
 One thing that I could do to be better at this is getting my keyboard movement down a little better.  Switching between tabs and processes should take no time at all.
+<<<<<<< HEAD
 
 * Next Meeting
 
@@ -293,19 +301,14 @@ made some minor changes.  Read up on it.
 ** 
 
 * TO DO
-** TODO make fundraiser creatable
-in the middle of trying to get validation working via marshmallow.  At the moment it's not taking the objects in properly.
-*** DONE make module that creates fundraisers
-*** TODO implement marshmallow validation
-*** 
 ** TODO research chase WePay
-** TODO implement modals for login
-might need kirby for this
-** TODO hashing [0/2]
-*** TODO Basic hashing
-*** TODO salt bae tha hashes
-** TODO Implement user avatars sitewide
-** TODO team management
+** TODO Finish integrating Flask-Security
+** TODO Static asset upload
+This is going to be necessary for avatars etc.
+** TODO Create Team management [0/8]
+*** TODO Can users create teams?
+*** TODO Can users edit teams?
+how are we going
 *** TODO who owns it
 **** TODO add ownership bit to the assoc table.
 ***** TODO how are we going to use this?
@@ -330,7 +333,7 @@ what I mean is, how are we going to access this data?
 * Fixes
 
 ** TODO Gamer Profile no longer shows name properly after ian fucked with it.
-
+   
 * Implement Me
 
 ** WTForms [/] 
@@ -349,9 +352,231 @@ what I mean is, how are we going to access this data?
 
 **** TODO gamer profile
 
-* SCHEDULED TODO
+* The List
+These are the TODOs.  They change a lot.
+** Gruntwork
+these are the things that need to be done by sort of crawling through the code and making minor adjustments, but are of critical importance 
+*** DONE go over all the wtforms instances and ensure proper validation
+*** TODO code-cleanup
+**** deprecated modules
+**** PEP8
+*** TODO Clean the hell out of this TODO
+*** DONE Add documentation to any modules that even kind of need it
+    an idiot should be able to maintain the site without any primer whatsoever.
+** Implement features from flask-security
 
-** DONE Implement WTForms
+*** TODO Whatever the hell Flask-Login does
+So the only thing that it seems to do that we don't yet is 'Protect your users' sessions from being stolen by cookie thieves'.  It may be faster to figure out how to do that manually rather than put more distance between us and things we've already done.
 
-** Implement Flask-Security
+*** TODO Identity Access Management
+Users that are owners of teams or other assets need control of them.  Flask-Security does this using roles and that's probably a good pattern.   It's done in flask-security with Flask-Principal.  Look into it
 
+*** DONE Passwerd Hashin'
+Booya.
+
+*** TODO Token Authentication
+Need Ian to set up a dev oauth thing for this
+
+*** DONE Change password
+
+** Dumb shit
+This can be done super quick and mostly represents wiring up views and making buttons real and such.
+
+*** TODO 'Donate now' and 'Join us' links on the homepage
+
+** Tiny think
+These are fairly straightforward but likely represent a slight design rabbithole
+*** TODO "my fundraisers" menu
+*** TODO Donate module
+
+**** Questions
+
+***** How, again, are donations being handled?  I wrote this down somewhere (perhaps earlier in this doc) and I need to know it here.
+
+**** Requirements TODO
+
+***** TODO Get the models for donations tracking all necessary info
+What *is* all necessary info?
+
+** Design considerations
+These are the high-level decisions that need to be made about how the site is going to work, and should all generate low-level TODOs.
+
+*** The news page
+What else needs to be a part of this?  What is the UX involved here?
+
+*** Teams
+Again, UX for this should be better fleshed out.
+
+**** What are the functions of a team?  
+are they meant to promote?  How will they accomplish this?  
+Can they function as entities in their own right re: fundraisers etc?
+
+*** Shelter Pages
+What does the workflow look like to sign up partners? (such as shelters etc.)
+**** Workflow for signup
+are we going to have shelter profile pages?  Are we going to allow the shelter owner complete control of those pages, or will they be created / populated via the admin panel that we made for clock?  My concern here is the amount of trust and the cleanliness of these pages.  The simplest route would likely be just letting the shelter owner mess with them, but requiring some sort of approval before the page goes live for the first time.
+**** Purposes of the shelter profile page
+- to promote the shelter as a service to them for partnering with us
+- to increase the apparent legitimacy of paws as an organization, and make our mission 'real' to anyone browsing through our site
+- ?to give the shelter a mechanism for getting involved in fundraiser generation?
+- am I missing stuff here?
+
+*** Search
+SUPER IMPORTANT! How is search going to work, and what should it operate on?  Teams and such.
+
+**** Things that search should search for
+
+***** Teams
+
+***** Players
+
+***** Fundraisers
+
+***** Shelters
+
+** Ian-Actionable
+
+*** Work out a donations workflow
+
+*** Get Oauth provider keys from facebook, Google
+
+*** Talk a little about shelters and shelter profiles
+refer to the Design Considerations/ Shelter Pages notes
+
+*** The admin module be broken, son.  
+You could fix it yourself, or teach me enough so I could do it.  I think you probably know which will be faster.
+
+* Meeting thursday 1/9/20
+
+** Overview
+There are some things that I can do myself, and others that I need a little help with.
+
+** For Ian
+
+** What can I do myself
+
+** Hey Kirby
+I should make a call and check on the status.  Also to say hi.
+
+* From Journal.ln
+
+They have a system in extra life where you create a fundraising page
+[ ] Search page
+  -search by
+  	  -name
+	  -region
+	  -affiliation?
+	  -browse (no search parameters but order by X)
+  [ ] Search gamers
+  [ ] Search teams
+  [ ] Search shelters
+[ ] Shelter page
+  [ ] location
+  [ ] about
+  [ ] connected gamers?  teams?
+[ ] Team page
+  [ ] Team stats
+  [ ] Gamer roster
+  [ ] about
+[ ] Gamer page
+  [ ] gamer stats
+  [ ] about
+  [ ] *links to gamer profiles
+  [ ] Donate
+  [ ] *followers
+  [ ] STUFF
+  [ ] *streaming schedule
+[ ] Ranking
+[ ] Campaign
+  - it's like a user-generated (or otherwise) fundraising event of arbitrary length with arb ownership and arb owners
+  - breakdown by
+    - ownership
+    - beneficiary
+    - donors
+    - participants
+  - WHAT IS A CAMPAIGN MADE OF
+    -start
+    -end
+    name
+    blurb
+    people / orgs
+    targets
+[ ] gamers want to
+  [ ] *promote
+  [ ] check rankings
+  [ ] is there a campaign?  How far am I? What needs done?
+  [ ] edit profile widget 
+[ ] Donate module
+[ ] Shelter Profile
+[ ] add profile management page
+[ ] dick around with BUILD and see if I can prune some dependencies
+[ ] factor out testing.populate()
+[ ] implement marshmallow for form submissions to parse and validate.
+
+~~~~Generalized thoughts on the site~~~~
+We need to make it easy to go to a player's stream.
+
+[ ] Donate button - do we want a modal?  Should this redirect to it's own page?  To an outside page?  What's going on here?
+* Styling considerations
+These are all the things that eventually I want to run by Kirby.
+
+I am noticing that attempting to think about this my first thought is "what would she be doing" so perhaps a more in depth look at these, done together, is in order.
+** Implement Modal for login
+** Need to create some sort of menu-dropdown or whatever is the prettiest implementation for controls on the member page 
+*** Account stuff (like deletion)
+*** Starting fundraisers
+*** changing passwords
+** Member Profile page needs to be brought up to speed
+** Need a field for about text re: fundraisers.
+** News is almost entirely unstyled
+** Pages that are entirely unstyled
+*** News
+*** Login
+*** Signup
+=======
+*** TO DO
+**** TODO set up structlog
+**** 
+>>>>>>> hashing
+* Notes 1/16/20
+** TODO Players vs Members
+We need to distinguish streamers from other members.
+Questions:
+1. Are there members that are not streamers?
+- absolutely.  They may have a shelter or just be a contributor.
+
+** TODO Finish the search page
+
+*** TODO implement sorting
+
+*** TODO Formatting for dates and cash
+
+** TODO ADD TEAMS TO FIXTURES!
+
+** TODO ADD SHELTERS TOO!
+
+* IAN: from 1/16 on
+
+** Will we have members that are just contributors?
+My answer:
+I think this could be a powerful driver for revenue.  Consider this: I am a streamer and I want to recruit people.  My friends make profiles and now they're recruited as dissemination points (with a profile, they can share their contributions and level up by recruiting others).  It turns watching a stream into an active role. Just picture Ethan and his youtubers - I think that if given a chance to gameify watching and being a part of the thing his involvement would skyrocket.
+Now that I'm writing this out I'm kind of thinking that maybe this course of action is slightly evil.  Wanna know what you think.
+
+** How can we best apply rank to streamers?
+The question: Doing a whole extra hit on the db and calculation for rank seems expensive in a few ways (server load, page loading times, bugfixing).  Am I wrong here?  Or should we implement some kind of crawler that periodically updates the rankings based on when they were last updated 
+My Idea: When someone makes a request involving player rankings, the server checks whether those have been updated in the past, say, 15 seconds, and if they haven't it updates them.
+
+** A question on playing nice with others
+One of the things I've done in the past to make things more readable for myself is using variables to store the output of functions rather than just using the functions inline, esp. in cases where I had to deep read the docs to get a sense of what the return value of that function actually meant.  This was also meant to improve readability.  What I mean is:
+
+Prefer This:
+data = db.web.session.query(models.Whatever).filter_by(something)
+do_thing_with_data(data)
+
+Over This:
+do_thing_with_data(db.web.session.query(models.Whatever).filter_by(something))
+
+Is this the right way to do this, in your estimation?  More to the point, if I were part of a team would this be the thing to do?
+
+** A question about grouping fundraiser donations.
+Need to figure out what the best way for this is.
