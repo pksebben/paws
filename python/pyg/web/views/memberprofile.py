@@ -1,3 +1,5 @@
+import datetime
+
 import flask
 
 from wtforms import Form, StringField, TextAreaField, HiddenField, validators
@@ -46,6 +48,14 @@ def memberprofile(userid=1):
     auth = member.auth
     fundraisers = member.fundraisers
     form = MemberProfileForm(flask.request.form, member)
+    upcoming_fundraiser = None
+    for i in member.fundraisers:
+        try:
+            if i.end_date >= datetime.datetime.now() and i.end_date <= upcoming_fundraiser.end_date:
+                upcoming_fundraiser = i
+        except AttributeError:
+            upcoming_fundraiser = i
+            
     if flask.request.method == 'POST' and form.validate():
         update_user_profile(
             flask.session['userid'],
@@ -56,4 +66,4 @@ def memberprofile(userid=1):
             form.handle.data
         )
     return flask.render_template(
-        'content_member_profile.html', form=form, member=member, auth=auth, fundraisers=fundraisers)
+        'content_member_profile.html', form=form, member=member, auth=auth, fundraisers=fundraisers, upcoming_fundraiser = upcoming_fundraiser)

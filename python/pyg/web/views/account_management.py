@@ -96,9 +96,8 @@ def accountmanagement(memberid):
                 The function for deleting members needs to wait on a design decision re: how
                 to handle deleting members.
                 """
-                # db.web.session.delete(member)
-                # db.web.session.delete(auth)
-                # db.web.session.commit()
+                member.active = False
+                db.web.session.commit()
                 return flask.redirect('/account_deleted')
         else:
             return flask.render_template("errorpage.html")

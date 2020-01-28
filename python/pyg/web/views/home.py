@@ -3,6 +3,7 @@ from flask import render_template
 from sqlalchemy import desc, func
 
 from pyg.web import models, db
+from pyg.web.views.login import LoginForm
 
 
 """
@@ -28,6 +29,7 @@ def rankedlist():
 
 @bp.route('/')
 def home():
+    loginform = LoginForm(flask.request.form)
     donations = db.web.session.query(
         models.Member.handle, models.Member.id,
         func.sum(models.Donation.amount).label('total')
@@ -36,5 +38,5 @@ def home():
         models.Member.handle).order_by(desc('total')).all()
     leaderboard_players = enumerate(donations, start=1)
     news = db.web.session.query(models.NewsArticle).order_by(
-        desc("datetime"))
-    return render_template('content_home.html', news=news, leaderboard_players=leaderboard_players)
+        desc("date"))
+    return render_template('content_home.html', news=news, leaderboard_players=leaderboard_players, loginform=loginform)

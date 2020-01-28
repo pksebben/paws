@@ -14,8 +14,6 @@ from sqlalchemy.orm import relationship, backref
 from sqlalchemy import create_engine
 
 
-
-
 """
 models.py
 This is where all the db models (and, by ORM extension, the schema) are created / configured.
@@ -36,7 +34,6 @@ class MemberToTeam(Base):
     is_owner = Column(Boolean, nullable=False)
     member = relationship("Member", back_populates="teams")
     team = relationship("Team", back_populates="members")
-
 
 class Shelter(Base):
     __tablename__ = 'shelter'
@@ -177,7 +174,7 @@ class NewsArticle(Base):
     slug = Column(Text(convert_unicode=True), unique=True)
     headline = Column(Text(convert_unicode=True))
     author = Column(Text(convert_unicode=True))
-    datetime = Column(DateTime, nullable=False)
+    date = Column(DateTime, nullable=False)
     snippet = Column(Text(convert_unicode=True, length=250), nullable=False)
     body = Column(Text(convert_unicode=True))
 

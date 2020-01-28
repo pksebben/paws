@@ -17,6 +17,9 @@ What purpose would a dedicated leaderboard serve that is not served by having le
 TODO:
 - Create a leaderboard page that uses the leaderboard macro in 'leaderboard.html' 
 - This next module is not finished.  Finish him!
+
+CURRENTLY:
+We want to make it such that the leaderboard function serves up a 'windowed' version of the data. 
 """
 # def pull_leaders(listsize = None, center = None):
 #     donations = db.web.session.query(
@@ -39,6 +42,6 @@ def leaderboard():
         func.sum(models.Donation.amount).label('total')
     ).join(models.Donation
     ).group_by(
-        models.Profile.handle).order_by(desc('total')).all()
+        models.Member.handle).order_by(desc('total')).all()
     ranked = enumerate(donations, start=1)
-    return flask.render_template('content_leaderboard.html', players = ranked)
+    return flask.render_template('content_leaderboard.html', leaderboard_players = ranked)

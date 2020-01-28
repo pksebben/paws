@@ -62,7 +62,13 @@ class SQLAlchemy(object):
         self.engine = sqlalchemy.create_engine(
             connection_string, **self.engine_conf)
         self.sessionmaker = orm.scoped_session(
+            orm.sessionmaker(by.create_engine(
+            connection_string, **self.engine_conf)
+        self.sessionmaker = orm.scoped_session(
             orm.sessionmaker(bind=self.engine, **self.session_conf),
+            scopefunc=self.DEFAULT_SCOPE_IDENT)
+
+        @self.app.teardown_requind=self.engine, **self.session_conf),
             scopefunc=self.DEFAULT_SCOPE_IDENT)
 
         @self.app.teardown_request

@@ -57,7 +57,7 @@ def articles():
     article_1 = models.NewsArticle(
         headline=lorem(5),
         author=lorem(2),
-        datetime=datetime.datetime.now(),
+        date=datetime.datetime.now(),
         body=lorem(-1),
         slug="article-1",
         snippet="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium."
@@ -67,7 +67,7 @@ def articles():
     article_2 = models.NewsArticle(
         headline=lorem(2),
         author=lorem(2),
-        datetime=datetime.datetime.now(),
+        date=datetime.datetime.now(),
         body=lorem(-1),
         slug="article-2",
         snippet="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium."
@@ -259,6 +259,16 @@ def fundraisers():
         target_funds = 5000000
         )
     session.add(springbreak)
+    tomsfundraiser = models.Fundraiser(
+        active = True,
+        name = "Tom is raising the funds",
+        about = "I am tom.  I like money",
+        member = session.query(models.Auth).filter_by(email="tom@gmail.com").first().member,
+        created = datetime.datetime.now(),
+        start_date = datetime.datetime(2,1,1),
+        end_date = datetime.datetime(3000,1,1),
+        target_funds = 250,
+    )
     session.commit()
 
 def create_team(owner, **data):
