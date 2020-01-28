@@ -320,8 +320,7 @@ a {
           #Nav ul li.nav-search .nav-search-icon:hover {
             color: #fff; }
         #Nav ul li.nav-search .nav-search-form_container {
-          display: none;
-          width: 100%;
+          width: 0;
           height: 100%;
           position: relative; }
           #Nav ul li.nav-search .nav-search-form_container .nav-search-exit {
@@ -425,6 +424,37 @@ a {
           color: #fff; }
         #Nav ul li.nav-donate:hover {
           background-color: #009910; }
+
+.table .table-row {
+  padding: 0 40px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  position: relative;
+  transition: background-color .5s ease-in-out; }
+  .table .table-row .table-row-cell {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
+    -ms-flex-pack: center;
+    -webkit-align-items: stretch;
+    -moz-align-items: stretch;
+    -ms-align-items: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch; }
 
 .goalProgress {
   background: #e6fad4;
@@ -675,24 +705,14 @@ ul.gamer_profile-overview-stats {
 .leaderboard {
   background-color: #1b002b; }
 
-li.leaderboard-list-item {
-  padding: 0 40px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: center;
-  height: 100px;
-  position: relative;
-  transition: background-color .5s ease-in-out; }
-  li.leaderboard-list-item:hover {
-    background-color: rgba(89, 0, 255, 0.3);
-    cursor: pointer; }
-  li.leaderboard-list-item:not(:last-child) {
-    border-bottom: 1px solid rgba(89, 0, 255, 0.3); }
-  li.leaderboard-list-item:first-child .leaderboard-list-item-rank,
-  li.leaderboard-list-item:first-child .leaderboard-list-item-name {
-    color: #00c9db; }
+li.leaderboard-list-item:hover {
+  background-color: rgba(89, 0, 255, 0.3);
+  cursor: pointer; }
+li.leaderboard-list-item:not(:last-child) {
+  border-bottom: 1px solid rgba(89, 0, 255, 0.3); }
+li.leaderboard-list-item:first-child .leaderboard-list-item-rank,
+li.leaderboard-list-item:first-child .leaderboard-list-item-name {
+  color: #00c9db; }
 
 .leaderboard-list-item-link {
   position: absolute;

@@ -2,9 +2,9 @@ jQuery(document).ready(function( $ ) {
         $nav_news = $('.nav-news');
         $('.nav-search-icon').on('click', function(event){
                 event.preventDefault();
-                $('.nav-news').hide();
-                $('.nav-our_tail').hide();
-                $('.nav-search-form_container').animate({width:'toggle'},350);
+                $('.nav-news').animate({width:'toggle'},1000);
+                $('.nav-our_tail').animate({width:'toggle'},1000);
+                $('.nav-search-form_container').animate({width:'toggle'},1000);
                 $('.nav-search').toggleClass('active');
         });
 

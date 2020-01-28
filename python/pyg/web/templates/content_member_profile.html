@@ -10,7 +10,7 @@
     <h3>auth.id</h3>
     <p>{{ auth.id }}</p>
   </div>
-  {% if session.userid == auth.id && auth.id %}
+  {% if session.userid == auth.id and auth.id %}
   <h2>Welcome, {{ auth.name }}</h2>
   <form id="submit" action="/profile/{{ auth.id }}" method="post">
     <button>Submit changes</button>

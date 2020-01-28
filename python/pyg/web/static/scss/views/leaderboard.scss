@@ -3,16 +3,6 @@
 }
 ul.leaderboard-list{}
 li.leaderboard-list-item{
-        padding:0 40px;
-        display:flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-        align-items: center;
-        height:100px;
-        position: relative;
-        transition: background-color .5s ease-in-out; 
-
         &:hover{
                 background-color: rgba(89, 0, 255, .3);
                 cursor:pointer;
