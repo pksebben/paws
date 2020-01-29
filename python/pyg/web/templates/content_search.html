@@ -19,8 +19,8 @@
     </form>
   </div>
   <div class="searchResults">
-
     {% if results.players[0] is defined %}
+    <label class="search-table-label">Players</label>
     <table id="player_results" class="table">
       <tr class="table-row">
 	<th class="search-table-rank table-cell"><button onclick={% set sortby = "id" %}>Rank</button></th>
@@ -38,6 +38,7 @@
     {% endif %}
 
     {% if results.teams[0] is defined %}
+    <label class="search-table-label">Teams</label>
     <table id="team_results" class="table">
       <tr class="table-header table-row">
 	<th class="search-table-rank table-cell">Rank</th>
@@ -58,6 +59,7 @@
     {% endif %}
 
     {% if results.fundraisers[0] is defined %}
+    <label class="search-table-label">Fundraisers</label>
     <table id="fundraiser_results" class="table">
       <tr class="table-header table-row">
 	<th class="search-table-rank table-cell">Rank</th>
@@ -79,6 +81,7 @@
     {% endif %}
 
     {% if results.shelters[0] is defined %}
+    <label class="search-table-label">Shelters</label>
     <table id="shelter_results" class="table">
       <tr class="table-header table-row">
 	<th class="search_table-name table-cell" class="search_table-name">Name</th>

@@ -447,9 +447,10 @@ a {
   .table-row th button {
     font-family: alphaHeadline;
     text-transform: uppercase;
-    font-size: 16px;
+    font-size: 13px;
     font-style: normal;
-    text-align: left; }
+    text-align: left;
+    font-weight: 200; }
   .table-row .table-cell {
     -webkit-flex-grow: 1;
     -moz-flex-grow: 1;
@@ -1090,6 +1091,11 @@ li.leaderboard-list-item:first-child .leaderboard-list-item-name {
         color: #1b002b;
         cursor: pointer; }
 
+.search .search-table-label {
+  padding: 30px 20px 0px;
+  color: #1b002b;
+  font-family: alphaHeadline;
+  font-size: 40px; }
 .search .table-row {
   height: 60px;
   border-bottom: 1px solid #1b002b;

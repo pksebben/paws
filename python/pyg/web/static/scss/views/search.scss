@@ -91,6 +91,12 @@
 }
 
 .search{
+        .search-table-label{
+                padding:30px 20px 0px;
+                color:$dkpurple;
+                font-family:alphaHeadline;
+                font-size:40px;
+        }
         .table-row{
                 height:60px;
                 border-bottom:1px solid $dkpurple;
