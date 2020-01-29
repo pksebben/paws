@@ -11,6 +11,7 @@
 @import 'modules/variables.scss';
 @import 'modules/nav.scss';
 @import 'modules/table.scss';
+@import 'modules/table-leaderboard.scss';
 
 // ********************************
 // Views
@@ -19,6 +20,7 @@
 @import 'views/leaderboard.scss';
 @import 'views/home.scss';
 @import 'views/news.scss';
+@import 'views/search.scss';
 
 
 // ********************************
@@ -36,6 +38,14 @@
 //         justify-content: center;
 //         align-items:center;
         // padding:40px;
+}
+
+#content{
+        position:absolute;
+        top: $headerHeight;
+        left:0;
+        right:0;
+        bottom:0;
 }
 .section-vertical{
         display:flex;

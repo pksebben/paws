@@ -5,9 +5,17 @@
   
   <div class="searchBar">
     <form method="post">
-      {{ render_field(form.querystring) }}
-      {{ render_field(form.submit) }}
-      {{ render_field(form.searchfor) }}
+
+      {% if form.querystring.errors %}
+      {% for error in form.querystring.errors %}
+      <span>{{ error }}</span>
+      {% endfor %}
+      {% endif %}
+      {{ form.querystring(class="querystring") }}
+
+      {{ form.searchfor() }}
+      {{ form.submit() }}
+      
     </form>
   </div>
   <div class="searchResults">

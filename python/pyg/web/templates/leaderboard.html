@@ -5,11 +5,11 @@
     <li class="leaderboard-list-item table-row">
       <a class="leaderboard-list-item-link" href="/profile/{{ i.1.id }}" >
       </a>
-      <span class="leaderboard-list-item-rank table-row-cell">{{ i.0 }}</span>
-      <img class="leaderboard-list-item-avatar table-row-cell" src="img/placeholder-user-avatar.png"/>
-      <span class="leaderboard-list-item-name table-row-cell">{{ i.1.handle }}</span>
-      <span class="leaderboard-list-item-change icon-block leaderboard-list-item-change-icon_up table-row-cell">navigateup</span>
-      <span class="leaderboard-list-item-amount table-row-cell">{{ "$%.2f"|format(i.1.total|float) }}</span>
+      <span class="leaderboard-list-item-rank table-cell">{{ i.0 }}</span>
+      <img class="leaderboard-list-item-avatar table-cell" src="img/placeholder-user-avatar.png"/>
+      <span class="leaderboard-list-item-name table-cell">{{ i.1.handle }}</span>
+      <span class="leaderboard-list-item-change icon-block leaderboard-list-item-change-icon_up table-cell">navigateup</span>
+      <span class="leaderboard-list-item-amount table-cell">{{ "$%.2f"|format(i.1.total|float) }}</span>
     </li>
     {% endfor %}
   </ul> <!--end leaderboard-list -->

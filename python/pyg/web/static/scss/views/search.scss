@@ -1,0 +1,124 @@
+.searchBar{
+        padding:30px;
+        background-color: $dkpurple;
+        color:$purple;
+        >form{
+                @include flexbox();
+                @include flex-direction(column);
+                @include flex-wrap(nowrap);
+                @include align-items(center);
+                #querystring{
+                        border-bottom:2px solid $purple;
+                        margin-bottom:20px;
+                        color: $white;
+                        font-size:30px;
+                        font-family:alphaHeadline;
+                        padding-bottom: 5px;
+                        text-align:center;
+                        width:80%;
+                }
+                #searchfor{
+                        @include flexbox();
+                        @include flex-direction(row);
+                        @include justify-content(space-evenly);
+                        @include align-items(center);
+                        margin-bottom: 30px;
+                        width:80%;
+                        li{
+                                &:hover{
+                                        cursor:pointer;
+                                }
+                                input[type=radio]{
+                                        margin-right:8px;
+                                        &:checked{
+                                                color:red;
+                                                &:after{
+                                                        width: 17px;
+                                                        height: 17px;
+                                                        top: -2px;
+                                                        left: -1px;
+                                                        position: relative;
+                                                        background-color: $purple;
+                                                        content: '';
+                                                        display: inline-block;
+                                                        visibility: visible;
+                                                        border: 2px solid $purple;
+                                                }
+                                        }
+                                        &:after{
+                                                width: 17px;
+                                                height: 17px;
+                                                top: -2px;
+                                                left: -1px;
+                                                position: relative;
+                                                background-color: $dkpurple;
+                                                content: '';
+                                                display: inline-block;
+                                                visibility: visible;
+                                                border: 2px solid $purple;
+                                        }
+                                        &:hover{
+                                                cursor:pointer;
+                                        }
+                                }
+                                label{
+                                        font-family: alphaHeadline;
+                                        text-transform: uppercase;
+                                        color: $purple;
+                                        margin-right:5px;
+                                        line-height: 18px;
+                                        margin-top: 5px;
+                                        &:hover{
+                                                cursor:pointer;
+                                        }
+                                }
+                        }
+                }
+                #submit{
+                        border:1px solid $purple;
+                        color: $purple;
+                        padding:10px 15px;
+                        font-family:alphaHeadline;
+                        text-transform:uppercase;
+                        transition:all .5s ease;
+                        &:hover{
+                                background-color:$purple;
+                                color:$dkpurple;
+                                cursor:pointer;
+                        }
+                }
+        }
+}
+.search-table{
+        .search-table-row{
+                border-bottom:2px solid $dkpurple;
+                .search-table-cell{
+                        @include flex-grow(1);
+                }
+                .search-table-cell-name{
+                        width:50%;
+                }
+        }
+}
+#player_results{
+        .search-table-cell-player_results-id{}
+        .search-table-cell-player_results-name{}
+        .search-table-cell-player_results-dontations{}
+}
+#team_results{
+        .search-table-celle-team_results-id{}
+        .search-table-celle-team_results-name{}
+        .search-table-celle-team_results-donations{}
+        .search-table-celle-team_results-members{}
+}
+#fundraiser_results{
+        .search-table-cell-fundraiser_results-id{}
+        .search-table-cell-fundraiser_results-name{}
+        .search-table-cell-fundraiser_results-donations{}
+        .search-table-cell-fundraiser_results-start{}
+        .search-table-cell-fundraiser_results-end{}
+}
+#shelter_results{
+      .search-table-cell-shelter_results-name{}
+      .search-table-cell-shelter_results-location{}
+}

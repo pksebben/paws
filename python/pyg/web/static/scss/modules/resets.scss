@@ -12,6 +12,9 @@ html{
 }
 ul, ol{
 	list-style:none outside none;
+        margin-block-start:0em;
+        margin-block-end: 0em;
+        padding-inline-start:0px;
 }
 h1, h2, h3, h4, h5, h6{
 	margin:0;
@@ -45,18 +48,29 @@ button{
     background-color:transparent;
     border:none;
 }
+table{
+        td{
+                border:none !important;
+                padding:0 !important;
+        }
+        th{
+                border:none !important;
+                padding:0 !important;
+        }
+}
 /*------------------- 
     LAYOUT
 ------------------- */
-#Content{
-    overflow:hidden;
-    display:block;
-    position:absolute;
-    width:100%;
-    height:100%;
-    top:0;
-    bottom:0;
-}
+// #content{
+//     overflow:hidden;
+//     display:block;
+//     position:absolute;
+//     width:100%;
+//     height:100%;
+//     top:$headerHeight;
+//     bottom:0;
+// }
+
 
 .column-one, 
 .column-two{

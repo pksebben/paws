@@ -50,7 +50,7 @@ It seems like getting the page to rerender might be a bit of a hassle. I don't k
 class SearchForm(Form):
     querystring = StringField("Search")
     searchfor = RadioField("Search For", choices=[("all","all"),("players","players"),("teams","teams"),("fundraisers","fundraisers"),("shelters", "shelters")], default="all")
-    submit = SubmitField("Submit")
+    submit = SubmitField("search")
 
 bp = flask.Blueprint('search', __name__)
 
