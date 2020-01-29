@@ -426,6 +426,9 @@ a {
         #Nav ul li.nav-donate:hover {
           background-color: #009910; }
 
+.table {
+  width: 100%; }
+
 .table-row {
   padding: 0 40px;
   display: -webkit-box;
@@ -440,12 +443,14 @@ a {
   height: 100px;
   position: relative;
   transition: background-color .5s ease-in-out; }
-  .table-row th {
+  .table-row th,
+  .table-row th button {
     font-family: alphaHeadline;
     text-transform: uppercase;
-    font-size: 16px; }
-  .table-row .table-cell,
-  .table-row th {
+    font-size: 16px;
+    font-style: normal;
+    text-align: left; }
+  .table-row .table-cell {
     -webkit-flex-grow: 1;
     -moz-flex-grow: 1;
     -ms-flex-grow: 1;
@@ -468,7 +473,8 @@ a {
     -moz-align-items: stretch;
     -ms-align-items: stretch;
     -ms-flex-align: stretch;
-    align-items: stretch; }
+    align-items: stretch;
+    font-family: alphaHeadline; }
 
 .leaderboard {
   background-color: #1b002b; }
@@ -1084,15 +1090,40 @@ li.leaderboard-list-item:first-child .leaderboard-list-item-name {
         color: #1b002b;
         cursor: pointer; }
 
-.search-table .search-table-row {
-  border-bottom: 2px solid #1b002b; }
-  .search-table .search-table-row .search-table-cell {
-    -webkit-flex-grow: 1;
-    -moz-flex-grow: 1;
-    -ms-flex-grow: 1;
-    flex-grow: 1; }
-  .search-table .search-table-row .search-table-cell-name {
-    width: 50%; }
+.search .table-row {
+  height: 60px;
+  border-bottom: 1px solid #1b002b;
+  padding: 0 20px; }
+.search td.search-table-raised {
+  color: #00c214; }
+
+#player_results th,
+#player_results td {
+  width: 20%; }
+#player_results .search_table-name {
+  width: 60%; }
+
+#fundraiser_results th,
+#fundraiser_results td {
+  width: 10%; }
+#fundraiser_results .search_table-name {
+  width: 60%; }
+
+#team_results th,
+#team_results td {
+  width: 10%; }
+#team_results .search_table-name {
+  width: 60%; }
+#team_results .search-table-raised {
+  text-align: center; }
+#team_results .search-table-members {
+  text-align: center; }
+
+#shelter_results th,
+#shelter_results td {
+  width: 30%; }
+#shelter_results .search_table-name {
+  width: 70%; }
 
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {

@@ -89,36 +89,59 @@
                 }
         }
 }
-.search-table{
-        .search-table-row{
-                border-bottom:2px solid $dkpurple;
-                .search-table-cell{
-                        @include flex-grow(1);
-                }
-                .search-table-cell-name{
-                        width:50%;
-                }
+
+.search{
+        .table-row{
+                height:60px;
+                border-bottom:1px solid $dkpurple;
+                padding:0 20px;
+        }
+        td.search-table-raised{
+                color: $green;
         }
 }
+//3 columns
 #player_results{
-        .search-table-cell-player_results-id{}
-        .search-table-cell-player_results-name{}
-        .search-table-cell-player_results-dontations{}
+        th,
+        td{
+                width:20%;
+        }
+        .search_table-name{
+                width:60%;
+        }
+}
+//4 columns
+#fundraiser_results{
+        th,
+        td{
+                width:10%;
+        }
+        .search_table-name{
+                width:60%;
+        }
 }
 #team_results{
-        .search-table-celle-team_results-id{}
-        .search-table-celle-team_results-name{}
-        .search-table-celle-team_results-donations{}
-        .search-table-celle-team_results-members{}
+        th,
+        td{
+                width:10%;
+        }
+        .search_table-name{
+                width:60%;
+        }  
+        .search-table-raised{
+                text-align:center;
+        }
+        .search-table-members{
+                text-align:center;
+        }
 }
-#fundraiser_results{
-        .search-table-cell-fundraiser_results-id{}
-        .search-table-cell-fundraiser_results-name{}
-        .search-table-cell-fundraiser_results-donations{}
-        .search-table-cell-fundraiser_results-start{}
-        .search-table-cell-fundraiser_results-end{}
-}
+//2 columns
 #shelter_results{
-      .search-table-cell-shelter_results-name{}
-      .search-table-cell-shelter_results-location{}
+        th,
+        td{
+                width:30%;
+        }
+        .search_table-name{
+                width:70%;
+        }
 }

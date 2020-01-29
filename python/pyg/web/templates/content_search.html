@@ -21,77 +21,73 @@
   <div class="searchResults">
 
     {% if results.players[0] is defined %}
-    <label for="player_results">Players</label>
-    <table id="player_results">
-      <tr>
-	<th><button onclick={% set sortby = "id" %}>ID</button></th>
-	<th><button onclick={% set sortby = "name" %}>Name</button></th>
-	<th>Amount raised</th>
+    <table id="player_results" class="table">
+      <tr class="table-row">
+	<th class="search-table-rank table-cell"><button onclick={% set sortby = "id" %}>Rank</button></th>
+	<th class="search_table-name table-cell"><button onclick={% set sortby = "name" %}>Name</button></th>
+	<th class="table-cell">Raised</th>
       </tr>
       {% for i in results.players|sort(attribute=sortby) %}
-      <tr>
-	<td>{{ i.id }}</td>
-	<td>{{ i.handle }}</td>
-	<td>{{ i.donations|sum(attribute="amount") }}</td>
+      <tr class="table-row">
+	<td class="search-table-rank table-cell">{{ i.id }}</td>
+	<td class="search_table-name table-cell">{{ i.handle }}</td>
+	<td class="search-table-raised table-cell">{{ i.donations|sum(attribute="amount") }}</td>
       </tr>
       {% endfor %}
     </table>
     {% endif %}
 
     {% if results.teams[0] is defined %}
-    <label for="team_results">Teams</label>
-    <table id="team_results">
-      <tr>
-	<th>ID</th>
-	<th>Name</th>
-	<th>Amount Raised</th>
-	<th>Members</th>
+    <table id="team_results" class="table">
+      <tr class="table-header table-row">
+	<th class="search-table-rank table-cell">Rank</th>
+	<th class="search_table-name table-cell">Name</th>
+	<th class="search-table-raised table-cell">Raised</th>
+	<th class="search-table-members table-cell">Members</th>
       </tr>
       {% for i in results.teams %}
-      <tr>
+      <tr class="table-row">
 
-	<td>{{ i.id }}</td>
-	<td><a href="/teamprofile/{{i.id}}">{{ i.name }}</a></td>
-	<td>{{ i.members.donations|sum(attribute="amount") }}</td>
-	<td>{{ i.members|length() }}</td>
+	<td class="search-table-rank table-cell">{{ i.id }}</td>
+	<td class="search_table-name table-cell"><a href="/teamprofile/{{i.id}}">{{ i.name }}</a></td>
+	<td class="search-table-raised table-cell">{{ i.members.donations|sum(attribute="amount") }}</td>
+	<td class="search-table-members table-cell">{{ i.members|length() }}</td>
       </tr>
       {% endfor %}
     </table>
     {% endif %}
 
     {% if results.fundraisers[0] is defined %}
-    <label for="fundraiser_results">Fundraisers</label>
-    <table id="fundraiser_results">
-      <tr>
-	<th>ID</th>
-	<th>Name</th>
-	<th>Amount Raised</th>
-	<th>Start Date</th>
-	<th>End Date</th>
+    <table id="fundraiser_results" class="table">
+      <tr class="table-header table-row">
+	<th class="search-table-rank table-cell">Rank</th>
+	<th class="search_table-name table-cell">Name</th>
+	<th class="table-cell">Raised</th>
+	<th class="table-cell">Start</th>
+	<th class="table-cell">End</th>
       </tr>
       {% for i in results.fundraisers %}
-      <tr>
-	<td>{{ i.id }}</td>
-	<td><a href="/fundraiser/{{ i.id }}">{{ i.name }}</a></td>
-	<td>{{ i.donations|sum(attribute="amount") }}</td>
-	<td>{{ i.start_date }}</td>
-	<td>{{ i.end_date }}</td>
+      <tr class="table-header table-row">
+	<td class="search-table-rank table-cell">{{ i.id }}</td>
+	<td class="search_table-name table-cell"><a href="/fundraiser/{{ i.id }}">{{ i.name }}</a></td>
+	<td class="search-table-raised table-cell">{{ i.donations|sum(attribute="amount") }}</td>
+	<td class="table-cell">{{ i.start_date }}</td>
+	<td class="table-cell">{{ i.end_date }}</td>
       </tr>
       {% endfor %}
     </table>
     {% endif %}
 
     {% if results.shelters[0] is defined %}
-    <label for="shelter_results">Shelters</label>
-    <table id="shelter_results">
-      <tr>
-	<th>Name</th>
-	<th>Location</th>
+    <table id="shelter_results" class="table">
+      <tr class="table-header table-row">
+	<th class="search_table-name table-cell" class="search_table-name">Name</th>
+	<th class="table-cell">Location</th>
       </tr>
       {% for i in results.shelters %}
-      <tr>
-	<td><a href="/shelter/{{ i.id }}">{{ i.name }}</td>
-	<td>{{ i.location }}</td>
+      <tr class="table-row">
+	<td class="search_table-name table-cell"><a href="/shelter/{{ i.id }}">{{ i.name }}</td>
+	<td class="table-cell">{{ i.location }}</td>
       </tr>
       {% endfor %}
     </table>
