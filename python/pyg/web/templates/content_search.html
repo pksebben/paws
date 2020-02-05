@@ -24,7 +24,7 @@
       <tr>
 	<td>{{ i.id }}</td>
 	<td>{{ i.handle }}</td>
-	<td>{{ i.donations|sum(attribute="amount") }}</td>
+	<td>{{ "$%.2f"|format(i.donations|sum(attribute="amount")) }}</td>
       </tr>
       {% endfor %}
     </table>
@@ -44,7 +44,7 @@
 
 	<td>{{ i.id }}</td>
 	<td><a href="/teamprofile/{{i.id}}">{{ i.name }}</a></td>
-	<td>{{ i.members.donations|sum(attribute="amount") }}</td>
+	<td>{{ "$%.2f"|format(i.members.donations|sum(attribute="amount")) }}</td>
 	<td>{{ i.members|length() }}</td>
       </tr>
       {% endfor %}
@@ -65,9 +65,9 @@
       <tr>
 	<td>{{ i.id }}</td>
 	<td><a href="/fundraiser/{{ i.id }}">{{ i.name }}</a></td>
-	<td>{{ i.donations|sum(attribute="amount") }}</td>
-	<td>{{ i.start_date }}</td>
-	<td>{{ i.end_date }}</td>
+	<td>{{ "$%.2f"|format(i.donations|sum(attribute="amount")) }}</td>
+	<td>{{ i.start_date.strftime('%Y-%m-%d') }}</td>
+	<td>{{ i.end_date.strftime('%Y-%m-%d') }}</td>
       </tr>
       {% endfor %}
     </table>

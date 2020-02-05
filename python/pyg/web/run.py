@@ -8,12 +8,10 @@ from oscar import flag
 from twisted.python import log
 from twisted.internet import task, reactor
 from sqlalchemy import func, desc
-
-from pyg.web import admin, app, container, db, models
-
 from twisted.internet import task
 from twisted.internet import reactor
 
+from pyg.web import admin, app, container, db, models
 
 """Ranking func
 Uses the twisted LoopingCall to schedule a repeating function that queries the db , organizing by sum(donations) 
@@ -33,7 +31,7 @@ def set_ranks():
         db.web.session.commit()
 
 l = task.LoopingCall(set_ranks)
-l.start(6.0) # call every second
+l.start(60.0) # call every second
 
 # l.stop() will stop the looping calls
 
