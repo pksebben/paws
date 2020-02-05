@@ -6,9 +6,36 @@ from structlog import twisted
 from structlog.twisted import LoggerFactory
 from oscar import flag
 from twisted.python import log
+from twisted.internet import task, reactor
+from sqlalchemy import func, desc
 
-from pyg.web import admin, app, container, db, ranking
+from pyg.web import admin, app, container, db, models
 
+from twisted.internet import task
+from twisted.internet import reactor
+
+
+"""Ranking func
+Uses the twisted LoopingCall to schedule a repeating function that queries the db , organizing by sum(donations) 
+"""
+def set_ranks():
+    if db.web is not None:
+        members = db.web.session.query(
+            models.Member,
+            func.sum(
+                models.Donation.amount).label('total')).join(
+                    models.Donation).group_by(
+                        models.Member).order_by(
+                            desc('total')).all()
+        for i in range(len(members)):
+            members[i][0].rank = i
+            
+        db.web.session.commit()
+
+l = task.LoopingCall(set_ranks)
+l.start(6.0) # call every second
+
+# l.stop() will stop the looping calls
 
 """
 run.py
@@ -34,9 +61,10 @@ def main():
     app.init()
     db.init(app.app)
     admin.init(app.app)
-    ranking.init_ranking()
     app.app.jinja_env.auto_reload = True
+    # reactor.run()
     container.run(app.app, FLAGS.endpoint, FLAGS.debug)
+
 
 
 if __name__ == "__main__":
