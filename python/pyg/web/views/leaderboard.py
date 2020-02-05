@@ -35,6 +35,21 @@ We want to make it such that the leaderboard function serves up a 'windowed' ver
 #     leaderlist = enumerate(donations, start=1)
 #     return leaderlist
 
+def rankedlist():
+    # subquery = db.web.session.query(models.Member.handle,
+    #                      func.rank().over(
+    #                          order_by=models.Donation.amount.desc(),
+    #                          partition_by=models.Member.id
+    #                      ).label('rank')).all()
+    # query = db.web.session.query(subquery).filter(subquery.amount.rank==1)
+    # return subquery
+     db.web.session.query(
+        models.Member.handle,
+        func.rank().over(func.sum(models.Donation.amount)).label('total')
+    ).join(models.Donation
+    ).group_by(
+        models.Member.handle).order_by(desc('total')).all()
+
 @bp.route('/leaderboard')
 def leaderboard():
     donations = db.web.session.query(
@@ -43,5 +58,6 @@ def leaderboard():
     ).join(models.Donation
     ).group_by(
         models.Member.handle).order_by(desc('total')).all()
-    ranked = enumerate(donations, start=1)
+    # ranked = enumerate(donations, start=1)
+    ranked = rankedlist()
     return flask.render_template('content_leaderboard.html', leaderboard_players = ranked)

@@ -57,6 +57,7 @@ class Member(Base):
     location = Column(String(40))
     twitch_handle = Column(String(40))
     created = Column(DateTime, nullable=False)
+    rank = Column(Integer, nullable=True)
     active = Column(Boolean, nullable=False) # for account deletion
 
     # Relationship Config

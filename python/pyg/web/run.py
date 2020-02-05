@@ -7,7 +7,7 @@ from structlog.twisted import LoggerFactory
 from oscar import flag
 from twisted.python import log
 
-from pyg.web import admin, app, container, db
+from pyg.web import admin, app, container, db, ranking
 
 
 """
@@ -34,6 +34,7 @@ def main():
     app.init()
     db.init(app.app)
     admin.init(app.app)
+    ranking.init_ranking()
     app.app.jinja_env.auto_reload = True
     container.run(app.app, FLAGS.endpoint, FLAGS.debug)
 
@@ -45,6 +46,7 @@ if __name__ == "__main__":
         wrapper_class=twisted.BoundLogger,
         cache_logger_on_first_use=True
     )
+
     log.startLogging(sys.stderr)
     
     flag.parse_commandline(sys.argv[1:])
