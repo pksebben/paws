@@ -1,0 +1,57 @@
+// @include font-face($name, $path, $weight: null, $style: null, $exts: eot woff2 woff ttf svg) {
+@include font-face(ssSocial, "fonts/ss-social");
+@include font-face(ssStandardLine, "fonts/ss-line");
+@include font-face(ssStandard, "fonts/ss-standard");
+@include font-face(ssBlock, "fonts/ss-block");
+@include font-face(alphaHeadline, "fonts/alpha-headline-regular", null, null, eot woff2 woff ttf svg);
+@include font-face(alphaHeadline, "fonts/alpha-headline-bold", bold, null, eot woff2 woff ttf svg);
+@include font-face(sourceSansPro, "fonts/source-sans-pro-light", light, null, eot woff2 woff ttf svg);
+@include font-face(sourceSansPro, "fonts/source-sans-pro-regular", regular, null, eot woff2 woff ttf svg);
+@include font-face(junegull, "fonts/Junegull-Regular", regular, null, eot woff2 woff ttf svg);
+
+html{
+        font-size:100%;
+}
+
+@mixin alpha-xl{
+        font-family:alphaHeadline;
+        font-size:36px;
+        text-transform: uppercase;
+        line-height: 50px;
+}
+@mixin alpha-s{
+        font-family: alphaHeadline;
+        font-size:18px;
+}
+
+h1{
+        @include alpha-xl;
+}
+
+p{
+        font-size:18px;
+        line-height: 27px;
+        font-family: sourceSansPro;
+        font-style:regular;
+}
+h2{
+}
+
+a{
+        color:$dkpurple;
+        transition: color .5s ease-in-out;
+
+        &:hover{
+                color:$purple;
+        }
+}
+
+.icon-standard{
+        font-family:ssStandard;
+}
+.icon-social{
+        font-family:ssSocial;
+}
+.icon-block{
+        font-family:ssBlock;
+}

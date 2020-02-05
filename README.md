@@ -15,10 +15,11 @@ This runs app.py through Python3
 1. [Install Python3](https://www.python.org/downloads/)
 2. Open a terminal and [create a venv](https://docs.python.org/3/library/venv.html)
 3. [Start that venv](https://packaging.python.org/tutorials/installing-packages/#creating-virtual-environments)
+3. `export PYTHONPATH=path/to/pyg/python`
 4. cd to pyg/python/pyg/web/
-5. do this: `python3 app.py`
+5. do this: `python3 run.py`
 6. It will bitch about some stuff missing. `pip install` whatever it says is missing.
-7. `python3 app.py` again.  If it bitches, see #6, if not, the site should be live at [localhost:8080](localhost:8080)
+7. `python3 run.py` again.  If it bitches, see #6, if not, the site should be live at [localhost:8080](localhost:8080)
 
 #### Via Pantsbuild (fewer things to install, **way** more to mess with while developing)
 This will generate an executable .pex file that can be run from anywhere without installing dependencies.

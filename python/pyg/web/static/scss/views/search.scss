@@ -1,0 +1,155 @@
+.searchBar{
+        padding:30px;
+        background-color: $dkpurple;
+        color:$purple;
+        >form{
+                @include flexbox();
+                @include flex-direction(column);
+                @include flex-wrap(nowrap);
+                @include align-items(center);
+                #querystring{
+                        border-bottom:2px solid $purple;
+                        margin-bottom:20px;
+                        color: $white;
+                        font-size:30px;
+                        font-family:alphaHeadline;
+                        padding-bottom: 5px;
+                        text-align:center;
+                        width:80%;
+                        margin-top:15px;
+                        font-size:24px;
+                }
+                #searchfor{
+                        @include flexbox();
+                        @include flex-direction(row);
+                        @include justify-content(space-evenly);
+                        @include align-items(center);
+                        margin-bottom: 30px;
+                        width:80%;
+                        li{
+                                &:hover{
+                                        cursor:pointer;
+                                }
+                                input[type=radio]{
+                                        margin-right:8px;
+                                        &:checked{
+                                                color:red;
+                                                &:after{
+                                                        width: 17px;
+                                                        height: 17px;
+                                                        top: -2px;
+                                                        left: -1px;
+                                                        position: relative;
+                                                        background-color: $purple;
+                                                        content: '';
+                                                        display: inline-block;
+                                                        visibility: visible;
+                                                        border: 2px solid $purple;
+                                                }
+                                        }
+                                        &:after{
+                                                width: 17px;
+                                                height: 17px;
+                                                top: -2px;
+                                                left: -1px;
+                                                position: relative;
+                                                background-color: $dkpurple;
+                                                content: '';
+                                                display: inline-block;
+                                                visibility: visible;
+                                                border: 2px solid $purple;
+                                        }
+                                        &:hover{
+                                                cursor:pointer;
+                                        }
+                                }
+                                label{
+                                        font-family: alphaHeadline;
+                                        text-transform: uppercase;
+                                        color: $purple;
+                                        margin-right:5px;
+                                        line-height: 18px;
+                                        margin-top: 5px;
+                                        &:hover{
+                                                cursor:pointer;
+                                        }
+                                }
+                        }
+                }
+                #submit{
+                        border:1px solid $purple;
+                        color: $purple;
+                        padding:15px 20px;
+                        font-family:alphaHeadline;
+                        text-transform:uppercase;
+                        transition:all .5s ease;
+                        &:hover{
+                                background-color:$purple;
+                                color:$dkpurple;
+                                cursor:pointer;
+                        }
+                }
+        }
+}
+
+.search{
+        .search-table-label{
+                padding:30px 20px 0px;
+                color:$dkpurple;
+                font-family:alphaHeadline;
+                font-size:40px;
+        }
+        .table-row{
+                height:60px;
+                border-bottom:1px solid $dkpurple;
+                padding:0 20px;
+        }
+        td.search-table-raised{
+                color: $green;
+        }
+}
+//3 columns
+#player_results{
+        th,
+        td{
+                width:20%;
+        }
+        .search_table-name{
+                width:60%;
+        }
+}
+//4 columns
+#fundraiser_results{
+        th,
+        td{
+                width:10%;
+        }
+        .search_table-name{
+                width:60%;
+        }
+}
+#team_results{
+        th,
+        td{
+                width:10%;
+        }
+        .search_table-name{
+                width:60%;
+        }  
+        .search-table-raised{
+                text-align:center;
+        }
+        .search-table-members{
+                text-align:center;
+        }
+}
+//2 columns
+#shelter_results{
+        th,
+        td{
+                width:30%;
+        }
+        .search_table-name{
+                width:70%;
+        }
+}

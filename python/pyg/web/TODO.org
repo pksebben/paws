@@ -1,10 +1,4 @@
 * Immediate TODOs
-** TODO Implement testing data
-*** TODO Finish models.py to integrate donations
-*** TODO Populate the testing data file
-*** TODO Write function into test.app to use testing data
-*** TODO Write setup function for app.py
-*** TODO Write teardown function for app.py
 
 * Sitemap
 These are the pages we are gonna need, with the relevant data nested.

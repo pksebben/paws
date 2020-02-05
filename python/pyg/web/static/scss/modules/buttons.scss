@@ -1,0 +1,16 @@
+.button{
+        font-family:alphaHeadline;
+        font-size:28px;
+        padding:5px 20px;
+}
+
+.button-green{
+        color:$green;
+        border:2px solid $green;
+        transition:all .5s ease-in-out;
+
+        &:hover{
+                background-color:$green;
+                color:$white;
+        }
+}
