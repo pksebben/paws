@@ -40,7 +40,13 @@ a {
 
 button {
   background-color: transparent;
-  border: none; }
+  border: none;
+  border-radius: 0;
+  transition: all 0.5s ease; }
+  button:focus {
+    outline: none; }
+  button:hover {
+    cursor: pointer; }
 
 table td {
   border: none !important;
@@ -289,7 +295,8 @@ a {
     #Nav ul li {
       display: flex;
       justify-content: center;
-      align-items: center; }
+      align-items: center;
+      padding: 0 20px; }
       #Nav ul li a {
         font-family: alphaHeadline;
         font-size: 18px;
@@ -302,38 +309,33 @@ a {
       #Nav ul li:hover {
         cursor: pointer; }
       #Nav ul li.nav-our_tail, #Nav ul li.nav-news {
-        -webkit-flex-grow: 3;
-        -moz-flex-grow: 3;
-        -ms-flex-grow: 3;
-        flex-grow: 3; }
-      #Nav ul li.nav-search {
         -webkit-flex-grow: 1;
         -moz-flex-grow: 1;
         -ms-flex-grow: 1;
-        flex-grow: 1;
+        flex-grow: 1; }
+      #Nav ul li.nav-search {
         background-color: #1b002b; }
-        #Nav ul li.nav-search.active .nav-search-icon {
-          padding: 0 20px; }
-          #Nav ul li.nav-search.active .nav-search-icon:hover {
-            color: #5900ff; }
         #Nav ul li.nav-search .nav-search-icon {
           color: #5900ff; }
-          #Nav ul li.nav-search .nav-search-icon:hover {
-            color: #fff; }
         #Nav ul li.nav-search .nav-search-form_container {
-          width: 0;
-          height: 100%;
-          position: relative; }
+          position: absolute;
+          top: 40px;
+          left: 0;
+          width: 100%;
+          background-color: #1b002b;
+          display: none; }
           #Nav ul li.nav-search .nav-search-form_container .nav-search-exit {
             position: absolute;
             font-family: alphaHeadline;
-            top: 24%;
+            top: 10px;
             color: #5900ff;
             font-size: 18px;
             right: 20px;
+            transition: all 0.5s ease;
+            opacity: 0.4;
             transition: all 0.5s ease; }
             #Nav ul li.nav-search .nav-search-form_container .nav-search-exit:hover {
-              color: #fff; }
+              opacity: 1; }
         #Nav ul li.nav-search form {
           display: -webkit-box;
           display: -moz-box;
@@ -353,32 +355,47 @@ a {
           -ms-align-items: center;
           -ms-flex-align: center;
           align-items: center;
-          height: 100%; }
+          -webkit-justify-content: space-between;
+          -moz-justify-content: space-between;
+          -ms-justify-content: space-between;
+          justify-content: space-between;
+          -ms-flex-pack: space-between;
+          padding: 30px 20px 40px; }
           #Nav ul li.nav-search form input[type=text] {
             width: 100%;
             transition: width 0.5s ease-in-out;
-            border: 0px;
+            border-bottom: 2px solid #5900ff;
             font-family: alphaHeadline;
             padding: 0 15px;
-            color: #fff; }
+            font-size: 30px;
+            padding-bottom: 10px;
+            margin-top: 15px;
+            font-size: 24px;
+            text-align: center;
+            color: #fff;
+            width: 80%; }
             #Nav ul li.nav-search form input[type=text]::placeholder {
-              color: #f2e6ff; }
+              color: #5900ff;
+              opacity: .5; }
           #Nav ul li.nav-search form button.nav-search-submit {
+            padding: 15px 20px;
             color: #5900ff;
             font-family: alphaHeadline;
-            margin-right: 50px;
-            transition: all 0.5s ease; }
+            margin-left: 20px;
+            margin-top: 15px;
+            transition: all 0.5s ease;
+            text-transform: uppercase;
+            border: 1px solid #5900ff; }
             #Nav ul li.nav-search form button.nav-search-submit:hover {
-              color: #fff; }
+              background-color: #5900ff;
+              color: #1b002b;
+              cursor: pointer; }
       #Nav ul li.nav-signin {
         background-color: #5900ff;
         transition: all .75s;
-        padding: 0 20px;
         position: relative; }
         #Nav ul li.nav-signin a {
           color: #fff; }
-        #Nav ul li.nav-signin:hover {
-          background-color: #4700cc; }
         #Nav ul li.nav-signin form {
           position: absolute;
           top: 40px;
@@ -419,12 +436,9 @@ a {
             flex-wrap: nowrap; }
       #Nav ul li.nav-donate {
         background-color: #00c214;
-        transition: all .75s;
-        padding: 0 20px; }
+        transition: all .75s; }
         #Nav ul li.nav-donate a {
           color: #fff; }
-        #Nav ul li.nav-donate:hover {
-          background-color: #009910; }
 
 .table {
   width: 100%; }
@@ -1017,7 +1031,9 @@ li.leaderboard-list-item:first-child .leaderboard-list-item-name {
       font-family: alphaHeadline;
       padding-bottom: 5px;
       text-align: center;
-      width: 80%; }
+      width: 80%;
+      margin-top: 15px;
+      font-size: 24px; }
     .searchBar > form #searchfor {
       display: -webkit-box;
       display: -moz-box;
@@ -1082,7 +1098,7 @@ li.leaderboard-list-item:first-child .leaderboard-list-item-name {
     .searchBar > form #submit {
       border: 1px solid #5900ff;
       color: #5900ff;
-      padding: 10px 15px;
+      padding: 15px 20px;
       font-family: alphaHeadline;
       text-transform: uppercase;
       transition: all .5s ease; }

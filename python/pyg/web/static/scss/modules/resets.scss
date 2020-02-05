@@ -45,9 +45,18 @@ a{
 }
 
 button{
-    background-color:transparent;
-    border:none;
+        background-color:transparent;
+        border:none;
+        border-radius:0;
+        transition:all 0.5s ease;
+        &:focus{
+                outline:none;
+        }
+        &:hover{
+                cursor:pointer;
+        }
 }
+
 table{
         td{
                 border:none !important;
