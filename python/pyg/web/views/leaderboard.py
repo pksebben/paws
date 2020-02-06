@@ -28,6 +28,8 @@ This query defines a 'window' of players to look at that are X ahead of the chos
 
 It is required anywhere you want to serve up such an asset.
 """
+
+
 def rankedlist(member, windowsize=2):
     donations = db.web.session.query(
         models.Member.handle,

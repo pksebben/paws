@@ -13,11 +13,11 @@ from sqlite3 import IntegrityError
 
 
 import pyg.web.app as app
-from pyg.web import auth
 from pyg.web import db
 from pyg.web import models
 from pyg.web import fixtures
 from pyg.web.views import signup, news
+from pyg.web.views.home import feature_mvp
 
 
 
@@ -152,6 +152,10 @@ class StartTest(unittest.TestCase):
             userid=3
         ))
         self.assertIn(b"krane", res.data)
+
+    def test_feature_mvp(self):
+        feature_mvp()
+        self.assertEquals(True,True)
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,22 +1,5 @@
-* Immediate TODOs
-
 * Sitemap
 These are the pages we are gonna need, with the relevant data nested.
-
-** TODO News Page [2/4]
-- [X] HTML structured out
-- [X] Data modeled
-  - [X] News Items [5/5]
-    - [X] Headline
-    - [X] Author
-    - [X] Datetime
-    - [X] Body
-    - [X] Slug
-- [ ] HTML wired to database
-- [ ] Code to generate written
-
-** TODO About
-- [X] HTML structured out
 
 ** TODO Home Page [0/3]
 - [ ] Featured Gamer
@@ -574,3 +557,4 @@ Is this the right way to do this, in your estimation?  More to the point, if I w
 
 ** A question about grouping fundraiser donations.
 Need to figure out what the best way for this is.
+
