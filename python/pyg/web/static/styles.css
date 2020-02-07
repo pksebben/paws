@@ -285,46 +285,46 @@ a {
     #Nav h1:hover {
       color: #5900ff;
       cursor: pointer; }
-  #Nav ul {
+  #Nav > ul {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: flex-end;
     flex-grow: 1;
     align-items: stretch; }
-    #Nav ul li {
+    #Nav > ul li {
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 0 20px; }
-      #Nav ul li a {
+      #Nav > ul li a {
         font-family: alphaHeadline;
         font-size: 18px;
         text-transform: uppercase;
         color: #1b002b;
         transition: all .75s;
         font-size: 16px; }
-      #Nav ul li i {
+      #Nav > ul li i {
         transition: all .75s; }
-      #Nav ul li:hover {
+      #Nav > ul li:hover {
         cursor: pointer; }
-      #Nav ul li.nav-our_tail, #Nav ul li.nav-news {
+      #Nav > ul li.nav-our_tail, #Nav > ul li.nav-news {
         -webkit-flex-grow: 1;
         -moz-flex-grow: 1;
         -ms-flex-grow: 1;
         flex-grow: 1; }
-      #Nav ul li.nav-search {
+      #Nav > ul li.nav-search {
         background-color: #1b002b; }
-        #Nav ul li.nav-search .nav-search-icon {
+        #Nav > ul li.nav-search .nav-search-icon {
           color: #5900ff; }
-        #Nav ul li.nav-search .nav-search-form_container {
+        #Nav > ul li.nav-search .nav-search-form_container {
           position: absolute;
           top: 40px;
           left: 0;
           width: 100%;
           background-color: #1b002b;
           display: none; }
-          #Nav ul li.nav-search .nav-search-form_container .nav-search-exit {
+          #Nav > ul li.nav-search .nav-search-form_container .nav-search-exit {
             position: absolute;
             font-family: alphaHeadline;
             top: 10px;
@@ -334,9 +334,9 @@ a {
             transition: all 0.5s ease;
             opacity: 0.4;
             transition: all 0.5s ease; }
-            #Nav ul li.nav-search .nav-search-form_container .nav-search-exit:hover {
+            #Nav > ul li.nav-search .nav-search-form_container .nav-search-exit:hover {
               opacity: 1; }
-        #Nav ul li.nav-search form {
+        #Nav > ul li.nav-search form {
           display: -webkit-box;
           display: -moz-box;
           display: -ms-flexbox;
@@ -361,7 +361,7 @@ a {
           justify-content: space-between;
           -ms-flex-pack: space-between;
           padding: 30px 20px 40px; }
-          #Nav ul li.nav-search form input[type=text] {
+          #Nav > ul li.nav-search form input[type=text] {
             width: 100%;
             transition: width 0.5s ease-in-out;
             border-bottom: 2px solid #5900ff;
@@ -374,10 +374,10 @@ a {
             text-align: center;
             color: #fff;
             width: 80%; }
-            #Nav ul li.nav-search form input[type=text]::placeholder {
+            #Nav > ul li.nav-search form input[type=text]::placeholder {
               color: #5900ff;
               opacity: .5; }
-          #Nav ul li.nav-search form button.nav-search-submit {
+          #Nav > ul li.nav-search form button.nav-search-submit {
             padding: 15px 20px;
             color: #5900ff;
             font-family: alphaHeadline;
@@ -386,26 +386,52 @@ a {
             transition: all 0.5s ease;
             text-transform: uppercase;
             border: 1px solid #5900ff; }
-            #Nav ul li.nav-search form button.nav-search-submit:hover {
+            #Nav > ul li.nav-search form button.nav-search-submit:hover {
               background-color: #5900ff;
               color: #1b002b;
               cursor: pointer; }
-      #Nav ul li.nav-signin {
+      #Nav > ul li.nav-profile {
+        background-color: #5900ff;
+        position: relative;
+        transition: all 0.5s ease; }
+        #Nav > ul li.nav-profile a {
+          color: #fff; }
+        #Nav > ul li.nav-profile:hover {
+          background-color: #7a33ff; }
+          #Nav > ul li.nav-profile:hover ul {
+            display: block; }
+        #Nav > ul li.nav-profile ul {
+          position: absolute;
+          left: 0;
+          top: 40px;
+          width: 100%;
+          display: none;
+          transition: all 0.5s ease; }
+          #Nav > ul li.nav-profile ul li {
+            background-color: #5900ff;
+            height: 40px;
+            border-top: 1px solid #7a33ff;
+            transition: all 0.5s ease; }
+            #Nav > ul li.nav-profile ul li a {
+              color: #fff; }
+            #Nav > ul li.nav-profile ul li:hover {
+              background-color: #9b66ff; }
+      #Nav > ul li.nav-signin {
         background-color: #5900ff;
         transition: all .75s;
         position: relative; }
-        #Nav ul li.nav-signin a {
+        #Nav > ul li.nav-signin a {
           color: #fff; }
-        #Nav ul li.nav-signin form {
+        #Nav > ul li.nav-signin form {
           position: absolute;
           top: 40px;
           left: 0;
           padding: 20px;
           background-color: #5900ff; }
-          #Nav ul li.nav-signin form fieldset {
+          #Nav > ul li.nav-signin form fieldset {
             position: relative;
             margin-bottom: 20px; }
-          #Nav ul li.nav-signin form legend {
+          #Nav > ul li.nav-signin form legend {
             color: #fff;
             text-transform: uppercase;
             position: absolute;
@@ -415,12 +441,12 @@ a {
             top: -10px;
             left: -1px;
             margin-bottom: 20px; }
-          #Nav ul li.nav-signin form input {
+          #Nav > ul li.nav-signin form input {
             background-color: transparent;
             height: 50px;
             border: 1px solid #fff;
             min-width: 300px; }
-          #Nav ul li.nav-signin form .nav-signin-form-create {
+          #Nav > ul li.nav-signin form .nav-signin-form-create {
             display: -webkit-box;
             display: -moz-box;
             display: -ms-flexbox;
@@ -434,10 +460,10 @@ a {
             -moz-flex-wrap: nowrap;
             -ms-flex-wrap: nowrap;
             flex-wrap: nowrap; }
-      #Nav ul li.nav-donate {
+      #Nav > ul li.nav-donate {
         background-color: #00c214;
         transition: all .75s; }
-        #Nav ul li.nav-donate a {
+        #Nav > ul li.nav-donate a {
           color: #fff; }
 
 .table {

@@ -45,8 +45,14 @@
                 </div>
 	      </li>
 	      {% if session.userid %}
-	      <li class="nav-profile"><a href="/profile/{{session.userid}}">My Profile</a></li>
-	      <li><a href="/logout">sign out</a></li>
+	      <li class="nav-profile">
+                <a href="/profile/{{session.userid}}">Profile</a>
+                <ul>
+                        <li>
+                                <a href="/logout">logout</a>
+                        </li>
+                </ul>
+              </li>
 	      {% else %}
 	      <li class="nav-signin"><a href="/login">Sign In</a></li>
 	      {% endif %}
