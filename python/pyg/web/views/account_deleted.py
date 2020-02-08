@@ -21,6 +21,7 @@ TODO:
 
 bp = flask.Blueprint("account_deleted", __name__)
 
+
 @bp.route('/account_deleted')
 def account_deleted():
     return flask.render_template("account_deleted.html")

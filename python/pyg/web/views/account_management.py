@@ -44,20 +44,12 @@ class ChangePasswordForm(Form):
             validators.EqualTo('newpassword', message="password mismatch")])
     submit = SubmitField("Submit")
 
-    # def validate(self):
-    #     print("change password validation attempt")
-    #     super(ChangePasswordForm, self).validate()
-
 
 class DeleteAccountForm(Form):
     confirmdelete = BooleanField(
         "Delete my account", validators=[
             validators.DataRequired()])
     submit = SubmitField("Do it")
-
-#     def validate(self):
-#         print("delete account validation attempt")
-#         super(DeleteAccountForm, self).validate()
 
 
 def changepassword(memberid, oldpass, newpass):
@@ -80,25 +72,27 @@ def accountmanagement(memberid):
     auth = member.auth
     passform = ChangePasswordForm(flask.request.form)
     deleteform = DeleteAccountForm(flask.request.form)
+
     def showpage():
-        return flask.render_template("account_management.html", passform=passform, deleteform=deleteform)
+        return flask.render_template(
+            "account_management.html", passform=passform, deleteform=deleteform)
     if flask.request.method == "POST":
         if passform.submit.data and passform.validate():
-                if changepassword(memberid, passform.oldpassword.data, passform.newpassword.data):
-                    flask.flash("password changed")
-                    return showpage()
-                else:
-                    flask.flash("incorrect credentials entered")
-                    return showpage()
+            if changepassword(memberid, passform.oldpassword.data,
+                              passform.newpassword.data):
+                flask.flash("password changed")
+                return showpage()
+            else:
+                flask.flash("incorrect credentials entered")
+                return showpage()
         elif deleteform.submit.data and deleteform.validate():
-                print("BALEEEETED!!!!!!")
-                """
+            """
                 The function for deleting members needs to wait on a design decision re: how
                 to handle deleting members.
                 """
-                member.active = False
-                db.web.session.commit()
-                return flask.redirect('/account_deleted')
+            member.active = False
+            db.web.session.commit()
+            return flask.redirect('/account_deleted')
         else:
             return flask.render_template("errorpage.html")
     else:
