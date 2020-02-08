@@ -32,8 +32,8 @@
   <!-- this section should contain the feature block -->
   <div class="home-featured featured section">
     <header><h2>Featured {{ feature.type }}</h2></header>
-    {% if feature.type == "fundraiser" %}
     <h3>{{ feature.name }}</h3>
+    {% if feature.type == "fundraiser" %}
     <dl>
       <dt>started</dt>
       <dd>{{ feature.started }}</dd>
@@ -41,6 +41,20 @@
       <dd>{{ feature.ends }}</dd>
       <dt>raised</dt>
       <dd>{{ feature.raised }}</dd>
+    </dl>
+    {% elif feature.type == "team" %}
+    <dl>
+      <dt>members</dt>
+      <dd>{{ feature.members }}</dd>
+    </dl>
+    {% elif feature.type == "streamer" %}
+    <dl>
+      <dt>raised</dt>
+      <dd>{{ feature.raised }}</dd>
+      <dt>rank</dt>
+      <dd>{{feature.rank}}</dd>
+      <dt>joined</dt>
+      <dd>{{ feature.joined }}</dd>
     </dl>
     {% endif %}
   </div>
