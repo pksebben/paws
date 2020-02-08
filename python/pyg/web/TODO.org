@@ -12,3 +12,5 @@ What is this going to be based on?
 * Team management
 
 * Teams Joined on member page
+
+* Finish the featured section

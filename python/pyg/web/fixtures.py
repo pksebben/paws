@@ -243,7 +243,7 @@ def fundraisers():
         about = "The pillagers of azeroth are raising money for the fostering and care of orphaned Tauren.  These poor creatures have been left by their owners and have nowhere to turn.  Won't you help us to bring love and care to these cute little unfortunates? -cue sarah mcglaughlin- ",
         member = pick_member(),
         created = datetime.datetime.now(),
-        start_date = datetime.datetime(2,1,1),
+        start_date = datetime.datetime.now(),
         end_date = datetime.datetime(3000,1,1),
         target_funds = 250
     )

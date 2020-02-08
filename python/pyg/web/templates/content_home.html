@@ -30,6 +30,20 @@
     </div>
   </div><!--end home-intro-->
   <!-- this section should contain the feature block -->
+  <div class="home-featured featured section">
+    <header><h2>Featured {{ feature.type }}</h2></header>
+    {% if feature.type == "fundraiser" %}
+    <h3>{{ feature.name }}</h3>
+    <dl>
+      <dt>started</dt>
+      <dd>{{ feature.started }}</dd>
+      <dt>ends</dt>
+      <dd>{{ feature.ends }}</dd>
+      <dt>raised</dt>
+      <dd>{{ feature.raised }}</dd>
+    </dl>
+    {% endif %}
+  </div>
   <div class="home-leaderboard leaderboard section">
     <h2 class="home-leaderboard-header">Leaderboard</h2>
     {% include 'leaderboard.html' %}

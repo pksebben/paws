@@ -31,6 +31,21 @@ This is meant to feature a fundraiser or player or team that has been exceptiona
 """
 
 
+def feature_fundraiser():
+    fundraiser = db.web.session.query(
+        models.Fundraiser).filter(
+        models.Fundraiser.start_date <= datetime.datetime.now(),
+        models.Fundraiser.end_date >= datetime.datetime.today()).order_by(
+            func.random()).first()
+    feature = {
+        "type": "fundraiser",
+        "name": fundraiser.name,
+        "started": fundraiser.start_date,
+        "ends": fundraiser.end_date,
+        "raised": "IMPLEMENT ME"
+    }
+    return feature
+
 # def feature_mvp():
 #     team = random.choice(db.web.session.query(models.Team).all())
 
@@ -55,4 +70,4 @@ def home():
     news = db.web.session.query(models.NewsArticle).order_by(
         desc("date"))
     return render_template('content_home.html', news=news,
-                           leaderboard_players=leaderboard_players, loginform=loginform)
+                           leaderboard_players=leaderboard_players, loginform=loginform, feature=feature_fundraiser())
