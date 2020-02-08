@@ -80,8 +80,23 @@
       {% else %}
 	<p>{{ member.about }}</p>
 	  </form>
-
       {% endif %}
+    </div>
+  </div>
+
+  <div class="section gamer_profile-teams">
+    <div class="teams">
+      <header><h1>Teams</h1><i class="icon"></i></header>
+      {% for i in member.teams %}
+      <!-- Kirby: how do we linkify this section? -->
+      <div class="team">
+	<p>{{ i.name }}</p>
+	<dl>
+	  <dt>members</dt>
+	  <dd>{{ i.members|length() }}</dd>
+	</dl>
+      </div>
+      {% endfor %}
     </div>
   </div>
   

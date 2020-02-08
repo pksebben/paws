@@ -10,3 +10,5 @@ What is this going to be based on?
 * Members Should be able to join a team
 
 * Team management
+
+* Teams Joined on member page
