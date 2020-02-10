@@ -11,4 +11,6 @@ jQuery(document).ready(function( $ ) {
                 $('.nav-search-form_container').slideToggle();
                 $('.nav-search').toggleClass('active');
         });
+
+        autosize($('textarea'));
 });

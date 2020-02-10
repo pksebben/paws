@@ -55,6 +55,9 @@ table th {
   border: none !important;
   padding: 0 !important; }
 
+textarea {
+  resize: none; }
+
 /*------------------- 
     LAYOUT
 ------------------- */
@@ -100,7 +103,8 @@ textarea {
   font-family: Arial; }
 
 /* Remove the stupid outer glow in Webkit */
-input:focus {
+input:focus,
+textarea:focus {
   outline: 0; }
 
 /* Box Sizing Reset
@@ -188,6 +192,12 @@ Bootstrap Resest
     border: 0; }
   .nav-tabs .nav-item a.active {
     border: none; }
+
+.alert {
+  border-radius: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important; }
 
 @font-face {
   font-family: "ssSocial";
@@ -403,7 +413,6 @@ a {
         #Nav > ul li.nav-profile ul {
           position: absolute;
           right: 0;
-          top: 40px;
           display: none;
           transition: all 0.5s ease; }
           #Nav > ul li.nav-profile ul li {
@@ -573,6 +582,42 @@ li.leaderboard-list-item:first-child .leaderboard-list-item-name {
   line-height: 50px;
   z-index: 2; }
 
+.alert {
+  position: fixed;
+  top: 40px;
+  background-color: #ffad80;
+  height: 40px;
+  width: 100%;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+  -ms-flex-pack: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  transition: all 0.5s ease; }
+  .alert button {
+    color: #ff5b00;
+    font-family: alphaHeadline;
+    font-size: 16px; }
+  .alert:hover {
+    background-color: #ff7c33;
+    cursor: pointer; }
+    .alert:hover button {
+      color: #993700; }
+
 .goalProgress {
   background: #e6fad4;
   height: 60px; }
@@ -584,6 +629,23 @@ li.leaderboard-list-item:first-child .leaderboard-list-item-name {
   overflow: hidden;
   padding: 5px;
   height: 60px; }
+
+#Gamer_Profile .alert {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  -moz-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap; }
+  #Gamer_Profile .alert p {
+    color: #ff5b00; }
 
 ul.gamer_profile-list li {
   display: flex;
@@ -692,18 +754,41 @@ ul.gamer_profile-overview-stats {
 .gamer_profile-why_i_paws {
   background-color: #1b002b; }
   .gamer_profile-why_i_paws .why_i_paws {
-    padding: 40px;
+    padding: 40px 60px;
     border: 1px solid #5900ff;
     width: 100%;
-    max-width: 1200px; }
+    max-width: 1200px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    -ms-flex-align: center;
+    align-items: center; }
     .gamer_profile-why_i_paws .why_i_paws header {
       color: #5900ff;
       text-align: center;
       margin-bottom: 15px; }
-    .gamer_profile-why_i_paws .why_i_paws p {
+    .gamer_profile-why_i_paws .why_i_paws textarea {
+      font-size: 28px;
+      font-family: alphaHeadline;
+      padding: 15px 2% 10px;
+      text-align: center;
       color: #fff;
-      max-width: 700px;
-      margin: 0 auto; }
+      border: 1px solid transparent;
+      transition: all 0.5s ease;
+      width: 100%;
+      padding-bottom: 0px; }
+      .gamer_profile-why_i_paws .why_i_paws textarea:hover {
+        cursor: url("/static/img/icon-edit.png"), auto;
+        border: 1px dotted #fff; }
 
 .gamer_profile-fundraisers {
   background-color: #00c9db;
