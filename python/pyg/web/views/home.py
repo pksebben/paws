@@ -51,6 +51,7 @@ def feature_fundraiser():
 # //features a team.
 # //team featured should be active, maybe recent
 
+
 """
 INCOMPLETE
 def feature_team():
@@ -76,6 +77,7 @@ def feature_streamer():
     }
 """
 
+
 @bp.route('/')
 def home():
     if flask.session.get('userid'):
@@ -83,6 +85,9 @@ def home():
             member=db.web.session.query(
                 models.Member).get(
                 flask.session['userid']))
+        member = db.web.session.query(
+            models.Member).get(
+            flask.session.get('userid'))
     else:
         leaderboard_players = rankedlist(
             member=db.web.session.query(
@@ -91,5 +96,5 @@ def home():
     loginform = LoginForm(flask.request.form)
     news = db.web.session.query(models.NewsArticle).order_by(
         desc("date"))
-    return render_template('content_home.html', news=news,
+    return render_template('content_home.html', news=news, member=member,
                            leaderboard_players=leaderboard_players, loginform=loginform, feature=feature_fundraiser())
