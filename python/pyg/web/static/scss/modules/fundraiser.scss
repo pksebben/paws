@@ -1,0 +1,71 @@
+.fundraiser{
+        // background-color: $teal;
+        @include flexbox();
+        @include flex-direction(column);
+        @include flex-wrap(wrap);
+        li{
+                @include flexbox();
+                @include flex-direction(row);
+                @include flex-wrap(nowrap);
+                padding:25px 0;
+                &.fundraiser-name{
+                        @include flexbox();
+                        @include flex-direction(column);
+                        @include flex-wrap(wrap);    
+                        dd,
+                        input{
+                                width:100%; 
+                        }
+                }
+        }
+        label{
+                font-family:sourceSansProLight;
+                font-size:12px;
+                text-transform: uppercase;
+        }
+        .icon{
+                font-size:30px;
+                text-align: center;
+                padding-right:40px;
+        }
+        h3{
+                @include alpha-xl;
+        }
+}
+.fundraiser-name{
+        @include alpha-xl;
+        input{
+                @include alpha-xl;
+                @include inputeditstyledark();
+        }
+}
+.fundraiser-date{
+        @include flexbox();
+        @include flex-direction(row);
+        @include flex-wrap(nowrap);
+        input{
+                @include alpha-xl;
+        }
+        .fundraiser-date-start{
+                margin-right:40px;
+        }
+        .fundraiser-date-end{}
+}
+.fundraiser-countdown{}
+.fundraiser-donations{}
+.fundraiser-donors{}
+.fundraiser-share{
+        @include flexbox();
+        @include flex-direction(row);
+        @include flex-wrap(nowrap);
+        justify-content: center;
+        margin:40px 0;
+
+        li:not(:last-child){
+                padding-right:20px;
+        }
+        .text{
+                font-family:sourceSansPro;
+                font-style:light;
+        }
+}

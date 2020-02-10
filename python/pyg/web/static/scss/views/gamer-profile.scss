@@ -1,18 +1,18 @@
 // ********************************
-// Shared
+// Mixins
 // ********************************
-@mixin editstyle(){
-        font-size:28px;
-        font-family:alphaHeadline;
-        padding: 15px 2% 10px;
-        text-align:center;
-        color:$white;
-        border:1px solid transparent;
-        transition:all 0.5s ease;
-        &:hover{
-             cursor: url('/static/img/icon-edit.png'), auto;
-             border:1px dotted $white;   
-        }
+@mixin list_style{
+        display:flex;
+        flex-direction:row;
+        flex-wrap:nowrap;
+        align-items:center;
+        padding:25px 0;
+
+        .icon{
+                font-size:30px;
+                text-align: center;
+                padding-right:40px;
+        }   
 }
 
 // ********************************
@@ -61,20 +61,6 @@ ul.member_profile-list li{
         }
 }
 
-@mixin list_style{
-        display:flex;
-        flex-direction:row;
-        flex-wrap:nowrap;
-        align-items:center;
-        padding:25px 0;
-
-        .icon{
-                font-size:30px;
-                text-align: center;
-                padding-right:40px;
-        }   
-}
-
 #member_profile{
         .section{
                 display:flex;
@@ -102,7 +88,8 @@ ul.member_profile-list li{
         padding-right:40px;
         max-width: 600px;
         input{
-                @include editstyle();
+                @include inputeditstylelight();
+                text-align: center;
         }
 }
 .member_profile-overview-avatar_username{
@@ -194,9 +181,10 @@ ul.member_profile-overview-stats{
                         margin-bottom: 15px;
                 }
                 textarea{
-                        @include editstyle();
+                        @include inputeditstylelight();
                         width:100%;
                         padding-bottom:0px;
+                        text-align: center;
                 }
         }
         
@@ -205,12 +193,13 @@ ul.member_profile-overview-stats{
 // Gamer Profile  - Fundraisers
 // ********************************
 .member_profile-fundraisers{
+        @include flexbox();
+        @include flex-direction(row);
+        @include flex-wrap(wrap);
+        @include justify-content(center);
+        @include align-items(center);
         background-color:$teal;
-        display:flex;
-        flex-direction:row;
-        flex-wrap:wrap;
-        justify-content: center;
-        align-items:center;
+       
         padding:40px;
 
          ul.nav-tabs{
@@ -282,21 +271,6 @@ ul.member_profile-overview-stats{
                                         @include alpha-xl;
                                 }
                         }
-                }
-        }
-        .member_profile-fundraisers-upcoming-share{
-                display:flex;
-                flex-direction:row;
-                flex-wrap: none;
-                justify-content: center;
-                margin:40px 0;
-
-                li:not(:last-child){
-                        padding-right:20px;
-                }
-                .text{
-                        font-family:sourceSansPro;
-                        font-style:light;
                 }
         }
 }

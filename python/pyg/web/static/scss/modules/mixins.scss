@@ -251,3 +251,30 @@
       -ms-align-self: $align;
           align-self: $align;
 }
+
+// EDIT STYLE
+@mixin inputeditstylelight(){
+        font-size:28px;
+        font-family:alphaHeadline;
+        padding: 15px 2% 10px;
+        text-align:center;
+        color:$white;
+        border:1px solid transparent;
+        transition:all 0.5s ease;
+        &:hover{
+             cursor: url('/static/img/icon-edit.png'), auto;
+             border:1px dotted $white;   
+        }
+}
+@mixin inputeditstyledark(){
+        font-size:28px;
+        font-family:alphaHeadline;
+        padding: 15px 2% 10px;
+        color:$dkpurple;
+        border:1px solid transparent;
+        transition:all 0.5s ease;
+        &:hover{
+             cursor: url('/static/img/icon-edit.png'), auto;
+             border:1px dotted $dkpurple;   
+        }
+}
