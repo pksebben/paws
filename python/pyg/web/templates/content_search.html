@@ -29,7 +29,7 @@
       </tr>
       {% for i in results.players|sort(attribute=sortby) %}
       <tr class="table-row">
-	<td class="search-table-rank table-cell">{{ i.id }}</td>
+	<td class="search-table-rank table-cell">{{ i.rank }}</td>
 	<td class="search_table-name table-cell">{{ i.handle }}</td>
 	<td class="search-table-raised table-cell">{{ "$%.2f"|format(i.donations|sum(attribute="amount")) }}</td>
       </tr>
@@ -48,7 +48,7 @@
       </tr>
       {% for i in results.teams %}
       <tr class="table-row">
-	<td class="search-table-rank table-cell">{{ i.id }}</td>
+	<td class="search-table-rank table-cell">{{ i.rank }}</td>
 	<td class="search_table-name table-cell"><a href="/teamprofile/{{i.id}}">{{ i.name }}</a></td>
 	<td class="search-table-raised table-cell">{{ "$%.2f"|format(i.members.donations|sum(attribute="amount")) }}</td>
 	<td class="search-table-members table-cell">{{ i.members|length() }}</td>
@@ -61,7 +61,6 @@
     <label class="search-table-label">Fundraisers</label>
     <table id="fundraiser_results" class="table">
       <tr class="table-header table-row">
-	<th class="search-table-rank table-cell">Rank</th>
 	<th class="search_table-name table-cell">Name</th>
 	<th class="table-cell">Raised</th>
 	<th class="table-cell">Start</th>
@@ -69,7 +68,6 @@
       </tr>
       {% for i in results.fundraisers %}
       <tr class="table-header table-row">
-	<td class="search-table-rank table-cell">{{ i.id }}</td>
 	<td class="search_table-name table-cell"><a href="/fundraiser/{{ i.id }}">{{ i.name }}</a></td>
 	<td class="search-table-raised table-cell">{{ "$%.2f"|format(i.donations|sum(attribute="amount")) }}</td>
 	<td class="table-cell">{{ i.start_date.strftime('%Y-%m-%d') }}</td>
