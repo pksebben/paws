@@ -753,6 +753,9 @@ li.leaderboard-list-item:first-child .leaderboard-list-item-name {
         font-style: light; }
       .fundraiser > li.fundraiser-share ul a:hover {
         color: #00c9db; }
+      .fundraiser > li.fundraiser-share ul a span {
+        margin-right: 5px;
+        font-size: 14px; }
   .fundraiser label {
     font-family: sourceSansProLight;
     font-size: 12px;
