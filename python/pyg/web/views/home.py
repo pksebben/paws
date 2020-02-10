@@ -93,6 +93,7 @@ def home():
             member=db.web.session.query(
                 models.Member).filter_by(
                 rank=3).first())
+        member = None
     loginform = LoginForm(flask.request.form)
     news = db.web.session.query(models.NewsArticle).order_by(
         desc("date"))
