@@ -51,7 +51,8 @@ def feature_fundraiser():
 # //features a team.
 # //team featured should be active, maybe recent
 
-
+"""
+INCOMPLETE
 def feature_team():
     team = db.web.session.query(
         models.Team
@@ -73,7 +74,7 @@ def feature_streamer():
         "raised": "IMPLEMENT",
         "joined": "IMPLEMENT"
     }
-
+"""
 
 @bp.route('/')
 def home():

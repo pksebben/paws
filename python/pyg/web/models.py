@@ -66,6 +66,11 @@ class Member(Base):
     rank = Column(Integer, nullable=True)
     active = Column(Boolean, nullable=False) # for account deletion
 
+    # We may want to create a whole schema for streams and just tie them
+    # to user accounts instead of doing this next bit, but for now it
+    # provides a method for determining if a member is a streamer
+    has_streamed = (Boolean)
+
     # Relationship Config
     auth = relationship(
         "Auth",
