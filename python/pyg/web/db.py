@@ -24,3 +24,5 @@ def init(app):
     global web
     web = plugin.SQLAlchemy(app, FLAGS.web)
     models.Base.metadata.create_all(web.engine)
+
+    

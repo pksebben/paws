@@ -28,14 +28,20 @@ TODO:
 Base = declarative_base()
 
 class MemberToTeam(Base):
+    """This table connects members to teams and can define ownership"""
+    
     __tablename__ = "member_to_team"
+    
     member_id = Column(Integer, ForeignKey('member.id'), primary_key=True)
     team_id = Column(Integer, ForeignKey('team.id'), primary_key=True)
     is_owner = Column(Boolean, nullable=False)
+    joined_on = Column(Date)
     member = relationship("Member", back_populates="teams")
     team = relationship("Team", back_populates="members")
 
 class Shelter(Base):
+    """Shelter data"""
+    
     __tablename__ = 'shelter'
 
     id = Column(Integer, primary_key=True)
@@ -59,6 +65,11 @@ class Member(Base):
     created = Column(DateTime, nullable=False)
     rank = Column(Integer, nullable=True)
     active = Column(Boolean, nullable=False) # for account deletion
+
+    # We may want to create a whole schema for streams and just tie them
+    # to user accounts instead of doing this next bit, but for now it
+    # provides a method for determining if a member is a streamer
+    has_streamed = (Boolean)
 
     # Relationship Config
     auth = relationship(

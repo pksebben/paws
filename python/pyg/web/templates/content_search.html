@@ -23,8 +23,8 @@
     <label class="search-table-label">Players</label>
     <table id="player_results" class="table">
       <tr class="table-row">
-	<th class="search-table-rank table-cell"><button onclick={% set sortby = "id" %}>Rank</button></th>
-	<th class="search_table-name table-cell"><button onclick={% set sortby = "name" %}>Name</button></th>
+	<th class="search-table-rank table-cell">Rank</th>
+	<th class="search_table-name table-cell"><a href="" onclick={% set sortby = "handle" %}><button onclick={% set sortby = "name" %}>Handle</button></a></th>
 	<th class="table-cell">Raised</th>
       </tr>
       {% for i in results.players|sort(attribute=sortby) %}

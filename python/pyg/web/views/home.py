@@ -30,6 +30,8 @@ This is meant to feature a fundraiser or player or team that has been exceptiona
  - trending (in the case of fundraisers)
 """
 
+# //features an active fundraiser
+
 
 def feature_fundraiser():
     fundraiser = db.web.session.query(
@@ -46,13 +48,33 @@ def feature_fundraiser():
     }
     return feature
 
-# def feature_mvp():
-#     team = random.choice(db.web.session.query(models.Team).all())
+# //features a team.
+# //team featured should be active, maybe recent
 
-# def feature_fundraiser():
-#     fundraiser = random.choice(db.web.session.query(models.Fundraiser).filter_by(active=True, end_date <= datetime.datetime.now()))
-# def pick_feature():
+"""
+INCOMPLETE
+def feature_team():
+    team = db.web.session.query(
+        models.Team
+    ).filter(func.max(models.Team.date_joined)).first()
+    feature = {
+        "type": "team",
+        "name": team.name,
+        "members": "IMPLEMENT"
+    }
 
+# feature a streamer
+
+def feature_streamer():
+    streamer = db.web.session.query(models.Member)
+    feature = {
+        "type": "streamer",
+        "name": "IMPLEMENT",
+        "rank": "IMPLEMENT",
+        "raised": "IMPLEMENT",
+        "joined": "IMPLEMENT"
+    }
+"""
 
 @bp.route('/')
 def home():
