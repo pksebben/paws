@@ -619,6 +619,28 @@ li.leaderboard-list-item:first-child .leaderboard-list-item-name {
     .alert:hover button {
       color: #993700; }
 
+.fundraiser-form {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-wrap: nowrap;
+  -moz-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #00c9db;
+  padding: 40px 0; }
+
 .fundraiser {
   display: -webkit-box;
   display: -moz-box;
@@ -632,8 +654,11 @@ li.leaderboard-list-item:first-child .leaderboard-list-item-name {
   -webkit-flex-wrap: wrap;
   -moz-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
-  flex-wrap: wrap; }
-  .fundraiser li {
+  flex-wrap: wrap;
+  background-color: #f5feff;
+  padding: 15px 40px;
+  margin: 40px 0; }
+  .fundraiser > li {
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
@@ -648,56 +673,105 @@ li.leaderboard-list-item:first-child .leaderboard-list-item-name {
     -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
     padding: 25px 0; }
-    .fundraiser li.fundraiser-name {
+    .fundraiser > li .fundraiser-content {
+      width: 100%; }
+    .fundraiser > li dt,
+    .fundraiser > li h3 {
+      padding-left: 15px; }
+    .fundraiser > li h3 {
+      font-size: 28px; }
+    .fundraiser > li > .icon {
+      font-size: 30px;
+      text-align: center;
+      padding-right: 20px; }
+    .fundraiser > li.fundraiser-name input {
+      font-size: 28px;
+      font-family: alphaHeadline;
+      padding: 15px 15px 10px;
+      color: #1b002b;
+      border: 1px solid transparent;
+      transition: all 0.5s ease;
+      width: 90%; }
+      .fundraiser > li.fundraiser-name input:hover {
+        cursor: url("/static/img/icon-edit.png"), auto;
+        border: 1px dotted #1b002b; }
+    .fundraiser > li.fundraiser-date .fundraiser-content {
       display: -webkit-box;
       display: -moz-box;
       display: -ms-flexbox;
       display: -webkit-flex;
       display: flex;
-      -webkit-flex-direction: column;
-      -moz-flex-direction: column;
-      -ms-flex-direction: column;
-      flex-direction: column;
-      -webkit-flex-wrap: wrap;
-      -moz-flex-wrap: wrap;
-      -ms-flex-wrap: wrap;
-      flex-wrap: wrap; }
-      .fundraiser li.fundraiser-name dd,
-      .fundraiser li.fundraiser-name input {
-        width: 100%; }
+      -webkit-flex-direction: row;
+      -moz-flex-direction: row;
+      -ms-flex-direction: row;
+      flex-direction: row;
+      -webkit-flex-wrap: nowrap;
+      -moz-flex-wrap: nowrap;
+      -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap; }
+    .fundraiser > li.fundraiser-donations dt {
+      width: 10%; }
+    .fundraiser > li.fundraiser-donations input {
+      font-size: 28px;
+      font-family: alphaHeadline;
+      padding: 15px 15px 10px;
+      color: #1b002b;
+      border: 1px solid transparent;
+      transition: all 0.5s ease; }
+      .fundraiser > li.fundraiser-donations input:hover {
+        cursor: url("/static/img/icon-edit.png"), auto;
+        border: 1px dotted #1b002b; }
+    .fundraiser > li.fundraiser-donations .icon {
+      color: #00c214; }
+    .fundraiser > li.fundraiser-donations .button {
+      margin: 0 0 15px 15px;
+      padding: 10px 20px; }
+    .fundraiser > li.fundraiser-share ul {
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-flex-direction: row;
+      -moz-flex-direction: row;
+      -ms-flex-direction: row;
+      flex-direction: row;
+      -webkit-flex-wrap: nowrap;
+      -moz-flex-wrap: nowrap;
+      -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+      -webkit-justify-content: center;
+      -moz-justify-content: center;
+      -ms-justify-content: center;
+      justify-content: center;
+      -ms-flex-pack: center;
+      width: 100%; }
+      .fundraiser > li.fundraiser-share ul li:not(:last-child) {
+        padding-right: 20px; }
+      .fundraiser > li.fundraiser-share ul .text {
+        font-family: sourceSansPro;
+        font-style: light; }
+      .fundraiser > li.fundraiser-share ul a:hover {
+        color: #00c9db; }
   .fundraiser label {
     font-family: sourceSansProLight;
     font-size: 12px;
-    text-transform: uppercase; }
-  .fundraiser .icon {
-    font-size: 30px;
-    text-align: center;
-    padding-right: 40px; }
+    text-transform: uppercase;
+    white-space: nowrap; }
   .fundraiser h3 {
     font-family: alphaHeadline;
     font-size: 36px;
     text-transform: uppercase;
     line-height: 50px; }
 
-.fundraiser-name {
-  font-family: alphaHeadline;
-  font-size: 36px;
-  text-transform: uppercase;
-  line-height: 50px; }
-  .fundraiser-name input {
-    font-family: alphaHeadline;
-    font-size: 36px;
-    text-transform: uppercase;
-    line-height: 50px;
-    font-size: 28px;
-    font-family: alphaHeadline;
-    padding: 15px 2% 10px;
-    color: #1b002b;
-    border: 1px solid transparent;
-    transition: all 0.5s ease; }
-    .fundraiser-name input:hover {
-      cursor: url("/static/img/icon-edit.png"), auto;
-      border: 1px dotted #1b002b; }
+.fundraiser-submitedits {
+  color: #fff;
+  border: 1px solid #fff;
+  padding: 15px 20px;
+  transition: all 0.5s ease; }
+  .fundraiser-submitedits:hover {
+    background-color: #fff;
+    color: #00c9db; }
 
 .fundraiser-date {
   display: -webkit-box;
@@ -714,34 +788,17 @@ li.leaderboard-list-item:first-child .leaderboard-list-item-name {
   -ms-flex-wrap: nowrap;
   flex-wrap: nowrap; }
   .fundraiser-date input {
+    font-size: 28px;
     font-family: alphaHeadline;
-    font-size: 36px;
-    text-transform: uppercase;
-    line-height: 50px; }
+    padding: 15px 15px 10px;
+    color: #1b002b;
+    border: 1px solid transparent;
+    transition: all 0.5s ease; }
+    .fundraiser-date input:hover {
+      cursor: url("/static/img/icon-edit.png"), auto;
+      border: 1px dotted #1b002b; }
   .fundraiser-date .fundraiser-date-start {
     margin-right: 40px; }
-
-.fundraiser-share {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-direction: row;
-  -moz-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-flex-wrap: nowrap;
-  -moz-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
-  justify-content: center;
-  margin: 40px 0; }
-  .fundraiser-share li:not(:last-child) {
-    padding-right: 20px; }
-  .fundraiser-share .text {
-    font-family: sourceSansPro;
-    font-style: light; }
 
 .goalProgress {
   background: #e6fad4;
