@@ -143,6 +143,7 @@
                                 }
                                 ul{
                                         position:absolute;
+                                        top:$headerHeight;
                                         right:0;
                                         display:none;
                                         transition:all 0.5s ease;

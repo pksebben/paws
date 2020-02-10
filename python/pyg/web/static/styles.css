@@ -412,6 +412,7 @@ a {
             display: block; }
         #Nav > ul li.nav-profile ul {
           position: absolute;
+          top: 40px;
           right: 0;
           display: none;
           transition: all 0.5s ease; }
