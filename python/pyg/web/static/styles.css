@@ -402,16 +402,16 @@ a {
             display: block; }
         #Nav > ul li.nav-profile ul {
           position: absolute;
-          left: 0;
+          right: 0;
           top: 40px;
-          width: 100%;
           display: none;
           transition: all 0.5s ease; }
           #Nav > ul li.nav-profile ul li {
             background-color: #5900ff;
             height: 40px;
             border-top: 1px solid #7a33ff;
-            transition: all 0.5s ease; }
+            transition: all 0.5s ease;
+            white-space: nowrap; }
             #Nav > ul li.nav-profile ul li a {
               color: #fff; }
             #Nav > ul li.nav-profile ul li:hover {
@@ -617,6 +617,17 @@ ul.gamer_profile-list li {
   align-items: center;
   padding-right: 40px;
   max-width: 600px; }
+  .gamer_profile-overview-avatar_username input {
+    font-size: 28px;
+    font-family: alphaHeadline;
+    padding: 15px 2% 10px;
+    text-align: center;
+    color: #fff;
+    border: 1px solid transparent;
+    transition: all 0.5s ease; }
+    .gamer_profile-overview-avatar_username input:hover {
+      cursor: url("/static/img/icon-edit.png"), auto;
+      border: 1px dotted #fff; }
 
 .gamer_profile-overview-avatar_username .avatar {
   height: 200px;
@@ -642,6 +653,9 @@ ul.gamer_profile-overview-stats {
       padding-right: 40px; }
     ul.gamer_profile-overview-stats li:not(:last-child) {
       border-bottom: 1px solid #5900ff; }
+    ul.gamer_profile-overview-stats li.editable input:hover {
+      cursor: url("/static/img/icon-edit.png"), auto;
+      border: 1px dotted #fff; }
   ul.gamer_profile-overview-stats .icon, ul.gamer_profile-overview-stats dd {
     color: #fff; }
   ul.gamer_profile-overview-stats .icon {
@@ -649,6 +663,14 @@ ul.gamer_profile-overview-stats {
     margin-top: 10px; }
   ul.gamer_profile-overview-stats dl {
     flex-grow: 3; }
+    ul.gamer_profile-overview-stats dl input {
+      color: #fff;
+      font-family: alphaHeadline;
+      font-size: 28px;
+      padding: 15px 2% 10px;
+      border: 1px solid transparent;
+      width: 96%;
+      transition: all 0.5s ease; }
   ul.gamer_profile-overview-stats dd, ul.gamer_profile-overview-stats dt {
     text-transform: uppercase; }
   ul.gamer_profile-overview-stats dt {
@@ -662,6 +684,8 @@ ul.gamer_profile-overview-stats {
     font-family: alphaHeadline;
     font-size: 28px;
     margin: 0; }
+    ul.gamer_profile-overview-stats dd a {
+      color: #fff; }
   ul.gamer_profile-overview-stats .gamer_profile-overview-stats-raised i, ul.gamer_profile-overview-stats .gamer_profile-overview-stats-raised dt, ul.gamer_profile-overview-stats .gamer_profile-overview-stats-raised dd {
     color: #00c214; }
 

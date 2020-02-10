@@ -74,6 +74,19 @@ ul.gamer_profile-list li{
         align-items:center;
         padding-right:40px;
         max-width: 600px;
+        input{
+                font-size:28px;
+                font-family:alphaHeadline;
+                padding: 15px 2% 10px;
+                text-align:center;
+                color:$white;
+                border:1px solid transparent;
+                transition:all 0.5s ease;
+                &:hover{
+                     cursor: url('/static/img/icon-edit.png'), auto;
+                     border:1px dotted $white;   
+                }
+        }
 }
 .gamer_profile-overview-avatar_username{
         .avatar{
@@ -96,6 +109,12 @@ ul.gamer_profile-overview-stats{
                 &:not(:last-child){
                          border-bottom:1px solid $purple;
                 }
+                &.editable{
+                        input:hover{
+                             cursor: url('/static/img/icon-edit.png'), auto;
+                             border:1px dotted $white;   
+                        }
+                }
         }
         .icon, dd{
                 color:$white;
@@ -106,6 +125,15 @@ ul.gamer_profile-overview-stats{
         }
         dl{
                 flex-grow:3;
+                input{
+                        color: $white;
+                        font-family: alphaHeadline;
+                        font-size:28px;
+                        padding:15px 2% 10px;
+                        border:1px solid transparent;
+                        width:96%;
+                        transition: all 0.5s ease;
+                }
         }
         dd, dt{
                 text-transform: uppercase;
@@ -122,6 +150,9 @@ ul.gamer_profile-overview-stats{
                 font-family:alphaHeadline;
                 font-size:28px;
                 margin:0;
+                a{
+                        color: $white;
+                }
         }
         .gamer_profile-overview-stats-raised{
                 i, dt, dd{
