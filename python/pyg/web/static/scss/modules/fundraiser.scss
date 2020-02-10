@@ -1,10 +1,13 @@
-.fundraiser-form{
+#Fundraiser{
         @include flexbox();
         @include flex-direction(column);
         @include flex-wrap(nowrap);
         @include align-items(center);
         background-color:$teal;
         padding:40px 0;
+}
+.fundraiser-form{
+        
 }
 .fundraiser{
         // background-color: $teal;

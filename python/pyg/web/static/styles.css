@@ -619,7 +619,7 @@ li.leaderboard-list-item:first-child .leaderboard-list-item-name {
     .alert:hover button {
       color: #993700; }
 
-.fundraiser-form {
+#Fundraiser {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
