@@ -37,7 +37,7 @@ def rankedlist(member, windowsize=2):
         func.sum(models.Donation.amount).label('total')
     ).join(models.Donation
            ).group_by(
-        models.Member.handle).order_by(asc(models.Member.rank)).filter(models.Member.rank + windowsize >= member.rank, models.Member.rank - windowsize <= member.rank)
+        models.Member.handle).order_by(asc(models.Member.rank)).filter(models.Member.rank + windowsize >= member.rank, models.Member.rank - windowsize <= models.Member.rank)
     return donations
 
 
