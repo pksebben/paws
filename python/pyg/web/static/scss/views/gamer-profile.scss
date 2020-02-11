@@ -8,7 +8,7 @@
         align-items:center;
         padding:25px 0;
 
-        .icon{
+        > .icon{
                 font-size:30px;
                 text-align: center;
                 padding-right:40px;
@@ -238,9 +238,16 @@ ul.member_profile-overview-stats{
                 }
         }
 
+        .tab-pane{
+                ul{
+                        padding:40px;
+                        background-color:$white;
+                        &:not(:first-child){
+                                margin-top:40px;
+                        }
+                }
+        }
         #member_profile-Fundraisers-Upcoming{
-                background-color:$white;
-                padding:40px;
                 .member_profile-fundraisers-upcoming-list >li{
                         @include list_style;
                 }
@@ -275,6 +282,27 @@ ul.member_profile-overview-stats{
         }
 }
 
+ul.fundraiser-share{
+        @include flexbox();
+        @include flex-direction(row);
+        @include flex-wrap(nowrap);
+        @include justify-content(center);
+        width:100%;
+        li {
+                &:not(:last-child){
+                        margin-right:20px;
+                }
+                a{
+                        &:hover{
+                                color:$teal;
+                        }
+                        .icon{
+                                margin-right:5px;
+                                font-size:12px;
+                        }
+                }
+        }
+}
 /* Fundraisers Past */
 #member_profile-Fundraisers-Past{
         .member_profile-fundraisers-past-item{

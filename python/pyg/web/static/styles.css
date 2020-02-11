@@ -884,7 +884,7 @@ ul.member_profile-overview-stats {
     flex-wrap: nowrap;
     align-items: center;
     padding: 25px 0; }
-    ul.member_profile-overview-stats li .icon {
+    ul.member_profile-overview-stats li > .icon {
       font-size: 30px;
       text-align: center;
       padding-right: 40px; }
@@ -1017,37 +1017,67 @@ ul.member_profile-overview-stats {
     line-height: 50px; }
     .member_profile-fundraisers h3 span {
       font-size: 22px; }
-  .member_profile-fundraisers #member_profile-Fundraisers-Upcoming {
-    background-color: #fff;
-    padding: 40px; }
-    .member_profile-fundraisers #member_profile-Fundraisers-Upcoming .member_profile-fundraisers-upcoming-list > li {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: nowrap;
-      align-items: center;
-      padding: 25px 0; }
-      .member_profile-fundraisers #member_profile-Fundraisers-Upcoming .member_profile-fundraisers-upcoming-list > li .icon {
-        font-size: 30px;
-        text-align: center;
-        padding-right: 40px; }
-    .member_profile-fundraisers #member_profile-Fundraisers-Upcoming li.member_profile-fundraisers-upcoming-donations {
-      justify-content: space-between; }
-      .member_profile-fundraisers #member_profile-Fundraisers-Upcoming li.member_profile-fundraisers-upcoming-donations .icon {
+  .member_profile-fundraisers .tab-pane ul {
+    padding: 40px;
+    background-color: #fff; }
+    .member_profile-fundraisers .tab-pane ul:not(:first-child) {
+      margin-top: 40px; }
+  .member_profile-fundraisers #member_profile-Fundraisers-Upcoming .member_profile-fundraisers-upcoming-list > li {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding: 25px 0; }
+    .member_profile-fundraisers #member_profile-Fundraisers-Upcoming .member_profile-fundraisers-upcoming-list > li > .icon {
+      font-size: 30px;
+      text-align: center;
+      padding-right: 40px; }
+  .member_profile-fundraisers #member_profile-Fundraisers-Upcoming li.member_profile-fundraisers-upcoming-donations {
+    justify-content: space-between; }
+    .member_profile-fundraisers #member_profile-Fundraisers-Upcoming li.member_profile-fundraisers-upcoming-donations .icon {
+      color: #00c214; }
+    .member_profile-fundraisers #member_profile-Fundraisers-Upcoming li.member_profile-fundraisers-upcoming-donations .member_profile-fundraisers-upcoming-donations-progress_bar {
+      flex-grow: 1;
+      margin-right: 40px; }
+      .member_profile-fundraisers #member_profile-Fundraisers-Upcoming li.member_profile-fundraisers-upcoming-donations .member_profile-fundraisers-upcoming-donations-progress_bar h3 {
         color: #00c214; }
-      .member_profile-fundraisers #member_profile-Fundraisers-Upcoming li.member_profile-fundraisers-upcoming-donations .member_profile-fundraisers-upcoming-donations-progress_bar {
-        flex-grow: 1;
-        margin-right: 40px; }
-        .member_profile-fundraisers #member_profile-Fundraisers-Upcoming li.member_profile-fundraisers-upcoming-donations .member_profile-fundraisers-upcoming-donations-progress_bar h3 {
-          color: #00c214; }
-      .member_profile-fundraisers #member_profile-Fundraisers-Upcoming li.member_profile-fundraisers-upcoming-donations .member_profile-fundraisers-upcoming-donations-donate_btn {
-        align-self: flex-end; }
-    .member_profile-fundraisers #member_profile-Fundraisers-Upcoming li.member_profile-fundraisers-upcoming-countdown h3 {
-      font-size: 22px; }
-      .member_profile-fundraisers #member_profile-Fundraisers-Upcoming li.member_profile-fundraisers-upcoming-countdown h3 span {
-        font-family: alphaHeadline;
-        font-size: 36px;
-        text-transform: uppercase;
-        line-height: 50px; }
+    .member_profile-fundraisers #member_profile-Fundraisers-Upcoming li.member_profile-fundraisers-upcoming-donations .member_profile-fundraisers-upcoming-donations-donate_btn {
+      align-self: flex-end; }
+  .member_profile-fundraisers #member_profile-Fundraisers-Upcoming li.member_profile-fundraisers-upcoming-countdown h3 {
+    font-size: 22px; }
+    .member_profile-fundraisers #member_profile-Fundraisers-Upcoming li.member_profile-fundraisers-upcoming-countdown h3 span {
+      font-family: alphaHeadline;
+      font-size: 36px;
+      text-transform: uppercase;
+      line-height: 50px; }
+
+ul.fundraiser-share {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  -moz-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+  -ms-flex-pack: center;
+  width: 100%; }
+  ul.fundraiser-share li:not(:last-child) {
+    margin-right: 20px; }
+  ul.fundraiser-share li a:hover {
+    color: #00c9db; }
+  ul.fundraiser-share li a .icon {
+    margin-right: 5px;
+    font-size: 12px; }
 
 /* Fundraisers Past */
 #member_profile-Fundraisers-Past .member_profile-fundraisers-past-item {
@@ -1060,7 +1090,7 @@ ul.member_profile-overview-stats {
     flex-wrap: nowrap;
     align-items: center;
     padding: 25px 0; }
-    #member_profile-Fundraisers-Past .member_profile-fundraisers-past-item > ul li .icon {
+    #member_profile-Fundraisers-Past .member_profile-fundraisers-past-item > ul li > .icon {
       font-size: 30px;
       text-align: center;
       padding-right: 40px; }

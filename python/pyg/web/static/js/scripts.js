@@ -22,4 +22,9 @@ jQuery(document).ready(function( $ ) {
                 $('.member_profile-alert-editing').slideToggle();
                  $('#member_profile').removeClass('editing');
         });
+
+        $("#member_profile").on("input", function() {
+               
+            alert("Change to " + this.value);
+        });
 });

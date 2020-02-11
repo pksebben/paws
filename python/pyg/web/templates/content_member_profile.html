@@ -115,46 +115,48 @@
       <div class="tab-pane fade show active" id="member_profile-Fundraisers-Upcoming" role="tabpanel" aria-labelledby="member_profile-Fundraisers-Upcoming-tab">
 	{% for i in fundraisers %}	
 	<ul class="member_profile-fundraisers-upcoming-list">
-	  <li class="member_profile-fundraisers-upcoming-name fundraiser-name">
-	    <h3>{{ i.name }}</h3>
-	  </li>
-	  <li class="member_profile-fundraisers-upcoming-date fundraiser-date">
-	    <span class="icon icon-standard">calendar</span>
-	    <h3>{{ i.start_date | humanize('naturaldate') }}</h3>
-	  </li>
-	  <li class="member_profile-fundraisers-upcoming-countdown fundraiser-countdown">
-	    <span class="icon icon-standard">stopwatch</span>
-	    <h3 class="countdown" countdown data-date="Jun 30 2020 21:00:00">
-	      <span data-days></span> Days
-	      <span data-hours></span> Hours
-	      <span data-minutes></span> Minutes
-	      <span data-seconds></span> Seconds
-	    </h3>
-	  </li>
-	  <li class="member_profile-fundraisers-upcoming-donations fundraiser-donations">
-	    <span class="icon icon-block">moneybag</span>
-	    <h3>{{ i.donations | sum(attribute="amount") | format_currency() }}  / {{ i.target_funds | format_currency() }}</h3>
-	    <div class="member_profile-fundraisers-upcoming-donations-progress_bar"></div>
-	    <button class="button button-green member_profile-fundraisers-upcoming-donations-donate_btn">Donate</button>
-	  </li>
-	  <li class="member_profile-fundraisers-upcoming-donors fundraiser-donors">
-	    <span class="icon icon-standard">user</span>
-	    <h3>{{ i.donations|length }} Donations</h3>
-	  </li>
+	       <li class="member_profile-fundraisers-upcoming-name fundraiser-name">
+	               <h3>{{ i.name }}</h3>
+	       </li>
+	       <li class="member_profile-fundraisers-upcoming-date fundraiser-date">
+	               <span class="icon icon-standard">calendar</span>
+	               <h3>{{ i.start_date | humanize('naturaldate') }}</h3>
+	       </li>
+	       <li class="member_profile-fundraisers-upcoming-countdown fundraiser-countdown">
+	               <span class="icon icon-standard">stopwatch</span>
+	               <h3 class="countdown" countdown data-date="Jun 30 2020 21:00:00">
+        	               <span data-days></span> Days
+        	               <span data-hours></span> Hours
+        	               <span data-minutes></span> Minutes
+        	               <span data-seconds></span> Seconds
+	               </h3>
+	       </li>
+	       <li class="member_profile-fundraisers-upcoming-donations fundraiser-donations">
+	               <span class="icon icon-block">moneybag</span>
+	               <h3>{{ i.donations | sum(attribute="amount") | format_currency() }}  / {{ i.target_funds | format_currency() }}</h3>
+	               <div class="member_profile-fundraisers-upcoming-donations-progress_bar"></div>
+	               <button class="button button-green member_profile-fundraisers-upcoming-donations-donate_btn">Donate</button>
+	       </li>
+                <li class="member_profile-fundraisers-upcoming-donors fundraiser-donors">
+        	       <span class="icon icon-standard">user</span>
+        	       <h3>{{ i.donations|length }} Donations</h3>
+                </li>
+                <li>
+                        <ul class="member_profile-fundraisers-upcoming-share fundraiser-share">
+                                <li>
+                                    <a href="#"><span class="icon icon-standard">link</span> Copy Page Link</a>
+                                </li>
+                                <li>
+                                    <a href="#"><span class="icon icon-standard">calendar</span> Add to Calendar</a>
+                                </li>
+                                <li>
+                                    <a href="#"><span class="icon icon-social">facebook</span> Share to Facebook</a>
+                                </li>
+                        </ul>
+                </li>
 	</ul>
-	<ul class="member_profile-fundraisers-upcoming-share fundraiser-share">
-	  <li>
-	    <a href="#"><span class="icon icon-standard">link</span> Copy Page Link</a>
-	  </li>
-	  <li>
-	    <a href="#"><span class="icon icon-standard">calendar</span> Add to Calendar</a>
-	  </li>
-	  <li>
-	    <a href="#"><span class="icon icon-social">facebook</span> Share to Facebook</a>
-	  </li>
-	</ul>
+        {% endfor %}
       </div><!-- end upcoming fundraiser tab -->
-      {% endfor %}
       <div class="tab-pane fade" id="member_profile-Fundraisers-Past" role="tabpanel" aria-labelledby="profile-tab">
 	<div class="member_profile-fundraisers-past-item">
 	  <ul>
