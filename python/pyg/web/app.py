@@ -6,6 +6,7 @@ import locale
 import flask
 from jinja2 import PackageLoader, environment
 from werkzeug import exceptions
+from werkzeug.utils import secure_filename
 from flask_login import LoginManager
 from flask_humanize import Humanize
 
@@ -29,6 +30,10 @@ see below docstrings for more info
 
 
 """
+
+# Upload Configuration
+UPLOAD_FOLDER = '/static/uploads'
+
 
 
 class PexFlask(flask.Flask):
@@ -116,6 +121,8 @@ def init():
     app.register_blueprint(partnering.bp)
     app.register_blueprint(account_deleted.bp)
     login_manager.init_app(app)
+
+    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
     humanize = Humanize(app)
     locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')

@@ -1,3 +1,4 @@
+import os
 import datetime
 
 import flask
@@ -26,6 +27,7 @@ class MemberProfileForm(Form):
     location = StringField("Location")
     twitch_handle = StringField("Twitch Handle")
     about = TextAreaField("About")
+
 
 
 def update_user_profile(id, name, about, location, twitch_handle, handle):

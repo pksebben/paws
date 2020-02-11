@@ -64,13 +64,13 @@
 	      </li>
 	      {% if session.userid %}
 	      <li class="nav-profile">
-                <a href="/profile/{{session.userid}}">Profile</a>
+                <a href="/profile/{{ session.userid }}">Profile</a>
                 <ul>
                         <li>
                                 <a href="/createfundraiser">Start a Fundraiser!</a>
                         </li>
                         <li>
-                                <a href="/account/{{ member.id }}">Account Management</a>
+                                <a href="/account/{{ session.userid }}">Account Management</a>
                         </li>
                         <li>
                                 <a href="/logout">logout</a>
