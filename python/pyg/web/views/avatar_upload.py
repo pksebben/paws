@@ -1,7 +1,10 @@
 import os
+import datetime
 
 import flask
 from werkzeug.utils import secure_filename
+
+from pyg.web import db, models
 
 bp = flask.Blueprint("avatar_upload", __name__)
 
@@ -14,16 +17,15 @@ CONSTRUCTION NOTES:
 
 """
 
-
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 def allowed_file(filename):
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@bp.route('/avatar_upload', methods=['POST'])
+@bp.route('/avatar_upload', methods=['POST','GET'])
 def upload_file():
-    if flask.request.method === 'POST':
+    if flask.request.method == 'POST':
         if 'file' not in flask.request.files:
             flask.flash('no file part')
             return flask.redirect(flask.request.url)
@@ -32,9 +34,13 @@ def upload_file():
             flask.flash('no selected file')
             return flask.redirect(flask.request.url)
         if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD__FOLDER'], filename))
-            return flask.redirect(url_for('uploaded_file', filename=filename))
+            # place a pointer in the db and make it the filename
+            member = db.web.session.query(models.Member).get(flask.session['userid'])           
+            filename = "av" + "_" + str(datetime.datetime.now()) + '_' + str(member.id)
+            print(flask.current_app.static_folder)
+            savepath = str(flask.current_app.static_folder) + '/userinfo/avatars/'
+            file.save(os.path.join(savepath, filename))
+            flask.flash('saved!!')
 
     return '''
     <!doctype html>
@@ -46,4 +52,9 @@ def upload_file():
     </form>
     '''
 
-@bp.route
+
+
+
+
+
+
