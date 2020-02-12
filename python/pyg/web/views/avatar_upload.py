@@ -9,11 +9,12 @@ from pyg.web import db, models
 bp = flask.Blueprint("avatar_upload", __name__)
 
 """
-File upload mechanism.  Under construction.
-CONSTRUCTION NOTES:
-- This mechanism should be factored such that it is useful on pages like member profile.
-- There may be issues with the static file folder and the methods we use to serve it up here.  Look into that if you get error messages with FnF or NoneType 
-
+do i wanna make a thing that does all the uploading?
+- probably less maintainable.
+why?
+- a single monolithic function might cause bugs down the line.
+- how?
+-- 
 
 """
 

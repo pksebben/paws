@@ -18,3 +18,4 @@ What is this going to be based on?
 
 * DOING NOW
 Static file upload
+ --refactor and make useful for avatars etc.
