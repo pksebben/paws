@@ -52,14 +52,19 @@ def memberprofile(userid=1):
     fundraisers = db.web.session.query(models.Fundraiser).filter(models.Fundraiser.active == True, models.Fundraiser.member_id == userid)
     form = MemberProfileForm(flask.request.form, member)
     upcoming_fundraiser = None
+    past_fundraisers = []
     numplayers = db.web.session.query(func.max(models.Member.rank)).one()[0]
     for i in member.fundraisers:
         try:
             if i.end_date >= datetime.datetime.now(
-            ) and i.end_date <= upcoming_fundraiser.end_date and fundraiser.active:
+            ) and i.end_date <= upcoming_fundraiser.end_date and i.active:
                 upcoming_fundraiser = i
         except AttributeError:
             upcoming_fundraiser = i
+
+    for i in member.fundraisers:
+        if i.end_date <= datetime.datetime.now() and i.active:
+            past_fundraisers.append(i)
 
     if flask.request.method == 'POST' and form.validate():
         update_user_profile(

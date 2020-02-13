@@ -20,5 +20,7 @@ What is this going to be based on?
 Avatar upload
  - fix the avatar stretching (kirby)
  - add validators to the avatar upload (wrong filetype etc.)
- - make the avatar upload a modal
+ - make the avatar upload into a modal
+
+
  
