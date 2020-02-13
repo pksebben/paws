@@ -37,19 +37,14 @@ def rankedlist(member, windowsize=2):
         func.sum(models.Donation.amount).label('total')
     ).join(models.Donation
            ).group_by(
-        models.Member.handle).order_by(asc(models.Member.rank)).filter(models.Member.rank + windowsize >= member.rank, models.Member.rank - windowsize <= models.Member.rank)
+        models.Member.handle).order_by(asc(models.Member.rank)).filter((models.Member.rank + windowsize) >= member.rank, (models.Member.rank - windowsize) <= member.rank)
+    print("PRINTING WINDOW SIZE")
+    print(windowsize)
     return donations
 
 
 @bp.route('/leaderboard')
 def leaderboard():
-    donations = db.web.session.query(
-        models.Member.handle,
-        func.sum(models.Donation.amount).label('total')
-    ).join(models.Donation
-           ).group_by(
-        models.Member.handle).order_by(desc('total')).all()
-    # ranked = enumerate(donations, start=1)
     ranked = rankedlist(db.web.session.query(models.Member).get(15))
     return flask.render_template(
         'content_leaderboard.html', leaderboard_players=ranked)

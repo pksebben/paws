@@ -22,5 +22,7 @@ Avatar upload
  - add validators to the avatar upload (wrong filetype etc.)
  - make the avatar upload into a modal
 
-
+* KIRBY!
+** fix avatars on the member profile page
+** 'sign in' should drop down with 'sign up'.  Maybe reverse those.
  
