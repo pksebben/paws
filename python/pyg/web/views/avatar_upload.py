@@ -24,6 +24,12 @@ def allowed_file(filename):
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+"""
+This route will eventually become an api call and reroute to the member profile page.
+TODO:
+Validation errors ("wrong filetype, meathead etc.")
+
+"""
 @bp.route('/avatar_upload', methods=['POST','GET'])
 def upload_file():
     if flask.request.method == 'POST':
@@ -36,23 +42,16 @@ def upload_file():
             return flask.redirect(flask.request.url)
         if file and allowed_file(file.filename):
             # place a pointer in the db and make it the filename
-            member = db.web.session.query(models.Member).get(flask.session['userid'])           
+            member = db.web.session.query(models.Member).get(flask.session['userid'])
             filename = "av" + "_" + str(datetime.datetime.now()) + '_' + str(member.id)
-            print(flask.current_app.static_folder)
             savepath = str(flask.current_app.static_folder) + '/userinfo/avatars/'
             file.save(os.path.join(savepath, filename))
+            print(filename)
+            member.avatar_url = str(filename)
+            db.web.session.commit()
             flask.flash('saved!!')
 
-    return '''
-    <!doctype html>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
-    <form method=post enctype=multipart/form-data>
-      <input type=file name=file>
-      <input type=submit value=Upload>
-    </form>
-    '''
-
+    return flask.render_template("upload_avatar.html")
 
 
 

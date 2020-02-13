@@ -1,6 +1,6 @@
 terraform/.terraform
 terraform/terraform.tfstate.backup
-
+userinfo/
 foo.db
 
 .DS_Store

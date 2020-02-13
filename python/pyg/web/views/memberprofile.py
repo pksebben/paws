@@ -49,14 +49,14 @@ def update_user_profile(id, name, about, location, twitch_handle, handle):
 def memberprofile(userid=1):
     member = db.web.session.query(models.Member).get(userid)
     auth = member.auth
-    fundraisers = member.fundraisers
+    fundraisers = db.web.session.query(models.Fundraiser).filter(models.Fundraiser.active == True, models.Fundraiser.member_id == userid)
     form = MemberProfileForm(flask.request.form, member)
     upcoming_fundraiser = None
     numplayers = db.web.session.query(func.max(models.Member.rank)).one()[0]
     for i in member.fundraisers:
         try:
             if i.end_date >= datetime.datetime.now(
-            ) and i.end_date <= upcoming_fundraiser.end_date:
+            ) and i.end_date <= upcoming_fundraiser.end_date and fundraiser.active:
                 upcoming_fundraiser = i
         except AttributeError:
             upcoming_fundraiser = i

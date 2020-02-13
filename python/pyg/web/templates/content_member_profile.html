@@ -13,7 +13,8 @@
   {% endif %}
   <div class="section member_profile-overview">
     <div class="member_profile-overview-avatar_username">
-      <img class="member_profile-overview-avatar avatar"/>
+      <img class="member_profile-overview-avatar avatar" src="/static/userinfo/avatars/{{ member.avatar_url }}"/>
+      <a href="/avatar_upload">Upload a new avatar</a>
       {% if session.userid == auth.id and auth.id %}
 	{{ form.handle }}
       {% else %}
