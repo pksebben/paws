@@ -19,10 +19,6 @@ TODO(ian): Design decisions re: the following
 TODO(ben):
 - should the change password function be factored out?  Maybe a modal?
 - implement better bad credential handling in changepassword()
-
-++++
-So this has become a bit of a mess trying to get two forms in there to work in tandem, but it's working so far.
-FIXME:
 - factor out the pasta
 - get the validators working so they don't get called on both submits (this may have to do with the fact that both submit buttons are given the same ID, start by prefixing each form)
 - There should be behaviors that make more sense upon account deletion / password change
