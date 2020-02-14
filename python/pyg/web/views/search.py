@@ -11,7 +11,7 @@ from pyg.web import db, models
 Search page
 This is a combination search and sort view that is the single source of direct access to all team, fundraiser, member profiles.
 
-This page, once complete, should have the following functions:
+TODO(ben): implement following
 Search for or Browse
 -Members
 --who are streamers

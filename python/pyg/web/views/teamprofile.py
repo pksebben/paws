@@ -7,7 +7,7 @@ from pyg.web import db, models
 Team Profile page
 Profile for teams.  Like the Member profile pages, if the logged in user is an owner this should present a form that can be modified in place of any data fields (this should be managed in the template)
 
-TODO:
+TODO(ben):
 - 'update team' view
 """
 

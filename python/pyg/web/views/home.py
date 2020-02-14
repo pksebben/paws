@@ -14,9 +14,6 @@ from pyg.web.views.leaderboard import rankedlist
 Home page
 fairly self-explanatory.
 
-TODO:
-- Implement windowing for the leaderboard query
-- find a home for the leaderboard windowing function so it becomes useful for member profile pages, the homepage, team profiles, and fundraisers.
 """
 
 bp = flask.Blueprint('home', __name__)
@@ -47,9 +44,6 @@ def feature_fundraiser():
         "raised": "IMPLEMENT ME"
     }
     return feature
-
-# //features a team.
-# //team featured should be active, maybe recent
 
 
 """

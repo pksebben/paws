@@ -35,7 +35,6 @@ see below docstrings for more info
 UPLOAD_FOLDER = '/static/uploads'
 
 
-
 class PexFlask(flask.Flask):
 
     def send_static_file(self, filename):

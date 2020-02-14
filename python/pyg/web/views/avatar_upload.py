@@ -14,8 +14,6 @@ do i wanna make a thing that does all the uploading?
 why?
 - a single monolithic function might cause bugs down the line.
 - how?
--- 
-
 """
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
@@ -26,7 +24,7 @@ def allowed_file(filename):
 
 """
 This route will eventually become an api call and reroute to the member profile page.
-TODO:
+TODO(ben):
 Validation errors ("wrong filetype, meathead etc.")
 
 """

@@ -17,7 +17,7 @@ Whether the fundraiser is displayed in 'edit' or 'view' mode is controlled in th
 
 Note on forms: WTForms has this great feature that will take an object and attempt to assume default values for fields based on matching the data in that object to the names of the fields. This is done here, and any changes to the fundraiser model or the fundraiser form must be reflected in the other.
 
-TODO:
+TODO(ben):
 Implement 'hiding' behavior for inactive fundraisers.
 """
 

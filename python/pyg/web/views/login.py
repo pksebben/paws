@@ -8,9 +8,12 @@ from pyg.web import db, models
 
 """
 Login page
-This is probably going to change a little, as I think we want this to be a modal rather than it's own whole thing.
+Placeholder until this is made modal
 
-TODO:
+TODO(kirby):
+Make me a modal
+
+TODO(ben):
 - how are all these functions going to be handled when this is a modal, potentially present on multiple views?
 """
 
