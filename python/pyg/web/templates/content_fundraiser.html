@@ -8,10 +8,10 @@
   {% if session.userid == fundraiser.member_id %}
   <form method="post" class="fundraiser-form">
       {% endif %}
-      <ul class="Fundraiser-upcoming-list fundraiser">
-	<li class="Fundraiser-upcoming-name fundraiser-name">
+      <ul class="fundraiser">
+	<li class="fundraiser-name fundraiser-item">
                 <span class="icon icon-block">tag</span>
-                <div class="fundraiser-content">
+                <div class="fundraiser-item-content">
         	       {% if session.userid == fundraiser.member_id %}
         	       {{ render_field(form.name) }}
         	       {% else %}
@@ -19,9 +19,9 @@
         	       {% endif %}
                 </div>
 	</li>
-	<li class="Fundraiser-upcoming-date fundraiser-date">
+	<li class="fundraiser-date fundraiser-item">
 	       <span class="icon icon-standard">calendar</span>
-                <div class="fundraiser-content">
+                <div class="fundraiser-item-content">
         	       {% if session.userid == fundraiser.member_id %}
                                 <div class="fundraiser-date-start">
                 	               {{ render_field(form.start_date) }}
@@ -34,31 +34,35 @@
         	       {% endif %}
                 </div>
 	</li>
-	<li class="Fundraiser-upcoming-countdown fundraiser-countdown">
-	  <span class="icon icon-standard">stopwatch</span>
-	  <h3 class="countdown" countdown data-date="Jun 30 2020 21:00:00">
-	    <span data-days></span> Days
-	    <span data-hours></span> Hours
-	    <span data-minutes></span> Minutes
-	    <span data-seconds></span> Seconds
-	  </h3>
+	<li class="fundraiser-countdown fundraiser-item">
+	       <span class="icon icon-standard">stopwatch</span>
+                <div class="fundraiser-item-content">
+        	       <h3 class="countdown" countdown data-date="Jun 30 2020 21:00:00">
+        	       <span data-days></span> Days
+        	       <span data-hours></span> Hours
+        	       <span data-minutes></span> Minutes
+        	       <span data-seconds></span> Seconds
+        	  </h3>
+                </div>
 	</li>
-	<li class="Fundraiser-upcoming-donations fundraiser-donations">
+	<li class="fundraiser-donations fundraiser-item">
 	  <span class="icon icon-block">moneybag</span>
-          <div class="fundraiser-content">
-                        <button class="button button-green Fundraiser-upcoming-donations-donate_btn">Donate</button>
-                        <div class="Fundraiser-upcoming-donations-progress_bar"></div>
-        	       <h3>{{ fundraiser.donations | sum(attribute="amount") | format_currency() }}  / {{ fundraiser.target_funds | format_currency() }}</h3>
+          <div class="fundraiser-item-content">
+                <button class="button button-green Fundraiser-upcoming-donations-donate_btn">Donate</button>
+                <div class="Fundraiser-upcoming-donations-progress_bar"></div>
+               <h3>{{ fundraiser.donations | sum(attribute="amount") | format_currency() }}  / {{ fundraiser.target_funds | format_currency() }}</h3>
         	       {% if session.userid == fundraiser.member_id %}
         	               {{ render_field(form.target_funds) }}
         	       {% endif %}
                 </div>
 	</li>
-	<li class="Fundraiser-upcoming-donors">
-	  <span class="icon icon-standard">user</span>
-	  <h3>{{ fundraiser.donations|length }} Donations</h3>
+	<li class="fundraiser-donors fundraiser-item">
+                <span class="icon icon-standard">user</span>
+                <div class="fundraiser-item-content">
+	               <h3>{{ fundraiser.donations|length }} Donations</h3>
+                </div>
 	</li>
-        <li class="Fundraiser-upcoming-share fundraiser-share">
+        <li class="fundraiser-share fundraiser-item">
                 <ul>
                         <li>
                           <a href="#"><span class="icon icon-standard">link</span> Copy Page Link</a>

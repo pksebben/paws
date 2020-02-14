@@ -213,14 +213,25 @@ ul.member_profile-overview-stats{
                         width:50%;
 
                         a{
+                                @include flexbox();
+                                @include justify-content(center);
+                                width:100%;
                                 font-family:alphaHeadline;
                                 font-size:28px;
                                 color:$white;
-                                padding:1rem 40px;
+                                padding:20px 40px;
                                 text-transform: uppercase; 
+                                transition:all 0.5s ease;
 
                                 &.active{
-                                        color:$navyblue;
+                                        color:$teal;
+                                        background-color:$white;
+                                        &:hover{
+                                                background-color:$white;
+                                        }
+                                }
+                                &:hover{
+                                        background-color:desaturate($teal, 10%);
                                 }
                         }
                 }
@@ -239,6 +250,7 @@ ul.member_profile-overview-stats{
         }
 
         .tab-pane{
+                width:100%;
                 ul{
                         padding:40px;
                         background-color:$white;
