@@ -5,32 +5,6 @@
         
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-
-        <!-- Jquery -->
-        <script src="{{ url_for('static', filename='js/libraries/jquery.js') }}"></script>
-        <!-- Popper - requirement for boostrap -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <!-- Bootstrap -->
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-        <script src="{{ url_for('static', filename='js/libraries/autosize.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
-	
-	<script>
-	  const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
-
-	  const comparer = (idx, asc) => (a, b) => ((v1, v2) => 
-						    v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
-						   )(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
-	  
-	  // do the work...
-	  document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() => {
-	      const table = th.closest('table');
-	      Array.from(table.querySelectorAll('tr:nth-child(n+2)'))
-		  .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this.asc))
-		  .forEach(tr => table.appendChild(tr) );
-	  })));
-	</script>
 	
     </head>
     {% with messages = get_flashed_messages() %}
@@ -64,7 +38,7 @@
 	      </li>
 	      {% if session.userid %}
 	      <li class="nav-profile">
-                <a href="/profile/{{session.userid}}">Profile</a>
+                <a href="/profile/{{ session.userid }}">Profile</a>
                 <ul>
                         <li>
                                 <a href="/createfundraiser">Start a Fundraiser!</a>

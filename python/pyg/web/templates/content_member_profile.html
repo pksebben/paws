@@ -5,14 +5,16 @@
 {% if member %}
 <div id="member_profile" class="content">
   {% if session.userid == auth.id and auth.id %}
-  <form id="submit" action="/profile/{{ auth.id }}" method="post">
-    <div class="alert member_profile-alert-editing">
-        <p>You have made changes. <button>Save Changes</button></p>
+  <h2>Welcome, {{ auth.name }}</h2>
+  <form id="submit" action="/profile/{{ session.userid }}" method="post">
+    <div class="alert">
+        <p>Editing Profile: <button>Submit Changes</button></p>
     </div>
   {% endif %}
   <div class="section member_profile-overview">
     <div class="member_profile-overview-avatar_username">
-      <img class="member_profile-overview-avatar avatar"/>
+      <img class="member_profile-overview-avatar avatar" src="/static/userinfo/avatars/{{ member.avatar_url }}"/>
+      <a href="/avatar_upload">Upload a new avatar</a>
       {% if session.userid == auth.id and auth.id %}
 	{{ form.handle }}
       {% else %}

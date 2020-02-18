@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<title>Paws Your Game</title>
+        
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+	
+    </head>
+    <body>
+      <h1>THIS PAGE SHOULD BE A MODAL ON THE MEMBER PROFILE PAGE</h1>
+      <h3>Choose a new avatar</h3>
+      <form method=post enctype=multipart/form-data>
+	<input type=file name=avatar>
+	<input type=submit value=Upload>
+      </form>
+    </body>
+</html>

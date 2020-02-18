@@ -1,3 +1,4 @@
+import os
 import datetime
 
 import flask
@@ -13,7 +14,7 @@ Is a view if it's not *your* member profile, otherwise is an editable form that 
 
 This is the view that links to all the admin things for stuff like teams, fundraisers, etc.
 
-TODO:
+TODO(ben):
 - currently, this view shows some arbitrary member if no member is selected (via setting the userid).  This is not something that's likely to ever happen (the user would have to type the URL in manually) but it's weird and pointless and I should change it.
 - Couldn't think of any validators for the profile form off the top of my head.
 """
@@ -47,17 +48,25 @@ def update_user_profile(id, name, about, location, twitch_handle, handle):
 def memberprofile(userid=1):
     member = db.web.session.query(models.Member).get(userid)
     auth = member.auth
-    fundraisers = member.fundraisers
+    fundraisers = db.web.session.query(
+        models.Fundraiser).filter(
+        models.Fundraiser.active == True,
+        models.Fundraiser.member_id == userid)
     form = MemberProfileForm(flask.request.form, member)
     upcoming_fundraiser = None
+    past_fundraisers = []
     numplayers = db.web.session.query(func.max(models.Member.rank)).one()[0]
     for i in member.fundraisers:
         try:
             if i.end_date >= datetime.datetime.now(
-            ) and i.end_date <= upcoming_fundraiser.end_date:
+            ) and i.end_date <= upcoming_fundraiser.end_date and i.active:
                 upcoming_fundraiser = i
         except AttributeError:
             upcoming_fundraiser = i
+
+    for i in member.fundraisers:
+        if i.end_date <= datetime.datetime.now() and i.active:
+            past_fundraisers.append(i)
 
     if flask.request.method == 'POST' and form.validate():
         update_user_profile(

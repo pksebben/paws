@@ -14,9 +14,7 @@ from pyg.web import db
 Member Signup page
 This is where members create their profile.  Most of the actual profile data lives in their profile and can be modified there once they are logged in; this should just have them set the non-nullable points of data like password and email and such.
 
-It shouldn't need to be said, so I'll say it: anything dealing with passwords should use encryption.
-
-TODO:
+TODO(ben):
 - figure out a workflow re: nullable emails once Oauth becomes a thing.
 - Configure bcrypt to use random salts
 """
