@@ -8,8 +8,6 @@ from oscar import flag
 from twisted.python import log
 from twisted.internet import task, reactor
 from sqlalchemy import func, desc
-from twisted.internet import task
-from twisted.internet import reactor
 
 from pyg.web import admin, app, container, db, models
 
@@ -62,7 +60,6 @@ def main():
     db.init(app.app)
     admin.init(app.app)
     app.app.jinja_env.auto_reload = True
-    # reactor.run()
     container.run(app.app, FLAGS.endpoint, FLAGS.debug)
 
 

@@ -21,12 +21,11 @@ def rankedlist(member, windowsize=2):
     donations = db.web.session.query(
         models.Member.handle,
         models.Member.rank,
+        models.Member.avatar_url,
         func.sum(models.Donation.amount).label('total')
     ).join(models.Donation
            ).group_by(
         models.Member.handle).order_by(asc(models.Member.rank)).filter((models.Member.rank + windowsize) >= member.rank, (models.Member.rank - windowsize) <= member.rank)
-    print("PRINTING WINDOW SIZE")
-    print(windowsize)
     return donations
 
 

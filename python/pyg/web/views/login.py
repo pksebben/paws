@@ -37,8 +37,7 @@ def login_user(email, password):
         flask.session['userid'] = user.id
         return flask.redirect('/')
     except (AssertionError, NoResultFound):
-        return flask.render_template(
-            "login.html", failure_text="bad credentials. please retry")
+        return flask.redirect('/')
 
 
 @bp.route('/login', methods=['GET', 'POST'])
@@ -48,4 +47,4 @@ def login():
         return login_user(
             form.email.data, form.password.data)
     else:
-        return flask.render_template("login.html", form=form)
+        return flask.redirect("/")

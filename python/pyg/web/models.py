@@ -61,7 +61,7 @@ class Member(Base):
     name = Column(String(80), unique=False, nullable=False)
     handle = Column(String(80), unique=True)
     about = Column(Text)
-    avatar_url = Column(String(120), unique=True)
+    avatar_url = Column(String(120))
     birthday = Column(Date)
     location = Column(String(40))
     twitch_handle = Column(String(40))

@@ -6,7 +6,7 @@
       <a class="leaderboard-list-item-link" href="/profile/{{ i.id }}" >
       </a>
       <span class="leaderboard-list-item-rank table-cell">{{ i.rank }}</span>
-      <img class="leaderboard-list-item-avatar table-cell" src="img/placeholder-user-avatar.png"/>
+      <img class="leaderboard-list-item-avatar table-cell" src="static/userinfo/avatars/{{ i.avatar_url }}"/>
       <span class="leaderboard-list-item-name table-cell">{{ i.handle }}</span>
       <span class="leaderboard-list-item-change icon-block leaderboard-list-item-change-icon_up table-cell">navigateup</span>
       <span class="leaderboard-list-item-amount table-cell">{{ "$%.2f"|format(i.total|float) }}</span>

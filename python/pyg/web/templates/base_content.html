@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+{% from "_formhelpers.html" import render_field %}
+
 <html>
     <head>
 	<title>Paws Your Game</title>
@@ -57,6 +59,19 @@
 	      <li class="nav-donate"><a href="/donate">Donate</a></li>
 	    </ul>
 	</nav>
+	<div id="login">
+	      <div>
+		<h3>{{ failure_text }}</h3>
+		<form method="post" target="/login">
+		  <dl>
+		    {{ render_field(loginform.email) }}
+		    {{ render_field(loginform.password) }}
+		  </dl>
+		  <p><input type=submit value=login>
+		</form>
+		<p>Don't have an account yet? You can <a href="signup">create one here</a></p>
+	      </div>
+	</div>
 	<div id="content">
 	  {% block content %}{% endblock %}
 	</div>

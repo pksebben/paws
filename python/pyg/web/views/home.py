@@ -6,7 +6,7 @@ from flask import render_template
 from sqlalchemy import desc, func
 
 from pyg.web import models, db
-from pyg.web.views.login import LoginForm
+from pyg.web.views.login import LoginForm, login_user
 from pyg.web.views.leaderboard import rankedlist
 
 
@@ -27,9 +27,8 @@ This is meant to feature a fundraiser or player or team that has been exceptiona
  - trending (in the case of fundraisers)
 """
 
+
 # //features an active fundraiser
-
-
 def feature_fundraiser():
     fundraiser = db.web.session.query(
         models.Fundraiser).filter(
@@ -74,6 +73,7 @@ def feature_streamer():
 
 @bp.route('/')
 def home():
+    loginform = LoginForm(flask.request.form)
     if flask.session.get('userid'):
         leaderboard_players = rankedlist(
             member=db.web.session.query(
