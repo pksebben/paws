@@ -105,46 +105,60 @@
     
     <ul class="nav nav-tabs" role="tablist">
       <li class="nav-item">
-	<a class="nav-link active" data-toggle="tab" href="#member_profile-Fundraisers-Upcoming" role="tab" aria-controls="home" aria-selected="true">Upcoming Fundraisers</a>
+	<a class="nav-link active" data-toggle="tab" href="#Member_Profile-Fundraisers-Upcoming" role="tab" aria-controls="home" aria-selected="true">Upcoming</a>
       </li>
       <li class="nav-item">
-	<a class="nav-link" data-toggle="tab" href="#member_profile-Fundraisers-Past" role="tab" aria-controls="profile" aria-selected="false">Past Fundraisers</a>
+	<a class="nav-link" data-toggle="tab" href="#Member_Profile-Fundraisers-Past" role="tab" aria-controls="profile" aria-selected="false">Past</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#Member_Profile-Create_Fundraiser" role="tab" aria-controls="profile" aria-selected="false">Create</a>
       </li>
     </ul>
 
 
     <div class="tab-content" id="myTabContent">
-      <div class="tab-pane fade show active" id="member_profile-Fundraisers-Upcoming" role="tabpanel" aria-labelledby="member_profile-Fundraisers-Upcoming-tab">
+      <div class="tab-pane fade show active" id="Member_Profile-Fundraisers-Upcoming" role="tabpanel" aria-labelledby="Member_Profile-Fundraisers-Upcoming-tab">
 	{% for i in fundraisers %}	
-	<ul class="member_profile-fundraisers-upcoming-list">
-	       <li class="member_profile-fundraisers-upcoming-name fundraiser-name">
-	               <h3>{{ i.name }}</h3>
+	<ul class="fundraiser">
+	       <li class="fundraiser-name fundraiser-item">
+                        <span class="icon icon-block">tag</span>
+                        <div class="fundraiser-item-content">
+	                       <h3>{{ i.name }}</h3>
+                        </div>
 	       </li>
-	       <li class="member_profile-fundraisers-upcoming-date fundraiser-date">
+	       <li class="fundraiser-date fundraiser-item">
 	               <span class="icon icon-standard">calendar</span>
-	               <h3>{{ i.start_date | humanize('naturaldate') }}</h3>
+                       <div class="fundraiser-item-content">
+	                       <h3>{{ i.start_date | humanize('naturaldate') }}</h3>
+                       </div>
 	       </li>
-	       <li class="member_profile-fundraisers-upcoming-countdown fundraiser-countdown">
+	       <li class="fundraiser-countdown fundraiser-item">
 	               <span class="icon icon-standard">stopwatch</span>
-	               <h3 class="countdown" countdown data-date="Jun 30 2020 21:00:00">
-        	               <span data-days></span> Days
-        	               <span data-hours></span> Hours
-        	               <span data-minutes></span> Minutes
-        	               <span data-seconds></span> Seconds
-	               </h3>
+                       <div class="fundraiser-item-content">
+        	               <h3 class="countdown" countdown data-date="Jun 30 2020 21:00:00">
+                	               <span data-days></span> Days
+                	               <span data-hours></span> Hours
+                	               <span data-minutes></span> Minutes
+                	               <span data-seconds></span> Seconds
+        	               </h3>
+                       </div>
 	       </li>
-	       <li class="member_profile-fundraisers-upcoming-donations fundraiser-donations">
+	       <li class="fundraiser-donations fundraiser-item">
 	               <span class="icon icon-block">moneybag</span>
-	               <h3>{{ i.donations | sum(attribute="amount") | format_currency() }}  / {{ i.target_funds | format_currency() }}</h3>
-	               <div class="member_profile-fundraisers-upcoming-donations-progress_bar"></div>
-	               <button class="button button-green member_profile-fundraisers-upcoming-donations-donate_btn">Donate</button>
+                       <div class="fundraiser-item-content">
+        	               <h3>{{ i.donations | sum(attribute="amount") | format_currency() }}  / {{ i.target_funds | format_currency() }}</h3>
+        	               <div class="member_profile-fundraisers-upcoming-donations-progress_bar"></div>
+        	               <button class="button button-green member_profile-fundraisers-upcoming-donations-donate_btn">Donate</button>
+                       </div>
 	       </li>
-                <li class="member_profile-fundraisers-upcoming-donors fundraiser-donors">
+                <li class="fundraiser-donors fundraiser-item">
         	       <span class="icon icon-standard">user</span>
-        	       <h3>{{ i.donations|length }} Donations</h3>
+                       <div class="fundraiser-item-content">
+        	               <h3>{{ i.donations|length }} Donations</h3>
+                       </div>
                 </li>
-                <li>
-                        <ul class="member_profile-fundraisers-upcoming-share fundraiser-share">
+                <li class="fundraiser-share fundraiser-item">
+                        <ul>
                                 <li>
                                     <a href="#"><span class="icon icon-standard">link</span> Copy Page Link</a>
                                 </li>
@@ -159,45 +173,37 @@
 	</ul>
         {% endfor %}
       </div><!-- end upcoming fundraiser tab -->
-      <div class="tab-pane fade" id="member_profile-Fundraisers-Past" role="tabpanel" aria-labelledby="profile-tab">
-	<div class="member_profile-fundraisers-past-item">
-	  <ul>
-	    <li class="member_profile-fundraisers-past-date">
+      <div class="tab-pane fade" id="Member_Profile-Fundraisers-Past" role="tabpanel" aria-labelledby="profile-tab">
+	  <ul class="fundraiser">
+	    <li class="fundraiser-date fundraiser-item">
 	      <span class="icon icon-standard">calendar</span>
-	      <h3>August 30,2019</h3>
+              <div class="fundraiser-item-content">
+	               <h3>August 30,2019</h3>
+               </div>
 	    </li>
-	    <li class="member_profile-fundraisers-past-donations">
+	    <li class="fundraiser-donations fundraiser-item">
 	      <span class="icon icon-block">moneybag</span>
-	      <div class="member_profile-fundraisers-past-donations-progress_bar"></div>
+              <div class="fundraiser-item-content">
+                        <h3>$500</h3>
+	               <div class="member_profile-fundraisers-past-donations-progress_bar"></div>
+               </div>
 	    </li>
-	    <li class="member_profile-fundraisers-past-donors">
+	    <li class="fundraiser-donors fundraiser-item">
 	      <span class="icon icon-standard">user</span>
-	      <h3>45 Donations</h3>
+              <div class="fundraiser-item-content">
+	               <h3>45 Donations</h3>
+               </div>
 	    </li>
-	    <div class="member_profile-fundraisers-past-twitch">
-	    </div>
+	    <li class="fundraiser-date fundraiser-item">
+                <span class="icon icon-standard">calendar</span>
+                <div class="fundraiser-item-content">
+                        <h3>August 30,2019</h3>
+                </div>
+            </li>
 	  </ul>
-	</div>
-	<div class="member_profile-fundraisers-past-item">
-	  <ul>
-	    <li class="member_profile-fundraisers-past-date">
-	      <span class="icon icon-standard">calendar</span>
-	      <h3>August 30,2019</h3>
-	    </li>
-	    <li class="member_profile-fundraisers-past-donations">
-	      <span class="icon icon-block">moneybag</span>
-	      <div class="member_profile-fundraisers-past-donations-progress_bar"></div>
-	    </li>
-	    <li class="member_profile-fundraisers-past-donors">
-	      <span class="icon icon-standard">user</span>
-	      <h3>45 Donations</h3>
-	    </li>
-	    <div class="member_profile-fundraisers-past-twitch">
-	    </div>
-	  </ul>
-	</div>
       </div><!-- end past fundraisers tab -->
-      
+      <div class="tab-pane fade" id="Member_Profile-Create_Fundraiser" role="tabpanel" aria-labelledby="profile-tab">
+      </div><!-- end create fundraiser tab -->
     </div><!-- end tab-content -->
   </div><!-- end fundraisers section -->
 
