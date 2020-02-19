@@ -61,6 +61,7 @@ def main():
     admin.init(app.app)
     app.app.jinja_env.auto_reload = True
     # reactor.run()
+    set_ranks()
     container.run(app.app, FLAGS.endpoint, FLAGS.debug)
 
 

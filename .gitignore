@@ -17,5 +17,7 @@ dist
 .pants.workdir.file_lock
 .cache/
 
+static/
+
 .todo-breakdown
 foo.db
