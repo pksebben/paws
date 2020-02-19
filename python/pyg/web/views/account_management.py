@@ -11,19 +11,14 @@ from pyg.web import db, models
 Account Management page.
 Allows users to do things like change passwords, delete their account, that kinda junk.  An extra layer of distance over the profile editing page for functions that are potentially hazardous.
 
-##ON HOLD##
-Design decisions need to be made re: account deletion
 
-TODO:
+TODO(ian): Design decisions re: the following
 - account deletion mechanics
-- have a conversation about what else should go in here.
-- have a brief conversation about whether there should be an extra layer of security over this module, as it concerns the changing and recovery of passwords
+- Is this secure?
+
+TODO(ben):
 - should the change password function be factored out?  Maybe a modal?
 - implement better bad credential handling in changepassword()
-
-++++
-So this has become a bit of a mess trying to get two forms in there to work in tandem, but it's working so far.
-FIXME:
 - factor out the pasta
 - get the validators working so they don't get called on both submits (this may have to do with the fact that both submit buttons are given the same ID, start by prefixing each form)
 - There should be behaviors that make more sense upon account deletion / password change

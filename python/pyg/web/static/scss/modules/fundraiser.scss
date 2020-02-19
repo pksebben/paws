@@ -5,26 +5,35 @@
         @include align-items(center);
         background-color:$teal;
         padding:40px 0;
-}
-.fundraiser-form{
-        
+        .fundraiser{
+                background-color: lighten($teal, 55%);
+                padding:15px 40px;
+                margin:40px;
+        }
+        .fundraiser-form{
+                width:100%;
+        }
 }
 .fundraiser{
-        // background-color: $teal;
         @include flexbox();
         @include flex-direction(column);
         @include flex-wrap(wrap);
-        background-color: lighten($teal, 55%);
-        padding:15px 40px;
-        margin:40px 0;
+        @include align-content(center);
+        .fundraiser-item{
+                @include flexbox();
+                @include flex-direction(row);
+                @include flex-wrap(nowrap);
+                .fundraiser-item-content{
+                        @include flexbox();
+                        @include flex-direction(column);
+                        @include flex-wrap(nowrap);
+                }
+        }
         > li{
                 @include flexbox();
                 @include flex-direction(row);
                 @include flex-wrap(nowrap);
-                padding:25px 0;
-                .fundraiser-content{
-                        width:100%;
-                }
+                padding:25px 0;fundraiser-item-content
                 dt,
                 h3{
                         padding-left:15px;
@@ -44,10 +53,8 @@
                         }
                 }
                 &.fundraiser-date{
-                        .fundraiser-content{
-                                @include flexbox();
+                        .fundraiser-item-content{
                                 @include flex-direction(row);
-                                @include flex-wrap(nowrap);
                         }
                 }
                 &.fundraiser-donations{
