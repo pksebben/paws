@@ -136,6 +136,11 @@ def init():
         return 'en_US'
 
     @app.context_processor
+    def provideloginform():
+        loginform = login.LoginForm(flask.request.form)
+        return { 'loginform' : loginform}
+
+    @app.context_processor
     def dynamic_data():
         texts = pyg.web.db.web.session.query(
             pyg.web.models.Text).filter_by(
