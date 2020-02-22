@@ -7,7 +7,6 @@ import flask
 from jinja2 import PackageLoader, environment
 from werkzeug import exceptions
 from werkzeug.utils import secure_filename
-from flask_login import LoginManager
 from flask_humanize import Humanize
 
 import pyg.web
@@ -78,14 +77,6 @@ app = PexFlask(__name__, static_folder='static')
 app.jinja_loader = PackageLoader('pyg.web', 'templates')
 # Necessary to set cookies.  Move to config later.
 app.secret_key = "2380b817f0f6dc67cebcc4068fc6b437"
-login_manager = LoginManager()  # part of flask-login.  Not yet implemented.
-
-
-# TODO: Is this deprecated?
-@login_manager.user_loader
-def load_user(userid):
-    return LoginUser(userid)
-
 
 """
 A couple of notes on the init()----
@@ -120,7 +111,6 @@ def init():
     app.register_blueprint(partnering.bp)
     app.register_blueprint(account_deleted.bp)
     app.register_blueprint(avatar_upload.bp)
-    login_manager.init_app(app)
 
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -138,7 +128,7 @@ def init():
     @app.context_processor
     def provideloginform():
         loginform = login.LoginForm(flask.request.form)
-        return { 'loginform' : loginform}
+        return {'loginform': loginform}
 
     @app.context_processor
     def dynamic_data():

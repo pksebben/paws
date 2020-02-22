@@ -19,6 +19,7 @@ It is required anywhere you want to serve up such an asset.
 
 def rankedlist(member, windowsize=2):
     donations = db.web.session.query(
+        models.Member.id,
         models.Member.handle,
         models.Member.rank,
         models.Member.avatar_url,
