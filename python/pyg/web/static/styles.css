@@ -430,46 +430,13 @@ a {
         background-color: #5900ff;
         transition: all .75s;
         position: relative; }
-        #Nav > ul li.nav-signin a {
-          color: #fff; }
-        #Nav > ul li.nav-signin form {
-          position: absolute;
-          top: 40px;
-          left: 0;
-          padding: 20px;
-          background-color: #5900ff; }
-          #Nav > ul li.nav-signin form fieldset {
-            position: relative;
-            margin-bottom: 20px; }
-          #Nav > ul li.nav-signin form legend {
-            color: #fff;
-            text-transform: uppercase;
-            position: absolute;
-            background-color: #5900ff;
-            width: auto;
-            padding-right: 10px;
-            top: -10px;
-            left: -1px;
-            margin-bottom: 20px; }
-          #Nav > ul li.nav-signin form input {
-            background-color: transparent;
-            height: 50px;
-            border: 1px solid #fff;
-            min-width: 300px; }
-          #Nav > ul li.nav-signin form .nav-signin-form-create {
-            display: -webkit-box;
-            display: -moz-box;
-            display: -ms-flexbox;
-            display: -webkit-flex;
-            display: flex;
-            -webkit-flex-direction: row;
-            -moz-flex-direction: row;
-            -ms-flex-direction: row;
-            flex-direction: row;
-            -webkit-flex-wrap: nowrap;
-            -moz-flex-wrap: nowrap;
-            -ms-flex-wrap: nowrap;
-            flex-wrap: nowrap; }
+        #Nav > ul li.nav-signin button {
+          color: #fff;
+          font-family: alphaHeadline;
+          font-size: 18px;
+          text-transform: uppercase;
+          transition: all .75s;
+          font-size: 16px; }
       #Nav > ul li.nav-donate {
         background-color: #00c214;
         transition: all .75s; }
@@ -827,6 +794,86 @@ li.leaderboard-list-item:first-child .leaderboard-list-item-name {
       border: 1px dotted #1b002b; }
   .fundraiser-date .fundraiser-date-start {
     margin-right: 40px; }
+
+#login.modal .modal-content {
+  background-color: #1b002b;
+  color: #5900ff; }
+  #login.modal .modal-content .modal-header {
+    border-bottom: none; }
+    #login.modal .modal-content .modal-header .modal-title {
+      font-family: alphaHeadline;
+      text-align: center;
+      text-transform: uppercase;
+      width: 100%; }
+    #login.modal .modal-content .modal-header button {
+      color: #5900ff;
+      text-shadow: none;
+      font-weight: 400; }
+  #login.modal .modal-content .modal-body form {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    -ms-flex-align: center;
+    align-items: center; }
+    #login.modal .modal-content .modal-body form dl {
+      width: 100%; }
+    #login.modal .modal-content .modal-body form input[type=text],
+    #login.modal .modal-content .modal-body form input[type=password] {
+      border: 1px solid #5900ff;
+      margin-bottom: 25px; }
+    #login.modal .modal-content .modal-body form input[type="submit"] {
+      border: 1px solid #5900ff;
+      color: #5900ff;
+      padding-left: 30px;
+      padding-right: 30px; }
+      #login.modal .modal-content .modal-body form input[type="submit"]:hover {
+        cursor: pointer;
+        background-color: #5900ff;
+        color: #fff; }
+  #login.modal .modal-content .modal-footer {
+    border-top: none; }
+    #login.modal .modal-content .modal-footer p {
+      font-size: 16px;
+      text-align: center;
+      width: 100%; }
+      #login.modal .modal-content .modal-footer p a {
+        color: #5900ff;
+        text-decoration: underline; }
+        #login.modal .modal-content .modal-footer p a:hover {
+          color: #fff; }
+
+form label {
+  font-family: sourceSansProLight;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  margin-bottom: 2px;
+  font-size: 12px;
+  opacity: 0.8; }
+form input[type=text],
+form input[type=password] {
+  color: #fff;
+  font-family: alphaHeadline;
+  font-size: 28px;
+  padding: 15px 2% 10px;
+  border: 1px solid transparent;
+  width: 96%;
+  transition: all 0.5s ease;
+  text-transform: uppercase; }
+form input[type="submit"] {
+  font-family: alphaHeadline;
+  font-size: 28px;
+  padding: 15px 2% 10px;
+  transition: all 0.5s ease;
+  text-transform: uppercase; }
 
 .goalProgress {
   background: #e6fad4;
