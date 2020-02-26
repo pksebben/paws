@@ -8,6 +8,7 @@
         padding:0 40px;
         @include flexbox();
         @include flex-direction(row);
+        @include align-items(center);
         height:100px;
         position: relative;
         transition: background-color .5s ease-in-out; 

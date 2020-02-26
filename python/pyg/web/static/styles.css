@@ -457,6 +457,11 @@ a {
   -moz-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   height: 100px;
   position: relative;
   transition: background-color .5s ease-in-out; }
@@ -1254,13 +1259,14 @@ li.leaderboard-list-item:first-child .leaderboard-list-item-name {
   color: #5900ff;
   font-family: alphaHeadline;
   font-size: 46px;
-  z-index: 2; }
+  z-index: 2;
+  margin-right: 30px; }
 
 .leaderboard-list-item-avatar {
   max-height: 50px;
   width: auto;
-  border-radius: 100px;
-  z-index: 2; }
+  z-index: 2;
+  margin: 0 60px 0 30px; }
 
 .leaderboard-list-item-name {
   color: #fff;
@@ -1268,17 +1274,12 @@ li.leaderboard-list-item:first-child .leaderboard-list-item-name {
   font-size: 36px;
   text-transform: uppercase;
   line-height: 50px;
+  -webkit-flex-grow: 3;
+  -moz-flex-grow: 3;
+  -ms-flex-grow: 3;
+  flex-grow: 3;
   font-size: 30px;
   z-index: 2; }
-
-.leaderboard-list-item-change {
-  font-size: 24px;
-  z-index: 2;
-  width: 50px; }
-  .leaderboard-list-item-change.leaderboard-list-item-change-icon_down {
-    color: #ff5b00; }
-  .leaderboard-list-item-change.leaderboard-list-item-change-icon_up {
-    color: #00c214; }
 
 .leaderboard-list-item-amount {
   color: #00c214;
