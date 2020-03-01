@@ -1,6 +1,12 @@
 jQuery(document).ready(function( $ ) { 
 
         autosize($('textarea'));
+        
+        // Show nav search
+        $('.nav-search').on('click', function(event){
+                $('.nav-search-form_container').slideToggle();
+                console.log('click');
+        });
 
         // Check if gamer profile is in edit mode, if not, add class 'editing'
         $('#member_profile input').on('click', function(event){

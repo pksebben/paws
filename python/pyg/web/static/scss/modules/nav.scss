@@ -166,41 +166,12 @@
                                 background-color:$purple;
                                 transition:all .75s;
                                 position:relative;
-                                a{
+                                button{
                                         color:$white;
-                                }
-                                form{
-                                        position:absolute;
-                                        top:$headerHeight;
-                                        left:0;
-                                        padding:20px;
-                                        background-color:$purple;
-                                        fieldset{
-                                                position:relative;
-                                                margin-bottom:20px;
-                                        }
-                                        legend{
-                                                color:$white;
-                                                text-transform: uppercase; 
-                                                position:absolute; 
-                                                background-color: $purple;
-                                                width:auto;
-                                                padding-right: 10px;
-                                                top: -10px;
-                                                left: -1px;
-                                                margin-bottom:20px;
-                                        }
-                                        input{
-                                                background-color:transparent;
-                                                height: 50px;
-                                                border:1px solid $white;
-                                                min-width: 300px;
-                                        }
-                                        .nav-signin-form-create{
-                                                @include flexbox();
-                                                @include flex-direction(row);
-                                                @include flex-wrap(nowrap);
-                                        }
+                                        @include alpha-s;
+                                        text-transform: uppercase;
+                                        transition:all .75s;
+                                        font-size:16px;
                                 }
                         }
                         &.nav-donate{

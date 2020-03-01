@@ -27,20 +27,23 @@ li.leaderboard-list-item{
         color:$purple;
         font-family: alphaHeadline;
         font-size:46px;
-        z-index: 1;
+        z-index:2;
+        margin-right:30px;
 }
 .leaderboard-list-item-avatar{
         max-height: 50px;
         width:auto;
-        border-radius:100px;
-        z-index: 1;
+        z-index:2;
+        margin:0 60px 0 30px;
 }
 .leaderboard-list-item-name{
         color:$white;
         @include alpha-xl;
+        @include flex-grow(3);
         font-size:30px;
         z-index: 1;
 }
+
 .leaderboard-list-item-change{
         font-size: 24px;
         z-index: 1;
@@ -52,6 +55,8 @@ li.leaderboard-list-item{
                 color:$green;  
         }
 }
+
+
 .leaderboard-list-item-amount{
         color:$green;
         @include alpha-xl;
