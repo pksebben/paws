@@ -71,8 +71,11 @@ def feature_streamer():
 """
 
 
-@bp.route('/')
+
+@bp.route('/', methods=["GET","POST"])
 def home():
+    if flask.request.method == "POST" and loginform.validate():
+        flask.flash("it's working!")
     loginform = LoginForm(flask.request.form)
     if flask.session.get('userid'):
         leaderboard_players = rankedlist(
@@ -88,8 +91,7 @@ def home():
                 models.Member).filter_by(
                 rank=3).first())
         member = None
-    loginform = LoginForm(flask.request.form)
     news = db.web.session.query(models.NewsArticle).order_by(
         desc("date"))
     return render_template('content_home.html', news=news, member=member,
-                           leaderboard_players=leaderboard_players, loginform=loginform, feature=feature_fundraiser())
+                           leaderboard_players=leaderboard_players, feature=feature_fundraiser())

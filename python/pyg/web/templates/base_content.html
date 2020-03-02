@@ -79,7 +79,7 @@
                                 </div><!-- modal-header -->
                                 <div class="modal-body">
                         		<h3>{{ failure_text }}</h3>
-                        		<form method="post" target="/login">
+                        		<form method="post" action="/login">
                         		  <dl>
                         		    {{ render_field(loginform.email) }}
                         		    {{ render_field(loginform.password) }}
