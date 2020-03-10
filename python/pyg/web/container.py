@@ -11,11 +11,7 @@ from twisted.web import wsgi
 
 """
 container.py
-I'm gonna be honest, I have *no idea* what this does.
-
-TODO:
-- essplain me what dafuq dis be, bossman.
-
+This defines server behavior in the event of an error and links up debugging and logging.
 """
 
 logger = logging.getLogger(__name__)

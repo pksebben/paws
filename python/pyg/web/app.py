@@ -24,10 +24,6 @@ Things this app.py still does:
 -registers all views
 -configures methods and data available to templates
 -performs some basic app configurations
-
-see below docstrings for more info
-
-
 """
 
 # Upload Configuration
@@ -82,13 +78,13 @@ app.secret_key = "2380b817f0f6dc67cebcc4068fc6b437"
 A couple of notes on the init()----
 
 Blueprint registration:
-The pattern we are using requires a few things to be in place for each blueprint:
-1. There must be a view for the blueprint in /views/, which should contain all the methods pertinent to that view and register a blueprint as bp.  Any of the existing views can be referred to re: the specifics of this pattern
-2. The view in question should reference a template (in the case that it presents any client-facing interface) in /templates/
-3. The view should be imported in this module and registered according to the pattern visible below.
+To make a view:
+1. Create the (viewname).py in /views/, with all local methods 
+2. Each view gets a template in /templates/, rendered in the (viewname).py
+3. Call app.register_blueprint((viewname).bp) in init() below
 
 Template Filters and Context Processors:
-All template filters and context processors (methods for mutating data within templates or providing data to templates, respectively) are registered here.  See below the @app.foo decorators.
+These are global to the app and made available to all views and templates.
 
 """
 

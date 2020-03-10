@@ -23,6 +23,36 @@ Avatar upload
  - make the avatar upload into a modal
 
 * KIRBY!
-** fix avatars on the member profile page
-** 'sign in' should drop down with 'sign up'.  Maybe reverse those.
+The search bar disappears on clicking.
+The news page needs some style.
+ - The TOC should live in it's own thing
+ - Do we want a featured section?
+The about page needs a little love
+ - Just make it pretty. Assume that it will have a lot of text 
+Fundraiser page
+ - The name is cropped in edit mode
+ - Is there a php script we could use for the timer?
+Account management page
+ - When focused on a field, there's no indicator that the field is focused (like, a cursor)
+ - the submit/ delete buttons don't look like buttons
+Home page
+ - the featured section needs styling
  
+* 3/9/20
+** TODO Ben:
+Should make a donate module available as a modal the same way that login was
+
+Should make sure that logins are validated properly
+
+Full list of styling needed for Kirby (also, call kirby when done)
+
+CODE CLEANUP!
+
+Study the things that Ian sent.
+
+** Talk to Ian about:
+Whether we want to seperate out streamers from regular users
+
+The looping call re: ranking the teams
+
+The docstring in account_deleted.py
