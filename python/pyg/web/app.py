@@ -16,7 +16,7 @@ from pyg.web.views import login, home, signup, news, search, about, teamprofile,
 """
 App.py
 
-A note for those familiar with flask:
+a note for those familiar with flask:
 Many of the functions that a traditional app.py handle in a flask app have been moved to run.py (such as the actual running of the app).  This was done to avoid a circular import problem relating to (I can't quite remember if it was the CMS or test suite or both.)
 
 Things this app.py still does:
