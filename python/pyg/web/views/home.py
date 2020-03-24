@@ -45,6 +45,8 @@ def feature_fundraiser():
     }
     return feature
 
+"""
+INCOMPLETE
 def feature_team():
     # feature team with most members
     team = db.web.session.query(models.Team).filter(func.max(func.count(models.Team.members))).first()
@@ -55,8 +57,7 @@ def feature_team():
         "joined": team.date_joined,
         "featured_for": "most members"
     }
-"""
-INCOMPLETE
+
 def feature_team():
     team = db.web.session.query(
         models.Team
@@ -103,4 +104,4 @@ def home():
     news = db.web.session.query(models.NewsArticle).order_by(
         desc("date"))
     return render_template('content_home.html', news=news, member=member,
-                           leaderboard_players=leaderboard_players, feature=random.choice(feature_fundraiser(), feature_team()))
+                           leaderboard_players=leaderboard_players, feature=feature_fundraiser())
