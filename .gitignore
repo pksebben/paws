@@ -22,3 +22,5 @@ static/
 
 .todo-breakdown
 foo.db
+
+*.swp

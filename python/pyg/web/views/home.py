@@ -47,7 +47,7 @@ def feature_fundraiser():
 
 def feature_team():
     # feature team with most members
-    team = db.web.session.query(models.Team).filter(func.max(func.count(models.Team.members)))
+    team = db.web.session.query(models.Team).filter(func.max(func.count(models.Team.members))).first()
     feature = {
         "type": "team",
         "name": team.name,
