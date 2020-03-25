@@ -24,3 +24,5 @@ static/
 foo.db
 
 *.swp
+
+.DS_Store
