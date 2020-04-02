@@ -15,7 +15,6 @@ fixtures.py
 This is a module for populating testing data into the db.  It's used in two places:
 1 - the test suite
 2 - as a standalone, whenever the dev version of the site is being data wacky or you want to add new testing data.
-
 """
 
 
@@ -301,8 +300,6 @@ def create_team(owner, **data):
     )
     session.add(team)
     session.commit()
-    # TODO add the current user as the team owner.
-    # TODO return something?
 
 
 def teams():

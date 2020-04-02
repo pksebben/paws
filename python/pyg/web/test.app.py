@@ -19,12 +19,8 @@ from pyg.web import fixtures
 from pyg.web.views import signup, news
 from pyg.web.views.home import feature_mvp
 
+# TODO (ben) : Clean this module up.  RTFM on writing tests.
 
-
-"""
-test.app.py
-This is our test suite!  I've been writing documentation for the past forever and don't feel like explaining it!  For more info visit lmgtfy.com
-"""
 
 def setUpModule():
     app.init()
@@ -155,7 +151,8 @@ class StartTest(unittest.TestCase):
 
     def test_feature_mvp(self):
         feature_mvp()
-        self.assertEquals(True,True)
+        self.assertEquals(True, True)
+
 
 if __name__ == '__main__':
     unittest.main()

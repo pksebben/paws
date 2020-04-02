@@ -16,7 +16,7 @@ TODO(ian): Design decisions re: the following
 - account deletion mechanics
 - Is this secure?
 
-TODO(ben):
+TODO(ben): This list.
 - should the change password function be factored out?  Maybe a modal?
 - implement better bad credential handling in changepassword()
 - factor out the pasta

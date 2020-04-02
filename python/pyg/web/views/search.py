@@ -11,6 +11,8 @@ from pyg.web import db, models
 Search page
 This is a combination search and sort view that is the single source of direct access to all team, fundraiser, member profiles.
 
+TODO(ben): This module is a right mess.  Spend some time.
+
 TODO(ben): implement following
 Search for or Browse
 -Members
@@ -33,8 +35,7 @@ Behaviors
 - Search by string should serve up everything that matches the string, but be reducible to teams / fundraisers / etc.
  - Search results should be split into multiple tables for each of the different classes of thing to search for, such as players and teams.
 
-TODO:
- - Sorting is becoming a bit of a monster. See note below
+TODO (ben) : Sorting is becoming a bit of a monster. See note below
 
 SORTING
 Jinja has a sort filter, using it in it's raw form:

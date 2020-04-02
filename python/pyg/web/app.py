@@ -4,8 +4,10 @@ import pkg_resources
 import locale
 
 import flask
+# TODO (ben) : is environment used in this context?
 from jinja2 import PackageLoader, environment
 from werkzeug import exceptions
+# TODO (ben) : is secure_filename used?
 from werkzeug.utils import secure_filename
 from flask_humanize import Humanize
 
@@ -71,7 +73,8 @@ def read_from_package(package, directory, filename):
 """create the app and configure it."""
 app = PexFlask(__name__, static_folder='static')
 app.jinja_loader = PackageLoader('pyg.web', 'templates')
-# Necessary to set cookies.  Move to config later.
+# TODO (ben) : RTFM on flask secret keys for best practices on where to
+# put this.
 app.secret_key = "2380b817f0f6dc67cebcc4068fc6b437"
 
 """
@@ -79,7 +82,7 @@ A couple of notes on the init()----
 
 Blueprint registration:
 To make a view:
-1. Create the (viewname).py in /views/, with all local methods 
+1. Create the (viewname).py in /views/, with all local methods
 2. Each view gets a template in /templates/, rendered in the (viewname).py
 3. Call app.register_blueprint((viewname).bp) in init() below
 
@@ -90,22 +93,23 @@ These are global to the app and made available to all views and templates.
 
 
 def init():
-    app.register_blueprint(shelterprofile.bp)
-    app.register_blueprint(account_management.bp)
+    # TODO (ben) : Make sure all these views are still used and prune if not
     app.register_blueprint(login.bp)
     app.register_blueprint(home.bp)
     app.register_blueprint(signup.bp)
     app.register_blueprint(news.bp, url_prefix='/news')
+    app.register_blueprint(search.bp)
     app.register_blueprint(about.bp)
     app.register_blueprint(teamprofile.bp)
-    app.register_blueprint(search.bp)
     app.register_blueprint(memberprofile.bp)
     app.register_blueprint(leaderboard.bp)
     app.register_blueprint(logout.bp)
     app.register_blueprint(fundraiser.bp)
     app.register_blueprint(create_fundraiser.bp)
+    app.register_blueprint(account_management.bp)
     app.register_blueprint(partnering.bp)
     app.register_blueprint(account_deleted.bp)
+    app.register_blueprint(shelterprofile.bp)
     app.register_blueprint(avatar_upload.bp)
 
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -113,6 +117,8 @@ def init():
     humanize = Humanize(app)
     locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
 
+    # TODO (ben) : do we use all of these?  Are we still providing the session
+    # as a global context proc?
     @app.template_filter()
     def format_currency(value):
         return locale.currency(value, symbol=True, grouping=True)

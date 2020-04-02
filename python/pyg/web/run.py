@@ -22,13 +22,8 @@ Things that happen here:
 """
 
 
-"""
-Ranking func
-Uses the twisted LoopingCall to schedule a repeating function that queries the db , organizing by sum(donations)
-"""
-
-
 def set_ranks():
+    # Add ranks to the member table.  Called below.
     if db.web is not None:
         members = db.web.session.query(
             models.Member,
@@ -45,8 +40,6 @@ def set_ranks():
 
 l = task.LoopingCall(set_ranks)
 l.start(60.0)  # call every second
-
-# l.stop() will stop the looping calls
 
 
 FLAGS = flag.namespace(__name__)

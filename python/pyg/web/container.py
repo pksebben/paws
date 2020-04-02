@@ -8,7 +8,6 @@ from twisted.web import server
 from twisted.web import wsgi
 
 
-
 """
 container.py
 This defines server behavior in the event of an error and links up debugging and logging.
@@ -31,7 +30,7 @@ def run(app, address, debug):
     def err_shutdown(failure):
         log.err(failure)
         reactor.callWhenRunning(reactor.stop)
-
+        
     def _run():
         reactor.suggestThreadPoolSize(FLAGS.threadpool_size)
         resource = wsgi.WSGIResource(reactor, reactor.getThreadPool(), app)

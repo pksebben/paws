@@ -14,9 +14,8 @@ from pyg.web import db
 Member Signup page
 This is where members create their profile.  Most of the actual profile data lives in their profile and can be modified there once they are logged in; this should just have them set the non-nullable points of data like password and email and such.
 
-TODO(ben):
-- figure out a workflow re: nullable emails once Oauth becomes a thing.
-- Configure bcrypt to use random salts
+TODO(ben): figure out a workflow re: nullable emails once Oauth becomes a thing.
+TODO(ben): Configure bcrypt to use random salts
 """
 
 bp = flask.Blueprint('signup', __name__)
@@ -42,8 +41,6 @@ def sign_new_user(email, password, name):
         db.web.session.add(newperson)
         db.web.session.commit()
         return newperson.id
-        # change to structlog
-        # print("user created")
     except IntegrityError as err:
         db.web.session.rollback()
         raise err
@@ -55,7 +52,7 @@ def home():
     if request.method == "POST" and form.validate():
         try:
             sign_new_user(form.email.data, form.password.data, form.name.data)
-            # TODO: replace auth module
+            # TODO(ben): replace auth module
             return redirect('/')
         except IntegrityError as err:
             flash("we found a user with that email already.")

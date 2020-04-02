@@ -10,6 +10,7 @@ Create Fundraiser route
 
 This does not render a view, rather, it creates a blank fundraiser as a template and reroutes to the 'edit fundraiser' view, to allow the user to actually configure the fundraiser.  This mechanism implements an 'active' field, which gets set to True as soon as the fundraiser is sufficiently configured by the user.
 
+NOTE: This feels hacky.  Perhaps refactor later.
 """
 
 bp = flask.Blueprint("create_fundraiser", __name__)

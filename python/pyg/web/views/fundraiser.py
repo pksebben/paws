@@ -17,8 +17,7 @@ Whether the fundraiser is displayed in 'edit' or 'view' mode is controlled in th
 
 Note on forms: WTForms has this great feature that will take an object and attempt to assume default values for fields based on matching the data in that object to the names of the fields. This is done here, and any changes to the fundraiser model or the fundraiser form must be reflected in the other.
 
-TODO(ben):
-Implement 'hiding' behavior for inactive fundraisers.
+TODO(ben): (maybe, see create_fundraiser NOTE)Implement 'hiding' behavior for inactive fundraisers.
 """
 
 
@@ -33,11 +32,6 @@ def daterange(soonest, latest):
 
 
 class FundraiserForm(Form):
-    """
-    TODO
-    - decide a reasonable max length for names
-    - is it possible to compare start and end dates to ensure that one precedes the other?
-    """
     date_constraint = daterange(datetime.date.today(),
                                 datetime.date.max)
     name = StringField("Name", validators=[InputRequired(), Length(max=25)])
@@ -69,9 +63,8 @@ def fundraiser(frid=None):
 
     If no fundraiser is selected to view (via fundraiser ID), show a list of all fundraisers.
 
-    TODO
-    make the list of fundraisers searchable
-    update the template to show 'about' section
+    TODO (ben) : make the list of fundraisers searchable
+    TODO (ben) : update the template to show 'about' section
     """
 
     if frid:
@@ -85,8 +78,6 @@ def fundraiser(frid=None):
             fundraiser.about = form.about.data
             fundraiser.active = True
             db.web.session.commit()
-        # form.name.data = fundraiser.name
-        # form.end_date = fundraiser.end_date
         return flask.render_template(
             "content_fundraiser.html", fundraiser=fundraiser, form=form)
 

@@ -4,6 +4,7 @@ from pyg.web import db, models
 
 bp = flask.Blueprint("shelterprofile", __name__)
 
+# TODO(ben): Probably everything
 
 @bp.route("/shelter/<shelterid>")
 def shelterprofile(shelterid):

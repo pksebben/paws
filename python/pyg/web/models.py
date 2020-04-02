@@ -112,11 +112,6 @@ class Auth(Base):
         return str(self.id)
 
 
-"""
-Team model
-"""
-
-
 class Team(Base):
     __tablename__ = 'team'
 

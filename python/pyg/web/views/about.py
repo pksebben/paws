@@ -8,11 +8,7 @@ Fairly self-explanatory.  All content is loaded from the db, and is managed usin
 
 TODO(clock): What is going to be in here?
 
-TODO(ben):
--make models for whatever data goes here
--styling
--grab/serve that data
--create html
+TODO (kirby) : styling
 """
 
 bp = flask.Blueprint('about', __name__)

@@ -10,11 +10,9 @@ from pyg.web import db, models
 Login page
 Placeholder until this is made modal
 
-TODO(kirby):
-Make me a modal
+TODO (kirby) : Make me a modal
 
-TODO(ben):
-- how are all these functions going to be handled when this is a modal, potentially present on multiple views?
+TODO (ben) : Is this a modal already?  Identify and fix. 
 """
 
 

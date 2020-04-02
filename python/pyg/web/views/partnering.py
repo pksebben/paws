@@ -4,8 +4,7 @@ import flask
 """
 This is the page to sign up new partners such as shelters and marketing partners.
 
-TODO:
-basically everything, starting with a coherent UX design around the partnering process.  May want to involve clock in this.
+TODO (ben) : Make a page and think more on what it needs
 
 """
 

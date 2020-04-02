@@ -20,7 +20,7 @@ bp = flask.Blueprint('home', __name__)
 
 
 """
-Feature section
+Feature section (IN PROGRESS)
 This is meant to feature a fundraiser or player or team that has been exceptional for some reason or another lately.  Reasons can be:
  - new and active
  - mvp in a particular category
@@ -46,6 +46,7 @@ def feature_fundraiser():
     return feature
 
 """
+TODO (ben) : fix this feature or deprecate
 INCOMPLETE
 def feature_team():
     # feature team with most members

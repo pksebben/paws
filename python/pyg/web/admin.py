@@ -8,8 +8,7 @@ from pyg.web import db, models
 """
 This is the CMS for the site.  Accessible via the /admin route in the browser.
 
-TODO:
-- this module is currently broken due to changes in the db models since it's birth.  More changes are likely to come, however, so perhaps wait to fix it until the db models are stable.
+TODO (ben) : Module appears to be broken ATM.
 """
 
 
