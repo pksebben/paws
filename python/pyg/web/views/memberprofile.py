@@ -2,7 +2,7 @@ import os
 import datetime
 
 import flask
-from wtforms import Form, StringField, TextAreaField, HiddenField, validators
+from wtforms import Form, StringField, TextAreaField, HiddenField, FileField, SubmitField, validators
 from sqlalchemy import func
 
 from pyg.web import db, models
@@ -18,6 +18,11 @@ This is the view that links to all the admin things for stuff like teams, fundra
 
 bp = flask.Blueprint("userprofile", __name__)
 
+# TODO (kirby) : This needs to be a modal
+class AvatarUploadForm(Form):
+    avatar = FileField("pick a new avatar")
+    submit = SubmitField("upload")
+    
 
 class MemberProfileForm(Form):
     handle = StringField("Handle")
