@@ -10,6 +10,7 @@ from pyg.web import db, models
 """
 Search page
 This is a combination search and sort view that is the single source of direct access to all team, fundraiser, member profiles.
+TODO (kirby) : The dropdown for search disappears on focus.  
 
 TODO(ben): This module is a right mess.  Spend some time.
 

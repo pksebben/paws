@@ -61,4 +61,4 @@
 * TODO TODO
 ** Finish BUILD
 This is just a matter of fixing and wiring up the dependancies.  Try running it and seeing what pops out (also the README.md should have info)
-** 
+** TODOs now live in grep.  Long live grep. 

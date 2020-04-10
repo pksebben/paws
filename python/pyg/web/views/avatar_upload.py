@@ -18,10 +18,14 @@ def allowed_file(filename):
 
 
 """
+Avatar Upload
+Members may upload avatars in {what formats?}.  The file will live in /static/avatars/ 
+
+Avatar image names are automatically applied as the image uploads (In order to circumvent directory traversal attacks), and take the format { 'av_' + timestamp + '_' + member id }.  This name is saved in the 'avatar url' field in their profile table. 
+
 This route will eventually become an api call and reroute to the member profile page.
 TODO(ben): Validation errors ("wrong filetype, meathead etc.")
 TODO(ben): Turn this into an API call / implement in member profile
-TODO(ben): Write documentation for this module
 
 """
 @bp.route('/avatar_upload', methods=['POST', 'GET'])

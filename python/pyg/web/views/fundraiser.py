@@ -18,9 +18,15 @@ Whether the fundraiser is displayed in 'edit' or 'view' mode is controlled in th
 Note on forms: WTForms has this great feature that will take an object and attempt to assume default values for fields based on matching the data in that object to the names of the fields. This is done here, and any changes to the fundraiser model or the fundraiser form must be reflected in the other.
 
 TODO(ben): (maybe, see create_fundraiser NOTE)Implement 'hiding' behavior for inactive fundraisers.
+
+What would be the ideal implementation for creating and editing fundraisers?
+
+ - User hits 'create fundraiser' button
+   - taken to a dummy fundraiser page that submits the fundraiser only once 'save fundraiser' is hit.
+   - this way, all fundraisers are 'active' and don't need to be staged
 """
 
-
+# custom validator
 def daterange(soonest, latest):
     msg = "Must be no sooner than %s and no later than %s" % (soonest, latest)
 
@@ -31,6 +37,7 @@ def daterange(soonest, latest):
     return _daterange
 
 
+# WTForm
 class FundraiserForm(Form):
     date_constraint = daterange(datetime.date.today(),
                                 datetime.date.max)
@@ -80,9 +87,7 @@ def fundraiser(frid=None):
             db.web.session.commit()
         return flask.render_template(
             "content_fundraiser.html", fundraiser=fundraiser, form=form)
-
     else:
-
         fundraisers = db.web.session.query(models.Fundraiser).all()
         return flask.render_template(
             "content_fundraiser.html", fundraisers=fundraisers)

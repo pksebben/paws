@@ -8,11 +8,8 @@ from pyg.web import db, models
 
 """
 Login page
-Placeholder until this is made modal
 
-TODO (kirby) : Make me a modal
-
-TODO (ben) : Is this a modal already?  Identify and fix. 
+TODO (kirby) : Can we have the cursor focus on email field when this opens as a modal?
 """
 
 

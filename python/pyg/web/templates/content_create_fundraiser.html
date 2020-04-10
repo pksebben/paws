@@ -1,0 +1,58 @@
+<!-- TODO: FINISH ME! -->
+{% extends "base_content.html" %}
+
+{% block content %}
+
+<form method="post" class="fundraiser-form">
+  <ul class="fundraiser">
+    <li class="fundraiser-name fundraiser-item">
+      <span class="icon icon-block">tag</span>
+      <div class="fundraiser-item-content">
+        {{ render_field(form.name) }}
+      </div>
+    </li>
+    <li class="fundraiser-date fundraiser-item">
+      <span class="icon icon-standard">calendar</span>
+      <div class="fundraiser-item-content">
+        <div class="fundraiser-date-start">
+          {{ render_field(form.start_date) }}
+        </div>
+        <div class="fundraiser-date-end">
+          {{ render_field(form.end_date) }}
+        </div>
+      </div>
+    </li>
+    <li class="fundraiser-countdown fundraiser-item">
+      <span class="icon icon-standard">stopwatch</span>
+      <div class="fundraiser-item-content">
+        <h3 class="countdown" countdown data-date="Jun 30 2020 21:00:00">
+          <span data-days></span> Days
+          <span data-hours></span> Hours
+          <span data-minutes></span> Minutes
+          <span data-seconds></span> Seconds
+        </h3>
+      </div>
+    <li>
+    {{ render_field(form.target_funds) }}
+    </li>
+    <li>
+      {{ render_field(form.about) }}
+    </li>
+    <li class="fundraiser-share fundraiser-item">
+      <ul>
+        <li>
+          <a href="#"><span class="icon icon-standard">link</span> Copy Page Link</a>
+        </li>
+        <li>
+          <a href="#"><span class="icon icon-standard">calendar</span> Add to Calendar</a>
+        </li>
+        <li>
+          <a href="#"><span class="icon icon-social">facebook</span> Share to Facebook</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <button type=submit value="create this fundraiser" class="fundraiser-submitedits button">Submit Fundraiser</button>
+</form>
+ 
+{% endblock %}
