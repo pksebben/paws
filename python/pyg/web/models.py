@@ -162,7 +162,6 @@ class Fundraiser(Base):
     start_date = Column(DateTime, nullable=False)
     end_date = Column(DateTime, nullable=False)
     target_funds = Column(Integer, nullable=False)
-    active = Column(Boolean, nullable=False)
 
     member_id = Column(Integer, ForeignKey("member.id"), nullable=False)
     member = relationship("Member", back_populates="fundraisers")
