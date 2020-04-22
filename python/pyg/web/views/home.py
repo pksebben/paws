@@ -33,8 +33,7 @@ def feature_fundraiser():
     fundraiser = db.web.session.query(
         models.Fundraiser).filter(
         models.Fundraiser.start_date <= datetime.datetime.now(),
-            models.Fundraiser.end_date >= datetime.datetime.today(),
-            models.Fundraiser.active == True).order_by(
+            models.Fundraiser.end_date >= datetime.datetime.today()).order_by(
             func.random()).first()
     feature = {
         "type": "fundraiser",
@@ -44,6 +43,7 @@ def feature_fundraiser():
         "raised": "IMPLEMENT ME"
     }
     return feature
+
 
 """
 TODO (ben) : fix this feature or deprecate

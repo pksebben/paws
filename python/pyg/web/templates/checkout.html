@@ -1,0 +1,73 @@
+<!-- Checkout page.  Client secret is held in a secure cookie 'payment_client_secret -->
+<!-- TODO (ben) : Delete comments in this module once payments are working -->
+<!-- TODO (kirby) : Styling for this module might be easiest to do inline due to the unique use of js.  Your call.  -->
+<head>
+  <title>Checkout</title>
+  <script src="https://js.stripe.com/v3/"></script>
+  
+</head>
+
+<body>
+  
+  <p id="checkout_warning">Thank you for improving the lives of disadvantaged animals everywhere.  Please complete payment here - payment details will expire in 5 minutes.</p>
+
+  <div id="stripe_elements_container">
+  
+    <form id="payment-form">
+
+      <div id="card-element"></div>
+
+      <div id="card-errors" role="alert"></div>
+
+      <button id="submit" data-secret="{{ client_secret }}">Donate!</Button>
+
+    </form>
+    
+  </div>
+  <script>
+    var stripe = Stripe('pk_test_HTyrLdURuJnpbillHSu08F8b00whHpDLAL')
+    var elements = stripe.elements()
+    var style = {
+	base: {
+	    color: 'salmon'
+	}
+    }
+    var card = elements.create("card", {style: style})
+    card.mount("#card-element")
+    card.addEventListener('change', function(event) {
+	var displayError = document.getElementById('card-errors');
+	if (event.error) {
+	    displayError.textContent = event.error.message;
+	} else {
+	    displayError.textContent = '';
+	}
+    });
+
+    var form =  document.getElementById('payment-form');
+    var submit = document.getElementById('submit');
+    const clientSecret = submit.getAttribute('data-secret');
+    form.addEventListener('submit', function(ev) {
+	ev.preventDefault();
+	stripe.confirmCardPayment(clientSecret, { // TODO (ben) :How do we get the client secret cookie here? is it better to embed it in html?
+	    payment_method: {
+		card: card,
+		billing_details: {
+		    name: 'Tom Nook'// NAMEGOESHERE
+		}
+	    }
+	}).then(function(result) {
+	    if (result.error) {
+		// PAYMENT FAILURE.  (stripe advises we alert the customer to this error message)
+		console.log(result.error.message);
+	    } else {
+		if (result.paymentIntent.status === 'succeeded') {
+		    // PAYMENT SUCCESS.  ROUTES SHOULD GO HERE.
+		    // TODO (ben) : Stripe recommends disabling form submission until the payment processes.  How do?
+		    alert("stripe is working!")
+		}
+	    }
+	});
+    });
+  </script>
+
+</body>

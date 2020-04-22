@@ -12,7 +12,7 @@ from werkzeug.utils import secure_filename
 from flask_humanize import Humanize
 
 import pyg.web
-from pyg.web.views import login, home, signup, news, search, about, teamprofile, memberprofile, leaderboard, logout, fundraiser, create_fundraiser, account_management, partnering, account_deleted, shelterprofile, avatar_upload
+from pyg.web.views import login, home, signup, news, search, about, teamprofile, memberprofile, leaderboard, logout, fundraiser, create_fundraiser, account_management, partnering, account_deleted, shelterprofile, avatar_upload, donate
 
 
 """
@@ -26,6 +26,10 @@ Things this app.py still does:
 -registers all views
 -configures methods and data available to templates
 -performs some basic app configurations
+
+TODO (ben) : Implement some form of UAC that uses auth tokens instead of checking userids against the session.  For more information look at The webapp hackers handbook in ch 8
+
+TODO (ben) : When the session is passed to the template, does that expose it in an unsecure fashion? Investigate.
 """
 
 # Upload Configuration
@@ -111,7 +115,8 @@ def init():
     app.register_blueprint(account_deleted.bp)
     app.register_blueprint(shelterprofile.bp)
     app.register_blueprint(avatar_upload.bp)
-
+    app.register_blueprint(donate.bp)
+    
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
     humanize = Humanize(app)

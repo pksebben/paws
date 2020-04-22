@@ -1,0 +1,10 @@
+<!-- Donate view.  Select amount and send request.  No cards processed on this page -->
+{% from "_formhelpers.html" import render_field %}
+
+<div>
+  
+  <form method='post' action="/donate">
+    {{ render_field(form.amount) }}
+    {{ render_field(form.submit) }}
+  </form>
+</div>
