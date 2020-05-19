@@ -19,69 +19,6 @@ fairly self-explanatory.
 bp = flask.Blueprint('home', __name__)
 
 
-"""
-Feature section (IN PROGRESS)
-This is meant to feature a fundraiser or player or team that has been exceptional for some reason or another lately.  Reasons can be:
- - new and active
- - mvp in a particular category
- - trending (in the case of fundraisers)
-"""
-
-
-# //features an active fundraiser
-def feature_fundraiser():
-    fundraiser = db.web.session.query(
-        models.Fundraiser).filter(
-        models.Fundraiser.start_date <= datetime.datetime.now(),
-            models.Fundraiser.end_date >= datetime.datetime.today()).order_by(
-            func.random()).first()
-    feature = {
-        "type": "fundraiser",
-        "name": fundraiser.name,
-        "started": fundraiser.start_date,
-        "ends": fundraiser.end_date,
-        "raised": "IMPLEMENT ME"
-    }
-    return feature
-
-
-"""
-TODO (ben) : fix this feature or deprecate
-INCOMPLETE
-def feature_team():
-    # feature team with most members
-    team = db.web.session.query(models.Team).filter(func.max(func.count(models.Team.members))).first()
-    feature = {
-        "type": "team",
-        "name": team.name,
-        "members": func.count(team.members).scalar(),
-        "joined": team.date_joined,
-        "featured_for": "most members"
-    }
-
-def feature_team():
-    team = db.web.session.query(
-        models.Team
-    ).filter(func.max(models.Team.date_joined)).first()
-    feature = {
-        "type": "team",
-        "name": team.name,
-        "members": "IMPLEMENT"
-    }
-
-# feature a streamer
-
-def feature_streamer():
-    streamer = db.web.session.query(models.Member)
-    feature = {
-        "type": "streamer",
-        "name": "IMPLEMENT",
-        "rank": "IMPLEMENT",
-        "raised": "IMPLEMENT",
-        "joined": "IMPLEMENT"
-    }
-"""
-
 
 @bp.route('/', methods=["GET", "POST"])
 def home():
@@ -105,4 +42,4 @@ def home():
     news = db.web.session.query(models.NewsArticle).order_by(
         desc("date"))
     return render_template('content_home.html', news=news, member=member,
-                           leaderboard_players=leaderboard_players, feature=feature_fundraiser())
+                           leaderboard_players=leaderboard_players)

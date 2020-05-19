@@ -29,37 +29,6 @@
       <a class="button" href="/partnering">Join us</a>
     </div>
   </div><!--end home-intro-->
-  <!-- this section should contain the feature block -->
-  <div class="home-featured featured section">
-    <header><h2>Featured {{ feature.type }}</h2></header>
-    <h3>{{ feature.name }}</h3>
-    {% if feature.type == "fundraiser" %}
-    <dl>
-      <dt>started</dt>
-      <dd>{{ feature.started | humanize('naturaldate') }}</dd>
-      <dt>ends</dt>
-      <dd>{{ feature.ends | humanize('naturaldate') }}</dd>
-      <dt>raised</dt>
-      <dd>{{ "$%.2f"|format(feature.raised|float) }}</dd>
-    </dl>
-    {% elif feature.type == "team" %}
-    <dl>
-      <dt>members</dt>
-      <dd>{{ feature.members }}</dd>
-      <dt>PAWSing since</dt>
-      <dd>{{ feature.joined }}</dd>
-    </dl>
-    {% elif feature.type == "streamer" %}
-    <dl>
-      <dt>raised</dt>
-      <dd>{{ "$%.2f"|format(feature.raised|float) }}</dd>
-      <dt>rank</dt>
-      <dd>{{ feature.rank }}</dd>
-      <dt>joined</dt>
-      <dd>{{ feature.joined | humanize('naturaldate') }}</dd>
-    </dl>
-    {% endif %}
-  </div>
   <div class="home-leaderboard leaderboard section">
     <h2 class="home-leaderboard-header">Leaderboard</h2>
     {% include 'leaderboard.html' %}
