@@ -4,16 +4,12 @@ import pkg_resources
 import locale
 
 import flask
-# TODO (ben) : is environment used in this context?
-from jinja2 import PackageLoader, environment
+from jinja2 import PackageLoader
 from werkzeug import exceptions
-# TODO (ben) : is secure_filename used?
-from werkzeug.utils import secure_filename
 from flask_humanize import Humanize
 
 import pyg.web
 from pyg.web.views import login, home, signup, news, search, about, teamprofile, memberprofile, leaderboard, logout, fundraiser, create_fundraiser, account_management, partnering, account_deleted, shelterprofile, avatar_upload, donate
-
 
 """
 App.py
@@ -35,9 +31,7 @@ TODO (ben) : When the session is passed to the template, does that expose it in 
 # Upload Configuration
 UPLOAD_FOLDER = '/static/uploads'
 
-
 class PexFlask(flask.Flask):
-
     def send_static_file(self, filename):
         if not self.has_static_folder:
             raise RuntimeError('No static folder for this object')
@@ -47,8 +41,10 @@ class PexFlask(flask.Flask):
         # Get the relative static directory
         directory = os.path.relpath(self.static_folder, self.root_path)
 
-        return send_from_package("pyg.web", directory,
-                                 filename, cache_timeout=cache_timeout)
+        return send_from_package("pyg.web",
+                                 directory,
+                                 filename,
+                                 cache_timeout=cache_timeout)
 
 
 def send_from_package(package, directory, filename, **options):
@@ -66,7 +62,10 @@ def send_from_package(package, directory, filename, **options):
 
 
 def read_from_package(package, directory, filename):
-    resource_location = "/".join((directory, filename,))
+    resource_location = "/".join((
+        directory,
+        filename,
+    ))
     if not pkg_resources.resource_exists(package, resource_location):
         print("could not find package {}".format(package))
         raise exceptions.NotFound()
@@ -80,7 +79,6 @@ app.jinja_loader = PackageLoader('pyg.web', 'templates')
 # TODO (ben) : RTFM on flask secret keys for best practices on where to
 # put this.
 app.secret_key = "2380b817f0f6dc67cebcc4068fc6b437"
-
 """
 A couple of notes on the init()----
 
@@ -97,6 +95,7 @@ These are global to the app and made available to all views and templates.
 
 
 def init():
+    """connect views and configure templates, then return app"""
     # TODO (ben) : Make sure all these views are still used and prune if not
     app.register_blueprint(login.bp)
     app.register_blueprint(home.bp)
@@ -116,7 +115,7 @@ def init():
     app.register_blueprint(shelterprofile.bp)
     app.register_blueprint(avatar_upload.bp)
     app.register_blueprint(donate.bp)
-    
+
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
     humanize = Humanize(app)
@@ -139,9 +138,8 @@ def init():
 
     @app.context_processor
     def dynamic_data():
-        texts = pyg.web.db.web.session.query(
-            pyg.web.models.Text).filter_by(
-                route_id=str(flask.request.url_rule))
+        texts = pyg.web.db.web.session.query(pyg.web.models.Text).filter_by(
+            route_id=str(flask.request.url_rule))
         text_dict = {x.slug: x.text for x in texts}
         return {'text': text_dict}
 
