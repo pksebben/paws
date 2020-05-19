@@ -1,12 +1,8 @@
-import random
-import datetime
-
 import flask
 from flask import render_template
-from sqlalchemy import desc, func
+from sqlalchemy import desc
 
 from pyg.web import models, db
-from pyg.web.views.login import LoginForm, login_user
 from pyg.web.views.leaderboard import rankedlist
 
 
@@ -18,13 +14,9 @@ fairly self-explanatory.
 
 bp = flask.Blueprint('home', __name__)
 
-
-
 @bp.route('/', methods=["GET", "POST"])
 def home():
-    if flask.request.method == "POST" and loginform.validate():
-        flask.flash("it's working!")
-    loginform = LoginForm(flask.request.form)
+    """The home view"""
     if flask.session.get('userid'):
         leaderboard_players = rankedlist(
             member=db.web.session.query(

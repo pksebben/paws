@@ -1,12 +1,10 @@
-import logging
 import sys
 
 import structlog
 from structlog import twisted
-from structlog.twisted import LoggerFactory
 from oscar import flag
 from twisted.python import log
-from twisted.internet import task, reactor
+from twisted.internet import task
 from sqlalchemy import func, desc
 
 from pyg.web import admin, app, container, db, models
@@ -23,7 +21,7 @@ Things that happen here:
 
 
 def set_ranks():
-    # Add ranks to the member table.  Called below.
+    """Add ranks to member table """
     if db.web is not None:
         members = db.web.session.query(
             models.Member,
@@ -32,14 +30,14 @@ def set_ranks():
                     models.Donation).group_by(
                         models.Member).order_by(
                             desc('total')).all()
-        for i in range(len(members)):
-            members[i][0].rank = i
+        for i in enumerate(members):
+            i[1][0].rank = i[0]
 
         db.web.session.commit()
 
 
-l = task.LoopingCall(set_ranks)
-l.start(60.0)  # call every second
+rankloop = task.LoopingCall(set_ranks)
+rankloop.start(60.0)  # call every second
 
 
 FLAGS = flag.namespace(__name__)
@@ -49,6 +47,7 @@ logger = structlog.get_logger()
 
 
 def main():
+    """Initialize app, db, admin panel, and run the container"""
     app.init()
     db.init(app.app)
     admin.init(app.app)

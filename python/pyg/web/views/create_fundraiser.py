@@ -32,7 +32,7 @@ def daterange(soonest, latest):
 
 def uniquename():
     msg = "We found a fundraiser with that name already."
-    
+   
     def _uniquename(form, field):
         name = field.data
         if name in db.web.session.query(models.Fundraiser.name).all():
@@ -41,6 +41,7 @@ def uniquename():
 
 # WTForm
 class FundraiserForm(Form):
+    """fundraiser input form"""
     date_constraint = daterange(datetime.date.today(),
                                 datetime.date.max)
     unique_constraint = uniquename()

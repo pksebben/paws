@@ -1,6 +1,6 @@
 import flask
 from sqlalchemy import desc
-from wtforms import Form, StringField, validators
+from wtforms import Form, StringField
 
 from pyg.web import models, db
 
@@ -14,10 +14,14 @@ WARNING: this page uses a different routing method from most of the other pages,
 
 TODO (ben) : There should be some form of navigation / search on the news page.  
 """
+
+# TODO | ian : do we wanna axe this section?  Will there be news?
+
 bp = flask.Blueprint('news', __name__)
 
 class SearchForm(Form):
     searchstring = StringField("Search for articles")
+
 
 @bp.route('/', defaults={'slug': None})
 @bp.route('/<slug>', methods=['GET', 'POST'])

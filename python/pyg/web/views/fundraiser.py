@@ -1,12 +1,13 @@
 import datetime
 
 import flask
-from wtforms import Form, StringField, TextAreaField, validators
+from wtforms import Form, StringField, TextAreaField
 from wtforms.fields.html5 import DateField, IntegerField
 from wtforms.validators import InputRequired, Length, ValidationError, DataRequired
 
 from pyg.web import db, models
 
+# TODO | ian : axe the fundraiser section?  Is that going to be handled by tiltify?
 
 """
 Fundraiser page
@@ -28,6 +29,7 @@ What would be the ideal implementation for creating and editing fundraisers?
 
 # custom validator
 def daterange(soonest, latest):
+    """ensure date lays between these values"""
     msg = "Must be no sooner than %s and no later than %s" % (soonest, latest)
 
     def _daterange(form, field):
@@ -39,6 +41,7 @@ def daterange(soonest, latest):
 
 # WTForm
 class FundraiserForm(Form):
+    """form for adding fundraisers"""
     date_constraint = daterange(datetime.date.today(),
                                 datetime.date.max)
     name = StringField("Name", validators=[InputRequired(), Length(max=25)])
