@@ -74,7 +74,7 @@ python_library(
 
 python_library(
     name='views',
-    sources=globs('views/*.py'),
+    sources=['views/*.py'],
     dependencies=[
         'third_party:flask',
 	'third_party:psycopg2',
@@ -116,10 +116,10 @@ python_library(
 
 resources(
     name='templates',
-    sources=rglobs('templates/*')
+    sources=['templates/*']
 )
 
 resources(
     name='static',
-    sources=rglobs('static/*')
+    sources=['static/*']
 )
