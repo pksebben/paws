@@ -8,6 +8,14 @@ python_requirement_library(
 )
 
 python_requirement_library(
+    name='bcrypt',
+    requirements=[
+	python_requirement('bcrypt'),
+    ],
+    dependencies=[],
+)
+
+python_requirement_library(
     name='structlog',
     requirements=[
         python_requirement('structlog'),
@@ -55,7 +63,9 @@ python_requirement_library(
     requirements=[
         python_requirement('passlib'),
     ],
-    dependencies=[],
+    dependencies=[
+	':bcrypt',
+    ],
 )
 
 python_requirement_library(
