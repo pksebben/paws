@@ -16,7 +16,7 @@ bp = flask.Blueprint('home', __name__)
 
 @bp.route('/', methods=["GET", "POST"])
 def home():
-    """The home view"""
+    """Home view"""
     if flask.session.get('userid'):
         leaderboard_players = rankedlist(
             member=db.web.session.query(

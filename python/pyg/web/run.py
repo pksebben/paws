@@ -11,7 +11,10 @@ from pyg.web import admin, app, container, db, models
 
 """
 run.py
-This was factored out of app.py because of some circular import problem relating to the test suite or admin panel or some such.  See app.py for a more detailed explanation of what got moved and what didn't.
+This was factored out of app.py because of some circular import problem
+relating to the test suite or admin panel or some such.
+
+See app.py for a more detailed explanation of what got moved and what didn't.
 
 Things that happen here:
 -logging config
@@ -21,7 +24,7 @@ Things that happen here:
 
 
 def set_ranks():
-    """Add ranks to member table """
+    """calculate ranks for member table """
     if db.web is not None:
         members = db.web.session.query(
             models.Member,
@@ -34,10 +37,14 @@ def set_ranks():
             i[1][0].rank = i[0]
 
         db.web.session.commit()
+    else:
+        raise Exception("no database found")
 
 
-rankloop = task.LoopingCall(set_ranks)
-rankloop.start(60.0)  # call every second
+def init_ranks():
+    """run set_ranks every minute"""
+    rankloop = task.LoopingCall(set_ranks)
+    rankloop.start(60.0)  # call every second
 
 
 FLAGS = flag.namespace(__name__)
@@ -50,6 +57,7 @@ def main():
     """Initialize app, db, admin panel, and run the container"""
     app.init()
     db.init(app.app)
+    init_ranks()
     admin.init(app.app)
     app.app.jinja_env.auto_reload = True
     set_ranks()

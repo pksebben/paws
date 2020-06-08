@@ -49,7 +49,7 @@ class SQLAlchemy(object):
     def init(self, connection_string, engine_conf=None, session_conf=None):
         '''Initialize the SQLAlchemy session manager.
 
-       :param str connection_string: database URI (e.g. sqlite:///foo.db)
+       :param str connection_string: database URI (e.g. sqlite:///~/Documents/foo.db)
        :type engine_conf: dict or None
        :type session_conf: dict or None
        '''

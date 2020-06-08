@@ -1,7 +1,7 @@
 import sys
 
 import flask
-from wtforms import Form, StringField, PasswordField, BooleanField, SubmitField, validators
+from wtforms import Form, PasswordField, BooleanField, SubmitField, validators
 from passlib.hash import bcrypt
 
 from pyg.web import db, models
@@ -64,7 +64,6 @@ def changepassword(memberid, oldpass, newpass):
 @bp.route('/account/<memberid>', methods=["POST", "GET"])
 def accountmanagement(memberid):
     member = db.web.session.query(models.Member).get(memberid)
-    auth = member.auth
     passform = ChangePasswordForm(flask.request.form)
     deleteform = DeleteAccountForm(flask.request.form)
 
@@ -81,10 +80,7 @@ def accountmanagement(memberid):
                 flask.flash("incorrect credentials entered")
                 return showpage()
         elif deleteform.submit.data and deleteform.validate():
-            """
-                The function for deleting members needs to wait on a design decision re: how
-                to handle deleting members.
-                """
+            # TODO (ben) : apply "active" check to all functions that use member data.
             member.active = False
             db.web.session.commit()
             return flask.redirect('/account_deleted')

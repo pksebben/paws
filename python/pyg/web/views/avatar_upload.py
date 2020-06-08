@@ -2,7 +2,6 @@ import os
 import datetime
 
 import flask
-from werkzeug.utils import secure_filename
 
 from pyg.web import db, models
 
@@ -26,6 +25,7 @@ Avatar image names are automatically applied as the image uploads (In order to c
 This route will eventually become an api call and reroute to the member profile page.
 TODO(ben): Validation errors ("wrong filetype, meathead etc.")
 TODO(ben): Turn this into an API call / implement in member profile
+TODO(ben): avatar filetype checking
 
 """
 @bp.route('/avatar_upload', methods=['POST', 'GET'])
