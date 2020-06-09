@@ -31,12 +31,15 @@ TODO(ben): avatar filetype checking
 @bp.route('/avatar_upload', methods=['POST', 'GET'])
 def upload_file():
     if flask.request.method == 'POST':
-        if 'file' not in flask.request.files:
-            flask.flash('no file part')
+        print(dir(flask.request.files))
+        print(flask.request.files)
+        
+        if 'avatar' not in flask.request.files:
+            print('no file part')
             return flask.redirect(flask.request.url)
-        file = flask.request.files['file']
+        file = flask.request.files['avatar']
         if file.filename == '':
-            flask.flash('no selected file')
+            print('no selected file')
             return flask.redirect(flask.request.url)
         if file and allowed_file(file.filename):
             # place a pointer in the db and make it the filename
@@ -51,6 +54,6 @@ def upload_file():
             print(filename)
             member.avatar_url = str(filename)
             db.web.session.commit()
-            flask.flash('saved!!')
+            print('saved!!')
 
     return flask.render_template("upload_avatar.html")
