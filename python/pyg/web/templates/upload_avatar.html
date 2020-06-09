@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% from "_formhelpers.html" import render_field %}
 <html>
     <head>
 	<title>Paws Your Game</title>
@@ -12,7 +13,7 @@
       <h1>THIS PAGE SHOULD BE A MODAL ON THE MEMBER PROFILE PAGE</h1>
       <h3>Choose a new avatar</h3>
       <form method=post enctype=multipart/form-data>
-	<input type=file name=avatar>
+	{{ render_field(avatarform.avatar) }}
 	<input type=submit value=Upload>
       </form>
     </body>
