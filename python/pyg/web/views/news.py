@@ -12,10 +12,10 @@ Articles are managed using the admin module, accessible via the /admin/ route.
 
 WARNING: this page uses a different routing method from most of the other pages, implementing a 'route prefix'.  This is defined when the blueprint is registered in app.py.  If you cannot find this page, look there first.
 
-TODO (ben) : There should be some form of navigation / search on the news page.  
+TODO(ben) : There should be some form of navigation / search on the news page.  
 """
 
-# TODO | ian : do we wanna axe this section?  Will there be news?
+#TODO(ian) : do we wanna axe this section?  Will there be news?
 
 bp = flask.Blueprint('news', __name__)
 

@@ -7,10 +7,17 @@ from wtforms import Form, StringField, SubmitField, RadioField, validators
 from pyg.web import db, models
 
 
+from marshmallow import Schema, fields
+class MemberSchema(Schema):
+    handle = fields.Str()
+    rank = fields.Integer()
+    
+
+    
 """
 Search page
 This is a combination search and sort view that is the single source of direct access to all team, fundraiser, member profiles.
-TODO (kirby) : The dropdown for search disappears on focus.  
+TODO(kirby) : The dropdown for search disappears on focus.  
 
 TODO(ben): This module is a right mess.  Spend some time.
 
@@ -36,17 +43,11 @@ Behaviors
 - Search by string should serve up everything that matches the string, but be reducible to teams / fundraisers / etc.
  - Search results should be split into multiple tables for each of the different classes of thing to search for, such as players and teams.
 
-TODO (ben) : Sorting is becoming a bit of a monster. See note below
+TODO(ben) : Sorting is becoming a bit of a monster. See note below
+TODO(ben) : The search modal in the navbar should show "browse" button instead of "search" unless there is some input.  Also the modal dropdown should reflect this.
 
 SORTING
-Jinja has a sort filter, using it in it's raw form:
-{% thingtosort|sort(attribute="attributetosort") %}
-I want to tie this to an onclick
-perhaps also to rerender the page?
-
-I think turning this into a macro and then tying that to a click is the way
-
-It seems like getting the page to rerender might be a bit of a hassle. I don't know what to do about this.
+When a sort is called, we should reload the page and set sort on that basis
 """
 
 
@@ -86,9 +87,18 @@ def likestring(query):
 
 
 def queryforplayers(query):
-    return db.web.session.query(models.Member).filter(
-        models.Member.handle.like(likestring(query)))
-
+    results =  db.web.session.query(models.Member).filter(
+        models.Member.handle.like(likestring(query))).all()
+    json_results= []
+    for i in results:
+        json_results.append({
+            "id" : i.id,
+            "handle" : i.handle,
+            "rank" : i.rank,
+            "raised": sum(y.amount for y in i.donations)
+        })
+    return json_results
+        
 
 def queryforteams(query):
     return db.web.session.query(models.Team).filter(
@@ -113,10 +123,24 @@ queryselector = {'players': queryforplayers,
                  'shelters': queryforshelters}
 
 
+"""
+TODO(ben) : FINISH THIS THING NEXT
+sorting!
+We need to take whatever the results of the search were, and a 'sortby'
+attribute, and pipe those into a link accessible from any of the headers on the search page.
+
+Sorting by sortby works, but in the current state, sortby is always id (although, most tables seem to sort by rank ATM, which is weird)
+
+###############
+another way to do this::
+we *could* serialize the results to JSON, and then use an AJAX call to sort in-place.
+"""
+
 @bp.route('/search', methods=['GET', 'POST'])
+@bp.route('/search/<sort_by>')
 def search():
     form = SearchForm(flask.request.form)
-    results = {"players": [],
+    results = {"players": {},
                "teams": [],
                "fundraisers": [],
                "shelters": []}

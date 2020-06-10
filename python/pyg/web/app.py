@@ -23,9 +23,9 @@ Things this app.py still does:
 -configures methods and data available to templates
 -performs some basic app configurations
 
-TODO (ben) : Implement some form of UAC that uses auth tokens instead of checking userids against the session.  For more information look at The webapp hackers handbook in ch 8
+TODO(ben) : Implement some form of UAC that uses auth tokens instead of checking userids against the session.  For more information look at The webapp hackers handbook in ch 8
 
-TODO (ben) : When the session is passed to the template, does that expose it in an unsecure fashion? Investigate.
+TODO(ben) : When the session is passed to the template, does that expose it in an unsecure fashion? Investigate.
 """
 
 # Upload Configuration
@@ -76,7 +76,7 @@ def read_from_package(package, directory, filename):
 """create the app and configure it."""
 app = PexFlask(__name__, static_folder='static')
 app.jinja_loader = PackageLoader('pyg.web', 'templates')
-# TODO (ben) : RTFM on flask secret keys for best practices on where to
+# TODO(ben) : RTFM on flask secret keys for best practices on where to
 # put this.
 app.secret_key = "2380b817f0f6dc67cebcc4068fc6b437"
 """
@@ -96,7 +96,7 @@ These are global to the app and made available to all views and templates.
 
 def init():
     """connect views and configure templates, then return app"""
-    # TODO (ben) : Make sure all these views are still used and prune if not
+    # TODO(ben) : Make sure all these views are still used and prune if not
     app.register_blueprint(login.bp)
     app.register_blueprint(home.bp)
     app.register_blueprint(signup.bp)
@@ -121,8 +121,6 @@ def init():
     humanize = Humanize(app)
     locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
 
-    # TODO (ben) : do we use all of these?  Are we still providing the session
-    # as a global context proc?
     @app.template_filter()
     def format_currency(value):
         return locale.currency(value, symbol=True, grouping=True)

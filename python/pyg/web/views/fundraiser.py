@@ -7,7 +7,7 @@ from wtforms.validators import InputRequired, Length, ValidationError, DataRequi
 
 from pyg.web import db, models
 
-# TODO | ian : axe the fundraiser section?  Is that going to be handled by tiltify?
+# TODO(ian) : axe the fundraiser section?  Is that going to be handled by tiltify?
 
 """
 Fundraiser page
@@ -73,8 +73,8 @@ def fundraiser(frid=None):
 
     If no fundraiser is selected to view (via fundraiser ID), show a list of all fundraisers.
 
-    TODO (ben) : make the list of fundraisers searchable
-    TODO (ben) : update the template to show 'about' section
+    TODO(ben) : make the list of fundraisers searchable
+    TODO(ben) : update the template to show 'about' section
     """
 
     if frid:

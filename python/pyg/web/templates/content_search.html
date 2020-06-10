@@ -2,6 +2,12 @@
 {% from "_formhelpers.html" import render_field %}
 {% block content %}
 <div class="search">
+  <script>
+    $(document).ready( function () {
+	$('#player_results').DataTable();
+    } );
+    
+  </script>
   
   <div class="searchBar">
     <form method="post">
@@ -18,22 +24,28 @@
       
     </form>
   </div>
+  
   <div class="searchResults">
     {% if results.players[0] is defined %}
     <label class="search-table-label">Players</label>
     <table id="player_results" class="table">
-      <tr class="table-row">
-	<th class="search-table-rank table-cell"><a href="" onclick={% set sortby = "rank" %}><button onclick={% set sortby = "rank" %}>Rank</button></a></th>
-	<th class="search_table-name table-cell"><a href="" onclick={% set sortby = "handle" %}><button onclick={% set sortby = "name" %}>Handle</button></a></th>
-	<th class="table-cell"><a href="" onclick={% set sortby = "rank" %}><button onclick={% set sortby = "rank" %}>Raised</button></a></th>
-      </tr>
+      <thead>
+	<tr class="table-row">
+	  <th class="search-table-rank table-cell"><a href="#"><button onclick={% set sortby = "rank" %}>Rank</button></a></th>
+	  <th class="search_table-handle table-cell"><a href="#"><button onclick={% set sortby = "handle" %}>Handle</button></a></th>
+	  <th class="table-cell"><a href="#"><button onclick={% set sortby = "raised" %}>Raised</button></a></th>
+	</tr>
+      </thead>
+      <tbody>
       {% for i in results.players|sort(attribute=sortby) %}
+      
       <tr class="table-row">
 	<td class="search-table-rank table-cell">{{ i.rank }}</td>
-	<td class="search_table-name table-cell">{{ i.handle }}</td>
-	<td class="search-table-raised table-cell">{{ "$%.2f"|format(i.donations|sum(attribute="amount")) }}</td>
+	<td class="search_table-handle table-cell"><a href="/profile/{{i.id}}">{{ i.handle }}</a></td>
+	<td class="search-table-raised table-cell">{{ i.raised }}</td>
       </tr>
       {% endfor %}
+      </tbody>
     </table>
     {% endif %}
 

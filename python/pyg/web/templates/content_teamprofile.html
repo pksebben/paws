@@ -3,6 +3,11 @@
 {% block content %}
 <div class="teamProfile">
   <p>TODO: Fill me out</p>
+  {% if is_owner %}
+  <h1>Welcome, team moderator!</h1>
+  {% else %}
+  <h1>You are not a moderator</h1>
+  {% endif %}
   <h3>{{ team.name }}</h3>
     <div class="teamProfileStats">
 	<p>amount raised</p>

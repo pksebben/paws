@@ -1,5 +1,6 @@
 import os
 import datetime
+import imghdr
 
 import flask
 from wtforms import Form, FileField, validators, ValidationError
@@ -34,10 +35,7 @@ Members may upload avatars in {what formats?}.  The file will live in /static/av
 Avatar image names are automatically applied as the image uploads (In order to circumvent directory traversal attacks), and take the format { 'av_' + timestamp + '_' + member id }.  This name is saved in the 'avatar url' field in their profile table.
 
 This route will eventually become an api call and reroute to the member profile page.
-TODO(ben): Validation errors ("wrong filetype, meathead etc.")
 TODO(ben): Turn this into an API call / implement in member profile
-TODO(ben): avatar filetype checking
-
 """
 
 
@@ -56,7 +54,13 @@ def upload_file():
         if file.filename == '':
             print('no selected file')
             return flask.redirect(flask.request.url)
-        if file.filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS:
+        # if imghdr.what(file) in ['jpg', 'png','jpeg']:
+        #     print("IMGHDR FILE TYPE CHECKING WORKS")
+        #     print(imghdr.what(file))
+        # else:
+        #     print("IMGHDR NOT WORKING")
+        #     print(imghdr.what(file))
+        if file.filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS or imghdr.what(file) in ALLOWED_EXTENSIONS:
             # do uploady stuff
             member = db.web.session.query(
                 models.Member).get(

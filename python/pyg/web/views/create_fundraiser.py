@@ -14,7 +14,7 @@ Create Fundraiser route
 
 This does not render a view, rather, it creates a blank fundraiser as a template and reroutes to the 'edit fundraiser' view, to allow the user to actually configure the fundraiser.  This mechanism implements an 'active' field, which gets set to True as soon as the fundraiser is sufficiently configured by the user.
 
-TODO (ben) : for some reason, this module allows dupe names, which should be impossible.  Investigate.
+TODO(ben) : for some reason, this module allows dupe names, which should be impossible.  Investigate.
 ++++ also, the dupe validator apparently does nothing.
 """
 
