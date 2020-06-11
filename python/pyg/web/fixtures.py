@@ -295,7 +295,7 @@ def create_team(owner, name):
     team = models.Team(name=name, date_created=datetime.datetime.now())
     relation = models.MemberToTeam(is_owner=True, joined_on=datetime.datetime.now())
     relation.member = owner
-    team.members.append(relation)
+    team.members[relation.member.id] = relation
     session.add(team)
     session.commit()
 

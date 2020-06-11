@@ -54,13 +54,8 @@ def upload_file():
         if file.filename == '':
             print('no selected file')
             return flask.redirect(flask.request.url)
-        # if imghdr.what(file) in ['jpg', 'png','jpeg']:
-        #     print("IMGHDR FILE TYPE CHECKING WORKS")
-        #     print(imghdr.what(file))
-        # else:
-        #     print("IMGHDR NOT WORKING")
-        #     print(imghdr.what(file))
-        if file.filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS or imghdr.what(file) in ALLOWED_EXTENSIONS:
+        if file.filename.rsplit('.', 1)[1].lower(
+        ) in ALLOWED_EXTENSIONS or imghdr.what(file) in ALLOWED_EXTENSIONS:
             # do uploady stuff
             member = db.web.session.query(
                 models.Member).get(
@@ -77,8 +72,7 @@ def upload_file():
             gotostr = "/profile/" + str(flask.session['userid'])
             return flask.redirect(gotostr)
         else:
-            avatarform.avatar.validate(avatarform, extra_validators=[invalid_filetype])
-            return flask.render_template("upload_avatar.html", avatarform=avatarform)
-            # place a pointer in the db and make it the filename
+            avatarform.avatar.validate(
+                avatarform, extra_validators=[invalid_filetype])
     return flask.render_template(
         "upload_avatar.html", avatarform=avatarform)

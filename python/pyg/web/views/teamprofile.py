@@ -9,7 +9,11 @@ TODO(ben): wire together donation data, campaign data
 TODO(ian): How are donations tied to teams? esp. now that we have tiltify.
 """
 
+import os
+import datetime
+
 import flask
+from wtforms import Form, StringField, TextAreaField, HiddenField, FileField, SubmitField, validators
 
 from pyg.web import db, models
 
@@ -17,15 +21,45 @@ from pyg.web import db, models
 bp = flask.Blueprint("teamprofile", __name__)
 
 
+class AvatarUploadForm(Form):
+    """form for changing team avatar"""
+    avatar = FileField("change team avatar")
+    submit = SubmitField("upload")
+
+
+class EditTeamForm(Form):
+    """form for editing team-specific data"""
+    name = StringField("Name")
+    missionstatement = TextAreaField("Mission Statement")
+    website = StringField("Website")
+    facebook_url = StringField("Facebook URL")
+    twitter_url = StringField("Twitter URL")
+    twitch_url = StringField("Twitch URL")
+    instagram_url = StringField("Instagram URL")
+    submit = SubmitField("Submit team edits")
+
+
 def update_team_profile(id):
     team = db.web.session.query(models.Team).get(id)
     db.web.session.commit()
 
 
-@bp.route("/teamprofile/<teamid>")
+@bp.route("/teamprofile/<teamid>", methods=['GET', 'POST'])
 def teamprofile(teamid):
     """serve up the team profile page"""
     team = db.web.session.query(models.Team).get(teamid)
+
+    avatarform = AvatarUploadForm()
+    editform = EditTeamForm()
+    if flask.request.method == "POST":
+        if avatarform.submit.data and avatarform.validate():
+            # deal with avatar form
+            pass
+        if editform.submit.data and editform.validate():
+            # deal with edit team form
+            pass
+
+    # Check membership / ownership variables and set
     if flask.session.get('userid'):
         user_id = flask.session.get('userid')
         print("TEAM DOT MEMBER?")
@@ -40,4 +74,6 @@ def teamprofile(teamid):
             is_owner = False
     else:
         is_owner = False
-    return flask.render_template("content_teamprofile.html", team=team, is_owner=is_owner, is_member=is_member)
+
+    return flask.render_template(
+        "content_teamprofile.html", team=team, is_owner=is_owner, is_member=is_member)

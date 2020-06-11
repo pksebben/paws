@@ -127,6 +127,7 @@ class Team(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(80))
+    avatar_url = Column(String(120))
     date_created = Column(Date, nullable=False)
     missionstatement = Column(Text, nullable=True)
     website = Column(Text, nullable=True)
