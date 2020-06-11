@@ -27,7 +27,17 @@ def teamprofile(teamid):
     """serve up the team profile page"""
     team = db.web.session.query(models.Team).get(teamid)
     if flask.session.get('userid'):
-        is_owner = db.web.session.query(models.MemberToTeam).filter_by(member_id=flask.session['userid']).one().is_owner
+        user_id = flask.session.get('userid')
+        print("TEAM DOT MEMBER?")
+        print(team.members)
+        if user_id in team.member_ids:
+            print("User is a member")
+            is_member = True
+            is_owner = team.members[user_id].is_owner
+        else:
+            print("user is not a member")
+            is_member = False
+            is_owner = False
     else:
         is_owner = False
-    return flask.render_template("content_teamprofile.html", team=team, is_owner=is_owner)
+    return flask.render_template("content_teamprofile.html", team=team, is_owner=is_owner, is_member=is_member)

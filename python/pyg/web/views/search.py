@@ -8,16 +8,17 @@ from pyg.web import db, models
 
 
 from marshmallow import Schema, fields
+
+
 class MemberSchema(Schema):
     handle = fields.Str()
     rank = fields.Integer()
-    
 
-    
+
 """
 Search page
 This is a combination search and sort view that is the single source of direct access to all team, fundraiser, member profiles.
-TODO(kirby) : The dropdown for search disappears on focus.  
+TODO(kirby) : The dropdown for search disappears on focus.
 
 TODO(ben): This module is a right mess.  Spend some time.
 
@@ -43,11 +44,9 @@ Behaviors
 - Search by string should serve up everything that matches the string, but be reducible to teams / fundraisers / etc.
  - Search results should be split into multiple tables for each of the different classes of thing to search for, such as players and teams.
 
-TODO(ben) : Sorting is becoming a bit of a monster. See note below
 TODO(ben) : The search modal in the navbar should show "browse" button instead of "search" unless there is some input.  Also the modal dropdown should reflect this.
+TODO(ben) : configure datatables for sensible defaults
 
-SORTING
-When a sort is called, we should reload the page and set sort on that basis
 """
 
 
@@ -77,42 +76,38 @@ Searching:
 Next are defined a set of functions for fetching data from various tables based on the search string.
 
 TODO: this next function needs to filter for streamers.  Do we want another search function for non-streamer members?
+TODO(design) : styling for datatables elements; see https://datatables.net/manual
+TODO(ben) : format amounts raised
 """
-
-# format the query to work with the 'like' filter from SQLAlchemy
-
-
-def likestring(query):
-    return '%' + query + '%'
 
 
 def queryforplayers(query):
-    results =  db.web.session.query(models.Member).filter(
-        models.Member.handle.like(likestring(query))).all()
-    json_results= []
+    results = db.web.session.query(models.Member).filter(
+        models.Member.handle.like("%{}%".format(query))).all()
+    json_results = []
     for i in results:
         json_results.append({
-            "id" : i.id,
-            "handle" : i.handle,
-            "rank" : i.rank,
+            "id": i.id,
+            "handle": i.handle,
+            "rank": i.rank,
             "raised": sum(y.amount for y in i.donations)
         })
     return json_results
-        
+
 
 def queryforteams(query):
     return db.web.session.query(models.Team).filter(
-        models.Team.name.like(likestring(query)))
+        models.Team.name.like("%{}%".format(query)))
 
 
 def queryforfundraisers(query):
     return db.web.session.query(models.Fundraiser).filter(
-        models.Fundraiser.name.like(likestring(query)))
+        models.Fundraiser.name.like("%{}%".format(query)))
 
 
 def queryforshelters(query):
     return db.web.session.query(models.Shelter).filter(
-        models.Shelter.name.like(likestring(query)))
+        models.Shelter.name.like("%{}%".format(query)))
 
 
 # this selector allows for flexible querying based on the 'search type'
@@ -122,19 +117,6 @@ queryselector = {'players': queryforplayers,
                  'fundraisers': queryforfundraisers,
                  'shelters': queryforshelters}
 
-
-"""
-TODO(ben) : FINISH THIS THING NEXT
-sorting!
-We need to take whatever the results of the search were, and a 'sortby'
-attribute, and pipe those into a link accessible from any of the headers on the search page.
-
-Sorting by sortby works, but in the current state, sortby is always id (although, most tables seem to sort by rank ATM, which is weird)
-
-###############
-another way to do this::
-we *could* serialize the results to JSON, and then use an AJAX call to sort in-place.
-"""
 
 @bp.route('/search', methods=['GET', 'POST'])
 @bp.route('/search/<sort_by>')

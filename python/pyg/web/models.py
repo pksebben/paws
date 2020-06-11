@@ -1,4 +1,6 @@
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.ext.associationproxy import association_proxy
+from sqlalchemy.orm.collections import attribute_mapped_collection
 from sqlalchemy import (
     Column,
     String,
@@ -25,6 +27,7 @@ If things here seem broken, a good place to start is the "basic relationship pat
 Base = declarative_base()
 
 
+# TODO(ben) : we might want to implement the 'association proxy' sqlalchemy extension in following...
 class MemberToTeam(Base):
     """This table connects members to teams and can define ownership"""
 
@@ -38,6 +41,14 @@ class MemberToTeam(Base):
     team = relationship("Team", back_populates="members")
 
 
+class TeamMembershipRequests(Base):
+    """Temporary store of pending team membership requests"""
+
+    __tablename__ = "team_membership_requests"
+    member_id = Column(Integer, ForeignKey('member.id'), primary_key=True)
+    team_id = Column(Integer, ForeignKey('team.id'), primary_key=True)
+    date_requested = Column(DateTime)
+    
 class Shelter(Base):
     """Shelter data"""
 
@@ -94,7 +105,7 @@ class Auth(Base):
     """
     UserAuth is for "native" or username/password auth into pyg.
     Flask-Security is being mixed in here, as there are more shared fields natively.
-    It may be necessary to factor those elements out to Member.  Revisit.
+    TODO(ben) : It may be necessary to factor those elements out to Member.  Revisit.
     """
 
     __tablename__ = 'auth'
@@ -111,21 +122,24 @@ class Auth(Base):
     def __str__(self):
         return str(self.id)
 
-
 class Team(Base):
     __tablename__ = 'team'
 
     id = Column(Integer, primary_key=True)
     name = Column(String(80))
-    date_joined = Column(Date, nullable=False)
+    date_created = Column(Date, nullable=False)
     missionstatement = Column(Text, nullable=True)
     website = Column(Text, nullable=True)
     facebook_url = Column(Text, nullable=True)
     twitter_url = Column(Text, nullable=True)
     twitch_url = Column(Text, nullable=True)
     instagram_url = Column(Text, nullable=True)
-    members = relationship("MemberToTeam", back_populates="team")
+    members = relationship("MemberToTeam",
+                           back_populates="team",
+                           collection_class = attribute_mapped_collection('member_id')
+    )
     fundraisers = relationship("Fundraiser", back_populates="team")
+    member_ids = association_proxy('members', 'member_id')
 
     def __str__(self):
         return self.name

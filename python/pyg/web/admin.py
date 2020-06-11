@@ -8,7 +8,7 @@ from pyg.web import db, models
 """
 This is the CMS for the site.  Accessible via the /admin route in the browser.
 
-TODO (ben) : Module appears to be broken ATM.
+TODO(ben) : Module appears to be broken ATM.
 """
 
 

@@ -80,7 +80,7 @@ def accountmanagement(memberid):
                 flask.flash("incorrect credentials entered")
                 return showpage()
         elif deleteform.submit.data and deleteform.validate():
-            # TODO (ben) : apply "active" check to all functions that use member data.
+            # TODO(ben) : apply "active" check to all functions that use member data.
             member.active = False
             db.web.session.commit()
             return flask.redirect('/account_deleted')

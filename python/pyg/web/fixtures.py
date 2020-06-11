@@ -15,6 +15,12 @@ fixtures.py
 This is a module for populating testing data into the db.  It's used in two places:
 1 - the test suite
 2 - as a standalone, whenever the dev version of the site is being data wacky or you want to add new testing data.
+
+TODO(ben) : OOOH! DO ME NEXT!
+the todo:
+    We need to add members to teams, but first we need to grant ownership of those teams to members.  I am currently working on marriage between tom and his team. This module is currently borked, until I fix the add teams thinger.
+
+Should probably implement some sort of API call that creates a team and adds an owner and use that in a factored version to commit these changes, so it's easy to implement once I get around to putting it in the site
 """
 
 
@@ -255,6 +261,7 @@ def fundraisers():
         member=pick_member(),
         created=datetime.datetime.now(),
         start_date=datetime.datetime.now(),
+
         end_date=datetime.datetime(3000, 1, 1),
         target_funds=250
     )
@@ -283,40 +290,18 @@ def fundraisers():
     session.commit()
 
 
-def create_team(owner, **data):
+def create_team(owner, name):
     """all the things that teams start with, including an owner"""
-    team = models.Team(
-        name=name,
-        date_joined=datetime.datetime.now(),
-        missionstatement=missionstatement,
-        website=website,
-        facebook_url=facebook_url,
-        twitter_url=twitter_url,
-        twitch_url=twitch_url,
-        instagram_url=instagram_url
-    )
+    team = models.Team(name=name, date_created=datetime.datetime.now())
+    relation = models.MemberToTeam(is_owner=True, joined_on=datetime.datetime.now())
+    relation.member = owner
+    team.members.append(relation)
     session.add(team)
     session.commit()
 
-
 def teams():
-    team1 = models.Team(
-        name="tom's team",
-        date_joined=datetime.datetime.now()
-    )
-    team2 = models.Team(
-        name="chad's fuckin' badass beach bros",
-        date_joined=datetime.datetime.now()
-    )
-    team3 = models.Team(
-        name="Go Team",
-        date_joined=datetime.datetime.now()
-    )
-    session.add(team1)
-    session.add(team2)
-    session.add(team3)
-    session.commit()
-
+    tom = session.query(models.Auth).filter(models.Auth.email == "tom@gmail.com").one().member
+    create_team(tom, "tom's team")
 
 def shelters():
     shelter1 = models.Shelter(

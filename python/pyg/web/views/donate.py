@@ -15,7 +15,7 @@ bp = flask.Blueprint('donate', __name__)
 def checkout():
     form = DonateForm(flask.request.form)
     if flask.request.method == "POST" and form.validate():
-        # TODO (ben) : do we want at this stage to do more security validation?
+        # TODO(ben) : do we want at this stage to do more security validation?
         
         return flask.render_template('checkout.html') 
 

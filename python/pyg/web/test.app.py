@@ -19,7 +19,7 @@ from pyg.web import fixtures
 from pyg.web.views import signup, news
 from pyg.web.views.home import feature_mvp
 
-# TODO (ben) : Clean this module up.  RTFM on writing tests.
+# TODO(ben) : Clean this module up.  RTFM on writing tests.
 
 
 def setUpModule():

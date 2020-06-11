@@ -6,7 +6,16 @@
     $(document).ready( function () {
 	$('#player_results').DataTable();
     } );
-    
+     $(document).ready( function () {
+	$('#team_results').DataTable();
+    } );   
+   $(document).ready( function () {
+	$('#fundraiser_results').DataTable();
+    } );   
+   $(document).ready( function () {
+	$('#shelter_results').DataTable();
+    } );   
+
   </script>
   
   <div class="searchBar">
@@ -52,12 +61,15 @@
     {% if results.teams[0] is defined %}
     <label class="search-table-label">Teams</label>
     <table id="team_results" class="table">
+      <thead>
       <tr class="table-header table-row">
 	<th class="search-table-rank table-cell">Rank</th>
 	<th class="search_table-name table-cell">Name</th>
 	<th class="search-table-raised table-cell">Raised</th>
 	<th class="search-table-members table-cell">Members</th>
       </tr>
+      </thead>
+      <tbody>
       {% for i in results.teams %}
       <tr class="table-row">
 	<td class="search-table-rank table-cell">{{ i.rank }}</td>
@@ -66,18 +78,22 @@
 	<td class="search-table-members table-cell">{{ i.members|length() }}</td>
       </tr>
       {% endfor %}
+      </tbody>
     </table>
     {% endif %}
 
     {% if results.fundraisers[0] is defined %}
     <label class="search-table-label">Fundraisers</label>
     <table id="fundraiser_results" class="table">
+      <thead>
       <tr class="table-header table-row">
 	<th class="search_table-name table-cell">Name</th>
 	<th class="table-cell">Raised</th>
 	<th class="table-cell">Start</th>
 	<th class="table-cell">End</th>
       </tr>
+      </thead>
+      <tbody>
       {% for i in results.fundraisers %}
       <tr class="table-header table-row">
 	<td class="search_table-name table-cell"><a href="/fundraiser/{{ i.id }}">{{ i.name }}</a></td>
@@ -86,22 +102,27 @@
 	<td class="table-cell">{{ i.end_date.strftime('%Y-%m-%d') }}</td>
       </tr>
       {% endfor %}
+      </tbody>
     </table>
     {% endif %}
 
     {% if results.shelters[0] is defined %}
     <label class="search-table-label">Shelters</label>
     <table id="shelter_results" class="table">
+      <thead>
       <tr class="table-header table-row">
 	<th class="search_table-name table-cell" class="search_table-name">Name</th>
 	<th class="table-cell">Location</th>
       </tr>
+      </thead>
+      <tbody>
       {% for i in results.shelters %}
       <tr class="table-row">
 	<td class="search_table-name table-cell"><a href="/shelter/{{ i.id }}">{{ i.name }}</td>
 	<td class="table-cell">{{ i.location }}</td>
       </tr>
       {% endfor %}
+      </tbody>
     </table>
     {% endif %}
 
