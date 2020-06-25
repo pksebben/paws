@@ -1,0 +1,29 @@
+/* ----------------------------------------------------------------------------------------------------
+
+Bootstrap Resest
+
+----------------------------------------------------------------------------------------------------*/
+
+.nav-tabs{
+        .nav-item{
+                a{
+                        padding:0;
+                        border:0;
+
+                        &:hover{
+                                border:0;
+                        }
+
+                        &.active{
+                                 border:none;
+                        }
+                }
+        }
+}
+
+.alert{
+        border-radius: 0 !important;
+        padding:0 !important;
+        margin: 0 !important;
+        border: none !important;
+}

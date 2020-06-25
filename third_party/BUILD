@@ -8,6 +8,22 @@ python_requirement_library(
 )
 
 python_requirement_library(
+    name='bcrypt',
+    requirements=[
+	python_requirement('bcrypt'),
+    ],
+    dependencies=[],
+)
+
+python_requirement_library(
+    name='structlog',
+    requirements=[
+        python_requirement('structlog'),
+    ],
+    dependencies=[],
+)
+
+python_requirement_library(
     name='oscar.flag',
     requirements=[
         python_requirement('oscar.flag==0.1.2'),
@@ -16,6 +32,49 @@ python_requirement_library(
     ],
 )
 
+python_requirement_library(
+    name='flask_humanize',
+    requirements=[
+        python_requirement('flask_humanize'),
+    ],
+    dependencies=[],
+)
+
+python_requirement_library(
+    name='email_validator',
+    requirements=[
+        python_requirement('email_validator'),
+    ],
+    dependencies=[],
+)
+
+python_requirement_library(
+    name='wtforms',
+    requirements=[
+        python_requirement('wtforms'),
+    ],
+    dependencies=[
+        ':email_validator',
+    ],
+)
+
+python_requirement_library(
+    name='passlib',
+    requirements=[
+        python_requirement('passlib'),
+    ],
+    dependencies=[
+	':bcrypt',
+    ],
+)
+
+python_requirement_library(
+    name='flask_admin',
+    requirements=[
+        python_requirement('flask_admin'),
+    ],
+    dependencies=[],
+)
 
 python_requirement_library(
     name='flask-login',

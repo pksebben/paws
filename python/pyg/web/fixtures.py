@@ -1,11 +1,27 @@
 import datetime
 import random
+import string
 
 import sqlalchemy
 from sqlalchemy import orm
+from passlib.hash import bcrypt
 
 from pyg.web import models
 from pyg.web import db
+
+
+"""
+fixtures.py
+This is a module for populating testing data into the db.  It's used in two places:
+1 - the test suite
+2 - as a standalone, whenever the dev version of the site is being data wacky or you want to add new testing data.
+
+TODO(ben) : OOOH! DO ME NEXT!
+the todo:
+    We need to add members to teams, but first we need to grant ownership of those teams to members.  I am currently working on marriage between tom and his team. This module is currently borked, until I fix the add teams thinger.
+
+Should probably implement some sort of API call that creates a team and adds an owner and use that in a factored version to commit these changes, so it's easy to implement once I get around to putting it in the site
+"""
 
 
 def lorem(n):
@@ -33,20 +49,22 @@ def pick_member():
     members = session.query(models.Member).all()
     return random.choice(members)
 
+
 def pick_team():
     teams = session.query(models.Team).all()
     return random.choice(teams)
 
+
 def pick_fundraiser():
     fundraisers = session.query(models.Fundraiser).all()
     return random.choice(fundraisers)
-    
+
 
 def articles():
     article_1 = models.NewsArticle(
         headline=lorem(5),
         author=lorem(2),
-        datetime=datetime.datetime.now(),
+        date=datetime.datetime.now(),
         body=lorem(-1),
         slug="article-1",
         snippet="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium."
@@ -56,7 +74,7 @@ def articles():
     article_2 = models.NewsArticle(
         headline=lorem(2),
         author=lorem(2),
-        datetime=datetime.datetime.now(),
+        date=datetime.datetime.now(),
         body=lorem(-1),
         slug="article-2",
         snippet="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium."
@@ -66,6 +84,48 @@ def articles():
     session.commit()
 
 
+vowels = ['a', 'e', 'i', 'o', 'u']
+consonants = [i for i in string.ascii_lowercase if i not in vowels]
+
+
+def makeaname(length):
+    name = []
+    name.append(random.choice(string.ascii_uppercase))
+    for i in range(length):
+        if name[-1].lower() == 'q':
+            name.append('u')
+        elif name[-1].lower() in vowels:
+            name.append(random.choice(consonants))
+        else:
+            name.append(random.choice(vowels))
+    return ''.join(name)
+
+
+def garble(length):
+    return "".join(random.choice(string.ascii_uppercase)
+                   for i in range(length))
+
+
+def generate_person():
+    person = models.Member(
+        name=makeaname(8),
+        created=datetime.datetime.now(),
+        handle=makeaname(8),
+        about=garble(150),
+        birthday=datetime.datetime.now(),
+        location=garble(12),
+        active=True,
+        avatar_url="avatar_placeholder.jpg"
+    )
+    session.add(person)
+    session.commit()
+
+
+def crowd(numpeople):
+    for i in range(numpeople):
+        generate_person()
+
+
 def people():
     tom = models.Member(
         name="tom",
@@ -73,10 +133,12 @@ def people():
         handle="tom_dawg",
         about="my name is tom.  I am not good with about sections",
         birthday=datetime.datetime.now(),
-        location="The town of hogsface, Land of foon"
+        location="The town of hogsface, Land of foon",
+        active=True,
+        avatar_url="avatar_placeholder.jpg"
     )
     tom.auth = models.Auth(
-        password="pass",
+        passhash=bcrypt.hash("pass"),
         email="tom@gmail.com"
     )
     othertom = models.Member(
@@ -85,11 +147,12 @@ def people():
         handle="tom_2",
         about="my name is other tom.  I am not good with about sections",
         birthday=datetime.datetime.now(),
-        location="The town of hogsface, Land of foon"
-
+        location="The town of hogsface, Land of foon",
+        active=True,
+        avatar_url="avatar_placeholder.jpg"
     )
     othertom.auth = models.Auth(
-        password="pass",
+        passhash=bcrypt.hash("pass"),
         email="othertom@gmail.com"
     )
     bob = models.Member(
@@ -98,10 +161,12 @@ def people():
         handle="bob_the_builder",
         about="my name is bob.  I am not good with about sections",
         birthday=datetime.datetime.now(),
-        location="The town of pigsface, Land of foon"
+        location="The town of pigsface, Land of foon",
+        active=True,
+        avatar_url="avatar_placeholder.jpg"
     )
     bob.auth = models.Auth(
-        password="pass",
+        passhash=bcrypt.hash("pass"),
         email="bob@gmail.com"
     )
     bill = models.Member(
@@ -110,11 +175,12 @@ def people():
         handle="boogie_2988",
         about="my name is bill.  I am not good with about sections",
         birthday=datetime.datetime.now(),
-        location="The town of hogsface, Land of foon"
-
+        location="The town of hogsface, Land of foon",
+        active=True,
+        avatar_url="avatar_placeholder.jpg"
     )
     bill.auth = models.Auth(
-        password="pass",
+        passhash=bcrypt.hash("pass"),
         email="bill@gmail.com"
     )
     session.add(othertom)
@@ -124,9 +190,9 @@ def people():
     session.commit()
 
 
-def donations():
+def donations(numdonations):
     members = session.query(models.Member).all()
-    for _ in range(90):
+    for _ in range(numdonations):
         donation = models.Donation(member_id=random.choice(members).id,
                                    donor_name="Scroog McDuck",
                                    created=datetime.datetime.now(),
@@ -187,65 +253,92 @@ def text():
     session.add(home_subtitle)
     session.commit()
 
+
 def fundraisers():
     forthehorde = models.Fundraiser(
-        active = True,
-        name = "Glory to the Horde fundraiser",
-        about = "The pillagers of azeroth are raising money for the fostering and care of orphaned Tauren.  These poor creatures have been left by their owners and have nowhere to turn.  Won't you help us to bring love and care to these cute little unfortunates? -cue sarah mcglaughlin- ",
-        member = pick_member(),
-        created = datetime.datetime.now(),
-        start_date = datetime.datetime(2,1,1),
-        end_date = datetime.datetime(3000,1,1),
-        target_funds = 250
+        name="Glory to the Horde fundraiser",
+        about="The pillagers of azeroth are raising money for the fostering and care of orphaned Tauren.  These poor creatures have been left by their owners and have nowhere to turn.  Won't you help us to bring love and care to these cute little unfortunates? -cue sarah mcglaughlin- ",
+        member=pick_member(),
+        created=datetime.datetime.now(),
+        start_date=datetime.datetime.now(),
+
+        end_date=datetime.datetime(3000, 1, 1),
+        target_funds=250
     )
     session.add(forthehorde)
     springbreak = models.Fundraiser(
-        active = True,
-        name = "chads spring break fundraiser",
-        about = "what's all this nerd shit?  who plays videogames anyway and why are they all talking about having paws?  Is this some kind of furry convention?  Anyway, my bro brad said I could like, get money here or something, and if we get more fundage, we can get more lit!  You know what I mean?  Yeah, you know what I mean, loser!  Let's paaaaartay like it's like, hey, when did they party really hard?  was that the 70s?  Doesn't matter cause with all the money I'm gonna have I'm sure to get it in! Crush puss like I crush those miller lites yaknow!",
-        member = pick_member(),
-        created = datetime.datetime.now(),
-        start_date = datetime.datetime(1985,1,1),
-        end_date = datetime.datetime(2069,1,1),
-        target_funds = 5000000
-        )
+        name="chads spring break fundraiser",
+        about="what's all this nerd shit?  who plays videogames anyway and why are they all talking about having paws?  Is this some kind of furry convention?  Anyway, my bro brad said I could like, get money here or something, and if we get more fundage, we can get more lit!  You know what I mean?  Yeah, you know what I mean, loser!  Let's paaaaartay like it's like, hey, when did they party really hard?  was that the 70s?  Doesn't matter cause with all the money I'm gonna have I'm sure to get it in! Crush puss like I crush those miller lites yaknow!",
+        member=pick_member(),
+        created=datetime.datetime.now(),
+        start_date=datetime.datetime(1985, 1, 1),
+        end_date=datetime.datetime(2069, 1, 1),
+        target_funds=5000000
+    )
     session.add(springbreak)
+    tomsfundraiser = models.Fundraiser(
+        name="Tom is raising the funds",
+        about="I am tom.  I like money",
+        member=session.query(
+            models.Auth).filter_by(
+            email="tom@gmail.com").first().member,
+        created=datetime.datetime.now(),
+        start_date=datetime.datetime(2, 1, 1),
+        end_date=datetime.datetime(3000, 1, 1),
+        target_funds=250,
+    )
     session.commit()
 
-def create_team(owner, **data):
+
+def create_team(owner, name):
     """all the things that teams start with, including an owner"""
-    team = models.Team(
-        name = name,
-        date_joined = datetime.datetime.now(),
-        missionstatement = missionstatement,
-        location = location,    # TODO do we need this?  Seems pointless.
-        website = website,
-        facebook_url = facebook_url,
-        twitter_url = twitter_url,
-        twitch_url = twitch_url,
-        instagram_url = instagram_url
-    )
-    # TODO add the current user as the team owner.
-    # TODO return something?
-    
+    team = models.Team(name=name, date_created=datetime.datetime.now())
+    relation = models.MemberToTeam(is_owner=True, joined_on=datetime.datetime.now())
+    relation.member = owner
+    team.members[relation.member.id] = relation
+    session.add(team)
+    session.commit()
+
 def teams():
+    tom = session.query(models.Auth).filter(models.Auth.email == "tom@gmail.com").one().member
+    create_team(tom, "tom's team")
+
+def shelters():
+    shelter1 = models.Shelter(
+        name="big bob's discount doggos",
+        location="pittsburgh"
+    )
+    session.add(shelter1)
+    session.commit()
     pass
-    
+
+
 def add_donations_to_fundraisers():
     donations = session.query(models.Donation).all()
     for i in donations:
         i.fundraiser = pick_fundraiser()
     session.commit()
 
+
+def add_fundraisers_to_teams():
+    fundraisers = session.query(models.Fundraiser).all()
+    for i in fundraisers:
+        i.team = pick_team()
+    session.commit()
+
+
 def gogogadget():
     init()
     articles()
     people()
-    donations()
+    crowd(50)
+    donations(500)
     text()
     fundraisers()
     teams()
+    shelters()
     add_donations_to_fundraisers()
+    add_fundraisers_to_teams()
 
 
 if __name__ == "__main__":

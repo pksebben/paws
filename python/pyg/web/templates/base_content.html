@@ -1,8 +1,18 @@
 <!DOCTYPE html>
+{% from "_formhelpers.html" import render_field %}
+
 <html>
     <head>
 	<title>Paws Your Game</title>
+        
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="{{ url_for('static', filename='js/libraries/autosize.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+	
     </head>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -17,27 +27,77 @@
 	<nav id="Nav">
 	    <h1 class="nav-logo"><a href="/">Paws Your Game</a></h1>
 	    <ul>
-	      <li><a href="/about">Our Tail</a></li>
-	      <li><a href="/news">News</a></li>
+	      <li class="nav-our_tail"><a href="/about">Our Tail</a></li>
+	      <li class="nav-news"><a href="/news">News</a></li>
 	      <li class="nav-search">
-		<form action="/search" method="post">
-		  <button>
-		    <i class="icon icon-standard">search</i>
-		  </button>
-		  <input type="text" name="name" placeholder="Search for Players / Shelters / Donors">
-		</form>
+                <button class="nav-search-icon">
+                        <i class="icon icon-standard">search</i>
+                </button>
+                <div class="nav-search-form_container">
+        		<form action="/search" method="post">
+                                <input type="text" placeholder="Search for Players / Shelters / Teams" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search for Players / Shelters / Teams'">
+                                <button class="nav-search-submit">
+                                      Search
+                                </button>
+        		</form>
+                        <button class="nav-search-exit">x</button>
+                </div>
 	      </li>
 	      {% if session.userid %}
-	      <li class="nav-profile"><a href="/profile/{{session.userid}}">My Profile</a></li>
-	      <li><a href="/logout">sign out</a></li>
+	      <li class="nav-profile">
+                <a href="/profile/{{ session.userid }}">Profile</a>
+                <ul>
+                        <li>
+                                <a href="/createfundraiser">Start a Fundraiser!</a>
+                        </li>
+                        <li>
+                                <a href="/account/{{ session.userid }}">Account Management</a>
+                        </li>
+                        <li>
+                                <a href="/logout">logout</a>
+                        </li>
+                </ul>
+              </li>
 	      {% else %}
-	      <li class="nav-signin"><a href="/login">Sign In</a></li>
+	      <li class="nav-signin">
+                <button class="" data-toggle="modal" data-target="#login">
+                        Login
+                </button>
+                </li>
 	      {% endif %}
 	      <li class="nav-donate"><a href="/donate">Donate</a></li>
 	    </ul>
 	</nav>
+	<div id="login" class="modal fade" tabindex="-1" role="dialog">
+	       <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                                <div class="modal-header">
+                                        <h5 class="modal-title">Login</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                        </button>
+                                </div><!-- modal-header -->
+                                <div class="modal-body">
+                        		<h3>{{ failure_text }}</h3>
+                        		<form method="post" action="/login">
+                        		  <dl>
+                        		    {{ render_field(loginform.email) }}
+                        		    {{ render_field(loginform.password) }}
+                        		  </dl>
+                        		  <input type=submit value=login>
+                        		</form>
+                                </div><!-- modal-body -->
+                                <div class="modal-footer">
+                                        <p class="login-create_account">Don't have an account yet? You can <a href="signup">create one here</a></p>
+                                </div><!-- modal-footer -->
+	               </div><!-- modal-content -->
+               </div> <!-- modal-dialog -->
+	</div> <!-- #login -->
 	<div id="content">
 	  {% block content %}{% endblock %}
 	</div>
+	<script type=text/javascript src="{{
+					  url_for('static', filename='jquery.js') }}"></script>
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
     </body>
 </html>

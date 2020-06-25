@@ -1,22 +1,47 @@
 python_binary(
+    name='run',
+    source='run.py',
+    dependencies=[
+        ':admin',
+	':app',
+	':container',
+	':db',
+	':models',
+	'third_party:structlog',
+	'third_party:oscar.flag',
+	'third_party:sqlalchemy',
+	'third_party:twisted',
+    ],
+)
+
+python_library(
     name='app',
     source='app.py',
     dependencies=[
-	':exceptions',
-        ':api',
-        ':views',
-        ':container',
-        ':plugin',
-	':models',
+	':views',
 	':db',
-	':testing',
-	':auth',
+	'third_party:wtforms',
+	'third_party:passlib',
         'third_party:flask',
 	'third_party:psycopg2',
 	'third_party:setuptools',
 	'third_party:flask-login',
+	'third_party:flask_humanize',
 	':templates',
 	':static',
+    ],
+)
+
+python_library(
+    name='admin',
+    sources=[
+        'admin.py',
+    ],
+    dependencies=[
+        ':db',
+	':models',
+	'third_party:flask_admin',
+	'third_party:flask',
     ],
 )
 
@@ -74,7 +99,7 @@ python_library(
 
 python_library(
     name='views',
-    sources=globs('views/*.py'),
+    sources=['views/*.py'],
     dependencies=[
         'third_party:flask',
 	'third_party:psycopg2',
@@ -116,10 +141,10 @@ python_library(
 
 resources(
     name='templates',
-    sources=rglobs('templates/*')
+    sources=['templates/*']
 )
 
 resources(
     name='static',
-    sources=rglobs('static/*')
+    sources=['static/*']
 )

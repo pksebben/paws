@@ -5,6 +5,13 @@ from flask_admin.contrib.sqla import ModelView
 from pyg.web import db, models
 
 
+"""
+This is the CMS for the site.  Accessible via the /admin route in the browser.
+
+TODO(ben) : Module appears to be broken ATM.
+"""
+
+
 class SessionProxy(object):
 
     def __getattr__(self, key, *args, **kwargs):

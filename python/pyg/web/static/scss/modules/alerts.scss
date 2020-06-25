@@ -1,0 +1,25 @@
+.alert{
+        position:fixed;
+        top:$headerHeight;
+        background-color:lighten($orange, 25%);
+        height:40px;
+        width:100%;
+        @include flexbox();
+        @include flex-direction(row);
+        @include justify-content(center);
+        @include align-items(center);
+        transition: all 0.5s ease;
+        
+        button{
+                color:$orange;
+                font-family:alphaHeadline;
+                font-size:16px;
+        }
+        &:hover{
+                background-color: lighten($orange, 10%);
+                cursor:pointer;
+                button{
+                        color:darken($orange, 20%);
+                }
+        }
+}

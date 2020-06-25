@@ -5,18 +5,23 @@ from pyg.web import plugin
 from pyg.web import models
 
 
+"""
+db.py
+Prepares the database and serves as an interface to that db.
+This is the module you need to use to get the sqlalchemy session, done like so:
+db.web.session.query(models.Foo)
+For more information, see the terribly convoluted SQLAlchemy docs.  Start with the tutorial sections if you're unsure of where to start, as that's pretty much the only semi-intuitive part of their docs.
+
+"""
+
 FLAGS = flag.namespace(__name__)
 FLAGS.web = flag.String("web db connection string", default="sqlite:///foo.db")
 
 
 web = None
-# db_session = None
+
 
 def init(app):
     global web
-    # global db_session
     web = plugin.SQLAlchemy(app, FLAGS.web)
-    # db_session = scoped_session(sessionmaker(autocommit=False,
-    #                                          autoflush=False,
-    #                                          bind=web.engine))
     models.Base.metadata.create_all(web.engine)

@@ -1,14 +1,35 @@
 import datetime
 
 import flask
-from wtforms import Form, StringField, TextAreaField, validators
+from wtforms import Form, StringField, TextAreaField
 from wtforms.fields.html5 import DateField, IntegerField
-from wtforms.validators import InputRequired, Length, ValidationError
+from wtforms.validators import InputRequired, Length, ValidationError, DataRequired
 
 from pyg.web import db, models
 
+# TODO(ian) : axe the fundraiser section?  Is that going to be handled by tiltify?
 
+"""
+Fundraiser page
+
+This is both the view to look at a fundraiser (if you're not an owner) and the view to edit fundraisers (if you are.)  Newly created fundraisers are modified here before going live by setting the 'active' bit.
+
+Whether the fundraiser is displayed in 'edit' or 'view' mode is controlled in the template.
+
+Note on forms: WTForms has this great feature that will take an object and attempt to assume default values for fields based on matching the data in that object to the names of the fields. This is done here, and any changes to the fundraiser model or the fundraiser form must be reflected in the other.
+
+TODO(ben): (maybe, see create_fundraiser NOTE)Implement 'hiding' behavior for inactive fundraisers.
+
+What would be the ideal implementation for creating and editing fundraisers?
+
+ - User hits 'create fundraiser' button
+   - taken to a dummy fundraiser page that submits the fundraiser only once 'save fundraiser' is hit.
+   - this way, all fundraisers are 'active' and don't need to be staged
+"""
+
+# custom validator
 def daterange(soonest, latest):
+    """ensure date lays between these values"""
     msg = "Must be no sooner than %s and no later than %s" % (soonest, latest)
 
     def _daterange(form, field):
@@ -18,25 +39,24 @@ def daterange(soonest, latest):
     return _daterange
 
 
+# WTForm
 class FundraiserForm(Form):
-    """
-    TODO
-    decide a reasonable max length for names
-    update date validators to reflect desired ranges
-    """
+    """form for adding fundraisers"""
+    date_constraint = daterange(datetime.date.today(),
+                                datetime.date.max)
     name = StringField("Name", validators=[InputRequired(), Length(max=25)])
     end_date = DateField(
         "End Date",
         validators=[
-            InputRequired(),
-            daterange(
-                datetime.date.today(),
-                datetime.date(
-                    year=2050,
-                    month=1,
-                    day=1))])
-    start_date = DateField("Start Date")
-    target_funds = IntegerField("Target Funds")
+            DataRequired(),
+            date_constraint])
+    start_date = DateField(
+        "Start Date",
+        validators=[
+            DataRequired(),
+            date_constraint
+        ])
+    target_funds = IntegerField("Target Funds", validators=[DataRequired()])
     about = TextAreaField("About")
 
 
@@ -53,11 +73,10 @@ def fundraiser(frid=None):
 
     If no fundraiser is selected to view (via fundraiser ID), show a list of all fundraisers.
 
-    TODO
-    make the list of fundraisers searchable
-    update the template to show 'about' section
+    TODO(ben) : make the list of fundraisers searchable
+    TODO(ben) : update the template to show 'about' section
     """
-    
+
     if frid:
         fundraiser = db.web.session.query(models.Fundraiser).get(frid)
         form = FundraiserForm(flask.request.form, fundraiser)
@@ -67,14 +86,11 @@ def fundraiser(frid=None):
             fundraiser.start_date = form.start_date.data
             fundraiser.target_funds = form.target_funds.data
             fundraiser.about = form.about.data
+            fundraiser.active = True
             db.web.session.commit()
-        # form.name.data = fundraiser.name
-        # form.end_date = fundraiser.end_date
         return flask.render_template(
             "content_fundraiser.html", fundraiser=fundraiser, form=form)
-
     else:
-
         fundraisers = db.web.session.query(models.Fundraiser).all()
         return flask.render_template(
             "content_fundraiser.html", fundraisers=fundraisers)

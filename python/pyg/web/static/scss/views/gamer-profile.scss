@@ -1,0 +1,383 @@
+// ********************************
+// Mixins
+// ********************************
+@mixin list_style{
+        display:flex;
+        flex-direction:row;
+        flex-wrap:nowrap;
+        align-items:center;
+        padding:25px 0;
+
+        > .icon{
+                font-size:30px;
+                text-align: center;
+                padding-right:40px;
+        }   
+}
+
+// ********************************
+// Progress Bar
+// ********************************
+.goalProgress {
+  background: $ltgreen;
+  height:60px;
+}
+
+.progressBar {
+  background: $green;
+  color: #fff;
+  display: block;
+  overflow: hidden;
+  padding:5px;
+  height:60px;
+}
+
+// ********************************
+// Gamer Profile 
+// ********************************
+#member_profile{
+        &.editing{
+        }
+        .alert{
+                display:none;
+                text-align: center;
+                p{
+                        color:$orange;
+                }
+        }
+}
+
+ul.member_profile-list li{
+        display:flex;
+        flex-direction:row;
+        flex-wrap:nowrap;
+        align-items:center;
+        padding:25px 0;
+
+        .icon{
+                font-size:30px;
+                text-align: center;
+                padding-right:40px;
+        }
+}
+
+#member_profile{
+        .section{
+                display:flex;
+                flex-direction:row;
+                flex-wrap:wrap;
+                justify-content: center;
+                align-items:center;
+                padding:40px;
+        }
+}
+// ********************************
+// Gamer Profile  - Overview
+// ********************************
+.member_profile-overview{
+        background-color: $dkpurple;
+}
+.member_profile-overview-avatar_username,
+.member_profile-overview-stats{
+        flex-grow:1;
+}
+.member_profile-overview-avatar_username{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        padding-right:40px;
+        max-width: 600px;
+        input{
+                @include inputeditstylelight();
+                text-align: center;
+        }
+}
+.member_profile-overview-avatar_username{
+        .avatar{
+                height:200px;
+                width:200px;
+                border:3px solid $white;
+                border-radius:100px;
+                margin-bottom:20px;
+        }
+        .member_profile-overview-username{
+                color:$white;
+                text-align: center;
+        }
+}
+ul.member_profile-overview-stats{
+        max-width: 600px;
+
+        li{
+                @include list_style;
+                &:not(:last-child){
+                         border-bottom:1px solid $purple;
+                }
+                &.editable{
+                        input:hover{
+                             cursor: url('/static/img/icon-edit.png'), auto;
+                             border:1px dotted $white;   
+                        }
+                }
+        }
+        .icon, dd{
+                color:$white;
+        }
+        .icon{
+                padding-left:20px;
+                margin-top:10px;
+        }
+        dl{
+                flex-grow:3;
+                input{
+                        color: $white;
+                        font-family: alphaHeadline;
+                        font-size:28px;
+                        padding:15px 2% 10px;
+                        border:1px solid transparent;
+                        width:96%;
+                        transition: all 0.5s ease;
+                }
+        }
+        dd, dt{
+                text-transform: uppercase;
+        }
+        dt{
+                font-family:sourceSansPro;
+                font-style:light;
+                color:$purple;
+                font-size:12px;
+                letter-spacing: .1em;
+                padding-bottom: 5px;
+        }
+        dd{
+                font-family:alphaHeadline;
+                font-size:28px;
+                margin:0;
+                a{
+                        color: $white;
+                }
+        }
+        .member_profile-overview-stats-raised{
+                i, dt, dd{
+                        color:$green;
+                }
+        }
+        
+}
+.member_profile-why_i_paws{
+        background-color: $dkpurple;
+        .why_i_paws{
+                padding:40px 60px;
+                border:1px solid $purple;
+                width:100%;
+                max-width: 1200px;
+                @include flexbox();
+                @include flex-direction(column);
+                @include align-items(center);
+                header{
+                        color:$purple;
+                        text-align: center;
+                        margin-bottom: 15px;
+                }
+                textarea{
+                        @include inputeditstylelight();
+                        width:100%;
+                        padding-bottom:0px;
+                        text-align: center;
+                }
+        }
+        
+}
+// ********************************
+// Gamer Profile  - Fundraisers
+// ********************************
+.member_profile-fundraisers{
+        @include flexbox();
+        @include flex-direction(row);
+        @include flex-wrap(wrap);
+        @include justify-content(center);
+        @include align-items(center);
+        background-color:$teal;
+       
+        padding:40px;
+
+         ul.nav-tabs{
+                display:flex;
+                flex-direction:row;
+                flex-wrap: nowrap;
+                width:100%;
+
+                li{
+                        flex-grow:1;
+                        width:50%;
+
+                        a{
+                                @include flexbox();
+                                @include justify-content(center);
+                                width:100%;
+                                font-family:alphaHeadline;
+                                font-size:28px;
+                                color:$white;
+                                padding:20px 40px;
+                                text-transform: uppercase; 
+                                transition:all 0.5s ease;
+
+                                &.active{
+                                        color:$teal;
+                                        background-color:$white;
+                                        &:hover{
+                                                background-color:$white;
+                                        }
+                                }
+                                &:hover{
+                                        background-color:desaturate($teal, 10%);
+                                }
+                        }
+                }
+        }
+
+        .tab-content{
+                flex:1;
+        }
+
+        h3{
+                @include alpha-xl;
+
+                span{
+                        font-size:22px;
+                }
+        }
+
+        .tab-pane{
+                width:100%;
+                ul{
+                        padding:40px;
+                        background-color:$white;
+                        &:not(:first-child){
+                                margin-top:40px;
+                        }
+                }
+        }
+        #member_profile-Fundraisers-Upcoming{
+                .member_profile-fundraisers-upcoming-list >li{
+                        @include list_style;
+                }
+                li{
+                        &.member_profile-fundraisers-upcoming-donations{
+                                justify-content: space-between;
+
+                                .icon{
+                                        color:$green;
+                                }
+                                .member_profile-fundraisers-upcoming-donations-progress_bar{
+                                        flex-grow: 1;
+                                        margin-right:40px;
+
+                                        h3{
+                                                color:$green;
+                                        }
+                                }
+                                .member_profile-fundraisers-upcoming-donations-donate_btn{
+                                        align-self:flex-end;
+                                }
+
+                        }
+
+                        &.member_profile-fundraisers-upcoming-countdown h3{
+                                font-size:22px;
+                                span{
+                                        @include alpha-xl;
+                                }
+                        }
+                }
+        }
+}
+
+ul.fundraiser-share{
+        @include flexbox();
+        @include flex-direction(row);
+        @include flex-wrap(nowrap);
+        @include justify-content(center);
+        width:100%;
+        li {
+                &:not(:last-child){
+                        margin-right:20px;
+                }
+                a{
+                        &:hover{
+                                color:$teal;
+                        }
+                        .icon{
+                                margin-right:5px;
+                                font-size:12px;
+                        }
+                }
+        }
+}
+/* Fundraisers Past */
+#member_profile-Fundraisers-Past{
+        .member_profile-fundraisers-past-item{
+                background-color:$white;
+                padding:40px;
+                margin-bottom:20px;
+
+                > ul li{
+                        @include list_style;
+                }
+                .member_profile-fundraisers-past-donations-progress_bar{
+                        flex-grow:1;
+                }
+                .member_profile-fundraisers-past-donations .icon,
+                .member_profile-fundraisers-past-donations h3{
+                        color:$green;
+                }
+        }
+}
+
+/* Donations */
+.member_profile-donations{
+        background-color:$ltgreen;
+
+        header{
+                display:flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                width: 100%;
+        }
+}
+.member_profile-donations-header h1{
+        color:$green;
+}
+.member_profile-donations-list{
+        flex-grow: 1;
+}
+.member_profile-donations-list-item{
+        background-color:$white;
+        position:relative;
+        padding:20px;
+
+        h3{
+                font-family:sourceSansPro;
+                font-size:32px;
+                text-transform:uppercase;
+        }
+        .member_profile-donations-list-item-amount{
+                position:absolute;
+                top:20px;
+                right:20px;
+                color:$green;
+                @include alpha-xl;
+        }
+        date{
+                font-family:sourceSansPro;
+                font-style:light;
+                font-size:12px;
+        }
+        p{
+                font-family:sourceSansPro;
+                font-style:italic;
+                font-size:12px;
+        }
+
+}

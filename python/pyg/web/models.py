@@ -1,4 +1,6 @@
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.ext.associationproxy import association_proxy
+from sqlalchemy.orm.collections import attribute_mapped_collection
 from sqlalchemy import (
     Column,
     String,
@@ -12,29 +14,50 @@ from sqlalchemy import (
     Boolean)
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy import create_engine
-from flask_security import Security, SQLAlchemyUserDatastore, UserMixin, RoleMixin
+
+
+"""
+models.py
+This is where all the db models (and, by ORM extension, the schema) are created / configured.
+If things here seem broken, a good place to start is the "basic relationship patterns" section of the SQLAlchemy docs.
+
+"""
+
 
 Base = declarative_base()
 
 
-member_to_team = Table("member_to_team", Base.metadata,
-                       Column('member_id', Integer, ForeignKey('member.id')),
-                       Column('team_id', Integer, ForeignKey('team.id')),
-                       Column('owner', Boolean, nullable=False)
-                       )
+# TODO(ben) : we might want to implement the 'association proxy' sqlalchemy extension in following...
+class MemberToTeam(Base):
+    """This table connects members to teams and can define ownership"""
 
-roles_auths = Table("roles_auths", Base.metadata,
-                    Column("auth_id", Integer, ForeignKey('auth.id')),
-                    Column("role_id", Integer, ForeignKey('role.id'))
-                    )
+    __tablename__ = "member_to_team"
+
+    member_id = Column(Integer, ForeignKey('member.id'), primary_key=True)
+    team_id = Column(Integer, ForeignKey('team.id'), primary_key=True)
+    is_owner = Column(Boolean, nullable=False)
+    joined_on = Column(Date)
+    member = relationship("Member", back_populates="teams")
+    team = relationship("Team", back_populates="members")
 
 
-class Role(Base, RoleMixin):
-    __tablename__ = 'role'
+class TeamMembershipRequests(Base):
+    """Temporary store of pending team membership requests"""
+
+    __tablename__ = "team_membership_requests"
+    member_id = Column(Integer, ForeignKey('member.id'), primary_key=True)
+    team_id = Column(Integer, ForeignKey('team.id'), primary_key=True)
+    date_requested = Column(DateTime)
     
+class Shelter(Base):
+    """Shelter data"""
+
+    __tablename__ = 'shelter'
+
     id = Column(Integer, primary_key=True)
     name = Column(String(80), unique=True)
-    desc = Column(String(255))
+    location = Column(String(80))
+    about = Column(Text)
 
 
 class Member(Base):
@@ -46,11 +69,18 @@ class Member(Base):
     name = Column(String(80), unique=False, nullable=False)
     handle = Column(String(80), unique=True)
     about = Column(Text)
-    avatar_url = Column(String(80))
+    avatar_url = Column(String(120))
     birthday = Column(Date)
     location = Column(String(40))
     twitch_handle = Column(String(40))
     created = Column(DateTime, nullable=False)
+    rank = Column(Integer, nullable=True)
+    active = Column(Boolean, nullable=False)  # for account deletion
+
+    # We may want to create a whole schema for streams and just tie them
+    # to user accounts instead of doing this next bit, but for now it
+    # provides a method for determining if a member is a streamer
+    has_streamed = (Boolean)
 
     # Relationship Config
     auth = relationship(
@@ -65,17 +95,17 @@ class Member(Base):
         "Fundraiser",
         back_populates="member"
     )
-    teams = relationship("Team", secondary=member_to_team)
+    teams = relationship("MemberToTeam", back_populates="member")
 
     def __str__(self):
         return str(self.id)
 
 
-class Auth(Base, UserMixin):
+class Auth(Base):
     """
     UserAuth is for "native" or username/password auth into pyg.
     Flask-Security is being mixed in here, as there are more shared fields natively.
-    It may be necessary to factor those elements out to Member.  Revisit.
+    TODO(ben) : It may be necessary to factor those elements out to Member.  Revisit.
     """
 
     __tablename__ = 'auth'
@@ -84,7 +114,7 @@ class Auth(Base, UserMixin):
         Integer,
         ForeignKey("member.id"),
         primary_key=True)
-    password = Column(String(80), unique=False, nullable=False)
+    passhash = Column(String(80), unique=False, nullable=False)
     email = Column(String(80), unique=True, nullable=False)
     active = Column(Boolean)
     member = relationship("Member", uselist=False)
@@ -92,22 +122,25 @@ class Auth(Base, UserMixin):
     def __str__(self):
         return str(self.id)
 
-
 class Team(Base):
     __tablename__ = 'team'
 
     id = Column(Integer, primary_key=True)
     name = Column(String(80))
-    date_joined = Column(Date)
+    avatar_url = Column(String(120))
+    date_created = Column(Date, nullable=False)
     missionstatement = Column(Text, nullable=True)
-    location = Column(String(50), nullable=True, unique=False)
     website = Column(Text, nullable=True)
     facebook_url = Column(Text, nullable=True)
     twitter_url = Column(Text, nullable=True)
     twitch_url = Column(Text, nullable=True)
     instagram_url = Column(Text, nullable=True)
-    members = relationship("Member", secondary=member_to_team)
+    members = relationship("MemberToTeam",
+                           back_populates="team",
+                           collection_class = attribute_mapped_collection('member_id')
+    )
     fundraisers = relationship("Fundraiser", back_populates="team")
+    member_ids = association_proxy('members', 'member_id')
 
     def __str__(self):
         return self.name
@@ -144,7 +177,7 @@ class Fundraiser(Base):
     start_date = Column(DateTime, nullable=False)
     end_date = Column(DateTime, nullable=False)
     target_funds = Column(Integer, nullable=False)
-    active = Column(Boolean, nullable=False)
+    active = Column(Boolean, nullable=False, default=True)
 
     member_id = Column(Integer, ForeignKey("member.id"), nullable=False)
     member = relationship("Member", back_populates="fundraisers")
@@ -163,7 +196,7 @@ class NewsArticle(Base):
     slug = Column(Text(convert_unicode=True), unique=True)
     headline = Column(Text(convert_unicode=True))
     author = Column(Text(convert_unicode=True))
-    datetime = Column(DateTime, nullable=False)
+    date = Column(DateTime, nullable=False)
     snippet = Column(Text(convert_unicode=True, length=250), nullable=False)
     body = Column(Text(convert_unicode=True))
 

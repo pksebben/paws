@@ -1,0 +1,186 @@
+#Nav{
+        position:fixed;
+        display:flex;
+        flex-direction:row;
+        flex-wrap:nowrap;
+        justify-content: space-between;
+        align-items:stretch;
+        height: $headerHeight;
+        width: 100%;
+        background-color: $white;
+        z-index:1000;
+
+        h1{
+                display: flex;
+                align-items:center;
+                padding:0 20px;
+                color:$dkpurple;
+                font-family:junegull;
+                font-size:36px;
+                transition:all .75s;
+
+                &:hover{
+                        color:$purple;
+                        cursor:pointer;
+                }
+        }
+
+        > ul{
+                display:flex;
+                flex-direction:row;
+                flex-wrap:nowrap;
+                justify-content: flex-end;
+                flex-grow: 1;
+                align-items:stretch;
+
+                li{
+                        display: flex;
+                        justify-content: center;
+                        align-items:center;
+                        padding:0 20px;
+
+                        a{
+                                @include alpha-s;
+                                text-transform: uppercase;
+                                color:$dkpurple;
+                                transition:all .75s;
+                                font-size:16px;
+                        }
+                        i{
+                                transition:all .75s;
+                        }
+
+                        &:hover{
+                                cursor:pointer;    
+                        }
+                        &.nav-our_tail,
+                        &.nav-news{
+                                @include flex-grow(1);
+                        }
+                        &.nav-search{
+                                background-color:$dkpurple;
+                                .nav-search-icon{
+                                        color:$purple;
+                                }
+                                .nav-search-form_container{
+                                        position:absolute;
+                                        top: $headerHeight;
+                                        left:0;
+                                        width: 100%;
+                                        background-color:$dkpurple;
+                                        display:none;
+
+                                        .nav-search-exit{
+                                                position:absolute;
+                                                font-family:alphaHeadline;
+                                                top:10px;
+                                                color:$purple;
+                                                font-size:18px;
+                                                right:20px;
+                                                transition:all 0.5s ease;
+                                                opacity: 0.4;
+                                                transition: all 0.5s ease;
+                                                &:hover{
+                                                        opacity: 1;
+                                                }
+                                        }
+                                }
+                                form{
+                                        @include flexbox();
+                                        @include flex-direction(row);
+                                        @include flex-wrap(nowrap);
+                                        @include align-items(center);
+                                        @include justify-content(space-between);
+                                        padding: 30px 20px 40px;
+                                        input[type=text]{
+                                                width:100%;
+                                                transition:width 0.5s ease-in-out;
+                                                border-bottom:2px solid $purple;
+                                                font-family:alphaHeadline;
+                                                padding:0 15px;
+                                                font-size:30px;
+                                                padding-bottom: 10px;
+                                                margin-top:15px;
+                                                font-size:24px;
+                                                text-align:center;
+                                                color:$white;
+                                                width:80%;
+                                                &::placeholder{
+                                                        color:$purple;
+                                                        opacity: .5;
+                                                }
+                                        }
+                                        button.nav-search-submit{
+                                                padding:15px 20px;
+                                                color:$purple;
+                                                font-family: alphaHeadline;
+                                                margin-left:20px;
+                                                margin-top:15px;
+                                                transition: all 0.5s ease;
+                                                text-transform:uppercase;
+                                                border:1px solid $purple;
+
+                                                &:hover{
+                                                       background-color:$purple;
+                                                        color:$dkpurple;
+                                                        cursor:pointer;
+                                                }
+                                        }
+                                }
+                        }
+                        &.nav-profile{
+                                background-color: $purple;
+                                position:relative;
+                                transition: all 0.5s ease;
+                                a{
+                                        color:$white;
+                                }
+                                &:hover{
+                                        background-color: lighten($purple, 10%);
+                                        ul{
+                                                display:block;
+                                        }
+                                }
+                                ul{
+                                        position:absolute;
+                                        top:$headerHeight;
+                                        right:0;
+                                        display:none;
+                                        transition:all 0.5s ease;
+                                        li{
+                                                background-color: $purple;
+                                                height:$headerHeight;
+                                                border-top:1px solid lighten($purple, 10%);
+                                                transition:all 0.5s ease;
+                                                 white-space: nowrap;
+                                                a{
+                                                        color: $white;
+                                                }
+                                                &:hover{
+                                                       background-color: lighten($purple, 20%); 
+                                                }
+                                        }
+                                }
+                        }
+                        &.nav-signin{
+                                background-color:$purple;
+                                transition:all .75s;
+                                position:relative;
+                                button{
+                                        color:$white;
+                                        @include alpha-s;
+                                        text-transform: uppercase;
+                                        transition:all .75s;
+                                        font-size:16px;
+                                }
+                        }
+                        &.nav-donate{
+                                background-color:$green;
+                                transition:all .75s;
+                                a{
+                                        color:$white;
+                                }
+                        }
+                }
+        }
+}

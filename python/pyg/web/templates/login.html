@@ -12,12 +12,12 @@
     </div>
     <div>
       <h3>{{ failure_text }}</h3>
-      <form method="post">
+      <form method="post" action="/login">
 	<dl>
-	  {{ render_field(form.email) }}
-	  {{ render_field(form.password) }}
+	  {{ render_field(loginform.email) }}
+	  {{ render_field(loginform.password) }}
 	</dl>
-	<p><input type=submit value=login>
+	<p><input formaction="/login" type=submit value=login>
       </form>
       <p>Don't have an account yet? You can <a href="signup">create one here</a></p>
     </div>

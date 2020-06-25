@@ -2,24 +2,34 @@
 
 {% block content %}
 <div class="teamProfile">
-    <p>TODO: Fill me out</p>
+  <p>TODO: Fill me out</p>
+  {% if is_owner %}
+  <h1>Welcome, team moderator!</h1>
+  {% else %}
+  <h1>You are not a moderator</h1>
+  {% endif %}
+  <h3>{{ team.name }}</h3>
     <div class="teamProfileStats">
 	<p>amount raised</p>
-	<p>date joined</p>
+	<h3>Date Joined</h3>
+	<p>{{ team.date_joined }}</p>
 	<p>players on roster</p>
     </div>
     <div class="teamProfileCampaigns">
+      {% for i in team.fundraisers %}
+      <p>{{ i.name }}</p>
+      {% endfor %}
 	<p>TODO: Wire up a campaigns module here</p>
 	<p>Campaign name</p>
 	<p>Campaign $ raised so far</p>
 	<p>Campaign start</p>
 	<p>Campaign target</p>
-
 	<p>Campaign highest earner so far or: leaderboard</p>
     </div>
     <div class="teamProfileAbout">
-	<p>I should be about text</p>
-	<p>Do I want to know what shelters we've raised money for?</p>
+      <h3>About</h3>
+      <p>{{ team.about }}</p>
+      <p>Do I want to know what shelters we've raised money for?</p>
     </div>
 </div>
 {% endblock %}

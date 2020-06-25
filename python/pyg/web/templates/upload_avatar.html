@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{% from "_formhelpers.html" import render_field %}
+<html>
+    <head>
+	<title>Paws Your Game</title>
+        
+	<!-- TODO (kirby/ian) : did one of you put this here?  Can we get it into our static instead of loaded via CORS? -->
+	<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+	
+    </head>
+    <body>
+      <h1>THIS PAGE SHOULD BE A MODAL ON THE MEMBER PROFILE PAGE</h1>
+      <h3>Choose a new avatar</h3>
+      <form method=post enctype=multipart/form-data>
+	{{ render_field(avatarform.avatar) }}
+	<input type=submit value=Upload>
+      </form>
+    </body>
+</html>

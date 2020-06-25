@@ -1,8 +1,17 @@
 import flask
 from sqlalchemy.orm.exc import NoResultFound
 from wtforms import Form, StringField, PasswordField, validators
+from passlib.hash import bcrypt
 
 from pyg.web import db, models
+
+
+"""
+Login page
+
+TODO (kirby) : Can we have the cursor focus on email field when this opens as a modal?
+"""
+
 
 bp = flask.Blueprint('login', __name__)
 
@@ -19,15 +28,11 @@ def login_user(email, password):
         user = db.web.session.query(
             models.Auth).filter_by(
             email=email).one()
-        assert user.password == password
+        assert bcrypt.verify(password, user.passhash)
         flask.session['userid'] = user.id
         return flask.redirect('/')
-    except AssertionError:
-        return flask.render_template(
-            "login.html", failure_text="bad credentials. please retry")
-    except NoResultFound:
-        return flask.render_template(
-            "login.html", failure_text="bad credentials. please retry")
+    except (AssertionError, NoResultFound):
+        return flask.redirect('/')
 
 
 @bp.route('/login', methods=['GET', 'POST'])
@@ -37,4 +42,4 @@ def login():
         return login_user(
             form.email.data, form.password.data)
     else:
-        return flask.render_template("login.html", form=form)
+        return flask.redirect("/")

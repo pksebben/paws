@@ -3,6 +3,22 @@
 {% block content %}
 <div class="articles">
   <h1>News</h1>
+  <div class="toc">
+    
+    <label for="toc_date">News articles by date</label>
+    <table id="toc_date">
+      <tr>
+	<th>Date</th>
+	<th>Article</th>
+      </tr>
+      {% for item in toc %}
+      <tr>
+	<td>{{ item.date }}</td>
+	<td><a href="{{ url_for(".article", slug=item.slug) }}">{{ item.headline }}</a></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
   {% for article in articles %}
   <div class="newsItem">
     <h2 class="headline">{{ article.headline }}</h2>
@@ -11,12 +27,5 @@
     <p>{{ article.body }}</p>
   </div>
  {% endfor %}
-</div>
-<div class="toc">
-  <ul>
-    {% for item in toc %}
-    <li><a href="{{ url_for(".article", slug=item.slug) }}">{{ item.headline }}</a></li>
-    {% endfor %}
-  </ul>
 </div>
 {% endblock %}

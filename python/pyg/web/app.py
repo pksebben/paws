@@ -4,20 +4,34 @@ import pkg_resources
 import locale
 
 import flask
-from jinja2 import PackageLoader, environment
+from jinja2 import PackageLoader
 from werkzeug import exceptions
-from flask_login import LoginManager
 from flask_humanize import Humanize
 
 import pyg.web
-from pyg.web.views import login, home, signup, news, search, about, teamprofile, userprofile, leaderboard, logout, fundraiser, create_fundraiser
+from pyg.web.views import login, home, signup, news, search, about, teamprofile, memberprofile, leaderboard, logout, fundraiser, create_fundraiser, account_management, partnering, account_deleted, shelterprofile, avatar_upload, donate
 
+"""
+App.py
 
-"""this class and the following two functions enable loading static assets from the .pex"""
+a note for those familiar with flask:
+Many of the functions that a traditional app.py handle in a flask app have been moved to run.py (such as the actual running of the app).  This was done to avoid a circular import problem relating to (I can't quite remember if it was the CMS or test suite or both.)
 
+Things this app.py still does:
+-provides an interface for the app and it's static assets in the PexFlask class that solves an earlier issue with running the app as a .pex executable (see Pantsbuild docs for more on that)
+-registers all views
+-configures methods and data available to templates
+-performs some basic app configurations
+
+TODO(ben) : Implement some form of UAC that uses auth tokens instead of checking userids against the session.  For more information look at The webapp hackers handbook in ch 8
+
+TODO(ben) : When the session is passed to the template, does that expose it in an unsecure fashion? Investigate.
+"""
+
+# Upload Configuration
+UPLOAD_FOLDER = '/static/uploads'
 
 class PexFlask(flask.Flask):
-
     def send_static_file(self, filename):
         if not self.has_static_folder:
             raise RuntimeError('No static folder for this object')
@@ -27,8 +41,10 @@ class PexFlask(flask.Flask):
         # Get the relative static directory
         directory = os.path.relpath(self.static_folder, self.root_path)
 
-        return send_from_package("pyg.web", directory,
-                                 filename, cache_timeout=cache_timeout)
+        return send_from_package("pyg.web",
+                                 directory,
+                                 filename,
+                                 cache_timeout=cache_timeout)
 
 
 def send_from_package(package, directory, filename, **options):
@@ -46,7 +62,10 @@ def send_from_package(package, directory, filename, **options):
 
 
 def read_from_package(package, directory, filename):
-    resource_location = "/".join((directory, filename,))
+    resource_location = "/".join((
+        directory,
+        filename,
+    ))
     if not pkg_resources.resource_exists(package, resource_location):
         print("could not find package {}".format(package))
         raise exceptions.NotFound()
@@ -57,32 +76,47 @@ def read_from_package(package, directory, filename):
 """create the app and configure it."""
 app = PexFlask(__name__, static_folder='static')
 app.jinja_loader = PackageLoader('pyg.web', 'templates')
-# Necessary to set cookies.  Move to config later.
+# TODO(ben) : RTFM on flask secret keys for best practices on where to
+# put this.
 app.secret_key = "2380b817f0f6dc67cebcc4068fc6b437"
-login_manager = LoginManager()  # part of flask-login.  Not yet implemented.
+"""
+A couple of notes on the init()----
 
+Blueprint registration:
+To make a view:
+1. Create the (viewname).py in /views/, with all local methods
+2. Each view gets a template in /templates/, rendered in the (viewname).py
+3. Call app.register_blueprint((viewname).bp) in init() below
 
+Template Filters and Context Processors:
+These are global to the app and made available to all views and templates.
 
-
-@login_manager.user_loader
-def load_user(userid):
-    return LoginUser(userid)
+"""
 
 
 def init():
+    """connect views and configure templates, then return app"""
+    # TODO(ben) : Make sure all these views are still used and prune if not
     app.register_blueprint(login.bp)
     app.register_blueprint(home.bp)
     app.register_blueprint(signup.bp)
     app.register_blueprint(news.bp, url_prefix='/news')
+    app.register_blueprint(search.bp)
     app.register_blueprint(about.bp)
     app.register_blueprint(teamprofile.bp)
-    app.register_blueprint(search.bp)
-    app.register_blueprint(userprofile.bp)
+    app.register_blueprint(memberprofile.bp)
     app.register_blueprint(leaderboard.bp)
     app.register_blueprint(logout.bp)
     app.register_blueprint(fundraiser.bp)
     app.register_blueprint(create_fundraiser.bp)
-    login_manager.init_app(app)
+    app.register_blueprint(account_management.bp)
+    app.register_blueprint(partnering.bp)
+    app.register_blueprint(account_deleted.bp)
+    app.register_blueprint(shelterprofile.bp)
+    app.register_blueprint(avatar_upload.bp)
+    app.register_blueprint(donate.bp)
+
+    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
     humanize = Humanize(app)
     locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
@@ -96,10 +130,14 @@ def init():
         return 'en_US'
 
     @app.context_processor
+    def provideloginform():
+        loginform = login.LoginForm(flask.request.form)
+        return {'loginform': loginform}
+
+    @app.context_processor
     def dynamic_data():
-        texts = pyg.web.db.web.session.query(
-            pyg.web.models.Text).filter_by(
-                route_id=str(flask.request.url_rule))
+        texts = pyg.web.db.web.session.query(pyg.web.models.Text).filter_by(
+            route_id=str(flask.request.url_rule))
         text_dict = {x.slug: x.text for x in texts}
         return {'text': text_dict}
 

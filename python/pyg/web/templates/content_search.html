@@ -1,30 +1,132 @@
 {% extends "base_content.html" %}
-
+{% from "_formhelpers.html" import render_field %}
 {% block content %}
 <div class="search">
-  <p>TODO: Structure out a list for search results</p>
+  <script>
+    $(document).ready( function () {
+	$('#player_results').DataTable();
+    } );
+     $(document).ready( function () {
+	$('#team_results').DataTable();
+    } );   
+   $(document).ready( function () {
+	$('#fundraiser_results').DataTable();
+    } );   
+   $(document).ready( function () {
+	$('#shelter_results').DataTable();
+    } );   
+
+  </script>
+  
   <div class="searchBar">
-    <form id="searchform" action="/search" method="post">
-      <input type="text" name="name" placeholder="search name">
-      <button>search</button>
+    <form method="post">
+
+      {% if form.querystring.errors %}
+      {% for error in form.querystring.errors %}
+      <span>{{ error }}</span>
+      {% endfor %}
+      {% endif %}
+      {{ form.querystring(class="querystring") }}
+
+      {{ form.searchfor() }}
+      {{ form.submit() }}
+      
     </form>
   </div>
+  
   <div class="searchResults">
-    <label for="player_results">Players</label>
-    <table id="player_results">
-      <tr>
-	<th>Rank</th>
-	<th>Name</th>
-	<th>Amount raised</th>
-      </tr>
-      {% for i in donations %}
-      <tr>
-	<td>{{ i.0 }}</td>
-	<td>{{ i.1.handle }}</td>
-	<td>{{ "$%.2f"|format(i.1.total|float) }}</td>
+    {% if results.players[0] is defined %}
+    <label class="search-table-label">Players</label>
+    <table id="player_results" class="table">
+      <thead>
+	<tr class="table-row">
+	  <th class="search-table-rank table-cell"><a href="#"><button onclick={% set sortby = "rank" %}>Rank</button></a></th>
+	  <th class="search_table-handle table-cell"><a href="#"><button onclick={% set sortby = "handle" %}>Handle</button></a></th>
+	  <th class="table-cell"><a href="#"><button onclick={% set sortby = "raised" %}>Raised</button></a></th>
+	</tr>
+      </thead>
+      <tbody>
+      {% for i in results.players|sort(attribute=sortby) %}
+      
+      <tr class="table-row">
+	<td class="search-table-rank table-cell">{{ i.rank }}</td>
+	<td class="search_table-handle table-cell"><a href="/profile/{{i.id}}">{{ i.handle }}</a></td>
+	<td class="search-table-raised table-cell">{{ i.raised }}</td>
       </tr>
       {% endfor %}
+      </tbody>
     </table>
+    {% endif %}
+
+    {% if results.teams[0] is defined %}
+    <label class="search-table-label">Teams</label>
+    <table id="team_results" class="table">
+      <thead>
+      <tr class="table-header table-row">
+	<th class="search-table-rank table-cell">Rank</th>
+	<th class="search_table-name table-cell">Name</th>
+	<th class="search-table-raised table-cell">Raised</th>
+	<th class="search-table-members table-cell">Members</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for i in results.teams %}
+      <tr class="table-row">
+	<td class="search-table-rank table-cell">{{ i.rank }}</td>
+	<td class="search_table-name table-cell"><a href="/teamprofile/{{i.id}}">{{ i.name }}</a></td>
+	<td class="search-table-raised table-cell">{{ "$%.2f"|format(i.members.donations|sum(attribute="amount")) }}</td>
+	<td class="search-table-members table-cell">{{ i.members|length() }}</td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+
+    {% if results.fundraisers[0] is defined %}
+    <label class="search-table-label">Fundraisers</label>
+    <table id="fundraiser_results" class="table">
+      <thead>
+      <tr class="table-header table-row">
+	<th class="search_table-name table-cell">Name</th>
+	<th class="table-cell">Raised</th>
+	<th class="table-cell">Start</th>
+	<th class="table-cell">End</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for i in results.fundraisers %}
+      <tr class="table-header table-row">
+	<td class="search_table-name table-cell"><a href="/fundraiser/{{ i.id }}">{{ i.name }}</a></td>
+	<td class="search-table-raised table-cell">{{ "$%.2f"|format(i.donations|sum(attribute="amount")) }}</td>
+	<td class="table-cell">{{ i.start_date.strftime('%Y-%m-%d') }}</td>
+	<td class="table-cell">{{ i.end_date.strftime('%Y-%m-%d') }}</td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+
+    {% if results.shelters[0] is defined %}
+    <label class="search-table-label">Shelters</label>
+    <table id="shelter_results" class="table">
+      <thead>
+      <tr class="table-header table-row">
+	<th class="search_table-name table-cell" class="search_table-name">Name</th>
+	<th class="table-cell">Location</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for i in results.shelters %}
+      <tr class="table-row">
+	<td class="search_table-name table-cell"><a href="/shelter/{{ i.id }}">{{ i.name }}</td>
+	<td class="table-cell">{{ i.location }}</td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+
+    
   </div>
 </div>
 {% endblock %}

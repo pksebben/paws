@@ -1,0 +1,231 @@
+{% extends "base_content.html" %}
+
+{% block content %}
+
+{% if member %}
+<div id="member_profile" class="content">
+  {% if session.userid == auth.id and auth.id %}
+  <h2>Welcome, {{ auth.name }}</h2>
+  <form id="submit" action="/profile/{{ session.userid }}" method="post">
+    <div class="alert">
+        <p>Editing Profile: <button>Submit Changes</button></p>
+    </div>
+  {% endif %}
+  <div class="section member_profile-overview">
+    <div class="member_profile-overview-avatar_username">
+      <img class="member_profile-overview-avatar avatar" src="/static/userinfo/avatars/{{ member.avatar_url }}"/>
+      <a href="/avatar_upload">Upload a new avatar</a>
+      {% if session.userid == auth.id and auth.id %}
+	{{ form.handle }}
+      {% else %}
+      <h1 class="member_profile-overview-username">{{ auth.name }}</h1>
+      {% endif %}
+    </div>
+    <ul class="member_profile-overview-stats">
+      <li class="member_profile-overview-stats-raised">
+	<i class="icon icon-block stats-raised-icon">moneybag</i>
+	<dl>
+	  <dt>Raised</dt>
+	  <dd>{{ member.donations | sum(attribute="amount") | format_currency() }}</dd>
+	</dl>
+      </li>
+      <li class="member_profile-overview-stats-rank">
+	<i class="icon icon-block">trophy</i>
+	<dl>
+	  <dt>Rank</dt>
+	  <dd>{{ member.rank }} / {{ numplayers }}</dd>
+	</dl>
+      </li>
+      <li class="member_profile-overview-stats-upcoming_fundraiser">
+	<i class="icon icon-standard">calendar</i>
+	<dl>
+	  <dt>Upcoming Fundraiser</dt>
+	  {% if upcoming_fundraiser  %}
+	  <dd><a href="/fundraiser/{{member.fundraisers.0.id}}">{{ member.fundraisers.0.name }}</a></dd>
+	  {% else %}
+	  <dd>No upcoming fundraisers</dd>
+	  {% endif %}
+	</dl>
+      </li>
+      <li class="member_profile-overview-stats-location editable">
+	<i class="icon icon-block">earth</i>
+	<dl>
+	  <dt>Location</dt>
+	  {% if session.userid == auth.id and auth.id %}
+	    {{ form.location }}
+	  {% else %}
+	  <dd>{{ member.location }}</dd>
+	  {% endif %}
+	  
+	</dl>
+      </li>
+      <li class="member_profile-overview-stats-twitch_handle editable">
+	<i class="icon"></i>
+	<dl>
+	  <dt>Twitch Handle</dt>
+	  {% if session.userid == auth.id and auth.id %}
+	    {{ form.twitch_handle }}
+	  {% else %}
+	  <dd>{{ member.twitch_handle }}</dd>
+	  {% endif %}
+	</dl>
+      </li>
+    </ul>
+  </div>
+  
+  <div class="section member_profile-why_i_paws editable">
+    <div class="why_i_paws">
+      <header><h1>Why I Paws</h1><i class="icon"></i></header>
+      {% if session.userid == auth.id and auth.id %}
+      {{ form.about }}
+      {% else %}
+	<p>{{ member.about }}</p>
+	  </form>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="section member_profile-teams">
+    <div class="teams">
+      <header><h1>Teams</h1><i class="icon"></i></header>
+      {% for i in member.teams %}
+      <!-- Kirby: how do we linkify this section? -->
+      <div class="team">
+	<p>{{ i.name }}</p>
+	<dl>
+	  <dt>members</dt>
+	  <dd>{{ i.members|length() }}</dd>
+	</dl>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  
+  <div class="member_profile-fundraisers">
+    
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="nav-item">
+	<a class="nav-link active" data-toggle="tab" href="#Member_Profile-Fundraisers-Upcoming" role="tab" aria-controls="home" aria-selected="true">Upcoming</a>
+      </li>
+      <li class="nav-item">
+	<a class="nav-link" data-toggle="tab" href="#Member_Profile-Fundraisers-Past" role="tab" aria-controls="profile" aria-selected="false">Past</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#Member_Profile-Create_Fundraiser" role="tab" aria-controls="profile" aria-selected="false">Create</a>
+      </li>
+    </ul>
+
+
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="Member_Profile-Fundraisers-Upcoming" role="tabpanel" aria-labelledby="Member_Profile-Fundraisers-Upcoming-tab">
+	{% for i in fundraisers %}	
+	<ul class="fundraiser">
+	       <li class="fundraiser-name fundraiser-item">
+                        <span class="icon icon-block">tag</span>
+                        <div class="fundraiser-item-content">
+	                       <h3>{{ i.name }}</h3>
+                        </div>
+	       </li>
+	       <li class="fundraiser-date fundraiser-item">
+	               <span class="icon icon-standard">calendar</span>
+                       <div class="fundraiser-item-content">
+	                       <h3>{{ i.start_date | humanize('naturaldate') }}</h3>
+                       </div>
+	       </li>
+	       <li class="fundraiser-countdown fundraiser-item">
+	               <span class="icon icon-standard">stopwatch</span>
+                       <div class="fundraiser-item-content">
+        	               <h3 class="countdown" countdown data-date="Jun 30 2020 21:00:00">
+                	               <span data-days></span> Days
+                	               <span data-hours></span> Hours
+                	               <span data-minutes></span> Minutes
+                	               <span data-seconds></span> Seconds
+        	               </h3>
+                       </div>
+	       </li>
+	       <li class="fundraiser-donations fundraiser-item">
+	               <span class="icon icon-block">moneybag</span>
+                       <div class="fundraiser-item-content">
+        	               <h3>{{ i.donations | sum(attribute="amount") | format_currency() }}  / {{ i.target_funds | format_currency() }}</h3>
+        	               <div class="member_profile-fundraisers-upcoming-donations-progress_bar"></div>
+        	               <button class="button button-green member_profile-fundraisers-upcoming-donations-donate_btn">Donate</button>
+                       </div>
+	       </li>
+                <li class="fundraiser-donors fundraiser-item">
+        	       <span class="icon icon-standard">user</span>
+                       <div class="fundraiser-item-content">
+        	               <h3>{{ i.donations|length }} Donations</h3>
+                       </div>
+                </li>
+                <li class="fundraiser-share fundraiser-item">
+                        <ul>
+                                <li>
+                                    <a href="#"><span class="icon icon-standard">link</span> Copy Page Link</a>
+                                </li>
+                                <li>
+                                    <a href="#"><span class="icon icon-standard">calendar</span> Add to Calendar</a>
+                                </li>
+                                <li>
+                                    <a href="#"><span class="icon icon-social">facebook</span> Share to Facebook</a>
+                                </li>
+                        </ul>
+                </li>
+	</ul>
+        {% endfor %}
+      </div><!-- end upcoming fundraiser tab -->
+      <div class="tab-pane fade" id="Member_Profile-Fundraisers-Past" role="tabpanel" aria-labelledby="profile-tab">
+	  <ul class="fundraiser">
+	    <li class="fundraiser-date fundraiser-item">
+	      <span class="icon icon-standard">calendar</span>
+              <div class="fundraiser-item-content">
+	               <h3>August 30,2019</h3>
+               </div>
+	    </li>
+	    <li class="fundraiser-donations fundraiser-item">
+	      <span class="icon icon-block">moneybag</span>
+              <div class="fundraiser-item-content">
+                        <h3>$500</h3>
+	               <div class="member_profile-fundraisers-past-donations-progress_bar"></div>
+               </div>
+	    </li>
+	    <li class="fundraiser-donors fundraiser-item">
+	      <span class="icon icon-standard">user</span>
+              <div class="fundraiser-item-content">
+	               <h3>45 Donations</h3>
+               </div>
+	    </li>
+	    <li class="fundraiser-date fundraiser-item">
+                <span class="icon icon-standard">calendar</span>
+                <div class="fundraiser-item-content">
+                        <h3>August 30,2019</h3>
+                </div>
+            </li>
+	  </ul>
+      </div><!-- end past fundraisers tab -->
+      <div class="tab-pane fade" id="Member_Profile-Create_Fundraiser" role="tabpanel" aria-labelledby="profile-tab">
+      </div><!-- end create fundraiser tab -->
+    </div><!-- end tab-content -->
+  </div><!-- end fundraisers section -->
+
+
+  
+  <div class="section member_profile-donations">
+    <header class="member_profile-donations-header"><h1>Donations</h1></header>
+    <ul class="member_profile-donations-list">
+      <li class="member_profile-donations-list-item">
+	<h3 class="member_profile-donations-list-item-donor_name">Donor Name</h3>
+	<span class="member_profile-donations-list-item-amount">$45</span>
+	<date class="member_profile-donations-list-item-date">April 2, 2019</date>
+	<p class="member_profile-donations-list-item-comment">
+	  Comment (optional) Bacon ipsum dolor amet bacon picanha ground round, ham hock occaecat swine frankfurter anim pancetta. Laborum incididunt pancetta enim pork chop eiusmod consequat ullamco meatball tenderloin officia turkey landjaeger. Commodo fatback swine jowl pork chop voluptate venison. Fatback jowl lorem prosciutto, sed ribeye quis cillum elit ground round chuck pig nulla reprehenderit. Sint consequat pancetta, landjaeger nostrud deserunt shankle short loin bacon id officia filet mignon. Kevin tenderloin buffalo ball tip, velit do cupim beef ribs quis eu minim doner.
+	</p>
+      </li>
+    </ul>
+  </div>
+</div><!-- end gamer profile -->
+{% else %}
+<div>
+  <p>No profile found. Who were you looking for?</p>
+</div>
+{% endif %}
+{% endblock %}

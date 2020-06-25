@@ -1,11 +1,16 @@
 terraform/.terraform
 terraform/terraform.tfstate.backup
+userinfo/
+foo.db
 
+.DS_Store
 node_modules
 
 ~$
 
 *#
+
+.#*
 
 *.pyc
 
@@ -15,5 +20,11 @@ dist
 .pants.workdir.file_lock
 .cache/
 
+static/
+
 .todo-breakdown
 foo.db
+
+*.swp
+
+.DS_Store

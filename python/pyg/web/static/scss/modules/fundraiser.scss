@@ -1,0 +1,136 @@
+#Fundraiser{
+        @include flexbox();
+        @include flex-direction(column);
+        @include flex-wrap(nowrap);
+        @include align-items(center);
+        background-color:$teal;
+        padding:40px 0;
+        .fundraiser{
+                background-color: lighten($teal, 55%);
+                padding:15px 40px;
+                margin:40px;
+        }
+        .fundraiser-form{
+                width:100%;
+        }
+}
+.fundraiser{
+        @include flexbox();
+        @include flex-direction(column);
+        @include flex-wrap(wrap);
+        @include align-content(center);
+        .fundraiser-item{
+                @include flexbox();
+                @include flex-direction(row);
+                @include flex-wrap(nowrap);
+                .fundraiser-item-content{
+                        @include flexbox();
+                        @include flex-direction(column);
+                        @include flex-wrap(nowrap);
+                }
+        }
+        > li{
+                @include flexbox();
+                @include flex-direction(row);
+                @include flex-wrap(nowrap);
+                padding:25px 0;fundraiser-item-content
+                dt,
+                h3{
+                        padding-left:15px;
+                }
+                h3{
+                        font-size:28px;
+                }
+                > .icon{
+                        font-size:30px;
+                        text-align: center;
+                        padding-right:20px;
+                }
+                &.fundraiser-name{
+                        input{
+                                @include inputeditstyledark();
+                                width:90%;
+                        }
+                }
+                &.fundraiser-date{
+                        .fundraiser-item-content{
+                                @include flex-direction(row);
+                        }
+                }
+                &.fundraiser-donations{
+                        dt{
+                                width:10%;
+                        }
+                        input{
+                                @include inputeditstyledark();
+                        }
+                        .icon{
+                                color:$green;
+                        }
+                        .button{
+                                margin:0 0 15px 15px;
+                                padding:10px 20px;
+                        }
+                }
+                &.fundraiser-share{
+                        ul{
+                                @include flexbox();
+                                @include flex-direction(row);
+                                @include flex-wrap(nowrap);
+                                @include justify-content(center);
+                                width:100%;
+
+                                li:not(:last-child){
+                                        padding-right:20px;
+                                }
+                                .text{
+                                        font-family:sourceSansPro;
+                                        font-style:light;
+                                }
+                                a{
+                                        &:hover{
+                                                color:$teal;
+                                        }
+                                        span{
+                                                margin-right:5px;
+                                                font-size:14px;
+                                        }
+                                }
+                        }
+                }
+        }
+        label{
+                font-family:sourceSansProLight;
+                font-size:12px;
+                text-transform: uppercase;
+                white-space:nowrap;
+        }
+        h3{
+                @include alpha-xl;
+        }
+}
+.fundraiser-submitedits{
+        color: $white;
+        border:1px solid $white;
+        padding:15px 20px;
+        transition:all 0.5s ease;
+        &:hover{
+                background-color:$white;
+                color:$teal;
+        }
+}
+.fundraiser-date{
+        @include flexbox();
+        @include flex-direction(row);
+        @include flex-wrap(nowrap);
+        input{
+                @include inputeditstyledark();
+        }
+        .fundraiser-date-start{
+                margin-right:40px;
+        }
+        .fundraiser-date-end{}
+}
+.fundraiser-countdown{}
+.fundraiser-donations{}
+.fundraiser-donors{}
