@@ -28,5 +28,5 @@ Note: you will have to run  `./pants binary python/pyg/web:app` *every time* you
 1. Open a terminal (like bash) and cd into the project root
 2. Do [this](https://www.pantsbuild.org/install.html)
 3. do this: `./pants binary python/pyg/web:app`
-4. do this: `./dist/app.pex`
+4. do this: `./dist/app.pex -endpoint="tcp:8080"`
 5. The site should be live at [localhost:8080](localhost:8080)

@@ -11,6 +11,7 @@ from flask_humanize import Humanize
 import pyg.web
 from pyg.web.views import login, home, signup, news, search, about, teamprofile, memberprofile, leaderboard, logout, fundraiser, create_fundraiser, account_management, partnering, account_deleted, shelterprofile, avatar_upload, donate
 
+
 """
 App.py
 

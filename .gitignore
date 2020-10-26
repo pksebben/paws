@@ -19,6 +19,7 @@ dist
 .pids
 .pants.workdir.file_lock
 .cache/
+scripts
 
 static/
 
