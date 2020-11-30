@@ -25,6 +25,7 @@ Things that happen here:
 """
 
 
+# TODO: Refactor to somewhere it makes sense.
 def set_ranks():
     """calculate ranks for member table """
     if db.web is not None:
@@ -43,6 +44,8 @@ def set_ranks():
         raise Exception("no database found")
 
 
+# TODO: (*1) Refactor into server calls.  See below.
+# There are likely a number of "looping call" functions we are going to need.
 def init_ranks():
     """run set_ranks every minute"""
     rankloop = task.LoopingCall(set_ranks)
@@ -50,19 +53,19 @@ def init_ranks():
 
 
 FLAGS = flag.namespace(__name__)
-FLAGS.endpoint = flag.String("server endpoint", default="tcp:8080")
+FLAGS.endpoint = flag.String("server endpoint", default="tcp:8080") #TODO: default is non-functional ATM.  Troubleshoot. 
 FLAGS.debug = flag.Bool("enable debug", default=False)
-logger = structlog.get_logger()
+logger = structlog.get_logger() #TODO: This belongs in an init() 
 
 
 def main():
     """Initialize app, db, admin panel, and run the container"""
     app.init()
     db.init(app.app)
-    init_ranks()
+    init_ranks()                #TODO: Refactor.  See *1 
     admin.init(app.app)
     app.app.jinja_env.auto_reload = True
-    set_ranks()
+    set_ranks()                 # TODO: this should live in app.init()
     container.run(app.app, FLAGS.endpoint, FLAGS.debug)
 
 

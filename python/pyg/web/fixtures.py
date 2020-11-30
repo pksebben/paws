@@ -15,12 +15,6 @@ fixtures.py
 This is a module for populating testing data into the db.  It's used in two places:
 1 - the test suite
 2 - as a standalone, whenever the dev version of the site is being data wacky or you want to add new testing data.
-
-TODO(ben) : OOOH! DO ME NEXT!
-the todo:
-    We need to add members to teams, but first we need to grant ownership of those teams to members.  I am currently working on marriage between tom and his team. This module is currently borked, until I fix the add teams thinger.
-
-Should probably implement some sort of API call that creates a team and adds an owner and use that in a factored version to commit these changes, so it's easy to implement once I get around to putting it in the site
 """
 
 
@@ -83,7 +77,7 @@ def articles():
 
     session.commit()
 
-
+# TODO: Factor out name generator.  Perhaps to it's own imported module.
 vowels = ['a', 'e', 'i', 'o', 'u']
 consonants = [i for i in string.ascii_lowercase if i not in vowels]
 
